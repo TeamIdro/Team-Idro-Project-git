@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/TESTING NICCO/ScenaTest_Nicco_Movimento_Personaggio.unity
+    guid: 8c118ca9136b2e24992987d439451584
+  - enabled: 1
+    path: Assets/Scenes/TESTING NICCO/ScenaTesting_1_Nicco.unity
+    guid: de88d90bd267fa940bf1368c7191e3c4
   m_configObjects: {}

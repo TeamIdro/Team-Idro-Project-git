@@ -160,28 +160,48 @@
             ]
         },
         {
-            "name": "ChessMovement",
+            "name": "KidMovement",
             "id": "e7016efa-623c-4599-ac4a-2efcd36abc43",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "MouseClick",
                     "type": "Button",
                     "id": "1d5edb02-2c10-4d54-ab32-4f2d6ecd619e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "1389fd0e-c5f2-4818-a043-4c12c804665b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "9c3bf6e4-0ba2-4c5c-888c-13a3b999cf20",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "MouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "217ad8e1-4a4d-4942-b356-1caebd9a16b7",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

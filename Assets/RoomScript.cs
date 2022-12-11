@@ -7,21 +7,36 @@ using UnityEngine.SceneManagement;
 
 public class RoomScript : MonoBehaviour
 {
-    public SceneAsset roomData;
+    public string sceneToReference;
     public bool IsFirstRoom;
 
-    private static string roomName;
-    public static UnityEvent OnRoomEnter;
-   
+    public UnityEvent OnMouseClick;
+    public UnityEvent OnRoomEnter;
+    
 
     private void Awake()
     {
-        roomName = roomData.name;
+        if (sceneToReference == null)
+        {
+            return;
+        }
     }
 
-    public static void EnterRoom()
+    public void EnterRoom()
     {
-        SceneManager.LoadScene(roomName);
-        OnRoomEnter.Invoke();
+        if (sceneToReference != null)
+        {
+            SceneManager.LoadScene(sceneToReference);
+            OnRoomEnter.Invoke();
+        }
+       
+    }
+    private void OnMouseDown()
+    {
+        OnMouseClick.Invoke();
+    }
+    private void OnMouseOver()
+    {
+        
     }
 }
