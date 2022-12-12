@@ -4,29 +4,50 @@ using UnityEngine;
 
 public class PlayerSaveData : MonoBehaviour
 {
-    private PlayerData myData = new PlayerData();
+    private PlayerData myPlayerData = new PlayerData();
+    private MapData myMapData = new MapData();
 
-    // Update is called once per frame
-    void Update()
+    // void Update()
+    // {
+    //     // myData.playerPos = transform.position;
+    //     // myData.playerRot = transform.rotation;
+    //     // myData.currentHealth = 10;
+
+    //     if(Input.GetKeyDown(KeyCode.Q))
+    //     {
+    //         // SaveGameManager.currentSaveData.playerData = myData;
+    //         SaveGameManager.SaveGame();
+    //     }
+
+    //     if(Input.GetKeyDown(KeyCode.L))
+    //     {
+    //         SaveGameManager.LoadGame();
+    //         // myData = SaveGameManager.currentSaveData.playerData;
+    //         // transform.position = myData.playerPos;
+    //         // transform.rotation = myData.playerRot;
+    //     }
+    // }
+
+    public void SaveMapData()
     {
-        myData.playerPos = transform.position;
-        myData.playerRot = transform.rotation;
-        myData.currentHealth = 10;
+        SaveGameManager.currentSaveData.mapData = myMapData;
+        SaveGameManager.SaveGame();
+    }
 
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            SaveGameManager.currentSaveData.playerData = myData;
-            SaveGameManager.SaveGame();
-        }
+    public void SavePlayerData()
+    {
+        SaveGameManager.currentSaveData.playerData = myPlayerData;
+        SaveGameManager.SaveGame();
+    }
 
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            SaveGameManager.LoadGame();
-            myData = SaveGameManager.currentSaveData.playerData;
-            transform.position = myData.playerPos;
-            transform.rotation = myData.playerRot;
+    public void LoadMapData()
+    {
+        SaveGameManager.LoadGame();
+    }
 
-        }
+    public void LoadPlayerData()
+    {
+        SaveGameManager.LoadGame();
     }
 }
 
@@ -36,5 +57,12 @@ public struct PlayerData
     public Vector3 playerPos;
     public Quaternion playerRot;
     public int currentHealth;
+}
 
+[System.Serializable]
+public struct MapData
+{
+    public Vector3 playerPos;
+    public Quaternion playerRot;
+    public int currentHealth;
 }
