@@ -1,10 +1,13 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ActionBase
+
+
+public interface #SCRIPTNAME#
 {
-	public void Execute();
-	public void Undo();
-		
+     #region Methods
+
+     #endregion
 }

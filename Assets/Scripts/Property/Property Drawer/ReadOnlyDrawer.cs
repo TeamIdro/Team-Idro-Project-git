@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.UIElements;
-
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyDrawer : PropertyDrawer
 {
@@ -24,3 +22,4 @@ public class ReadOnlyDrawer : PropertyDrawer
         return base.GetPropertyHeight(property, label);
     }
 }
+#endif

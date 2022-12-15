@@ -1,10 +1,11 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ActionBase
+
+
+public interface IDialogueSpeaker
 {
-	public void Execute();
-	public void Undo();
-		
+    public void Speak();
 }

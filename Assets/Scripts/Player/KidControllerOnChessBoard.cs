@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(ActionRecorder))]
-public class KidControllerOnChessBoard : MonoBehaviour
+[DisallowMultipleComponent]
+public class KidControllerOnChessBoard : MonoBehaviour,IDialogueSpeaker
 {
     [SerializeField] private ActionRecorder actionRecorder;
     [SerializeField] private int m_maxTimeAvailable;
     [SerializeField, ReadOnly] private int m_currentTimeAvailable;
+    [SerializeField] private LayerMask m_tilesMask;
     public int CurrentTimeAvailable
     {
         get { return m_currentTimeAvailable; }
@@ -23,8 +26,9 @@ public class KidControllerOnChessBoard : MonoBehaviour
 
     private GamePlayInputActions m_actions;
     private RoomScript[] m_tilesThatThePlayerCanGo;
+    private MovementAction movementAction;
 
-    private const float RAYCASTDISTANCEFROMPLAYER = 5f;
+    private const float RAYCASTDISTANCEFROMPLAYER = 4.75f;
 
     private void Awake()
     {
@@ -33,6 +37,7 @@ public class KidControllerOnChessBoard : MonoBehaviour
     public void Start()
     {
         m_currentTimeAvailable = m_maxTimeAvailable;
+        GetCurrentPlayerPosition();
     }
 
 
@@ -40,6 +45,7 @@ public class KidControllerOnChessBoard : MonoBehaviour
     private void Update()
     {
         Movement();
+        GetCurrentPlayerPosition();
     }
 
     private void Movement()
@@ -57,14 +63,12 @@ public class KidControllerOnChessBoard : MonoBehaviour
     {
         List<RoomScript> roomScripts = new List<RoomScript>();
         RaycastHit2D[] hits;
-        hits = Physics2D.BoxCastAll(transform.position, new Vector2(RAYCASTDISTANCEFROMPLAYER, RAYCASTDISTANCEFROMPLAYER), 0, Vector2.right, 1f);
+        hits = Physics2D.BoxCastAll(transform.position, new Vector2(RAYCASTDISTANCEFROMPLAYER, RAYCASTDISTANCEFROMPLAYER), 0, Vector2.zero, 1f);
         for (int i = 0; i < hits.Length; i++)
         {
             if (hits[i].collider.gameObject.GetComponent<RoomScript>())
             {
                 roomScripts.Add(hits[i].collider.gameObject.GetComponent<RoomScript>());
-                Debug.Log(roomScripts[i]);
-
             }
         }
         return roomScripts.ToArray();
@@ -84,7 +88,6 @@ public class KidControllerOnChessBoard : MonoBehaviour
                     {
                         GoToNextTile(m_tilesThatThePlayerCanGo[i].gameObject.transform.position);
                         m_tilesThatThePlayerCanGo[i].OnMouseClick.Invoke();
-                        currentRoomToEnter = m_tilesThatThePlayerCanGo[i].gameObject;
                     }
                    
 
@@ -92,12 +95,19 @@ public class KidControllerOnChessBoard : MonoBehaviour
             }
         }
     }
-
-  
-
+    public void GetCurrentPlayerPosition()
+    {
+        RaycastHit2D hit;
+        hit = Physics2D.Raycast(transform.position, Vector3.forward, 0.1f, m_tilesMask);
+        Debug.Log(hit.collider);
+        if (hit.collider != null)
+        {
+            currentRoomToEnter = hit.collider.gameObject;
+        }
+    }
     public void GoToNextTile(Vector2 direction)
     {
-        var movementAction = new MovementAction(this,direction);
+        movementAction = new MovementAction(this,direction,transform.position);
         actionRecorder.Record(movementAction);
     }
     /// <summary>
@@ -107,7 +117,10 @@ public class KidControllerOnChessBoard : MonoBehaviour
     {
         currentRoomToEnter.GetComponent<RoomScript>().EnterRoom();
     }
-
+    public void Speak()
+    {
+        //Codice per chiamare Dialogue System
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -123,5 +136,5 @@ public class KidControllerOnChessBoard : MonoBehaviour
     private void OnEnable() =>m_actions.Enable();
     private void OnDisable() => m_actions.Disable();
 
-
+    
 }

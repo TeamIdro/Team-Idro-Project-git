@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8409694806797848491}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.98, y: 9, z: 0}
+  m_LocalPosition: {x: 0.9839997, y: 8.600021, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -101,6 +101,9 @@ MonoBehaviour:
   actionRecorder: {fileID: 8409694806797848487}
   m_maxTimeAvailable: 5
   m_currentTimeAvailable: 0
+  m_tilesMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8409694806797848487
 MonoBehaviour:
   m_ObjectHideFlags: 0

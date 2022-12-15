@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 13e03cbc0f54301439bdabe7bc178dae
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerPrefab_ChessVersion: {fileID: 8409694806797848491, guid: 1ee84a131aa802e4f9a370f6ae8e9c3e, type: 3}
+  - playerPrefab_LaytonVersion: {instanceID: 0}
+  - virtualCameraForChessKid: {fileID: 3623084029725276824, guid: 3f8b78aa64f03d44894ac49b47e069ad, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
