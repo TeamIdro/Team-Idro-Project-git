@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public enum Interaction 
-{ 
-
-}
-
+public enum Interaction { }
 public enum BubblePosition { Right, Left}
 
 public class DialogScriptableObject : ScriptableObject
