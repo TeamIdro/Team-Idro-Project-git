@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public enum Interaction { }
+public enum Interaction { NONE }
 public enum BubblePosition { Right, Left}
 
 public class DialogScriptableObject : ScriptableObject
@@ -12,11 +12,10 @@ public class DialogScriptableObject : ScriptableObject
     public class DialogString
     {
         public string sentence;
-        public int id;
+        public string id;
         public Interaction interaction;
         public Color colorFrame;
         public Color colorText;
-        public BubblePosition bubblePosition;
         public Sprite portrait;
     }
 
