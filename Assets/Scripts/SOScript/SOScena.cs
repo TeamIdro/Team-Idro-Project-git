@@ -9,7 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class SOScena : ScriptableObject
 {
-
     public SceneReference sceneReference;
-    
+    public GameStates currentStateInScene;
 }

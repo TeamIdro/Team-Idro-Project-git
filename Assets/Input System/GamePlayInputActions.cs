@@ -182,7 +182,7 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
             ]
         },
         {
-            ""name"": ""KidMovement"",
+            ""name"": ""Kid"",
             ""id"": ""e7016efa-623c-4599-ac4a-2efcd36abc43"",
             ""actions"": [
                 {
@@ -236,10 +236,10 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Movement = m_GamePlay.FindAction("Movement", throwIfNotFound: true);
         m_GamePlay_Interaction = m_GamePlay.FindAction("Interaction", throwIfNotFound: true);
-        // KidMovement
-        m_KidMovement = asset.FindActionMap("KidMovement", throwIfNotFound: true);
-        m_KidMovement_MouseClick = m_KidMovement.FindAction("MouseClick", throwIfNotFound: true);
-        m_KidMovement_MousePosition = m_KidMovement.FindAction("MousePosition", throwIfNotFound: true);
+        // Kid
+        m_Kid = asset.FindActionMap("Kid", throwIfNotFound: true);
+        m_Kid_MouseClick = m_Kid.FindAction("MouseClick", throwIfNotFound: true);
+        m_Kid_MousePosition = m_Kid.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,34 +337,34 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
     }
     public GamePlayActions @GamePlay => new GamePlayActions(this);
 
-    // KidMovement
-    private readonly InputActionMap m_KidMovement;
-    private IKidMovementActions m_KidMovementActionsCallbackInterface;
-    private readonly InputAction m_KidMovement_MouseClick;
-    private readonly InputAction m_KidMovement_MousePosition;
-    public struct KidMovementActions
+    // Kid
+    private readonly InputActionMap m_Kid;
+    private IKidActions m_KidActionsCallbackInterface;
+    private readonly InputAction m_Kid_MouseClick;
+    private readonly InputAction m_Kid_MousePosition;
+    public struct KidActions
     {
         private @GamePlayInputActions m_Wrapper;
-        public KidMovementActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MouseClick => m_Wrapper.m_KidMovement_MouseClick;
-        public InputAction @MousePosition => m_Wrapper.m_KidMovement_MousePosition;
-        public InputActionMap Get() { return m_Wrapper.m_KidMovement; }
+        public KidActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseClick => m_Wrapper.m_Kid_MouseClick;
+        public InputAction @MousePosition => m_Wrapper.m_Kid_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_Kid; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(KidMovementActions set) { return set.Get(); }
-        public void SetCallbacks(IKidMovementActions instance)
+        public static implicit operator InputActionMap(KidActions set) { return set.Get(); }
+        public void SetCallbacks(IKidActions instance)
         {
-            if (m_Wrapper.m_KidMovementActionsCallbackInterface != null)
+            if (m_Wrapper.m_KidActionsCallbackInterface != null)
             {
-                @MouseClick.started -= m_Wrapper.m_KidMovementActionsCallbackInterface.OnMouseClick;
-                @MouseClick.performed -= m_Wrapper.m_KidMovementActionsCallbackInterface.OnMouseClick;
-                @MouseClick.canceled -= m_Wrapper.m_KidMovementActionsCallbackInterface.OnMouseClick;
-                @MousePosition.started -= m_Wrapper.m_KidMovementActionsCallbackInterface.OnMousePosition;
-                @MousePosition.performed -= m_Wrapper.m_KidMovementActionsCallbackInterface.OnMousePosition;
-                @MousePosition.canceled -= m_Wrapper.m_KidMovementActionsCallbackInterface.OnMousePosition;
+                @MouseClick.started -= m_Wrapper.m_KidActionsCallbackInterface.OnMouseClick;
+                @MouseClick.performed -= m_Wrapper.m_KidActionsCallbackInterface.OnMouseClick;
+                @MouseClick.canceled -= m_Wrapper.m_KidActionsCallbackInterface.OnMouseClick;
+                @MousePosition.started -= m_Wrapper.m_KidActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_KidActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_KidActionsCallbackInterface.OnMousePosition;
             }
-            m_Wrapper.m_KidMovementActionsCallbackInterface = instance;
+            m_Wrapper.m_KidActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @MouseClick.started += instance.OnMouseClick;
@@ -376,13 +376,13 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
             }
         }
     }
-    public KidMovementActions @KidMovement => new KidMovementActions(this);
+    public KidActions @Kid => new KidActions(this);
     public interface IGamePlayActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
     }
-    public interface IKidMovementActions
+    public interface IKidActions
     {
         void OnMouseClick(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);

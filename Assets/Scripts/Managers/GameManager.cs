@@ -34,8 +34,12 @@ public class GameManager : Manager
     }
     private void InitiliazeVariables()
     {
-        throw new NotImplementedException();
+        Cursor.SetCursor(baseMouseCursor, Vector2.zero, CursorMode.ForceSoftware);
     }
+    [ReadOnly] public GameStates currentGameState = GameStates.PlayerOnChessBoardScene;
+    [Space(20)]
+    public Texture2D baseMouseCursor;
+    [Space]
     [Header("Player Reference(Chess Version)")]
     public GameObject playerPrefab_ChessVersion;
     [Header("Player Reference(Layton Type Version)")]
@@ -45,7 +49,6 @@ public class GameManager : Manager
     public GameObject virtualCameraForChessKid;
 
 
-    [ReadOnly] public GameStates currentGameState = GameStates.PlayerOnChessBoardScene;
 
 
 
@@ -76,6 +79,10 @@ public class GameManager : Manager
     private void SetCameras()
     {
         //set camera based on the current state of the game
+    }
+    public void SetCurrentState(GameStates currentStateToChange)
+    {
+        currentGameState = currentStateToChange;
     }
 
 }

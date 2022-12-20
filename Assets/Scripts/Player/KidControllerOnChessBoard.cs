@@ -76,7 +76,7 @@ public class KidControllerOnChessBoard : MonoBehaviour,IDialogueSpeaker
     private void GetSelectedTile(RoomScript[] m_tilesThatThePlayerCanGo)
     {
         if(m_tilesThatThePlayerCanGo == null) return;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(m_actions.KidMovement.MousePosition.ReadValue<Vector2>());
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(m_actions.Kid.MousePosition.ReadValue<Vector2>());
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
         for (int i = 0; i < m_tilesThatThePlayerCanGo.Length; i++)
         {
@@ -84,7 +84,7 @@ public class KidControllerOnChessBoard : MonoBehaviour,IDialogueSpeaker
             {
                 if (hit.collider.gameObject == m_tilesThatThePlayerCanGo[i].gameObject)
                 {
-                    if (m_actions.KidMovement.MouseClick.WasPressedThisFrame())
+                    if (m_actions.Kid.MouseClick.WasPressedThisFrame())
                     {
                         GoToNextTile(m_tilesThatThePlayerCanGo[i].gameObject.transform.position);
                         m_tilesThatThePlayerCanGo[i].OnMouseClick.Invoke();
@@ -119,7 +119,7 @@ public class KidControllerOnChessBoard : MonoBehaviour,IDialogueSpeaker
     }
     public void Speak()
     {
-        //Codice per chiamare Dialogue System
+        //Codice per chiamare il Dialogue System
     }
     private void OnDrawGizmos()
     {

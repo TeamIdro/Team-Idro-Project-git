@@ -35,9 +35,7 @@ public class RoomScript : MonoBehaviour
     private void OnMouseDown()
     {
         OnMouseClick.Invoke();
+        Debug.Log("Invocato");
     }
-    private void OnMouseOver()
-    {
-        
-    }
+   
 }
