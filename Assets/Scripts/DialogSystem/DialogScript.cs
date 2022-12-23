@@ -16,5 +16,7 @@ public class DialogScript : MonoBehaviour
     private void OnNextSentence()
     {
         //NEXT SENTENCE
+        DialogController.Instance.NextSentence();
+
     }
 }

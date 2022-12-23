@@ -52,7 +52,7 @@ public class DialogController : MonoBehaviour
     {
         _instance = this;
         dialogStatus = DialagoStatus.Init;
-        DontDestroyOnLoad(this.gameObject);
+        // DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -72,8 +72,53 @@ public class DialogController : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
 
-        // EndOfDialogCheck();
+        EndOfDialogCheck();
     }    
+
+    public void AddSpeaker()
+    {
+        NPCScript[] speakers = GameObject.FindObjectsOfType<NPCScript>();
+
+        //ADD PLAYER BEFORE NPCS
+        PlayerDialogScript ps = GameObject.FindObjectOfType<PlayerDialogScript>();
+
+        if (ps != null 
+            && ps.gameObject.GetComponent<PlayerInput>().isActiveAndEnabled)
+        {
+            speakerList.Add("Player", GameObject.FindObjectOfType<PlayerDialogScript>().gameObject);
+        }
+        
+        foreach (NPCScript s in speakers)
+        {
+            speakerList.Add(s.id, s.gameObject);
+        }
+
+        foreach (KeyValuePair<string, GameObject> entry in speakerList.OrderBy(x => x.Key))
+        {
+            sortedSpeakerList.Add(entry.Key, entry.Value);
+        }
+
+        //Previus ID first save
+        if (dialogAsset != null)
+        {
+            previusId = dialogAsset.strings[index].id;
+        }
+
+        PrintSpeakers();
+    }
+
+    public void PrintSpeakers()
+    {
+        foreach (KeyValuePair<string, GameObject> entry in speakerList)
+        {
+            Debug.Log("normal list - " + entry);
+        }
+
+        foreach (KeyValuePair<string, GameObject> entry in sortedSpeakerList)
+        {
+            Debug.Log("ordered list" + entry);
+        }
+    }
 
     public void NextSentence()
     {
@@ -144,6 +189,19 @@ public class DialogController : MonoBehaviour
 
         dialogTextObj.text = "";
         dialogTextObj.color = colorText;
+    }
+
+    private void EndOfDialogCheck()
+    {
+        if (index < dialogAsset.strings.Count - 1)
+        {
+            index++;
+            dialogStatus = DialagoStatus.EndOfSentence;
+        }
+        else
+        {
+            dialogStatus = DialagoStatus.EndOfDialog;            
+        }
     }
 
     public void Reset()
