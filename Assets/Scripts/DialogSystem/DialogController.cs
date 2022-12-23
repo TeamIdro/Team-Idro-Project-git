@@ -87,9 +87,21 @@ public class DialogController : MonoBehaviour
         if (index < dialogAsset.strings.Count 
                 && dialogStatus != DialagoStatus.EndOfDialog 
                 && (dialogStatus == DialagoStatus.EndOfSentence || dialogStatus == DialagoStatus.Init))
-            {
+        {
+                SetCanvasToActivate();
 
-            }
+                SetTextMeshObj(dialogAsset.strings[index].colorText);
+
+                StartCoroutine(coroutine);
+        }
+        else if (dialogStatus == DialagoStatus.EndOfDialog)
+        {
+            DeactivateCanvas(sortedSpeakerList[dialogAsset.strings[index].id]);
+
+            //SwitchControlAtEnd();
+
+            Reset();
+        }
     }
 
     //SCEGLIE IL CANVAS DA DISATTIVARE E QUELLO DA ATTIVARE 
@@ -123,5 +135,32 @@ public class DialogController : MonoBehaviour
         DialogBox canvas = gameObject.GetComponentInChildren<DialogBox>();
 
         canvas.canvas.SetActive(false);
+    }
+
+    private void SetTextMeshObj(Color colorText)
+    {
+        dialogTextObj =
+            sortedSpeakerList[dialogAsset.strings[index].id].gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        dialogTextObj.text = "";
+        dialogTextObj.color = colorText;
+    }
+
+    public void Reset()
+    {
+        index = 0;
+        dialogStatus = DialagoStatus.Init;
+
+        speakerList.Clear();
+        sortedSpeakerList.Clear();
+
+        dialogAsset = null;
+        setPointObj = null;
+
+        //SwitchToMinigameCam();
+
+        //ChangeScene();
+
+        //ActiveAllEvents();
     }
 }
