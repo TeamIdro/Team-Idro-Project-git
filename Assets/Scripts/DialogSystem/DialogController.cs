@@ -5,6 +5,7 @@ using TMPro;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System;
 
 public enum DialagoStatus { Init, Typing, EndOfSentence, EndOfDialog }
 public class DialogController : MonoBehaviour
@@ -137,6 +138,8 @@ public class DialogController : MonoBehaviour
 
                 SetTextMeshObj(dialogAsset.strings[index].colorText);
 
+                SetPortraitImage(dialogAsset.strings[index].portrait);
+
                 StartCoroutine(coroutine);
         }
         else if (dialogStatus == DialagoStatus.EndOfDialog)
@@ -147,6 +150,25 @@ public class DialogController : MonoBehaviour
 
             Reset();
         }
+    }
+
+    private void SetPortraitImage(Sprite portrait)
+    {
+        Image[] imageList;
+        imageList = sortedSpeakerList[dialogAsset.strings[index].id].gameObject.GetComponentsInChildren<Image>();
+
+        foreach(Image i in imageList)
+        {
+            // Debug.Log("Image name: " + i.name);
+
+            if(i.name == "Portrait")
+            {
+                i.sprite = portrait;
+            }
+        }
+
+        
+        // dialogTextObj.color = colorText;
     }
 
     //SCEGLIE IL CANVAS DA DISATTIVARE E QUELLO DA ATTIVARE 
