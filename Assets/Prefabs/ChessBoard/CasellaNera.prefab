@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7292076929760192916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.93445, y: 9.929006, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 1.9928771, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 753149549
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -98,7 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e143bb45fc704014f8f1886dabf9fd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomData: {fileID: 0}
+  sceneToReference: 
+  IsFirstRoom: 0
+  OnMouseClick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRoomEnter:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &3625074386914264872
 BoxCollider2D:
   m_ObjectHideFlags: 0

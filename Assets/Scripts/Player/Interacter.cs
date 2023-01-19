@@ -4,6 +4,8 @@ public class Interacter : MonoBehaviour
 {
     GamePlayInputActions m_inputActions;
     ObjectBehaviourContainer objectBehaviour;
+    Vector2 mousePosition;
+    public LayerMask maskToInteract;
     private bool m_canInteract = false;
     private void Awake()
     {
@@ -17,28 +19,35 @@ public class Interacter : MonoBehaviour
     {
         m_inputActions.Disable();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void CheckForInteractable()
     {
-        if (collision.GetComponent<ObjectBehaviourContainer>() != null)
+        RaycastHit2D hit;
+        mousePosition = Camera.main.ScreenToWorldPoint(m_inputActions.Kid.MousePosition.ReadValue<Vector2>());
+        hit = Physics2D.Raycast(mousePosition, Vector3.zero, 1f, maskToInteract);
+        if (hit.collider != null)
         {
-            objectBehaviour = collision.GetComponent<ObjectBehaviourContainer>();
-            objectBehaviour.behaviourScriptableObject.ShowUIOnCloseDistance(true);
-            m_canInteract = true;
+            Debug.Log(hit.collider.gameObject);
+
+            if (hit.collider.gameObject.GetComponent<ObjectBehaviourContainer>() != null)
+            {
+                objectBehaviour = hit.collider.gameObject.GetComponent<ObjectBehaviourContainer>();
+                m_canInteract = true;
+            }
+            else
+            {
+                objectBehaviour = null;
+                m_canInteract = false;
+            }
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.GetComponent<ObjectBehaviourContainer>() != null)
-        {
-            objectBehaviour = collision.GetComponent<ObjectBehaviourContainer>();
-            objectBehaviour.behaviourScriptableObject.ShowUIOnCloseDistance(false);
-            objectBehaviour = null;
-            m_canInteract=false;
-        }
-    }
+    
     private void Update()
     {
         InteractionUpdate();
+    }
+    private void FixedUpdate()
+    {
+        CheckForInteractable();
     }
 
     private void InteractionUpdate()
@@ -47,7 +56,7 @@ public class Interacter : MonoBehaviour
         {
             if (objectBehaviour != null)
             {
-                if (m_inputActions.GamePlay.Interaction.WasPressedThisFrame())
+                if (m_inputActions.Kid.MouseClick.WasPressedThisFrame())
                 {
                     objectBehaviour.behaviourScriptableObject.Interact();
                     if (objectBehaviour.useonlyOnce)
@@ -59,5 +68,9 @@ public class Interacter : MonoBehaviour
 
             }
         }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(mousePosition, Vector2.zero);
     }
 }

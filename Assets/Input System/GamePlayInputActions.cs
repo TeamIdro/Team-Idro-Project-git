@@ -182,28 +182,48 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
             ]
         },
         {
-            ""name"": ""ChessMovement"",
+            ""name"": ""Kid"",
             ""id"": ""e7016efa-623c-4599-ac4a-2efcd36abc43"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""MouseClick"",
                     ""type"": ""Button"",
                     ""id"": ""1d5edb02-2c10-4d54-ab32-4f2d6ecd619e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""1389fd0e-c5f2-4818-a043-4c12c804665b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""9c3bf6e4-0ba2-4c5c-888c-13a3b999cf20"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""217ad8e1-4a4d-4942-b356-1caebd9a16b7"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -216,9 +236,10 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
         m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
         m_GamePlay_Movement = m_GamePlay.FindAction("Movement", throwIfNotFound: true);
         m_GamePlay_Interaction = m_GamePlay.FindAction("Interaction", throwIfNotFound: true);
-        // ChessMovement
-        m_ChessMovement = asset.FindActionMap("ChessMovement", throwIfNotFound: true);
-        m_ChessMovement_Newaction = m_ChessMovement.FindAction("New action", throwIfNotFound: true);
+        // Kid
+        m_Kid = asset.FindActionMap("Kid", throwIfNotFound: true);
+        m_Kid_MouseClick = m_Kid.FindAction("MouseClick", throwIfNotFound: true);
+        m_Kid_MousePosition = m_Kid.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -316,45 +337,54 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
     }
     public GamePlayActions @GamePlay => new GamePlayActions(this);
 
-    // ChessMovement
-    private readonly InputActionMap m_ChessMovement;
-    private IChessMovementActions m_ChessMovementActionsCallbackInterface;
-    private readonly InputAction m_ChessMovement_Newaction;
-    public struct ChessMovementActions
+    // Kid
+    private readonly InputActionMap m_Kid;
+    private IKidActions m_KidActionsCallbackInterface;
+    private readonly InputAction m_Kid_MouseClick;
+    private readonly InputAction m_Kid_MousePosition;
+    public struct KidActions
     {
         private @GamePlayInputActions m_Wrapper;
-        public ChessMovementActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_ChessMovement_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_ChessMovement; }
+        public KidActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @MouseClick => m_Wrapper.m_Kid_MouseClick;
+        public InputAction @MousePosition => m_Wrapper.m_Kid_MousePosition;
+        public InputActionMap Get() { return m_Wrapper.m_Kid; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ChessMovementActions set) { return set.Get(); }
-        public void SetCallbacks(IChessMovementActions instance)
+        public static implicit operator InputActionMap(KidActions set) { return set.Get(); }
+        public void SetCallbacks(IKidActions instance)
         {
-            if (m_Wrapper.m_ChessMovementActionsCallbackInterface != null)
+            if (m_Wrapper.m_KidActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_ChessMovementActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_ChessMovementActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_ChessMovementActionsCallbackInterface.OnNewaction;
+                @MouseClick.started -= m_Wrapper.m_KidActionsCallbackInterface.OnMouseClick;
+                @MouseClick.performed -= m_Wrapper.m_KidActionsCallbackInterface.OnMouseClick;
+                @MouseClick.canceled -= m_Wrapper.m_KidActionsCallbackInterface.OnMouseClick;
+                @MousePosition.started -= m_Wrapper.m_KidActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_KidActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_KidActionsCallbackInterface.OnMousePosition;
             }
-            m_Wrapper.m_ChessMovementActionsCallbackInterface = instance;
+            m_Wrapper.m_KidActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @MouseClick.started += instance.OnMouseClick;
+                @MouseClick.performed += instance.OnMouseClick;
+                @MouseClick.canceled += instance.OnMouseClick;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
-    public ChessMovementActions @ChessMovement => new ChessMovementActions(this);
+    public KidActions @Kid => new KidActions(this);
     public interface IGamePlayActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
     }
-    public interface IChessMovementActions
+    public interface IKidActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnMouseClick(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }
