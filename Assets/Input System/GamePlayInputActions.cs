@@ -24,12 +24,12 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
     ""name"": ""GamePlayInputActions"",
     ""maps"": [
         {
-            ""name"": ""GamePlay"",
+            ""name"": ""Mage"",
             ""id"": ""34384080-95a8-4ee7-b837-6c9b9d4826ea"",
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""2db25bd3-2c60-489d-8634-62826f44c8eb"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -40,6 +40,15 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
                     ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""76cb9122-9b85-4e65-b315-4503e70a7c1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd0eb405-bdad-4e41-8dec-9bd7316b831e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -70,8 +79,19 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector Keyboard"",
-                    ""id"": ""937abf7d-130a-449b-870b-453688b64d2c"",
+                    ""name"": """",
+                    ""id"": ""a54890a0-643c-4927-b9e2-28006bbdf575"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""99cc971d-d9e8-4676-9424-350e64fc2390"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -81,30 +101,8 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""14ca03f0-77aa-42bc-bd7a-54dac08daa63"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""18d70e3e-618a-4b0c-bbc3-1f3766935328"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""left"",
-                    ""id"": ""199f69a4-068c-40b2-966f-eee2dba857c6"",
+                    ""id"": ""bae7dcc4-c315-47eb-8812-83096b75bcfc"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -115,63 +113,8 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""27870e6c-5588-48d9-bf99-d1886e64ba6c"",
+                    ""id"": ""4d2af373-63be-41d3-b7e8-3f0b37c2fe5b"",
                     ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""2D Vector Pad"",
-                    ""id"": ""f5e5cf45-f653-492f-9534-c2e5383133e2"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""9a81f238-c868-4820-b9ac-87e19b08082b"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""ad32fa25-d9b9-4b65-b908-579e21678df0"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""371e7e3b-040a-421f-9db3-f80da414384d"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""ae9cec5a-b365-4151-9d8e-658075d3f00c"",
-                    ""path"": """",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -232,10 +175,11 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
     ],
     ""controlSchemes"": []
 }");
-        // GamePlay
-        m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
-        m_GamePlay_Movement = m_GamePlay.FindAction("Movement", throwIfNotFound: true);
-        m_GamePlay_Interaction = m_GamePlay.FindAction("Interaction", throwIfNotFound: true);
+        // Mage
+        m_Mage = asset.FindActionMap("Mage", throwIfNotFound: true);
+        m_Mage_Movement = m_Mage.FindAction("Movement", throwIfNotFound: true);
+        m_Mage_Interaction = m_Mage.FindAction("Interaction", throwIfNotFound: true);
+        m_Mage_Jump = m_Mage.FindAction("Jump", throwIfNotFound: true);
         // Kid
         m_Kid = asset.FindActionMap("Kid", throwIfNotFound: true);
         m_Kid_MouseClick = m_Kid.FindAction("MouseClick", throwIfNotFound: true);
@@ -296,34 +240,39 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // GamePlay
-    private readonly InputActionMap m_GamePlay;
-    private IGamePlayActions m_GamePlayActionsCallbackInterface;
-    private readonly InputAction m_GamePlay_Movement;
-    private readonly InputAction m_GamePlay_Interaction;
-    public struct GamePlayActions
+    // Mage
+    private readonly InputActionMap m_Mage;
+    private IMageActions m_MageActionsCallbackInterface;
+    private readonly InputAction m_Mage_Movement;
+    private readonly InputAction m_Mage_Interaction;
+    private readonly InputAction m_Mage_Jump;
+    public struct MageActions
     {
         private @GamePlayInputActions m_Wrapper;
-        public GamePlayActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_GamePlay_Movement;
-        public InputAction @Interaction => m_Wrapper.m_GamePlay_Interaction;
-        public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
+        public MageActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Mage_Movement;
+        public InputAction @Interaction => m_Wrapper.m_Mage_Interaction;
+        public InputAction @Jump => m_Wrapper.m_Mage_Jump;
+        public InputActionMap Get() { return m_Wrapper.m_Mage; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GamePlayActions set) { return set.Get(); }
-        public void SetCallbacks(IGamePlayActions instance)
+        public static implicit operator InputActionMap(MageActions set) { return set.Get(); }
+        public void SetCallbacks(IMageActions instance)
         {
-            if (m_Wrapper.m_GamePlayActionsCallbackInterface != null)
+            if (m_Wrapper.m_MageActionsCallbackInterface != null)
             {
-                @Movement.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMovement;
-                @Movement.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMovement;
-                @Movement.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnMovement;
-                @Interaction.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnInteraction;
-                @Interaction.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnInteraction;
-                @Interaction.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnInteraction;
+                @Movement.started -= m_Wrapper.m_MageActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_MageActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_MageActionsCallbackInterface.OnMovement;
+                @Interaction.started -= m_Wrapper.m_MageActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_MageActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_MageActionsCallbackInterface.OnInteraction;
+                @Jump.started -= m_Wrapper.m_MageActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_MageActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_MageActionsCallbackInterface.OnJump;
             }
-            m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
+            m_Wrapper.m_MageActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Movement.started += instance.OnMovement;
@@ -332,10 +281,13 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
                 @Interaction.started += instance.OnInteraction;
                 @Interaction.performed += instance.OnInteraction;
                 @Interaction.canceled += instance.OnInteraction;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
-    public GamePlayActions @GamePlay => new GamePlayActions(this);
+    public MageActions @Mage => new MageActions(this);
 
     // Kid
     private readonly InputActionMap m_Kid;
@@ -377,10 +329,11 @@ public partial class @GamePlayInputActions : IInputActionCollection2, IDisposabl
         }
     }
     public KidActions @Kid => new KidActions(this);
-    public interface IGamePlayActions
+    public interface IMageActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IKidActions
     {

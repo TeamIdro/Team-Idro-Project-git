@@ -18,7 +18,7 @@ public struct MovementAction : ActionBase
     {
         previousDirection = controller.gameObject.transform.position;
         controller.gameObject.transform.position = direction;
-        if(controller.CurrentTimeAvailable>0)controller.CurrentTimeAvailable--;
+        if (controller.CurrentTimeAvailable > 0) controller.CurrentTimeAvailable--;
     }
 
     public void Undo()
