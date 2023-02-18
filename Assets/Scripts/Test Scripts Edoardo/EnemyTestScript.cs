@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using BehaviorDesigner.Runtime;
+using System;
 
 public class EnemyTestScript : MonoBehaviour, IEnemy
 {
@@ -12,6 +14,11 @@ public class EnemyTestScript : MonoBehaviour, IEnemy
     [field: SerializeField] public float speed { get; set; }
     [field: SerializeField] public Rigidbody2D rigidBody { get; set; }
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; set; }
+    
+    [field: SerializeField] public float angle { get; set; }
+    [field: SerializeField] public bool canPatrol { get; set; }
+
+
 
     public void Start()
     {
@@ -22,11 +29,28 @@ public class EnemyTestScript : MonoBehaviour, IEnemy
         var agent = GetComponent<NavMeshAgent>();
 		agent.updateRotation = false;
 		agent.updateUpAxis = false;
-        // transform.rotation = Quaternion.Euler(0f,0f,0f);
+
+        angle = 280f;
+        canPatrol = true;
     }
 
     public void Update()
     {
-        
+        var behaviorTree = GetComponent<BehaviorTree>();
+        behaviorTree.RegisterEvent<object>("Attack", AttackEvent);
+        behaviorTree.RegisterEvent<object>("SetCanPatrol", SetCanPatrolEvent);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+    }
+
+    private void AttackEvent(object arg1)
+    {
+        Debug.Log("ARG: " + arg1);
+        var behaviorTree = GetComponent<BehaviorTree>();
+        // behaviorTree.RestartWhenComplete = true;
+    }
+
+    private void SetCanPatrolEvent(object arg1)
+    {
+
     }
 }
