@@ -44,7 +44,7 @@ public class EnemyTestScript : MonoBehaviour, IEnemy
 
     private void AttackEvent(object arg1)
     {
-        Debug.Log("ARG: " + arg1);
+        // Debug.Log("ARG: " + arg1);
         var behaviorTree = GetComponent<BehaviorTree>();
         // behaviorTree.RestartWhenComplete = true;
     }
