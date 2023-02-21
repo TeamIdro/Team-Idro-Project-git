@@ -18,27 +18,33 @@ public class EnemyTestScript : MonoBehaviour, IEnemy
     [field: SerializeField] public float angle { get; set; }
     [field: SerializeField] public bool canPatrol { get; set; }
 
+    private NavMeshAgent agent;
+    private BehaviorTree behaviorTree;
 
+    private void Awake() 
+    {
+        agent = GetComponent<NavMeshAgent>();
+        behaviorTree = GetComponent<BehaviorTree>();
+
+		agent.updateRotation = false;
+		agent.updateUpAxis = false;
+        // agent.stoppingDistance = behaviorTree.GetVariable()
+    }
 
     public void Start()
     {
         //INIT VARIABLES
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        var agent = GetComponent<NavMeshAgent>();
-		agent.updateRotation = false;
-		agent.updateUpAxis = false;
 
         angle = 280f;
-        canPatrol = true;
+        // canPatrol = true;
     }
 
     public void Update()
     {
-        var behaviorTree = GetComponent<BehaviorTree>();
         behaviorTree.RegisterEvent<object>("Attack", AttackEvent);
-        behaviorTree.RegisterEvent<object>("SetCanPatrol", SetCanPatrolEvent);
+        // behaviorTree.RegisterEvent<object>("SetCanPatrol", SetCanPatrolEvent);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
@@ -46,7 +52,6 @@ public class EnemyTestScript : MonoBehaviour, IEnemy
     {
         // Debug.Log("ARG: " + arg1);
         var behaviorTree = GetComponent<BehaviorTree>();
-        // behaviorTree.RestartWhenComplete = true;
     }
 
     private void SetCanPatrolEvent(object arg1)
