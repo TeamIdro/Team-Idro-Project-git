@@ -6,7 +6,7 @@
             "id": "34384080-95a8-4ee7-b837-6c9b9d4826ea",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "Movimento",
                     "type": "PassThrough",
                     "id": "2db25bd3-2c60-489d-8634-62826f44c8eb",
                     "expectedControlType": "Vector2",
@@ -27,6 +27,51 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "fd0eb405-bdad-4e41-8dec-9bd7316b831e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UsaElementoFuoco",
+                    "type": "Button",
+                    "id": "698cee77-4281-4660-8599-fc37e0f04b00",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UsaElementoAcqua",
+                    "type": "Button",
+                    "id": "30673b2a-710e-4b18-9a9b-c1dae185b0bf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UsaElementoTerra",
+                    "type": "Button",
+                    "id": "a65c7176-b7fa-4fdd-93c2-d8d9f5ddee0f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UsaElementoAria",
+                    "type": "Button",
+                    "id": "99f87ccf-e49f-4b2b-84e9-04b20b316c97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UsaElementoFulmine",
+                    "type": "Button",
+                    "id": "7648c45d-18c2-4c31-8999-dd2f0cf14cf5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -59,7 +104,7 @@
                 {
                     "name": "",
                     "id": "a54890a0-643c-4927-b9e2-28006bbdf575",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -74,31 +119,86 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Movimento",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "left",
                     "id": "bae7dcc4-c315-47eb-8812-83096b75bcfc",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Movimento",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "right",
                     "id": "4d2af373-63be-41d3-b7e8-3f0b37c2fe5b",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Movimento",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0c5e3a1e-11c3-49cf-9166-e8316334a058",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UsaElementoFuoco",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be30a3ac-b061-464c-be8d-f39a3b49f80d",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UsaElementoAcqua",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0449c9bb-0bb1-43a2-ae02-c8d75d1dd696",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UsaElementoTerra",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ed9c37e-12ad-4a5b-b74d-fe32b1174c12",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UsaElementoAria",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "573397a6-47e2-4560-ba63-a36ce9f6aa24",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UsaElementoFulmine",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

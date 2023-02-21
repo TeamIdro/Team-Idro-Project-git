@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class ElementoMagiaSO : ScriptableObject
 {
 	public Texture2D textureDellaMagia;
 	public TipoMagia tipoDiMagia;
+
+  
 }
 public enum TipoMagia
 {

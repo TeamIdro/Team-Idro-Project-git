@@ -4,17 +4,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MageCharacterController : MonoBehaviour
+public class PlayerCharacterController : MonoBehaviour
 {
+    [Header("Player type")]
+    [SerializeField] EPlayerType playerType;
+    [Space(10)]
     //VARIABILI IN INSPECTOR
     [Header("Player values")]
     [SerializeField] private float movementVelocity;
-    [SerializeField] private float jumpvelocity;
+    [SerializeField] private float jumpVelocity;
     [SerializeField] private float maxVelocityCap;
+    [Range(0f, 5f)]
+    [SerializeField] private float linearDrag;
+    [Space(10)]
     [Header("Debug values")]
     [SerializeField,ReadOnly] private Vector2 movementDirection;
-    [SerializeField,ReadOnly] private bool isMoving;
+    [SerializeField, ReadOnly] private bool isMoving;
     [SerializeField,ReadOnly] private bool isJumping;
+    [Space(10)]
     [Header("For raycasting")]
     [SerializeField] private Transform rayCastPosition;
     [SerializeField] private Vector2 boxCastDimension;
@@ -32,6 +39,7 @@ public class MageCharacterController : MonoBehaviour
     public Vector2 MovementDirection { get { return movementDirection; } set { movementDirection = value; } }
 
     public bool IsJumping { get => isJumping; set => isJumping = value; }
+    public bool IsMoving { get=> IsMoving; set => IsMoving = value; }
 
     private void Awake()
     {
@@ -52,7 +60,7 @@ public class MageCharacterController : MonoBehaviour
 
     private void GetInputDirection()
     {
-        movementDirection.x = m_gamePlayInputActions.Mage.Movement.ReadValue<Vector2>().x;
+        movementDirection.x = m_gamePlayInputActions.Mage.Movimento.ReadValue<Vector2>().x;
         movementDirection.y = m_gamePlayInputActions.Mage.Jump.ReadValue<float>();
        
         if (movementDirection.x != 0)
@@ -78,12 +86,12 @@ public class MageCharacterController : MonoBehaviour
     private void Jump()
     {
         Vector2 jump = new Vector2(0, movementDirection.y);
-        if (CheckIfCanJump())
+        if (CheckIfCanJump() && playerType == EPlayerType.Mago)
         {
             IsJumping = !CheckIfCanJump();
             Vector2 jumpWithVelocity = jump.normalized
                 * Time.fixedDeltaTime
-                * jumpvelocity;
+                * jumpVelocity;
             m_playerMageRB2D.AddForce(Vector2.up * jumpWithVelocity,ForceMode2D.Impulse);
         }
 
@@ -98,22 +106,29 @@ public class MageCharacterController : MonoBehaviour
         if (hit.collider != null)
         {
             playerCanJump = true;
+            //Setto il linear drag a 2.5
+            m_playerMageRB2D.drag = linearDrag;
         }
         else
         {
             playerCanJump = false;
+            m_playerMageRB2D.drag =0;
         }
         return playerCanJump;
     }
-
+    public void ChangePlayerType(EPlayerType type)
+    {
+        if (type != playerType)
+            playerType = type;
+        else
+            return;
+    }
     private void OnEnable()
     {
-        m_gamePlayInputActions.Enable();
+        m_gamePlayInputActions.Mage.Enable();
     }
-    private void OnDisable()
-    {
-        m_gamePlayInputActions.Disable();
-    }
+  
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(rayCastPosition.position, boxCastDimension);
