@@ -8,10 +8,23 @@ public class Magia : MonoBehaviour
 
     public MagiaSO magia;
     public bool isCasted = false;
+    public Animator animator;
+    private PlayerFacing playerFacingOnInstance;
+
+
+    private SpriteRenderer renderer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        renderer = GetComponent<SpriteRenderer>();
+        InitializeMagic();
+    }
+
+    private void InitializeMagic()
+    {
+        playerFacingOnInstance = PlayerCharacterController.playerFacingDirection;
+        animator.runtimeAnimatorController = magia.animatorMagia;
+      
     }
 
     // Update is called once per frame
@@ -45,7 +58,16 @@ public class Magia : MonoBehaviour
     private void LancioMagiaLanciata()
     {
         if (!isCasted) return;
-        transform.Translate(Vector2.right * Time.deltaTime * 20);
+        if (playerFacingOnInstance == PlayerFacing.Sinistra)
+        {
+            transform.Translate(Vector2.left * Time.deltaTime * magia.velocit‡MagiaLanciata);
+            renderer.flipX= true;
+        }
+        else
+        {
+            transform.Translate(Vector2.right * Time.deltaTime * magia.velocit‡MagiaLanciata);
+            renderer.flipX= false;
+        }
         StartCoroutine(DistruggiDopoSecondi(1f));
 
     }

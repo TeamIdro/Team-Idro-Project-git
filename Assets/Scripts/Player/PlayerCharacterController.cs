@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerCharacterController : MonoBehaviour
 {
+    public static PlayerFacing playerFacingDirection;
+
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
     [Space(10)]
@@ -26,7 +28,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private Transform rayCastPosition;
     [SerializeField] private Vector2 boxCastDimension;
     [SerializeField] private LayerMask playerMask;
-
+    
 
     //VARIABILI PRIVATE
     private Collider2D m_playerMageCollider;
@@ -70,6 +72,14 @@ public class PlayerCharacterController : MonoBehaviour
         else
         {
             isMoving = false;
+        }
+        if (movementDirection.x > 0)
+        {
+            playerFacingDirection = PlayerFacing.Destra;
+        }
+        else if (movementDirection.x < 0)
+        {
+            playerFacingDirection= PlayerFacing.Sinistra;
         }
 
     }
@@ -133,4 +143,9 @@ public class PlayerCharacterController : MonoBehaviour
     {
         Gizmos.DrawWireCube(rayCastPosition.position, boxCastDimension);
     }
+}
+public enum PlayerFacing
+{
+    Sinistra,
+    Destra,
 }

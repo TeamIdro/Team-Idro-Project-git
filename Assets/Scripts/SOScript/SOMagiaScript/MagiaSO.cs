@@ -3,18 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Magia/MagiaSO", menuName = "Magia/MagiaSO")]
 public class MagiaSO : ScriptableObject,IMagia
 {
-    [SerializeField] TipoComportamentoMagia magicBehaviourType;
+    public AnimatorController animatorMagia;
+    public TipoComportamentoMagia magicBehaviourType;
     [Space]
-    [SerializeField] TipoDiDannoMagia damageType;
+    public TipoDiDannoMagia damageType;
     [Header("Lista Combinazioni")]
     public List<ElementoMagiaSO> combinazioneDiElementi;
     [Space(15)]
-    [Header("Valori Magia")]
+    [Header("Valori Magia Generici")]
     public float dannoDellaMagia;
     [Space(5)]
     [Range(0f, 10f)]
@@ -22,6 +24,15 @@ public class MagiaSO : ScriptableObject,IMagia
     [Space(5)]
     [Range(0f, 10f)]
     public float moltiplicatoreResistenza;
+    [Space(5)]
+    [Header("Valori Per Magia Lanciata")]
+    [Range(0, 100)]
+    public float velocitàMagiaLanciata;
+    [Header("Valori Per Magia Stazionaria")]
+    public int placeHolder;
+    [Header("Valori Per Magia Teleport")]
+    public Transform posizioneDelNemicoPiùVicino;
+
 
     public virtual void Lancia()
     {

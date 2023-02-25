@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 259332c7172799746af2445fd49cddd8
+guid: c4c86fbb9a4177743871b7443c80a77c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -115,18 +115,40 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: FB004_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 9
+        width: 33
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91938298932bb88439245ab7f7db80c7
+      internalID: 1174869292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FB004_0: 1174869292
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

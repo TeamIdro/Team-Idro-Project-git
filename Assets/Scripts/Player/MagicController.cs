@@ -14,8 +14,9 @@ using static UnityEngine.ParticleSystem;
 
 public class MagicController : MonoBehaviour
 {
+    [SerializeField] private GameObject m_UIPrefab;
     [SerializeField] private int m_spellSlot;
-    [SerializeField]private GameObject m_basePrefabToShoot;
+    [SerializeField] private GameObject m_basePrefabToShoot;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
     [SerializeField,ReadOnly] private List<MagiaSO> m_tuttaLaListaDelleMagie;
     [Space(15)]
@@ -148,7 +149,6 @@ public class MagicController : MonoBehaviour
 
     private IEnumerator CheckIfPlayerKnowsTheMagic()
     {
-        bool isMagiaConosciuta = false;
         bool isMagiaCheStaLanciandoConosciuta = false;
         int counterCheck = 0;
         List<MagiaSO> listaTutteMagieLocale = new List<MagiaSO>();
