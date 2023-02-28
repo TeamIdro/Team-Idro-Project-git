@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : MonoBehaviour
 {
@@ -34,7 +35,8 @@ public class PlayerCharacterController : MonoBehaviour
     private Collider2D m_playerMageCollider;
     private Rigidbody2D m_playerMageRB2D;
     private GamePlayInputActions m_gamePlayInputActions;
-   
+    private Animator animatorMago;
+    private SpriteRenderer mageRenderer;
 
     //PROPRIETA
     public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
@@ -48,12 +50,21 @@ public class PlayerCharacterController : MonoBehaviour
         m_playerMageRB2D = GetComponent<Rigidbody2D>();
         m_playerMageCollider = GetComponent<Collider2D>();
         m_gamePlayInputActions = new();
+        animatorMago = GetComponentInChildren<Animator>();
+        mageRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+    private void Start()
+    {
     }
 
     private void Update()
     {
         GetInputDirection();
+        AnimationUpdate();
     }
+
+   
+
     private void FixedUpdate()
     {
         Movement();
@@ -76,17 +87,24 @@ public class PlayerCharacterController : MonoBehaviour
         if (movementDirection.x > 0)
         {
             playerFacingDirection = PlayerFacing.Destra;
+            mageRenderer.flipX= false;
         }
         else if (movementDirection.x < 0)
         {
             playerFacingDirection= PlayerFacing.Sinistra;
+            mageRenderer.flipX= true;
         }
+
+    }
+    private void AnimationUpdate()
+    {
+        animatorMago.SetBool("IsMoving",isMoving);
+        animatorMago.SetBool("isJumping",isJumping);
 
     }
     private void Movement()
     {
         Vector2 movement = new Vector2(movementDirection.x * movementVelocity * Time.deltaTime,0);
-        Debug.Log(movement);
         m_playerMageRB2D.AddForce(movement, ForceMode2D.Impulse);
         if (m_playerMageRB2D.velocity.x > maxVelocityCap || m_playerMageRB2D.velocity.x < -maxVelocityCap)
         {
@@ -98,10 +116,11 @@ public class PlayerCharacterController : MonoBehaviour
         Vector2 jump = new Vector2(0, movementDirection.y);
         if (CheckIfCanJump() && playerType == EPlayerType.Mago)
         {
-            IsJumping = !CheckIfCanJump();
-            Vector2 jumpWithVelocity = jump.normalized
+            isJumping = !CheckIfCanJump();
+            Vector2 jumpWithVelocity = jump
                 * Time.fixedDeltaTime
                 * jumpVelocity;
+            Debug.Log(jumpWithVelocity);
             m_playerMageRB2D.AddForce(Vector2.up * jumpWithVelocity,ForceMode2D.Impulse);
         }
 
@@ -122,7 +141,7 @@ public class PlayerCharacterController : MonoBehaviour
         else
         {
             playerCanJump = false;
-            m_playerMageRB2D.drag =0;
+            m_playerMageRB2D.drag = 0;
         }
         return playerCanJump;
     }

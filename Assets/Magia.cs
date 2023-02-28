@@ -10,13 +10,11 @@ public class Magia : MonoBehaviour
     public bool isCasted = false;
     public Animator animator;
     private PlayerFacing playerFacingOnInstance;
-
-
-    private SpriteRenderer renderer;
+    private SpriteRenderer spriteRendererMagia;
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        spriteRendererMagia = GetComponent<SpriteRenderer>();
         InitializeMagic();
     }
 
@@ -61,12 +59,12 @@ public class Magia : MonoBehaviour
         if (playerFacingOnInstance == PlayerFacing.Sinistra)
         {
             transform.Translate(Vector2.left * Time.deltaTime * magia.velocitàMagiaLanciata);
-            renderer.flipX= true;
+            spriteRendererMagia.flipX= true;
         }
         else
         {
             transform.Translate(Vector2.right * Time.deltaTime * magia.velocitàMagiaLanciata);
-            renderer.flipX= false;
+            spriteRendererMagia.flipX= false;
         }
         StartCoroutine(DistruggiDopoSecondi(1f));
 
@@ -81,6 +79,14 @@ public class Magia : MonoBehaviour
     private void LancioMagiaStazionaria()
     {
         throw new NotImplementedException();
+    }
+    public float FaiDanno(float currentHealth)
+    {
+        if (currentHealth > 0)
+        {
+            currentHealth -= magia.dannoDellaMagia;
+        }
+        return currentHealth;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

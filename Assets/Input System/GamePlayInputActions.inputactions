@@ -146,6 +146,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "2D Vector GamePad",
+                    "id": "74267e0d-90fe-4b88-916b-7f7aea0e0fd9",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movimento",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "left",
+                    "id": "d60a1c31-1825-4e0c-9e06-aafade2b4381",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movimento",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "821e25a6-2900-4184-a85c-7f3f93d370a2",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Movimento",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "0c5e3a1e-11c3-49cf-9166-e8316334a058",
                     "path": "<Keyboard>/z",

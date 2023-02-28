@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285037267585120529}
   - component: {fileID: 6758082493375761218}
+  - component: {fileID: 7604304924014332225}
   m_Layer: 8
   m_Name: Graphic
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575464462213413425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 731325323, guid: 963899e9fb6036b44b8b3b26e01bf262, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &7604304924014332225
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575464462213413425}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: efc8eb264d279f04e82537ddfaebd942, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4108159572990154237
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,15 +154,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e96e8d2df6aadc24d82f22a02da2356d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 0
+  playerType: 1
   movementVelocity: 50
-  jumpVelocity: 0
+  jumpVelocity: 500
   maxVelocityCap: 10
+  linearDrag: 4.35
   movementDirection: {x: 0, y: 0}
   isMoving: 0
   isJumping: 0
   rayCastPosition: {fileID: 2316705413653882135}
-  boxCastDimension: {x: 0.5, y: 0.36}
+  boxCastDimension: {x: 0.5, y: 0.29}
   playerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -157,8 +179,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2c8c1a2e7280f4690923ce8966d863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBeforeShoot: 0
+  m_UIPrefab: {fileID: 0}
+  m_spellSlot: 3
+  m_basePrefabToShoot: {fileID: 2811095905312843416, guid: 1e486950aaa25c84196a0b0371c78c3e, type: 3}
+  m_faseCorrente: 0
   m_tuttaLaListaDelleMagie: []
-  m_listaDiQuelloCheIlMagoSa: []
+  m_listaDiQuelloCheIlMagoSa:
+  - {fileID: 11400000, guid: fe3ce6d40e009754cbf86ba775ae9c52, type: 2}
+  - {fileID: 11400000, guid: 15e21f0892b2c85449111f415ca24319, type: 2}
+  - {fileID: 11400000, guid: e006e213f8837764e9a13e1133b8bfee, type: 2}
+  - {fileID: 11400000, guid: 107a9ad85995dd443a6413081ec90ecb, type: 2}
+  m_elementiDaPrendere: []
+  OnMagicComposed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!70 &4337122286586203744
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -168,7 +215,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 4108159572990154237}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 828715ad4b343224eb9d901caf91493c, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -189,9 +236,9 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 3
-  m_Material: {fileID: 6200000, guid: 828715ad4b343224eb9d901caf91493c, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1

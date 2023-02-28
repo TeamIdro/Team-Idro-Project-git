@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82420e90972c5a4e9c06ae32c1bf401, type: 3}
   m_Name: Fuoco
   m_EditorClassIdentifier: 
+  spriteElemento: {fileID: 21300000, guid: 89b9b7b2048debd4a90ee3fb1ad0a003, type: 3}
+  tipoDiMagia: 0

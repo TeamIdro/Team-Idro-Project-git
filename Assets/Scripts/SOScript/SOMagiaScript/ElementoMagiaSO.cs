@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Magia/ElementoMagiaSO", menuName = "Magia/ElementoMagiaSO")]
 public class ElementoMagiaSO : ScriptableObject
 {
-	public Texture2D textureDellaMagia;
+	public Sprite spriteElemento;
 	public TipoMagia tipoDiMagia;
 
   
