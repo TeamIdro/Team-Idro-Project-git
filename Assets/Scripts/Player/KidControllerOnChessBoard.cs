@@ -12,6 +12,7 @@ public class KidControllerOnChessBoard : MonoBehaviour,IDialogueSpeaker
     [SerializeField] private int m_maxTimeAvailable;
     [SerializeField, ReadOnly] private int m_currentTimeAvailable;
     [SerializeField] private LayerMask m_tilesMask;
+    
     public int CurrentTimeAvailable
     {
         get { return m_currentTimeAvailable; }

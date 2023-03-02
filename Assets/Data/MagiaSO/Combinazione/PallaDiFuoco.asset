@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
+  m_Name: PallaDiFuoco
+  m_EditorClassIdentifier: 
+  animatorMagia: {fileID: 9100000, guid: 7c8f6d2fd2d26d44584dc219f47d4d53, type: 2}
+  magicBehaviourType: 0
+  damageType: 1
+  combinazioneDiElementi:
+  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
+  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
+  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
+  dannoDellaMagia: 50
+  moltiplicatoreDanno: 1.28
+  moltiplicatoreResistenza: 2.97
+  "velocit\xE0MagiaLanciata": 8
+  placeHolder: 0
+  "posizioneDelNemicoPi\xF9Vicino": {fileID: 0}
