@@ -21,6 +21,9 @@ public class EnemyTestScript : MonoBehaviour, IEnemy
     private NavMeshAgent agent;
     private BehaviorTree behaviorTree;
 
+    public float attackCooldown = 0f;
+    public float attackCooldownSet = 5f;
+
     private void Awake() 
     {
         agent = GetComponent<NavMeshAgent>();
@@ -43,19 +46,21 @@ public class EnemyTestScript : MonoBehaviour, IEnemy
 
     public void Update()
     {
-        behaviorTree.RegisterEvent<object>("Attack", AttackEvent);
-        // behaviorTree.RegisterEvent<object>("SetCanPatrol", SetCanPatrolEvent);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
 
-    private void AttackEvent(object arg1)
+    public void AttackEvent()//GameObject player
     {
-        // Debug.Log("ARG: " + arg1);
-        var behaviorTree = GetComponent<BehaviorTree>();
-    }
-
-    private void SetCanPatrolEvent(object arg1)
-    {
-
+         
+        if (attackCooldown <= 0f)
+        {
+            Debug.Log("ATTACK");
+            attackCooldown = attackCooldownSet;
+        }
+        else
+        {
+            attackCooldown -= Time.deltaTime;
+        }
+        
     }
 }
