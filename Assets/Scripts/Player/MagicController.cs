@@ -15,7 +15,8 @@ public class MagicController : MonoBehaviour
     [SerializeField] private GameObject m_basePrefabToShoot;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
     [SerializeField, ReadOnly] private List<MagiaSO> m_tuttaLaListaDelleMagie;
-    [SerializeField] private bool lastInFirstOut = false;
+    [Tooltip("Se spuntato fa si che se la lista degli elementi è piena e provi ad inserirne uno nuovo viene buttato fuori il primo elemento della lista per fare spazio, se non è spuntato una volta che la lista è piena non si potrà più aggiungere elementi")]
+    [SerializeField] private bool lastInFirstOut = true;
     [Space(15)]
     //[SerializeField]  public int livCatalizzatore = 1;
     //[SerializeField] private List<MagiaSO> m_listaDiQuelloCheIlMagoSa;
@@ -340,12 +341,21 @@ public class MagicController : MonoBehaviour
             {
                 bullet = Instantiate(magia, gameObject.transform.position + new Vector3(1, 0, 0), gameObject.transform.rotation);
                 bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitàMagiaLanciata*10, 0));
+                if (m_magiaDaLanciare.rallentamentoGraduale)
+                {
+                    bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;
+                }
+
             }
             else
             {                
                 bullet = Instantiate(magia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
                 bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
                 bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(-m_magiaDaLanciare.velocitàMagiaLanciata*10, 0));
+                if (m_magiaDaLanciare.rallentamentoGraduale)
+                {
+                    bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;
+                }
             }
 
             bullet.GetComponent<Animator>().runtimeAnimatorController = m_magiaDaLanciare.animatorMagia;

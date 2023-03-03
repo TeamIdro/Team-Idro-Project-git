@@ -31,23 +31,21 @@ public class MagiaSO : ScriptableObject,IMagia
     public float velocitàMagiaLanciata;
     [Tooltip("Se il proiettile deve rallentare fino a fermarsi")]
     public bool rallentamentoGraduale;
-    [Tooltip("Velocità di decellerazione, viene usata solo se rallentamento graduale è spuntato")]
-    [Range(0, 100)]
-    public float decellerazione;
+    [Tooltip("Tempo che ci mette il proiettile a fermarsi rallentando gradualmente")]
+    [Range(1, 100)]
+    public float decellerazioneTime;
     [Range(0, 100)]
     [Tooltip("Distanza percorsa dal proiettile prima di essere distrutto")]
     public float distanzaMagiaLanciata;
-    [Range(0, 1000)]
+    [Range(1, 1000)]
     [Tooltip("Durata in secondi del proiettile prima di essere distrutto")]
     public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
-    [Tooltip("I layer con cui il proiettile non collide")]
+    [Tooltip("I layer con cui il proiettile non collide, può comunque infliggere danni ai nemici impostati su danneggiaTarget ma infliggerà danno solo una volta per ognuno sulla traiettoria e passerà oltre")]
     public LayerMask ignoraCollisioni;
     [Tooltip("I layer che possono essere danneggiati dal proiettile")]
     public LayerMask danneggiaTarget;
-    [Tooltip("Se il colpo deve passare oltre i bersagli danneggiabili, se vero il colpo danneggerà il bersaglio una volta e passerà oltre danneggiando qualunque bersaglio valido sulla traiettoria")]
-    public bool colpoPerforante;
 
     [Header("Valori Per Magia Stazionaria")]
     public int placeHolder;
