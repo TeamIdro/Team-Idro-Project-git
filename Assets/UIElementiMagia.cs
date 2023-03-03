@@ -13,12 +13,27 @@ public class UIElementiMagia : MonoBehaviour
         uiMagicImages = new List<GameObject>();
     }
 
-    public void AddUI(ElementoMagiaSO elementoDaAggiungere)
+    public void AddUI(ElementoMagiaSO elementoDaAggiungere, int catalizerLevel ,bool addMode)
     {
-        GameObject uiInstantieted = Instantiate(uiToSpawn, transform);
-        uiInstantieted.GetComponent<Image>().sprite = elementoDaAggiungere.spriteElemento;
-        uiMagicImages.Add(uiInstantieted);
+        if (addMode)
+        {
+            GameObject uiInstantieted = Instantiate(uiToSpawn, transform);
+            uiInstantieted.GetComponent<Image>().sprite = elementoDaAggiungere.spriteElemento;
+            uiMagicImages.Add(uiInstantieted);
+            if (uiMagicImages.Count > catalizerLevel)
+            {
+                Destroy(uiMagicImages[0].gameObject);
+                uiMagicImages.RemoveAt(0);
+            }            
+        }
+        else
+        {
+            GameObject uiInstantieted = Instantiate(uiToSpawn, transform);
+            uiInstantieted.GetComponent<Image>().sprite = elementoDaAggiungere.spriteElemento;
+            uiMagicImages.Add(uiInstantieted);
+        }        
     }
+
     public void ClearUI()
     {
         foreach (var item in uiMagicImages.ToArray())
