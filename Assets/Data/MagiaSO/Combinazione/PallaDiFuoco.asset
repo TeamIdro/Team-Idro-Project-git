@@ -22,6 +22,18 @@ MonoBehaviour:
   dannoDellaMagia: 50
   moltiplicatoreDanno: 1.28
   moltiplicatoreResistenza: 2.97
-  "velocit\xE0MagiaLanciata": 8
+  "velocit\xE0MagiaLanciata": 100
+  rallentamentoGraduale: 0
+  decellerazione: 0
+  distanzaMagiaLanciata: 6
+  tempoMagiaLanciata: 43
+  detonazioneAdImpatto: 1
+  ignoraCollisioni:
+    serializedVersion: 2
+    m_Bits: 256
+  danneggiaTarget:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  colpoPerforante: 0
   placeHolder: 0
   "posizioneDelNemicoPi\xF9Vicino": {fileID: 0}
