@@ -10,30 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
-  m_Name: PallaDiFuoco
+  m_Name: NubeEsplosiva
   m_EditorClassIdentifier: 
-  animatorMagia: {fileID: 9100000, guid: 7c8f6d2fd2d26d44584dc219f47d4d53, type: 2}
+  animatorMagia: {fileID: 0}
   magicBehaviourType: 0
-  damageType: 1
+  damageType: 0
   combinazioneDiElementi:
+  - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
-  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
-  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
-  dannoDellaMagia: 50
-  moltiplicatoreDanno: 1.28
-  moltiplicatoreResistenza: 2.97
-  "velocit\xE0MagiaLanciata": 25
-  rallentamentoGraduale: 1
-  decellerazioneTime: 2
-  distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 10
+  dannoDellaMagia: 0
+  moltiplicatoreDanno: 0
+  moltiplicatoreResistenza: 0
+  "velocit\xE0MagiaLanciata": 2
+  rallentamentoGraduale: 0
+  decellerazioneTime: 1
+  distanzaMagiaLanciata: 10
+  tempoMagiaLanciata: 100
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 7952463968355666411, guid: a334fe2610405a74889c731f40be3dc3, type: 3}
-  AlternativeBullet: {fileID: 0}
+  AlternativeBullet: {fileID: 1859015137868134137, guid: ba353dc91d14f274ca7b3995157ff1fb, type: 3}
   explosionKnockbackForce: 50
   ignoraCollisioni:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 768
   danneggiaTarget:
     serializedVersion: 2
     m_Bits: 2147483647

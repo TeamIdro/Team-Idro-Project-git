@@ -42,6 +42,12 @@ public class MagiaSO : ScriptableObject,IMagia
     public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
+    [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto è spuntata")]
+    public GameObject ExplosionPref;
+    [Tooltip("Se si vuole sparare altro al posto del normale bullet inserire qui il prefab, se lasciato vuoto verrà sparato il prefab bullet")]
+    public GameObject AlternativeBullet;    
+    [Range(0, 100)]
+    public float explosionKnockbackForce = 1;
     [Tooltip("I layer con cui il proiettile non collide, può comunque infliggere danni ai nemici impostati su danneggiaTarget ma infliggerà danno solo una volta per ognuno sulla traiettoria e passerà oltre")]
     public LayerMask ignoraCollisioni;
     [Tooltip("I layer che possono essere danneggiati dal proiettile")]

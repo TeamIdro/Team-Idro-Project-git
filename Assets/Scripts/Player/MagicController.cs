@@ -154,22 +154,22 @@ public class MagicController : MonoBehaviour
     //}
 
   
-    private void ThrowMagic()
-    {
-        Instantiate(m_basePrefabToShoot,transform.position,Quaternion.identity);
-        magiaDaInizializzare.isCasted = true;
-        magiaDaInizializzare = null;
-        m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
-        m_listaValoriLancio.Clear();
-        UIelementiMagia.ClearUI();
+    //private void ThrowMagic()
+    //{
+    //    Instantiate(m_basePrefabToShoot,transform.position,Quaternion.identity);
+    //    magiaDaInizializzare.isCasted = true;
+    //    magiaDaInizializzare = null;
+    //    m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+    //    m_listaValoriLancio.Clear();
+    //    UIelementiMagia.ClearUI();
 
-    }
+    //}
 
-    private void WaitForMagicToShoot()
-    {
-        InizializzaMagia();
-        m_faseCorrente = FasiDiLancioMagia.LancioMagia;
-    }
+    //private void WaitForMagicToShoot()
+    //{
+    //    InizializzaMagia();
+    //    m_faseCorrente = FasiDiLancioMagia.LancioMagia;
+    //}
 
     private void InizializzaMagia()
     {
@@ -240,6 +240,14 @@ public class MagicController : MonoBehaviour
             }                        
         }
 
+        if (m_magiaDaLanciare == null)
+        {
+            Debug.LogWarning("Magia non creata");
+            ClearElementList();
+            UIelementiMagia.ClearUI();
+            m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+            return;
+        }
         m_faseCorrente = FasiDiLancioMagia.AspettandoLancioMagia;
         OnMagicComposed.Invoke();
         
@@ -337,6 +345,12 @@ public class MagicController : MonoBehaviour
             GameObject bullet;
             var asset = AssetDatabase.FindAssets("Bullet", new[] { "Assets/Prefabs/Object" });
             var magia = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(asset[0]));
+
+            if (m_magiaDaLanciare.AlternativeBullet != null)
+            {
+                magia = m_magiaDaLanciare.AlternativeBullet;
+            }
+
             if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Destra)
             {
                 bullet = Instantiate(magia, gameObject.transform.position + new Vector3(1, 0, 0), gameObject.transform.rotation);
@@ -358,15 +372,33 @@ public class MagicController : MonoBehaviour
                 }
             }
 
-            bullet.GetComponent<Animator>().runtimeAnimatorController = m_magiaDaLanciare.animatorMagia;
-            bullet.GetComponent<CircleCollider2D>().enabled = true;
+            if (m_magiaDaLanciare.detonazioneAdImpatto)
+            {
+                bullet.AddComponent<InstatiateExplosion>().ExplosionPref = m_magiaDaLanciare.ExplosionPref;
+                bullet.GetComponent<InstatiateExplosion>().explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
+                bullet.GetComponent<InstatiateExplosion>().DamageContact = m_magiaDaLanciare.danneggiaTarget;
+            }
+            if (bullet.GetComponent<Animator>() != null)
+            {   bullet.GetComponent<Animator>().runtimeAnimatorController = m_magiaDaLanciare.animatorMagia;    }
+
+            if (bullet.GetComponent<CircleCollider2D>() != null)
+            { bullet.GetComponent<CircleCollider2D>().enabled = true; }
+
             bullet.AddComponent<DestroyOnTrigger>().setLayer(m_magiaDaLanciare.ignoraCollisioni);
             bullet.AddComponent<DestroyAfterDistance>().MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
             bullet.AddComponent<DestroyAfterTime>().destroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
         }
         
         m_magiaDaLanciare = null;
+        ClearElementList();
+        UIelementiMagia.ClearUI();
         m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+
+    }
+
+    private void ClearElementList()
+    {
+        m_listaValoriLancio.Clear();
     }
 
     private void OnEnable() => m_gamePlayInput.Mage.Enable();
