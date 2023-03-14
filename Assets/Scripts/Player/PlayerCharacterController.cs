@@ -140,12 +140,10 @@ public class PlayerCharacterController : MonoBehaviour
         {
             playerCanJump = true;
             //Setto il linear drag a 2.5
-            m_playerMageRB2D.drag = linearDrag;
         }
         else
         {
             playerCanJump = false;
-            m_playerMageRB2D.drag = 0;
         }
         return playerCanJump;
     }

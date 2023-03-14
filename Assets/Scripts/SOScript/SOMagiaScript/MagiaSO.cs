@@ -28,7 +28,7 @@ public class MagiaSO : ScriptableObject,IMagia
     [Header("Valori Per Magia Lanciata")]
     [Range(0, 100)]
     [Tooltip("Velocità del proiettile")]
-    public float velocitàMagiaLanciata;
+    public float velocitaMagiaLanciata;
     [Tooltip("Se il proiettile deve rallentare fino a fermarsi")]
     public bool rallentamentoGraduale;
     [Tooltip("Tempo che ci mette il proiettile a fermarsi rallentando gradualmente")]
@@ -56,7 +56,7 @@ public class MagiaSO : ScriptableObject,IMagia
     [Header("Valori Per Magia Stazionaria")]
     public int placeHolder;
     [Header("Valori Per Magia Teleport")]
-    public Transform posizioneDelNemicoPiùVicino;
+    public Transform posizioneDelNemicoPiuVicino;
 
 
     public virtual void Lancia()
