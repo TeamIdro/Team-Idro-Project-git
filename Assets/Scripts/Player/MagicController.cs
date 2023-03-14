@@ -11,12 +11,15 @@ public class MagicController : MonoBehaviour
 {
     [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
-    [SerializeField] private int m_spellSlot;
+    [SerializeField] [Range(1, 3)] private int m_spellSlot;
     [SerializeField] private GameObject m_basePrefabToShoot;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
-    [SerializeField,ReadOnly] private List<MagiaSO> m_tuttaLaListaDelleMagie;
+    [SerializeField, ReadOnly] private List<MagiaSO> m_tuttaLaListaDelleMagie;
+    [Tooltip("Se spuntato fa si che se la lista degli elementi è piena e provi ad inserirne uno nuovo viene buttato fuori il primo elemento della lista per fare spazio, se non è spuntato una volta che la lista è piena non si potrà più aggiungere elementi")]
+    [SerializeField] private bool lastInFirstOut = true;
     [Space(15)]
-    [SerializeField] private List<MagiaSO> m_listaDiQuelloCheIlMagoSa;
+    //[SerializeField]  public int livCatalizzatore = 1;
+    //[SerializeField] private List<MagiaSO> m_listaDiQuelloCheIlMagoSa;
     [SerializeField] private List<ElementoMagiaSO> m_elementiDaPrendere;
     public UnityEvent OnMagicComposed;
 
@@ -41,6 +44,7 @@ public class MagicController : MonoBehaviour
         foreach (var item in element)
         {
             var elementoDaAggiungere = AssetDatabase.LoadAssetAtPath<ElementoMagiaSO>(AssetDatabase.GUIDToAssetPath(item));
+            Debug.Log(elementoDaAggiungere);
             m_elementiDaPrendere.Add(elementoDaAggiungere);
         }
         for (int i = 0; i < m_tuttaLaListaDelleMagie.Count; i++)
@@ -48,11 +52,11 @@ public class MagicController : MonoBehaviour
             m_tuttaLaListaDelleMagie.OrderBy(x => x.combinazioneDiElementi);
             m_tuttaLaListaDelleMagie[i].combinazioneDiElementi.OrderBy(x => x.tipoDiMagia);
         }
-        for (int i = 0; i < m_listaDiQuelloCheIlMagoSa.Count; i++)
-        {
-            m_listaDiQuelloCheIlMagoSa.OrderBy(x => x.combinazioneDiElementi);
-            m_listaDiQuelloCheIlMagoSa[i].combinazioneDiElementi.OrderBy(x=> x.tipoDiMagia);
-        }
+        //for (int i = 0; i < m_listaDiQuelloCheIlMagoSa.Count; i++)
+        //{
+        //    m_listaDiQuelloCheIlMagoSa.OrderBy(x => x.combinazioneDiElementi);
+        //    m_listaDiQuelloCheIlMagoSa[i].combinazioneDiElementi.OrderBy(x=> x.tipoDiMagia);
+        //}
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoAcqua, TipoMagia.Acqua);
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoTerra, TipoMagia.Terra);
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoFuoco, TipoMagia.Fuoco);
@@ -64,21 +68,44 @@ public class MagicController : MonoBehaviour
         m_gamePlayInput.Mage.UsaElementoFuoco.performed += AddElement;
         m_gamePlayInput.Mage.UsaElementoAria.performed += AddElement;
         m_gamePlayInput.Mage.UsaElementoFulmine.performed += AddElement;
+        m_gamePlayInput.Mage.Fire.performed += Onfire;
     }
 
     private void AddElement(InputAction.CallbackContext obj)
     {
-        if (m_listaValoriLancio.Count < m_spellSlot)
+        if (lastInFirstOut)
         {
-            TipoMagia tipoDiMagiaDaAggiungere = m_dizionariElementi.GetValueOrDefault(obj.action);
-            ElementoMagiaSO elementoMagia = m_elementiDaPrendere.Find(x => x.tipoDiMagia == tipoDiMagiaDaAggiungere);
-            m_listaValoriLancio.Add(elementoMagia);
-            UIelementiMagia.AddUI(elementoMagia);
+            if (m_listaValoriLancio.Count < m_spellSlot)
+            {
+                TipoMagia tipoDiMagiaDaAggiungere = m_dizionariElementi.GetValueOrDefault(obj.action);
+                ElementoMagiaSO elementoMagia = m_elementiDaPrendere.Find(x => x.tipoDiMagia == tipoDiMagiaDaAggiungere);
+                m_listaValoriLancio.Add(elementoMagia);
+                UIelementiMagia.AddUI(elementoMagia, m_spellSlot, false);
+            }
+            else
+            {
+                TipoMagia tipoDiMagiaDaAggiungere = m_dizionariElementi.GetValueOrDefault(obj.action);
+                ElementoMagiaSO elementoMagia = m_elementiDaPrendere.Find(x => x.tipoDiMagia == tipoDiMagiaDaAggiungere);
+                m_listaValoriLancio.RemoveAt(0);
+                m_listaValoriLancio.Add(elementoMagia);
+                UIelementiMagia.AddUI(elementoMagia, m_spellSlot, true);
+            }
         }
         else
         {
-            return;
+            if (m_listaValoriLancio.Count < m_spellSlot)
+            {
+                TipoMagia tipoDiMagiaDaAggiungere = m_dizionariElementi.GetValueOrDefault(obj.action);
+                ElementoMagiaSO elementoMagia = m_elementiDaPrendere.Find(x => x.tipoDiMagia == tipoDiMagiaDaAggiungere);
+                m_listaValoriLancio.Add(elementoMagia);
+                UIelementiMagia.AddUI(elementoMagia, m_spellSlot, false);
+            }
+            else
+            {
+                return;
+            }
         }
+        
       
 
     }
@@ -92,53 +119,57 @@ public class MagicController : MonoBehaviour
 
     public void Update()
     {
-        CheckStatusMagia();
-    }
-
-    private void CheckStatusMagia()
-    {
-        switch(m_faseCorrente)
+        if (m_faseCorrente == FasiDiLancioMagia.AspettoComponimentoMagia)
         {
-            case FasiDiLancioMagia.AspettoComponimentoMagia:
-                CheckIfPlayerWantToStartMagic();
-                break;
-
-            case FasiDiLancioMagia.ComponendoMagia:
-                StartCoroutine(CheckIfPlayerKnowsTheMagic());
-                break;
-
-            case FasiDiLancioMagia.MagiaComposta:
-                DoSomethingOnMagicComposed();
-                break;
-
-            case FasiDiLancioMagia.AspettandoLancioMagia:
-                WaitForMagicToShoot();
-                break;
-
-            case FasiDiLancioMagia.LancioMagia:
-                ThrowMagic();
-                break;
-
-        }    
+            CheckIfPlayerWantToStartMagic();
+        }
+        
     }
+
+    //private void CheckStatusMagia()
+    //{
+    //    switch(m_faseCorrente)
+    //    {
+    //        case FasiDiLancioMagia.AspettoComponimentoMagia:
+    //            CheckIfPlayerWantToStartMagic();
+    //            break;
+
+    //        case FasiDiLancioMagia.ComponendoMagia:
+    //            StartCoroutine(ComponiMagia());
+    //            break;
+
+    //        case FasiDiLancioMagia.MagiaComposta:
+    //            DoSomethingOnMagicComposed();
+    //            break;
+
+    //        case FasiDiLancioMagia.AspettandoLancioMagia:
+    //            WaitForMagicToShoot();
+    //            break;
+
+    //        case FasiDiLancioMagia.LancioMagia:
+    //            ThrowMagic();
+    //            break;
+
+    //    }    
+    //}
 
   
-    private void ThrowMagic()
-    {
-        Instantiate(m_basePrefabToShoot,transform.position,Quaternion.identity);
-        magiaDaInizializzare.isCasted = true;
-        magiaDaInizializzare = null;
-        m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
-        m_listaValoriLancio.Clear();
-        UIelementiMagia.ClearUI();
+    //private void ThrowMagic()
+    //{
+    //    Instantiate(m_basePrefabToShoot,transform.position,Quaternion.identity);
+    //    magiaDaInizializzare.isCasted = true;
+    //    magiaDaInizializzare = null;
+    //    m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+    //    m_listaValoriLancio.Clear();
+    //    UIelementiMagia.ClearUI();
 
-    }
+    //}
 
-    private void WaitForMagicToShoot()
-    {
-        InizializzaMagia();
-        m_faseCorrente = FasiDiLancioMagia.LancioMagia;
-    }
+    //private void WaitForMagicToShoot()
+    //{
+    //    InizializzaMagia();
+    //    m_faseCorrente = FasiDiLancioMagia.LancioMagia;
+    //}
 
     private void InizializzaMagia()
     {
@@ -149,77 +180,227 @@ public class MagicController : MonoBehaviour
 
     private void DoSomethingOnMagicComposed()
     {
-        OnMagicComposed.Invoke();
-        m_faseCorrente = FasiDiLancioMagia.AspettandoLancioMagia;
-    }
-
-
-    private IEnumerator CheckIfPlayerKnowsTheMagic()
-    {
-        bool isMagiaCheStaLanciandoConosciuta = false;
-        int counterCheck = 0;
+        m_listaValoriLancio.OrderBy(x => x.tipoDiMagia);
         List<MagiaSO> listaTutteMagieLocale = new List<MagiaSO>();
         listaTutteMagieLocale = m_tuttaLaListaDelleMagie;
-        m_listaValoriLancio.OrderBy(x => x.tipoDiMagia);
         listaTutteMagieLocale.OrderBy(x => x.name);
-        m_listaDiQuelloCheIlMagoSa.OrderBy(x => x.name);
-        yield return new WaitForSeconds(timeBeforeShoot);
+        int elementoMultiploRipetizioni = 0;
+        ElementoMagiaSO elemMultiplo = new();
 
-        for (int i = 0; i < m_tuttaLaListaDelleMagie.Count; i++)
+        for (int i = 0; i < m_listaValoriLancio.Count; i++)
         {
-            for (int j = 0; j < m_listaDiQuelloCheIlMagoSa.Count; j++)
+            elementoMultiploRipetizioni = m_listaValoriLancio.FindAll(f => f == m_listaValoriLancio[i]).Count;
+            if (elementoMultiploRipetizioni >= 2)
             {
-                //bool isEqual = first.OrderBy(x => x).SequenceEqual(second.OrderBy(x => x));
-                if (listaTutteMagieLocale[i].combinazioneDiElementi.SequenceEqual(m_listaDiQuelloCheIlMagoSa[j].combinazioneDiElementi))
+                elemMultiplo = m_listaValoriLancio[i];
+                break;
+            }
+        }
+        
+        foreach (MagiaSO spell in listaTutteMagieLocale)
+        {
+            if (spell.combinazioneDiElementi.Count > m_listaValoriLancio.Count)
+            {
+                continue;
+            }
+
+            if (elemMultiplo!= null && elementoMultiploRipetizioni > 1)
+            {
+                if (spell.combinazioneDiElementi.FindAll(f => f == elemMultiplo).Count == elementoMultiploRipetizioni)
                 {
-                    for (int k = 0; k < m_listaValoriLancio.Count; k++)
+                    if (elementoMultiploRipetizioni == m_listaValoriLancio.Count)
                     {
-                        /* TODO BUG: il sistema se si premono combinazioni diverse di tasti da qualsiasi magia essa prenderà elementi dalle diverse magie che sta ciclando 
-                            per poi prendere la l'ultima magia che sta ciclando e creare quella, se non ricordi bug fai test*/
-                        if (m_listaDiQuelloCheIlMagoSa[j].combinazioneDiElementi[k].tipoDiMagia == m_listaValoriLancio[k].tipoDiMagia)
-                        {
-                            counterCheck++;
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        m_magiaDaLanciare = spell;
+                        break;
                     }
-                    if (counterCheck <= m_spellSlot && counterCheck != 0)
+                    else if (m_listaValoriLancio.Find(f => f != elemMultiplo) == spell.combinazioneDiElementi.Find(f=>f != elemMultiplo))
                     {
-                        m_magiaDaLanciare = m_listaDiQuelloCheIlMagoSa[j];
-                        Debug.Log("Magia da lanciare: " + m_magiaDaLanciare);
-                        isMagiaCheStaLanciandoConosciuta = true;
-                        counterCheck = 0;
+                        m_magiaDaLanciare = spell;
                         break;
                     }
                 }
             }
+            else
+            {
+                int corrispondenze;
+                corrispondenze = 0;
+                foreach (ElementoMagiaSO element in m_listaValoriLancio)
+                {
+                    if (spell.combinazioneDiElementi.Find(f => f == element))
+                    {
+                        corrispondenze++;
+                    }
+                }
+
+                if (corrispondenze == m_listaValoriLancio.Count)
+                {
+                    m_magiaDaLanciare = spell;
+                    break;
+                }
+            }                        
         }
-       
-        if (isMagiaCheStaLanciandoConosciuta == true)
+
+        if (m_magiaDaLanciare == null)
         {
-            m_faseCorrente = FasiDiLancioMagia.MagiaComposta;
-            counterCheck = 0;
-        }
-        else
-        {
-            m_listaValoriLancio.Clear();
+            Debug.LogWarning("Magia non creata");
+            ClearElementList();
+            UIelementiMagia.ClearUI();
             m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
-            counterCheck = 0;
+            return;
         }
-        StopCoroutine(CheckIfPlayerKnowsTheMagic());
+        m_faseCorrente = FasiDiLancioMagia.AspettandoLancioMagia;
+        OnMagicComposed.Invoke();
+        
+    }
+
+
+    private IEnumerator ComponiMagia()  //in teoria non serve
+    {
         yield return null;
+
+        if (true)
+        {
+            //bool isMagiaCheStaLanciandoConosciuta = false;
+            //int counterCheck = 0;
+            //List<MagiaSO> listaTutteMagieLocale = new List<MagiaSO>();
+            //listaTutteMagieLocale = m_tuttaLaListaDelleMagie;
+            //m_listaValoriLancio.OrderBy(x => x.tipoDiMagia);
+            //listaTutteMagieLocale.OrderBy(x => x.name);
+            ////m_listaDiQuelloCheIlMagoSa.OrderBy(x => x.name);
+            //yield return new WaitForSeconds(timeBeforeShoot);
+
+            //for (int i = 0; i < m_tuttaLaListaDelleMagie.Count; i++)
+            //{
+            //    for (int j = 0; j < m_listaDiQuelloCheIlMagoSa.Count; j++)
+            //    {
+            //        //bool isEqual = first.OrderBy(x => x).SequenceEqual(second.OrderBy(x => x));
+            //        if (listaTutteMagieLocale[i].combinazioneDiElementi.SequenceEqual(m_listaDiQuelloCheIlMagoSa[j].combinazioneDiElementi))
+            //        {
+            //            for (int k = 0; k < m_listaValoriLancio.Count; k++)
+            //            {
+            //                /* TODO BUG: il sistema se si premono combinazioni diverse di tasti da qualsiasi magia essa prenderà elementi dalle diverse magie che sta ciclando 
+            //                    per poi prendere la l'ultima magia che sta ciclando e creare quella, se non ricordi bug fai test*/
+            //                if (m_listaDiQuelloCheIlMagoSa[j].combinazioneDiElementi[k].tipoDiMagia == m_listaValoriLancio[k].tipoDiMagia)
+            //                {
+            //                    counterCheck++;
+            //                }
+            //                else
+            //                {
+            //                    break;
+            //                }
+            //            }
+            //            if (counterCheck <= m_spellSlot && counterCheck != 0)
+            //            {
+            //                m_magiaDaLanciare = m_listaDiQuelloCheIlMagoSa[j];
+            //                Debug.Log("Magia da lanciare: " + m_magiaDaLanciare);
+            //                isMagiaCheStaLanciandoConosciuta = true;
+            //                counterCheck = 0;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
+
+            //if (isMagiaCheStaLanciandoConosciuta == true)
+            //{
+            //    m_faseCorrente = FasiDiLancioMagia.MagiaComposta;
+            //    counterCheck = 0;
+            //}
+            //else
+            //{
+            //    m_listaValoriLancio.Clear();
+            //    m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+            //    counterCheck = 0;
+            //}
+            //StopCoroutine(ComponiMagia());
+            //yield return null;
+        }
+
     }
 
     private void CheckIfPlayerWantToStartMagic()
     {
-        if (m_listaValoriLancio.Count == m_spellSlot)
+        if (m_listaValoriLancio.Count > 0)
         {
             m_faseCorrente = FasiDiLancioMagia.ComponendoMagia;
         }
     }
-       
+
+    private void Onfire(InputAction.CallbackContext obj)
+    {
+        Debug.Log("OnFire");
+        if (m_listaValoriLancio.Count <= 0)
+        {
+            return;           
+        }
+        m_faseCorrente = FasiDiLancioMagia.MagiaComposta;
+        DoSomethingOnMagicComposed();
+    }
+
+    public void CastSpell()
+    {
+        m_faseCorrente = FasiDiLancioMagia.LancioMagia;
+        if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
+        {
+            GameObject bullet;
+            var asset = AssetDatabase.FindAssets("Bullet", new[] { "Assets/Prefabs/Object" });
+            var magia = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(asset[0]));
+
+            if (m_magiaDaLanciare.AlternativeBullet != null)
+            {
+                magia = m_magiaDaLanciare.AlternativeBullet;
+            }
+
+            if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Destra)
+            {
+                bullet = Instantiate(magia, gameObject.transform.position + new Vector3(1, 0, 0), gameObject.transform.rotation);
+                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitàMagiaLanciata*10, 0));
+                if (m_magiaDaLanciare.rallentamentoGraduale)
+                {
+                    bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;
+                }
+
+            }
+            else
+            {                
+                bullet = Instantiate(magia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
+                bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
+                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(-m_magiaDaLanciare.velocitàMagiaLanciata*10, 0));
+                if (m_magiaDaLanciare.rallentamentoGraduale)
+                {
+                    bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;
+                }
+            }
+
+            if (m_magiaDaLanciare.detonazioneAdImpatto)
+            {
+                bullet.AddComponent<InstatiateExplosion>().ExplosionPref = m_magiaDaLanciare.ExplosionPref;
+                bullet.GetComponent<InstatiateExplosion>().explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
+                bullet.GetComponent<InstatiateExplosion>().DamageContact = m_magiaDaLanciare.danneggiaTarget;
+            }
+            if (bullet.GetComponent<Animator>() != null)
+            {   bullet.GetComponent<Animator>().runtimeAnimatorController = m_magiaDaLanciare.animatorMagia;    }
+
+            if (bullet.GetComponent<CircleCollider2D>() != null)
+            { bullet.GetComponent<CircleCollider2D>().enabled = true; }
+
+            bullet.AddComponent<DestroyOnTrigger>().setLayer(m_magiaDaLanciare.ignoraCollisioni);
+            bullet.AddComponent<DestroyAfterDistance>().MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
+            bullet.AddComponent<DestroyAfterTime>().destroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
+        }
+        
+        m_magiaDaLanciare = null;
+        ClearElementList();
+        UIelementiMagia.ClearUI();
+        m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+
+    }
+
+    private void ClearElementList()
+    {
+        m_listaValoriLancio.Clear();
+    }
+
     private void OnEnable() => m_gamePlayInput.Mage.Enable();
         
 }

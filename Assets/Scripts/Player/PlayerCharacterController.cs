@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    public static PlayerFacing playerFacingDirection;
+    public static PlayerFacing playerFacingDirection = PlayerFacing.Destra;
 
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
@@ -17,6 +17,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private float movementVelocity;
     [SerializeField] private float jumpVelocity;
     [SerializeField] private float maxVelocityCap;
+    [SerializeField] private float deceleration;
     [Range(0f, 5f)]
     [SerializeField] private float linearDrag;
     [Space(10)]
@@ -110,6 +111,10 @@ public class PlayerCharacterController : MonoBehaviour
         {
             m_playerMageRB2D.velocity = new Vector2(Mathf.Clamp(m_playerMageRB2D.velocity.x, -maxVelocityCap, maxVelocityCap),m_playerMageRB2D.velocity.y);
         }
+        if (Math.Abs(movementDirection.x) < 0.1f)
+        {
+            m_playerMageRB2D.velocity = Vector2.Lerp(new Vector2(m_playerMageRB2D.velocity.x, m_playerMageRB2D.velocity.y), new Vector2(0, m_playerMageRB2D.velocity.y), deceleration * Time.fixedDeltaTime);
+        }
     }
     private void Jump()
     {
@@ -120,7 +125,6 @@ public class PlayerCharacterController : MonoBehaviour
             Vector2 jumpWithVelocity = jump
                 * Time.fixedDeltaTime
                 * jumpVelocity;
-            Debug.Log(jumpWithVelocity);
             m_playerMageRB2D.AddForce(Vector2.up * jumpWithVelocity,ForceMode2D.Impulse);
         }
 
@@ -136,12 +140,10 @@ public class PlayerCharacterController : MonoBehaviour
         {
             playerCanJump = true;
             //Setto il linear drag a 2.5
-            m_playerMageRB2D.drag = linearDrag;
         }
         else
         {
             playerCanJump = false;
-            m_playerMageRB2D.drag = 0;
         }
         return playerCanJump;
     }

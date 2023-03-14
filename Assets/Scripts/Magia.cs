@@ -58,12 +58,12 @@ public class Magia : MonoBehaviour
         if (!isCasted) return;
         if (playerFacingOnInstance == PlayerFacing.Sinistra)
         {
-            transform.Translate(Vector2.left * Time.deltaTime * magia.velocit‡MagiaLanciata);
+            transform.Translate(Vector2.left * Time.deltaTime * magia.velocitaMagiaLanciata);
             spriteRendererMagia.flipX= true;
         }
         else
         {
-            transform.Translate(Vector2.right * Time.deltaTime * magia.velocit‡MagiaLanciata);
+            transform.Translate(Vector2.right * Time.deltaTime * magia.velocitaMagiaLanciata);
             spriteRendererMagia.flipX= false;
         }
         StartCoroutine(DistruggiDopoSecondi(1f));

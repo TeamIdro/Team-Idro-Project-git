@@ -10,30 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
-  m_Name: MeteorStorm
+  m_Name: Nube Tossica
   m_EditorClassIdentifier: 
   animatorMagia: {fileID: 0}
-  magicBehaviourType: 1
-  damageType: 0
+  magicBehaviourType: 0
+  damageType: 1
   combinazioneDiElementi:
   - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
-  - {fileID: 11400000, guid: 8aa8c337adb74d6429acb70ac064d5f1, type: 2}
   - {fileID: 11400000, guid: 883b13981282ae5478df3bd72ba83949, type: 2}
-  dannoDellaMagia: 0
+  - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
+  dannoDellaMagia: 10
   moltiplicatoreDanno: 0
   moltiplicatoreResistenza: 0
-  "velocit\xE0MagiaLanciata": 0
-  rallentamentoGraduale: 0
-  decellerazione: 0
-  distanzaMagiaLanciata: 0
-  tempoMagiaLanciata: 0
+  "velocit\xE0MagiaLanciata": 22.4
+  rallentamentoGraduale: 1
+  decellerazioneTime: 5
+  distanzaMagiaLanciata: 100
+  tempoMagiaLanciata: 5
   detonazioneAdImpatto: 0
+  ExplosionPref: {fileID: 0}
+  AlternativeBullet: {fileID: 1859015137868134137, guid: 873c9052f617cd64091dd9ff0d5ef04f, type: 3}
+  explosionKnockbackForce: 1
   ignoraCollisioni:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483647
   danneggiaTarget:
     serializedVersion: 2
     m_Bits: 0
-  colpoPerforante: 0
   placeHolder: 0
   "posizioneDelNemicoPi\xF9Vicino": {fileID: 0}
