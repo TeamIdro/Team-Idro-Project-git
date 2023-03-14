@@ -73,7 +73,7 @@ public class GameManager : Manager
 
     private void InitializeGame()
     {
-        currentGameState = GameStates.Menù;
+        currentGameState = GameStates.Menu;
         SetCameras();
     }
     private void SetCameras()

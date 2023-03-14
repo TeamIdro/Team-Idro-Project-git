@@ -15,7 +15,7 @@ public class MagicController : MonoBehaviour
     [SerializeField] private GameObject m_basePrefabToShoot;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
     [SerializeField, ReadOnly] private List<MagiaSO> m_tuttaLaListaDelleMagie;
-    [Tooltip("Se spuntato fa si che se la lista degli elementi è piena e provi ad inserirne uno nuovo viene buttato fuori il primo elemento della lista per fare spazio, se non è spuntato una volta che la lista è piena non si potrà più aggiungere elementi")]
+    [Tooltip("Se spuntato fa si che se la lista degli elementi ï¿½ piena e provi ad inserirne uno nuovo viene buttato fuori il primo elemento della lista per fare spazio, se non ï¿½ spuntato una volta che la lista ï¿½ piena non si potrï¿½ piï¿½ aggiungere elementi")]
     [SerializeField] private bool lastInFirstOut = true;
     [Space(15)]
     //[SerializeField]  public int livCatalizzatore = 1;
@@ -278,7 +278,7 @@ public class MagicController : MonoBehaviour
             //        {
             //            for (int k = 0; k < m_listaValoriLancio.Count; k++)
             //            {
-            //                /* TODO BUG: il sistema se si premono combinazioni diverse di tasti da qualsiasi magia essa prenderà elementi dalle diverse magie che sta ciclando 
+            //                /* TODO BUG: il sistema se si premono combinazioni diverse di tasti da qualsiasi magia essa prenderï¿½ elementi dalle diverse magie che sta ciclando 
             //                    per poi prendere la l'ultima magia che sta ciclando e creare quella, se non ricordi bug fai test*/
             //                if (m_listaDiQuelloCheIlMagoSa[j].combinazioneDiElementi[k].tipoDiMagia == m_listaValoriLancio[k].tipoDiMagia)
             //                {
@@ -354,7 +354,7 @@ public class MagicController : MonoBehaviour
             if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Destra)
             {
                 bullet = Instantiate(magia, gameObject.transform.position + new Vector3(1, 0, 0), gameObject.transform.rotation);
-                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitàMagiaLanciata*10, 0));
+                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitaMagiaLanciata*10, 0));
                 if (m_magiaDaLanciare.rallentamentoGraduale)
                 {
                     bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;
@@ -365,7 +365,7 @@ public class MagicController : MonoBehaviour
             {                
                 bullet = Instantiate(magia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
                 bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
-                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(-m_magiaDaLanciare.velocitàMagiaLanciata*10, 0));
+                bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(-m_magiaDaLanciare.velocitaMagiaLanciata*10, 0));
                 if (m_magiaDaLanciare.rallentamentoGraduale)
                 {
                     bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;

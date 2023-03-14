@@ -1,6 +1,6 @@
 ﻿public enum GameStates
 {
-    Menù,
+    Menu,
     Paused,
     ChangingSceneFromKidToMage,
     ChangingSceenFromMageToKid,
