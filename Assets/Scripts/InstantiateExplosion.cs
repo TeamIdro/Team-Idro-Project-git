@@ -7,6 +7,8 @@ public class InstatiateExplosion : MonoBehaviour
     public float explosionKnockbackForce = 1;
     public GameObject ExplosionPref;
     public LayerMask DamageContact;
+    public int damage;
+   
     private void OnDestroy()
     {
         GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
@@ -15,6 +17,7 @@ public class InstatiateExplosion : MonoBehaviour
         {
             ExlDam.setLayer(DamageContact);
             ExlDam.ExplosionKnockbackForce = explosionKnockbackForce;
+            ExlDam.damageExplosion = damage;
         }
         else
         {

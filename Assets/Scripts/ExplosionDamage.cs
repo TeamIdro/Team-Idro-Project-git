@@ -6,6 +6,7 @@ public class ExplosionDamage : MonoBehaviour
 {
     public float ExplosionKnockbackForce = 1;
     public LayerMask DamageContact;
+    public int damageExplosion = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (DamageContact.Contains(collision.gameObject.layer))
@@ -15,6 +16,11 @@ public class ExplosionDamage : MonoBehaviour
                 collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * ExplosionKnockbackForce*10);
                 Debug.LogWarning("manca il danno, logica da scrivere");
             }
+        }
+        if (collision.gameObject.GetComponent<EnemyScript>()!=null)
+        {
+            var enemy = collision.gameObject.GetComponent<EnemyScript>();
+            enemy.TakeDamage(damageExplosion);
         }
     }
 

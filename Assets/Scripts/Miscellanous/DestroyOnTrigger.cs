@@ -13,13 +13,20 @@ public static class LayerMaskExtensions
 public class DestroyOnTrigger : MonoBehaviour
 {
     public LayerMask ignoreContact;
-
+    public int damage = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!ignoreContact.Contains(collision.gameObject.layer))
         {
             Destroy(gameObject);
         }
+        if (collision.gameObject.GetComponent<EnemyScript>() != null)
+        {
+            var enemy = collision.gameObject.GetComponent<EnemyScript>();
+            enemy.TakeDamage(damage);
+        }
+        
+
     }
 
     public void setLayer(LayerMask layers)

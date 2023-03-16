@@ -99,9 +99,9 @@ public class Magia : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        if (collision.collider.GetComponent<EnemyScript>()!= null)
+        if (collision.gameObject.GetComponent<EnemyScript>()!= null)
         {
-            var enemy = collision.collider.GetComponent<EnemyScript>();
+            var enemy = collision.gameObject.GetComponent<EnemyScript>();
             enemy.TakeDamage(magia.dannoDellaMagia);
         }
     }
