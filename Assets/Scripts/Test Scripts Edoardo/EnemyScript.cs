@@ -25,17 +25,20 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     public float attackCooldown = 0f;
     public float attackCooldownSet = 5f;
+    public float jumpForce = 5f;
 
     private void Awake() 
     {
+        angle = 280f;
+        fovAngle = 120f;
+        viewDistance = 7.4f;
+
         agent = GetComponent<NavMeshAgent>();
         behaviorTree = GetComponent<BehaviorTree>();
 
 		agent.updateRotation = false;
 		agent.updateUpAxis = false;
         // agent.stoppingDistance = behaviorTree.GetVariable()
-
-        
     }
 
     public void Start()
@@ -43,10 +46,6 @@ public class EnemyScript : MonoBehaviour, IEnemy
         //INIT VARIABLES
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        angle = 280f;
-        fovAngle = 120f;
-        viewDistance = 7.4f;
         // canPatrol = true;
     }
 
@@ -93,5 +92,11 @@ public class EnemyScript : MonoBehaviour, IEnemy
         angle = 280f;
         fovAngle = 360f;
         viewDistance = 10f;
+    }
+
+    public void Jump()
+    {
+        Debug.Log("JUMP");
+        rigidBody.AddForce(Vector2.up * jumpForce);
     }
 }
