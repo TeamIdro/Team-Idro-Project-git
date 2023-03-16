@@ -5,6 +5,8 @@ using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
 using System;
 
+public enum OnGround {Ground, Air}
+
 public class EnemyScript : MonoBehaviour, IEnemy
 {
     [field: SerializeField] public EnemyCategory category { get; set; }
@@ -25,17 +27,23 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     public float attackCooldown = 0f;
     public float attackCooldownSet = 5f;
+    public float jumpForce = 5f;
+
+    public OnGround isOnGround;
+    public float rayGroundLenght;
 
     private void Awake() 
     {
+        angle = 280f;
+        fovAngle = 120f;
+        viewDistance = 7.4f;
+
         agent = GetComponent<NavMeshAgent>();
         behaviorTree = GetComponent<BehaviorTree>();
 
 		agent.updateRotation = false;
 		agent.updateUpAxis = false;
         // agent.stoppingDistance = behaviorTree.GetVariable()
-
-        
     }
 
     public void Start()
@@ -43,15 +51,24 @@ public class EnemyScript : MonoBehaviour, IEnemy
         //INIT VARIABLES
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        angle = 280f;
-        fovAngle = 120f;
-        viewDistance = 7.4f;
         // canPatrol = true;
     }
 
     public void Update()
     {
+        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, Vector2.down, (transform.lossyScale.y) + rayGroundLenght);
+        Debug.Log(raycastHit.collider.name);
+
+        if(raycastHit.collider != null 
+            && raycastHit.collider.IsTouchingLayers(9))
+        {
+            isOnGround = OnGround.Ground;
+        }
+        else if(raycastHit.collider == null)
+        {
+            isOnGround = OnGround.Air;
+        }
+
         if(hp <= 0)
         {
             Destroy(this.gameObject);
@@ -94,4 +111,19 @@ public class EnemyScript : MonoBehaviour, IEnemy
         fovAngle = 360f;
         viewDistance = 10f;
     }
+
+    public void Jump()
+    {
+        if(isOnGround == OnGround.Ground)
+        {
+            Debug.Log("JUMP");
+            rigidBody.AddForce(Vector2.up * jumpForce);
+        }
+    }
+
+    private void OnDrawGizmos() 
+    {
+        Gizmos.DrawLine(this.transform.position, new Vector3(transform.position.x, (transform.lossyScale.y) + rayGroundLenght, 0f));
+    }
+
 }
