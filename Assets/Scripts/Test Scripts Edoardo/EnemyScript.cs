@@ -5,6 +5,8 @@ using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
 using System;
 
+public enum OnGround {Ground, Air}
+
 public class EnemyScript : MonoBehaviour, IEnemy
 {
     [field: SerializeField] public EnemyCategory category { get; set; }
@@ -26,6 +28,9 @@ public class EnemyScript : MonoBehaviour, IEnemy
     public float attackCooldown = 0f;
     public float attackCooldownSet = 5f;
     public float jumpForce = 5f;
+
+    public OnGround isOnGround;
+    public float rayGroundLenght;
 
     private void Awake() 
     {
@@ -51,6 +56,19 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     public void Update()
     {
+        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, Vector2.down, (transform.lossyScale.y) + rayGroundLenght);
+        Debug.Log(raycastHit.collider.name);
+
+        if(raycastHit.collider != null 
+            && raycastHit.collider.IsTouchingLayers(9))
+        {
+            isOnGround = OnGround.Ground;
+        }
+        else if(raycastHit.collider == null)
+        {
+            isOnGround = OnGround.Air;
+        }
+
         if(hp <= 0)
         {
             Destroy(this.gameObject);
@@ -96,7 +114,16 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     public void Jump()
     {
-        Debug.Log("JUMP");
-        rigidBody.AddForce(Vector2.up * jumpForce);
+        if(isOnGround == OnGround.Ground)
+        {
+            Debug.Log("JUMP");
+            rigidBody.AddForce(Vector2.up * jumpForce);
+        }
     }
+
+    private void OnDrawGizmos() 
+    {
+        Gizmos.DrawLine(this.transform.position, new Vector3(transform.position.x, (transform.lossyScale.y) + rayGroundLenght, 0f));
+    }
+
 }
