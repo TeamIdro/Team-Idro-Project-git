@@ -6,8 +6,7 @@ using BehaviorDesigner.Runtime;
 using System;
 
 public enum OnGround {Ground, Air}
-
-public class EnemyScript : MonoBehaviour, IEnemy
+public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 {
     [field: SerializeField] public EnemyCategory category { get; set; }
     [field: SerializeField] public Weakness weakness { get; set; }
@@ -56,15 +55,15 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     public void Update()
     {
-        // Debug.Log((transform.lossyScale.y) + "   " + rayGroundLenght);
-        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, -Vector2.up, rayGroundLenght, 9);
-        // Debug.Log(raycastHit.collider.name);
+        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, Vector2.down, (transform.lossyScale.y) + rayGroundLenght);
+        Debug.Log(raycastHit.collider.name);
 
-        if(raycastHit.collider != null)
+        if(raycastHit.collider != null 
+            && raycastHit.collider.IsTouchingLayers(9))
         {
             isOnGround = OnGround.Ground;
         }
-        else
+        else if(raycastHit.collider == null)
         {
             isOnGround = OnGround.Air;
         }
@@ -92,11 +91,7 @@ public class EnemyScript : MonoBehaviour, IEnemy
         
     }
 
-    public void GetDamage(float damage)
-    {
-        Debug.Log("COLPITO");
-        hp -= 100;
-    }
+  
 
     public void ReduceSeeRange()
     {
@@ -123,7 +118,14 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     private void OnDrawGizmos() 
     {
-        Gizmos.DrawLine(this.transform.position, new Vector3(transform.position.x, rayGroundLenght, 0f));
+        Gizmos.DrawLine(this.transform.position, new Vector3(transform.position.x, (transform.lossyScale.y) + rayGroundLenght, 0f));
     }
 
+    public void TakeDamage(int damageToTake)
+    {
+        if (hp > 0)
+        {
+            hp =- damageToTake;
+        }
+    }
 }

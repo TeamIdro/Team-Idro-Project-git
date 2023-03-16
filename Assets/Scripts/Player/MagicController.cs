@@ -57,11 +57,7 @@ public class MagicController : MonoBehaviour
             m_tuttaLaListaDelleMagie.OrderBy(x => x.combinazioneDiElementi);
             m_tuttaLaListaDelleMagie[i].combinazioneDiElementi.OrderBy(x => x.tipoDiMagia);
         }
-        //for (int i = 0; i < m_listaDiQuelloCheIlMagoSa.Count; i++)
-        //{
-        //    m_listaDiQuelloCheIlMagoSa.OrderBy(x => x.combinazioneDiElementi);
-        //    m_listaDiQuelloCheIlMagoSa[i].combinazioneDiElementi.OrderBy(x=> x.tipoDiMagia);
-        //}
+     
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoAcqua, TipoMagia.Acqua);
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoTerra, TipoMagia.Terra);
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoFuoco, TipoMagia.Fuoco);
@@ -129,50 +125,6 @@ public class MagicController : MonoBehaviour
         
     }
 
-    //private void CheckStatusMagia()
-    //{
-    //    switch(m_faseCorrente)
-    //    {
-    //        case FasiDiLancioMagia.AspettoComponimentoMagia:
-    //            CheckIfPlayerWantToStartMagic();
-    //            break;
-
-    //        case FasiDiLancioMagia.ComponendoMagia:
-    //            StartCoroutine(ComponiMagia());
-    //            break;
-
-    //        case FasiDiLancioMagia.MagiaComposta:
-    //            DoSomethingOnMagicComposed();
-    //            break;
-
-    //        case FasiDiLancioMagia.AspettandoLancioMagia:
-    //            WaitForMagicToShoot();
-    //            break;
-
-    //        case FasiDiLancioMagia.LancioMagia:
-    //            ThrowMagic();
-    //            break;
-
-    //    }    
-    //}
-
-  
-    //private void ThrowMagic()
-    //{
-    //    Instantiate(m_basePrefabToShoot,transform.position,Quaternion.identity);
-    //    magiaDaInizializzare.isCasted = true;
-    //    magiaDaInizializzare = null;
-    //    m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
-    //    m_listaValoriLancio.Clear();
-    //    UIelementiMagia.ClearUI();
-
-    //}
-
-    //private void WaitForMagicToShoot()
-    //{
-    //    InizializzaMagia();
-    //    m_faseCorrente = FasiDiLancioMagia.LancioMagia;
-    //}
 
     private void InizializzaMagia()
     {
@@ -383,7 +335,7 @@ public class MagicController : MonoBehaviour
                 bullet.GetComponent<InstatiateExplosion>().DamageContact = m_magiaDaLanciare.danneggiaTarget;
             }
             if (bullet.GetComponent<Animator>() != null)
-            {  /* bullet.GetComponent<Animator>().runtimeAnimatorController = m_magiaDaLanciare.animatorMagia;  */  }
+            { /*bullet.GetComponent<Animator>()*/ }
 
             if (bullet.GetComponent<CircleCollider2D>() != null)
             { bullet.GetComponent<CircleCollider2D>().enabled = true; }
