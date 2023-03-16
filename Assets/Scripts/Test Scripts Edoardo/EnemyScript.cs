@@ -6,8 +6,7 @@ using BehaviorDesigner.Runtime;
 using System;
 
 public enum OnGround {Ground, Air}
-
-public class EnemyScript : MonoBehaviour, IEnemy
+public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 {
     [field: SerializeField] public EnemyCategory category { get; set; }
     [field: SerializeField] public Weakness weakness { get; set; }
@@ -92,11 +91,7 @@ public class EnemyScript : MonoBehaviour, IEnemy
         
     }
 
-    public void GetDamage()
-    {
-        Debug.Log("COLPITO");
-        hp -= 100;
-    }
+  
 
     public void ReduceSeeRange()
     {
@@ -126,4 +121,11 @@ public class EnemyScript : MonoBehaviour, IEnemy
         Gizmos.DrawLine(this.transform.position, new Vector3(transform.position.x, (transform.lossyScale.y) + rayGroundLenght, 0f));
     }
 
+    public void TakeDamage(int damageToTake)
+    {
+        if (hp > 0)
+        {
+            hp =- damageToTake;
+        }
+    }
 }

@@ -80,14 +80,14 @@ public class Magia : MonoBehaviour
     {
         throw new NotImplementedException();
     }
-    public float FaiDanno(float currentHealth)
-    {
-        if (currentHealth > 0)
-        {
-            currentHealth -= magia.dannoDellaMagia;
-        }
-        return currentHealth;
-    }
+    //public float FaiDanno(float currentHealth)
+    //{
+    //    if (currentHealth > 0)
+    //    {
+    //        currentHealth -= magia.dannoDellaMagia;
+    //    }
+    //    return currentHealth;
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -98,6 +98,11 @@ public class Magia : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+        if (collision.collider.GetComponent<EnemyScript>()!= null)
+        {
+            var enemy = collision.collider.GetComponent<EnemyScript>();
+            enemy.TakeDamage(magia.dannoDellaMagia);
         }
     }
     private void OnDisable()

@@ -8,7 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Magia/MagiaSO", menuName = "Magia/MagiaSO")]
 public class MagiaSO : ScriptableObject,IMagia
 {
-    public Animation animatorMagia;
+    public AnimationClip animatorMagia;
     public TipoComportamentoMagia magicBehaviourType;
     [Space]
     public TipoDiDannoMagia damageType;
@@ -16,7 +16,7 @@ public class MagiaSO : ScriptableObject,IMagia
     public List<ElementoMagiaSO> combinazioneDiElementi;
     [Space(15)]
     [Header("Valori Magia Generici")]
-    public float dannoDellaMagia;
+    public int dannoDellaMagia;
     [Space(5)]
     [Range(0f, 10f)]
     public float moltiplicatoreDanno;

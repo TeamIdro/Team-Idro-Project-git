@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: FireBolt
   m_EditorClassIdentifier: 
-  animatorMagia: {fileID: 9100000, guid: 7c8f6d2fd2d26d44584dc219f47d4d53, type: 2}
+  animatorMagia: {fileID: 7400000, guid: ce0a45e1af8993346a40430825d9e7b6, type: 2}
   magicBehaviourType: 0
   damageType: 0
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
-  dannoDellaMagia: 0
+  dannoDellaMagia: 10
   moltiplicatoreDanno: 0
   moltiplicatoreResistenza: 0
   velocitaMagiaLanciata: 11.5
