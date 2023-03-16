@@ -56,15 +56,15 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     public void Update()
     {
-        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, Vector2.down, (transform.lossyScale.y) + rayGroundLenght);
-        Debug.Log(raycastHit.collider.name);
+        // Debug.Log((transform.lossyScale.y) + "   " + rayGroundLenght);
+        RaycastHit2D raycastHit = Physics2D.Raycast(transform.position, -Vector2.up, rayGroundLenght, 9);
+        // Debug.Log(raycastHit.collider.name);
 
-        if(raycastHit.collider != null 
-            && raycastHit.collider.IsTouchingLayers(9))
+        if(raycastHit.collider != null)
         {
             isOnGround = OnGround.Ground;
         }
-        else if(raycastHit.collider == null)
+        else
         {
             isOnGround = OnGround.Air;
         }
@@ -92,7 +92,7 @@ public class EnemyScript : MonoBehaviour, IEnemy
         
     }
 
-    public void GetDamage()
+    public void GetDamage(float damage)
     {
         Debug.Log("COLPITO");
         hp -= 100;
@@ -123,7 +123,7 @@ public class EnemyScript : MonoBehaviour, IEnemy
 
     private void OnDrawGizmos() 
     {
-        Gizmos.DrawLine(this.transform.position, new Vector3(transform.position.x, (transform.lossyScale.y) + rayGroundLenght, 0f));
+        Gizmos.DrawLine(this.transform.position, new Vector3(transform.position.x, rayGroundLenght, 0f));
     }
 
 }
