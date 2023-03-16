@@ -21,7 +21,7 @@ public class Magia : MonoBehaviour
     private void InitializeMagic()
     {
         playerFacingOnInstance = PlayerCharacterController.playerFacingDirection;
-        animator.runtimeAnimatorController = magia.animatorMagia;
+        //animator.runtimeAnimatorController = magia.animatorMagia;
       
     }
 

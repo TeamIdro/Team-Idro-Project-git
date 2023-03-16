@@ -69,15 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UsaElementoFulmine",
-                    "type": "Button",
-                    "id": "7648c45d-18c2-4c31-8999-dd2f0cf14cf5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Fire",
                     "type": "Button",
                     "id": "2ad2c0c0-d11e-4854-9311-b83d123a5250",
@@ -190,7 +181,7 @@
                 {
                     "name": "",
                     "id": "0c5e3a1e-11c3-49cf-9166-e8316334a058",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -201,7 +192,7 @@
                 {
                     "name": "",
                     "id": "be30a3ac-b061-464c-be8d-f39a3b49f80d",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -212,7 +203,7 @@
                 {
                     "name": "",
                     "id": "0449c9bb-0bb1-43a2-ae02-c8d75d1dd696",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -223,7 +214,7 @@
                 {
                     "name": "",
                     "id": "0ed9c37e-12ad-4a5b-b74d-fe32b1174c12",
-                    "path": "<Keyboard>/v",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -233,19 +224,8 @@
                 },
                 {
                     "name": "",
-                    "id": "573397a6-47e2-4560-ba63-a36ce9f6aa24",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UsaElementoFulmine",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a19c7354-dd7c-43ed-a93b-ebf7598ef0d8",
-                    "path": "<Keyboard>/alt",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

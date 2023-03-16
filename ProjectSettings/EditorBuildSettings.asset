@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TESTING NICCO/ScenaTest_Nicco_Movimento_Personaggio.unity
     guid: 8c118ca9136b2e24992987d439451584
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TESTING NICCO/ScenaTesting_Bambino_ProfLayton.unity
     guid: 942018a7766b9e14487092d4ae201953
   m_configObjects: {}

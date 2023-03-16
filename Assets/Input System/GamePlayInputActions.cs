@@ -91,15 +91,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UsaElementoFulmine"",
-                    ""type"": ""Button"",
-                    ""id"": ""7648c45d-18c2-4c31-8999-dd2f0cf14cf5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Fire"",
                     ""type"": ""Button"",
                     ""id"": ""2ad2c0c0-d11e-4854-9311-b83d123a5250"",
@@ -212,7 +203,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0c5e3a1e-11c3-49cf-9166-e8316334a058"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -223,7 +214,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""be30a3ac-b061-464c-be8d-f39a3b49f80d"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -234,7 +225,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0449c9bb-0bb1-43a2-ae02-c8d75d1dd696"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -245,7 +236,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0ed9c37e-12ad-4a5b-b74d-fe32b1174c12"",
-                    ""path"": ""<Keyboard>/v"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -255,19 +246,8 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""573397a6-47e2-4560-ba63-a36ce9f6aa24"",
-                    ""path"": ""<Keyboard>/b"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UsaElementoFulmine"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a19c7354-dd7c-43ed-a93b-ebf7598ef0d8"",
-                    ""path"": ""<Keyboard>/alt"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -337,7 +317,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         m_Mage_UsaElementoAcqua = m_Mage.FindAction("UsaElementoAcqua", throwIfNotFound: true);
         m_Mage_UsaElementoTerra = m_Mage.FindAction("UsaElementoTerra", throwIfNotFound: true);
         m_Mage_UsaElementoAria = m_Mage.FindAction("UsaElementoAria", throwIfNotFound: true);
-        m_Mage_UsaElementoFulmine = m_Mage.FindAction("UsaElementoFulmine", throwIfNotFound: true);
         m_Mage_Fire = m_Mage.FindAction("Fire", throwIfNotFound: true);
         // Kid
         m_Kid = asset.FindActionMap("Kid", throwIfNotFound: true);
@@ -411,7 +390,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Mage_UsaElementoAcqua;
     private readonly InputAction m_Mage_UsaElementoTerra;
     private readonly InputAction m_Mage_UsaElementoAria;
-    private readonly InputAction m_Mage_UsaElementoFulmine;
     private readonly InputAction m_Mage_Fire;
     public struct MageActions
     {
@@ -424,7 +402,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         public InputAction @UsaElementoAcqua => m_Wrapper.m_Mage_UsaElementoAcqua;
         public InputAction @UsaElementoTerra => m_Wrapper.m_Mage_UsaElementoTerra;
         public InputAction @UsaElementoAria => m_Wrapper.m_Mage_UsaElementoAria;
-        public InputAction @UsaElementoFulmine => m_Wrapper.m_Mage_UsaElementoFulmine;
         public InputAction @Fire => m_Wrapper.m_Mage_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Mage; }
         public void Enable() { Get().Enable(); }
@@ -456,9 +433,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @UsaElementoAria.started += instance.OnUsaElementoAria;
             @UsaElementoAria.performed += instance.OnUsaElementoAria;
             @UsaElementoAria.canceled += instance.OnUsaElementoAria;
-            @UsaElementoFulmine.started += instance.OnUsaElementoFulmine;
-            @UsaElementoFulmine.performed += instance.OnUsaElementoFulmine;
-            @UsaElementoFulmine.canceled += instance.OnUsaElementoFulmine;
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
@@ -487,9 +461,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @UsaElementoAria.started -= instance.OnUsaElementoAria;
             @UsaElementoAria.performed -= instance.OnUsaElementoAria;
             @UsaElementoAria.canceled -= instance.OnUsaElementoAria;
-            @UsaElementoFulmine.started -= instance.OnUsaElementoFulmine;
-            @UsaElementoFulmine.performed -= instance.OnUsaElementoFulmine;
-            @UsaElementoFulmine.canceled -= instance.OnUsaElementoFulmine;
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
@@ -573,7 +544,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         void OnUsaElementoAcqua(InputAction.CallbackContext context);
         void OnUsaElementoTerra(InputAction.CallbackContext context);
         void OnUsaElementoAria(InputAction.CallbackContext context);
-        void OnUsaElementoFulmine(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
     }
     public interface IKidActions

@@ -1,3 +1,4 @@
+using Mono.Cecil.Cil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,19 +34,23 @@ public class MagicController : MonoBehaviour
     {
         UIelementiMagia = m_UIPrefab.GetComponent<UIElementiMagia>();
         m_gamePlayInput = new GamePlayInputActions();
-        var assets = AssetDatabase.FindAssets("t:MagiaSO", new[] { "Assets/Data/MagiaSO/Combinazione" });
-        var element = AssetDatabase.FindAssets("t:ElementoMagiaSO", new[] { "Assets/Data/MagiaSO/Elementi" });
-        foreach (var item in assets)
+
+        
+        
+        var magicTakenFromFolder = Resources.LoadAll<MagiaSO>("Data/MagiaSO/Combinazione");
+        foreach (var magia in magicTakenFromFolder)
         {
-            var magie = AssetDatabase.LoadAssetAtPath<MagiaSO>(AssetDatabase.GUIDToAssetPath(item));
-            Debug.Log(magie);
-            m_tuttaLaListaDelleMagie.Add(magie);
+            var tempMagia = (MagiaSO)magia;
+            Debug.Log(tempMagia);
+            m_tuttaLaListaDelleMagie.Add(tempMagia);
         }
-        foreach (var item in element)
+        var elementsTakenFromFolder = Resources.LoadAll("Data/MagiaSO/Elementi", typeof(ElementoMagiaSO));
+       
+        foreach (var item in elementsTakenFromFolder)
         {
-            var elementoDaAggiungere = AssetDatabase.LoadAssetAtPath<ElementoMagiaSO>(AssetDatabase.GUIDToAssetPath(item));
-            Debug.Log(elementoDaAggiungere);
-            m_elementiDaPrendere.Add(elementoDaAggiungere);
+            var elementTemp = item as ElementoMagiaSO;
+            Debug.Log(item);
+            m_elementiDaPrendere.Add(elementTemp);
         }
         for (int i = 0; i < m_tuttaLaListaDelleMagie.Count; i++)
         {
@@ -61,13 +66,11 @@ public class MagicController : MonoBehaviour
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoTerra, TipoMagia.Terra);
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoFuoco, TipoMagia.Fuoco);
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoAria, TipoMagia.Vento);
-        m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoFulmine, TipoMagia.Fulmine);
 
         m_gamePlayInput.Mage.UsaElementoAcqua.performed += AddElement;
         m_gamePlayInput.Mage.UsaElementoTerra.performed += AddElement;
         m_gamePlayInput.Mage.UsaElementoFuoco.performed += AddElement;
         m_gamePlayInput.Mage.UsaElementoAria.performed += AddElement;
-        m_gamePlayInput.Mage.UsaElementoFulmine.performed += AddElement;
         m_gamePlayInput.Mage.Fire.performed += Onfire;
     }
 
@@ -343,9 +346,10 @@ public class MagicController : MonoBehaviour
         if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
         {
             GameObject bullet;
-            var asset = AssetDatabase.FindAssets("Bullet", new[] { "Assets/Prefabs/Object" });
-            var magia = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(asset[0]));
-
+            //var asset = AssetDatabase.FindAssets("Bullet", new[] { "Assets/Prefabs/Object" });
+            var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
+            //var magia = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(asset[0]));
+            //var magia = Resources.LoadAll("")
             if (m_magiaDaLanciare.AlternativeBullet != null)
             {
                 magia = m_magiaDaLanciare.AlternativeBullet;
@@ -379,7 +383,7 @@ public class MagicController : MonoBehaviour
                 bullet.GetComponent<InstatiateExplosion>().DamageContact = m_magiaDaLanciare.danneggiaTarget;
             }
             if (bullet.GetComponent<Animator>() != null)
-            {   bullet.GetComponent<Animator>().runtimeAnimatorController = m_magiaDaLanciare.animatorMagia;    }
+            {  /* bullet.GetComponent<Animator>().runtimeAnimatorController = m_magiaDaLanciare.animatorMagia;  */  }
 
             if (bullet.GetComponent<CircleCollider2D>() != null)
             { bullet.GetComponent<CircleCollider2D>().enabled = true; }

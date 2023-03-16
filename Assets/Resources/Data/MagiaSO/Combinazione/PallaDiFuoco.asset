@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorMagia: {fileID: 9100000, guid: 7c8f6d2fd2d26d44584dc219f47d4d53, type: 2}
   magicBehaviourType: 0
-  damageType: 1
+  damageType: 0
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
@@ -22,7 +22,7 @@ MonoBehaviour:
   dannoDellaMagia: 50
   moltiplicatoreDanno: 1.28
   moltiplicatoreResistenza: 2.97
-  "velocit\xE0MagiaLanciata": 25
+  velocitaMagiaLanciata: 10.8
   rallentamentoGraduale: 1
   decellerazioneTime: 2
   distanzaMagiaLanciata: 100
@@ -38,4 +38,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   placeHolder: 0
-  "posizioneDelNemicoPi\xF9Vicino": {fileID: 0}
+  posizioneDelNemicoPiuVicino: {fileID: 0}
