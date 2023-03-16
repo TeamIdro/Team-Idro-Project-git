@@ -341,6 +341,7 @@ public class MagicController : MonoBehaviour
             { bullet.GetComponent<CircleCollider2D>().enabled = true; }
 
             bullet.AddComponent<DestroyOnTrigger>().setLayer(m_magiaDaLanciare.ignoraCollisioni);
+            bullet.AddComponent<DestroyOnTrigger>().damage = m_magiaDaLanciare.dannoDellaMagia;
             bullet.AddComponent<DestroyAfterDistance>().MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
             bullet.AddComponent<DestroyAfterTime>().destroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
         }

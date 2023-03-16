@@ -125,7 +125,9 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     {
         if (hp > 0)
         {
-            hp =- damageToTake;
+            Debug.Log("Prendo danno");
+            Debug.Log(damageToTake);
+            hp = hp -damageToTake;
         }
     }
 }
