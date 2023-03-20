@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackBodyDeactivate : MonoBehaviour
 {
     public float timeToDeactivate = 1f;
+    public int damage = 10;
     Coroutine coroutine;
 
     void OnEnable()
@@ -30,7 +31,7 @@ public class AttackBodyDeactivate : MonoBehaviour
     {
         if(other.gameObject.GetComponent<PlayerCharacterController>())
         {
-            Debug.Log("HIT");
+            other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
         }
     }
 }

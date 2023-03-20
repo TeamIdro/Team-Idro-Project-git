@@ -51,6 +51,7 @@ public class EnemyMeelee : MonoBehaviour
     {
         if(isOnGround == OnGround.Ground)
         {
+            Debug.Log("JUMP");
             rigidbody.AddForce((Vector2.up + (Vector2)transform.forward) * jumpForce);
         }
     }
