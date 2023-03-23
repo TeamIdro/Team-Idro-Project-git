@@ -14,7 +14,6 @@ public class ExplosionDamage : MonoBehaviour
             if(collision.GetComponent<Rigidbody2D>() != null)
             {
                 collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * ExplosionKnockbackForce*10);
-                Debug.LogWarning("manca il danno, logica da scrivere");
             }
         }
         if (collision.gameObject.GetComponent<EnemyScript>()!=null)

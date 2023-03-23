@@ -8,7 +8,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Magia/MagiaSO", menuName = "Magia/MagiaSO")]
 public class MagiaSO : ScriptableObject,IMagia
 {
-    public AnimationClip animatorMagia;
+    public GameObject prefabAnimatoriMagia;
     public TipoComportamentoMagia magicBehaviourType;
     [Space]
     public TipoDiDannoMagia damageType;

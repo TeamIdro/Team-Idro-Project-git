@@ -20,16 +20,16 @@ public class DestroyOnTrigger : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (collision.gameObject.GetComponent<EnemyScript>() != null)
+        if (collision.gameObject.GetComponent<IDamageable>() != null)
         {
-            var enemy = collision.gameObject.GetComponent<EnemyScript>();
+            var enemy = collision.gameObject.GetComponent<IDamageable>();
             enemy.TakeDamage(damage);
         }
         
 
     }
 
-    public void setLayer(LayerMask layers)
+    public void SetLayer(LayerMask layers)
     {
         ignoreContact = layers;
     }
