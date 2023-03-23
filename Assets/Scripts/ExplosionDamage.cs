@@ -16,11 +16,11 @@ public class ExplosionDamage : MonoBehaviour
                 collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * ExplosionKnockbackForce*10);
             }
         }
-        if (collision.gameObject.GetComponent<EnemyScript>()!=null)
-        {
-            var enemy = collision.gameObject.GetComponent<EnemyScript>();
-            enemy.TakeDamage(damageExplosion);
-        }
+        // if (collision.gameObject.GetComponent<EnemyScript>()!=null)
+        // {
+        //     var enemy = collision.gameObject.GetComponent<EnemyScript>();
+        //     enemy.TakeDamage(damageExplosion);
+        // }
     }
 
     public void setLayer(LayerMask layers)

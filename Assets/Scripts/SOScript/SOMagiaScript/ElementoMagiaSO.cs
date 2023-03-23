@@ -9,15 +9,18 @@ public class ElementoMagiaSO : ScriptableObject
 {
 	public Sprite spriteElemento;
 	public TipoMagia tipoDiMagia;
-
-  
 }
+
 public enum TipoMagia
 {
 	Fuoco,
 	Acqua,
 	Vento,
 	Terra,
-	Fulmine,
-
+	Vapore,
+	Ghiaccio,
+	Erba,
+	Magma,
+	Tempesta,
+	Veleno
 }

@@ -102,7 +102,7 @@ public class Magia : MonoBehaviour
         if (collision.gameObject.GetComponent<EnemyScript>()!= null)
         {
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
-            enemy.TakeDamage(magia.dannoDellaMagia);
+            enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
         }
     }
     private void OnDisable()

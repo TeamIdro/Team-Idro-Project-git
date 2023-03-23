@@ -8,8 +8,8 @@ using System;
 public enum OnGround {Ground, Air}
 public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 {
-    [field: SerializeField] public EnemyCategory category { get; set; }
-    [field: SerializeField] public Weakness weakness { get; set; }
+    // [field: SerializeField] public EnemyCategory category { get; set; }
+    // [field: SerializeField] public Weakness weakness { get; set; }
     [field: SerializeField] public int hp { get; set; }
     [field: SerializeField] public int attack { get; set; }
     [field: SerializeField] public float speed { get; set; }
@@ -37,6 +37,8 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
      public float setIncreasedAngle = 280f;
     public float setIncreasedFovAngle = 360f;
     public float setIncreasedViewDistance = 10f;
+
+    public TipoMagia weakness; 
 
     private void Awake() 
     {
@@ -80,8 +82,9 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         viewDistance = setIncreasedViewDistance;
     }
 
-    public void TakeDamage(int damageToTake)
+    public void TakeDamage(int damageToTake, TipoMagia magicType)
     {
+        
         if (hp > 0)
         {
             Debug.Log("Prendo danno");
