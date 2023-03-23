@@ -11,7 +11,7 @@ public static class DamageCalculator
         {
             return damage*2;
         }
-        
+
         return damage;
     }
 }

@@ -89,7 +89,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         {
             Debug.Log("Prendo danno");
             Debug.Log(damageToTake);
-            hp = hp -damageToTake;
+            hp = hp - damageToTake;
         }
         else
         {
