@@ -17,7 +17,7 @@ public class MagiaSO : ScriptableObject,IMagia
     public List<ElementoMagiaSO> combinazioneDiElementi;
     [Space(15)]
     [Header("Valori Magia Generici")]
-    public int dannoDellaMagia;
+    public float dannoDellaMagia;
     [Space(5)]
     [Range(0f, 10f)]
     public float moltiplicatoreDanno;
