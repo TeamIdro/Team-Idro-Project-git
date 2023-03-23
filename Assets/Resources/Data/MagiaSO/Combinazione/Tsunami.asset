@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: Tsunami
   m_EditorClassIdentifier: 
-  animatorMagia: {fileID: 0}
+  prefabAnimatoriMagia: {fileID: 0}
   magicBehaviourType: 0
   damageType: 0
   combinazioneDiElementi:
@@ -22,6 +22,20 @@ MonoBehaviour:
   dannoDellaMagia: 0
   moltiplicatoreDanno: 0
   moltiplicatoreResistenza: 0
-  "velocit\xE0MagiaLanciata": 0
+  velocitaMagiaLanciata: 0
+  rallentamentoGraduale: 0
+  decellerazioneTime: 0
+  distanzaMagiaLanciata: 0
+  tempoMagiaLanciata: 5
+  detonazioneAdImpatto: 0
+  ExplosionPref: {fileID: 0}
+  AlternativeBullet: {fileID: 0}
+  explosionKnockbackForce: 1
+  ignoraCollisioni:
+    serializedVersion: 2
+    m_Bits: 1280
+  danneggiaTarget:
+    serializedVersion: 2
+    m_Bits: 0
   placeHolder: 0
-  "posizioneDelNemicoPi\xF9Vicino": {fileID: 0}
+  posizioneDelNemicoPiuVicino: {fileID: 0}
