@@ -9,9 +9,9 @@ public interface IEnemy
 {
      #region Methods
 
-     public EnemyCategory category {get; set;}
+     // public EnemyCategory category {get; set;}
 
-     public Weakness weakness {get; set;}
+     // public Weakness weakness {get; set;}
 
      public int hp {get; set;}
 
