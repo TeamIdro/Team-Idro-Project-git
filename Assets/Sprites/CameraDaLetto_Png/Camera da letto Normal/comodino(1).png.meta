@@ -117,27 +117,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: comodino(1)_0
-      rect:
-        serializedVersion: 2
-        x: 3104
-        y: 914
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 78d2d62a31dec5a4aa134d183a623b92
-      internalID: -1177881415
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: comodino(1)_1
       rect:
         serializedVersion: 2
@@ -146,7 +125,7 @@ TextureImporter:
         width: 349
         height: 565
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

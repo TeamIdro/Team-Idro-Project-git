@@ -115,7 +115,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: vestiti dentro armadio e palla magica_0
+      rect:
+        serializedVersion: 2
+        x: 2215
+        y: 1636
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb789b5ea2ff59f43bee050247dbdbd0
+      internalID: -915911666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vestiti dentro armadio e palla magica_1
+      rect:
+        serializedVersion: 2
+        x: 2027
+        y: 649
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc944effdb1df68468a88994f879f5dd
+      internalID: -343279825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: vestiti dentro armadio e palla magica_2
+      rect:
+        serializedVersion: 2
+        x: 2224
+        y: 447
+        width: 445
+        height: 1134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7b9c81fcfb825149a768b2a60265a0a
+      internalID: 1336979641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +189,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vestiti dentro armadio e palla magica_2: 1336979641
+      vestiti dentro armadio e palla magica_0: -915911666
+      vestiti dentro armadio e palla magica_1: -343279825
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
