@@ -366,24 +366,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 131743294, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 131743295, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
-      propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(-24.9078979,228.388031)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(1.6710434,129.9668)"},"ID":1,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.WithinDistance","NodeData":{"Offset":"(-149.4737,116.8421)"},"ID":2,"Name":"Within
-        Distance","Instant":true,"BooleanusePhysics2D":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringtargetTag":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"ToJump"},"LayerMaskobjectLayerMask":1,"Int32maxCollisionCount":200,"SharedFloatmagnitude":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1.89},"SharedBoollineOfSight":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"LayerMaskignoreLayerMask":4086,"SharedVector3offset":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"Vector3mValue":"(0,0,0)"},"SharedVector3targetOffset":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"Vector3mValue":"(0,0,0)"},"SharedBooldrawDebugRay":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedGameObjectreturnedObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null}},{"Type":"BehaviorDesigner.Runtime.Tasks.InvokeMethod","NodeData":{"Offset":"(126.315781,127.368355)"},"ID":3,"Name":"Invoke
-        Method","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringcomponentName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"EnemyMeelee"},"SharedStringmethodName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Jump"}}]}}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 2672353208428643250, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
-      propertyPath: m_Radius
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2672353208428643250, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
-      propertyPath: avoidancePriority
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 2672353208428643256, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -432,10 +414,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestMeleeEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 2672353208428643257, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2672353208428643258, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[3]
       value: 
@@ -450,7 +428,7 @@ PrefabInstance:
       objectReference: {fileID: 120657939}
     - target: {fileID: 4963705300253753115, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: jumpForce
-      value: 800
+      value: 375
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
@@ -1453,10 +1431,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1749073511, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
-      propertyPath: <hp>k__BackingField
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5541718880415109889, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -1501,10 +1475,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5541718880415109890, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
-      propertyPath: m_Mass
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5541718880415109892, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[0]
       value: 
@@ -1525,17 +1495,9 @@ PrefabInstance:
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[6]
       value: 
       objectReference: {fileID: 1813519429}
-    - target: {fileID: 5541718880415109893, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
-      propertyPath: m_Radius
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 5541718880415109895, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
       propertyPath: m_Name
       value: TestRangedEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5541718880415109895, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
@@ -13970,14 +13932,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6861427684917036641, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: m_Radius
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036641, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: m_ObstacleAvoidanceType
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6861427684917036642, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[3]
       value: 
@@ -13993,14 +13947,6 @@ PrefabInstance:
     - target: {fileID: 6861427684917036643, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: m_Name
       value: FlyEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036643, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036644, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: setIncreasedViewDistance
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6861427684917036645, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: m_RootOrder
@@ -14105,64 +14051,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95b253b833ad95d44b9f0fb1abe01bc3, type: 3}
---- !u!1001 &8059223699505451070
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_RootOrder
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.8846526
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.1068535
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -42.945953
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719940, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719944, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_Name
-      value: EnemyRangedBulletObj
-      objectReference: {fileID: 0}
-    - target: {fileID: 8059223698733719944, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
