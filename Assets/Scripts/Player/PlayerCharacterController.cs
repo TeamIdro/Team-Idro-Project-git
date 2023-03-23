@@ -30,6 +30,8 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private Transform rayCastPosition;
     [SerializeField] private Vector2 boxCastDimension;
     [SerializeField] private LayerMask playerMask;
+
+    public int hp;
     
 
     //VARIABILI PRIVATE
@@ -46,8 +48,20 @@ public class PlayerCharacterController : MonoBehaviour
     public bool IsJumping { get => isJumping; set => isJumping = value; }
     public bool IsMoving { get=> IsMoving; set => IsMoving = value; }
 
+    private static PlayerCharacterController _instance;
+
+    public static PlayerCharacterController Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
+
     private void Awake()
     {
+        _instance = this;
         m_playerMageRB2D = GetComponent<Rigidbody2D>();
         m_playerMageCollider = GetComponent<Collider2D>();
         m_gamePlayInputActions = new();
@@ -163,6 +177,16 @@ public class PlayerCharacterController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(rayCastPosition.position, boxCastDimension);
+    }
+
+    public void GetDamage(int damage)
+    {
+        hp -= damage;
+        if(hp < 0)
+        {
+            Debug.Log("PLAYER DEATH");
+            //Reload scene
+        }
     }
 }
 public enum PlayerFacing

@@ -41,7 +41,7 @@ public class MagicController : MonoBehaviour
         foreach (var magia in magicTakenFromFolder)
         {
             var tempMagia = (MagiaSO)magia;
-            Debug.Log(tempMagia);
+            // Debug.Log(tempMagia);
             m_tuttaLaListaDelleMagie.Add(tempMagia);
         }
         var elementsTakenFromFolder = Resources.LoadAll("Data/MagiaSO/Elementi", typeof(ElementoMagiaSO));
@@ -49,7 +49,7 @@ public class MagicController : MonoBehaviour
         foreach (var item in elementsTakenFromFolder)
         {
             var elementTemp = item as ElementoMagiaSO;
-            Debug.Log(item);
+            // Debug.Log(item);
             m_elementiDaPrendere.Add(elementTemp);
         }
         for (int i = 0; i < m_tuttaLaListaDelleMagie.Count; i++)
@@ -197,7 +197,7 @@ public class MagicController : MonoBehaviour
 
         if (m_magiaDaLanciare == null)
         {
-            Debug.LogWarning("Magia non creata");
+            // Debug.LogWarning("Magia non creata");
             ClearElementList();
             UIelementiMagia.ClearUI();
             m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
@@ -283,7 +283,7 @@ public class MagicController : MonoBehaviour
 
     private void Onfire(InputAction.CallbackContext obj)
     {
-        Debug.Log("OnFire");
+        // Debug.Log("OnFire");
         if (m_listaValoriLancio.Count <= 0)
         {
             return;           
