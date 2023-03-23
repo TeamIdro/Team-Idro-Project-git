@@ -32,7 +32,6 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private LayerMask playerMask;
 
     public int hp;
-    
 
     //VARIABILI PRIVATE
     private Collider2D m_playerMageCollider;

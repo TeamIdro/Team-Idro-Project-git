@@ -20,13 +20,11 @@ public class DestroyOnTrigger : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (collision.gameObject.GetComponent<IDamageable>() != null)
-        {
-            var enemy = collision.gameObject.GetComponent<IDamageable>();
-            enemy.TakeDamage(damage);
-        }
-        
-
+        // if (collision.gameObject.GetComponent<IDamageable>() != null)
+        // {
+        //     var enemy = collision.gameObject.GetComponent<IDamageable>();
+        //     enemy.TakeDamage(damage, );
+        // }
     }
 
     public void SetLayer(LayerMask layers)

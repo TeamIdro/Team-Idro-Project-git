@@ -11,6 +11,7 @@ public class MagiaSO : ScriptableObject,IMagia
     public GameObject prefabAnimatoriMagia;
     public TipoComportamentoMagia magicBehaviourType;
     [Space]
+    public TipoMagia tipoMagia;
     public TipoDiDannoMagia damageType;
     [Header("Lista Combinazioni")]
     public List<ElementoMagiaSO> combinazioneDiElementi;
@@ -26,7 +27,7 @@ public class MagiaSO : ScriptableObject,IMagia
     [Space(5)]
     [Header("Valori Per Magia Lanciata")]
     [Range(0, 100)]
-    [Tooltip("Velocità del proiettile")]
+    [Tooltip("Velocitï¿½ del proiettile")]
     public float velocitaMagiaLanciata;
     [Tooltip("Se il proiettile deve rallentare fino a fermarsi")]
     public bool rallentamentoGraduale;
@@ -41,13 +42,13 @@ public class MagiaSO : ScriptableObject,IMagia
     public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
-    [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto è spuntata")]
+    [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto ï¿½ spuntata")]
     public GameObject ExplosionPref;
-    [Tooltip("Se si vuole sparare altro al posto del normale bullet inserire qui il prefab, se lasciato vuoto verrà sparato il prefab bullet")]
+    [Tooltip("Se si vuole sparare altro al posto del normale bullet inserire qui il prefab, se lasciato vuoto verrï¿½ sparato il prefab bullet")]
     public GameObject AlternativeBullet;    
     [Range(0, 100)]
     public float explosionKnockbackForce = 1;
-    [Tooltip("I layer con cui il proiettile non collide, può comunque infliggere danni ai nemici impostati su danneggiaTarget ma infliggerà danno solo una volta per ognuno sulla traiettoria e passerà oltre")]
+    [Tooltip("I layer con cui il proiettile non collide, puï¿½ comunque infliggere danni ai nemici impostati su danneggiaTarget ma infliggerï¿½ danno solo una volta per ognuno sulla traiettoria e passerï¿½ oltre")]
     public LayerMask ignoraCollisioni;
     [Tooltip("I layer che possono essere danneggiati dal proiettile")]
     public LayerMask danneggiaTarget;
@@ -56,6 +57,7 @@ public class MagiaSO : ScriptableObject,IMagia
     public int placeHolder;
     [Header("Valori Per Magia Teleport")]
     public Transform posizioneDelNemicoPiuVicino;
+
 
 
     public virtual void Lancia()
