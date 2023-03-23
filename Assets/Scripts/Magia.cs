@@ -89,22 +89,28 @@ public class Magia : MonoBehaviour
     //    return currentHealth;
     //}
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         isCasted = false;
-        if(magia.GetBehaviourType() == TipoComportamentoMagia.Lanciata)
+        if (magia.GetBehaviourType() == TipoComportamentoMagia.Lanciata)
         {
-            if (collision.collider != false)
+            if (collision.GetComponent<Collider>() != false)
             {
                 Destroy(gameObject);
             }
         }
-        if (collision.gameObject.GetComponent<EnemyScript>()!= null)
+        if (collision.gameObject.GetComponent<EnemyScript>() != null)
         {
+
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
-            enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
+            if (enemy.gameObject.layer == magia.ignoraCollisioni) { return; }
+            if (enemy.gameObject.layer == magia.danneggiaTarget) 
+            {
+                //enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
+            }
         }
     }
+  
     private void OnDisable()
     {
         magia = null;

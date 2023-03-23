@@ -13,7 +13,7 @@ public static class LayerMaskExtensions
 public class DestroyOnTrigger : MonoBehaviour
 {
     public LayerMask ignoreContact;
-    public int damage = 0;
+    public float damage = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!ignoreContact.Contains(collision.gameObject.layer))
