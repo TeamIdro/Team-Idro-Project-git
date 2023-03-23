@@ -140,7 +140,7 @@ public class MagicController : MonoBehaviour
         listaTutteMagieLocale = m_tuttaLaListaDelleMagie;
         listaTutteMagieLocale.OrderBy(x => x.name);
         int elementoMultiploRipetizioni = 0;
-        ElementoMagiaSO elemMultiplo = new();
+        ElementoMagiaSO elemMultiplo = ScriptableObject.CreateInstance("MagiaSO")as ElementoMagiaSO;
 
         for (int i = 0; i < m_listaValoriLancio.Count; i++)
         {
@@ -349,7 +349,7 @@ public class MagicController : MonoBehaviour
             if (bullet.GetComponent<CircleCollider2D>() != null)
             { bullet.GetComponent<CircleCollider2D>().enabled = true; }
 
-            bullet.AddComponent<DestroyOnTrigger>().setLayer(m_magiaDaLanciare.ignoraCollisioni);
+            bullet.AddComponent<DestroyOnTrigger>().SetLayer(m_magiaDaLanciare.ignoraCollisioni);
             bullet.AddComponent<DestroyOnTrigger>().damage = m_magiaDaLanciare.dannoDellaMagia;
             bullet.AddComponent<DestroyAfterDistance>().MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
             bullet.AddComponent<DestroyAfterTime>().destroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);

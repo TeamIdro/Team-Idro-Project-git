@@ -29,7 +29,7 @@ public class DestroyOnTrigger : MonoBehaviour
 
     }
 
-    public void setLayer(LayerMask layers)
+    public void SetLayer(LayerMask layers)
     {
         ignoreContact = layers;
     }
