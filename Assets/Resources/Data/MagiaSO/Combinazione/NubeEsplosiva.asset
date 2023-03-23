@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: NubeEsplosiva
   m_EditorClassIdentifier: 
-  animatorMagia: {fileID: 7400000, guid: c4282db4772904f46ae908d50e001892, type: 2}
+  prefabAnimatoriMagia: {fileID: 0}
   magicBehaviourType: 0
   damageType: 0
   combinazioneDiElementi:
@@ -32,7 +32,7 @@ MonoBehaviour:
   explosionKnockbackForce: 50
   ignoraCollisioni:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 1792
   danneggiaTarget:
     serializedVersion: 2
     m_Bits: 2147483647
