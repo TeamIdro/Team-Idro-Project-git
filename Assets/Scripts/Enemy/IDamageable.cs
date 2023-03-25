@@ -1,4 +1,4 @@
 ﻿public interface IDamageable
 {
-    public void TakeDamage(int damageToTake, TipoMagia magicType);
+    public void TakeDamage(float damageToTake, TipoMagia magicType);
 }
