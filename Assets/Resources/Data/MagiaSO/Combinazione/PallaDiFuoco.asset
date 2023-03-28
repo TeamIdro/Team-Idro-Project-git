@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabAnimatoriMagia: {fileID: 212938572529725356, guid: e995b36056bda704c9ac4b8517938cd1, type: 3}
   magicBehaviourType: 0
+  tipoMagia: 0
   damageType: 0
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
@@ -33,9 +34,9 @@ MonoBehaviour:
   explosionKnockbackForce: 50
   ignoraCollisioni:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 1280
   danneggiaTarget:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 6903
   placeHolder: 0
   posizioneDelNemicoPiuVicino: {fileID: 0}

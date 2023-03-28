@@ -2,115 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.UI;
 
 public class Magia : MonoBehaviour
 {
-
+    public LayerMask damageMask;
     public MagiaSO magia;
     public bool isCasted = false;
     public Animator animator;
     private PlayerFacing playerFacingOnInstance;
     private SpriteRenderer spriteRendererMagia;
     // Start is called before the first frame update
-    void Start()
-    {
-        spriteRendererMagia = GetComponent<SpriteRenderer>();
-        InitializeMagic();
-    }
+   
 
-    private void InitializeMagic()
-    {
-        playerFacingOnInstance = PlayerCharacterController.playerFacingDirection;
-        //animator.runtimeAnimatorController = magia.prefabAnimatoriMagia;
-      
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        LanciaMagia();
-    }
-    public void LanciaMagia()
-    {
-        switch(magia.GetBehaviourType())
-        {
-            case TipoComportamentoMagia.Stazionaria:
-                LancioMagiaStazionaria();
-                break;
-
-            case TipoComportamentoMagia.Lanciata:
-                LancioMagiaLanciata();
-                break;
-            case TipoComportamentoMagia.Teleport:
-                LancioMagiaTeleport();
-                break;
-
-        }
-    }
-
-    private void LancioMagiaTeleport()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void LancioMagiaLanciata()
-    {
-        if (!isCasted) return;
-        if (playerFacingOnInstance == PlayerFacing.Sinistra)
-        {
-            transform.Translate(Vector2.left * Time.deltaTime * magia.velocitaMagiaLanciata);
-            spriteRendererMagia.flipX= true;
-        }
-        else
-        {
-            transform.Translate(Vector2.right * Time.deltaTime * magia.velocitaMagiaLanciata);
-            spriteRendererMagia.flipX= false;
-        }
-        StartCoroutine(DistruggiDopoSecondi(1f));
-
-    }
-
-    private IEnumerator DistruggiDopoSecondi(float time)
-    {
-        yield return new WaitForSeconds(time);
-        Destroy(gameObject);
-    }
-
-    private void LancioMagiaStazionaria()
-    {
-        throw new NotImplementedException();
-    }
-    //public float FaiDanno(float currentHealth)
-    //{
-    //    if (currentHealth > 0)
-    //    {
-    //        currentHealth -= magia.dannoDellaMagia;
-    //    }
-    //    return currentHealth;
-    //}
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         isCasted = false;
-        if (magia.GetBehaviourType() == TipoComportamentoMagia.Lanciata)
-        {
-            if (collision.GetComponent<Collider>() != false)
-            {
-                Destroy(gameObject);
-            }
-        }
+        //TODO: risolvere questione layer
         if (collision.gameObject.GetComponent<EnemyScript>() != null)
         {
-
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
-            if (enemy.gameObject.layer == magia.ignoraCollisioni) { return; }
-            if (enemy.gameObject.layer == magia.danneggiaTarget) 
+            if (magia == null) { return; }
+            else if (damageMask.Contains(collision.gameObject.layer))
             {
-                //enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
+                Debug.Log("Preso");
+                enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
             }
         }
     }
-  
+    /// <summary>
+    /// set the damage layer that needs to check
+    /// </summary>
+    /// <param name="damageValue"></param>
+    public void SetDamageLayer(LayerMask value)
+    {
+        damageMask = value;
+    }
+
     private void OnDisable()
     {
         magia = null;

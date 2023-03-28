@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 {
     // [field: SerializeField] public EnemyCategory category { get; set; }
     // [field: SerializeField] public Weakness weakness { get; set; }
-    [field: SerializeField] public int hp { get; set; }
+    [field: SerializeField] public float hp { get; set; }
     [field: SerializeField] public int attack { get; set; }
     [field: SerializeField] public float speed { get; set; }
     [field: SerializeField] public Rigidbody2D rigidBody { get; set; }
@@ -82,7 +82,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         viewDistance = setIncreasedViewDistance;
     }
 
-    public void TakeDamage(int damageToTake, TipoMagia magicType)
+    public void TakeDamage(float damageToTake, TipoMagia magicType)
     {
         
         if (hp > 0)

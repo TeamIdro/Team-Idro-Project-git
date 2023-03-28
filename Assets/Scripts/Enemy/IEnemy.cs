@@ -13,7 +13,7 @@ public interface IEnemy
 
      // public Weakness weakness {get; set;}
 
-     public int hp {get; set;}
+     public float hp {get; set;}
 
      public int attack {get; set;}
 

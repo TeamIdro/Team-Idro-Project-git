@@ -319,6 +319,7 @@ public class MagicController : MonoBehaviour
                 {
                     bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;
                 }
+                bullet.gameObject.GetComponent<Magia>().magia = m_magiaDaLanciare;
 
             }
             else
@@ -333,26 +334,25 @@ public class MagicController : MonoBehaviour
                 {
                     bullet.AddComponent<RallentaProiettile>().decelerationTime = m_magiaDaLanciare.decellerazioneTime;
                 }
+                bullet.gameObject.GetComponent<Magia>().magia = m_magiaDaLanciare;
             }
-          
+            
             if (m_magiaDaLanciare.detonazioneAdImpatto)
             {
                 bullet.AddComponent<InstatiateExplosion>().ExplosionPref = m_magiaDaLanciare.ExplosionPref;
                 bullet.GetComponent<InstatiateExplosion>().explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
                 bullet.GetComponent<InstatiateExplosion>().DamageContact = m_magiaDaLanciare.danneggiaTarget;
             }
-            if (bullet.GetComponent<Animator>() != null)
-            {
-               
-            }
+            
 
             if (bullet.GetComponent<CircleCollider2D>() != null)
             { bullet.GetComponent<CircleCollider2D>().enabled = true; }
 
-            bullet.AddComponent<DestroyOnTrigger>().SetLayer(m_magiaDaLanciare.ignoraCollisioni);
-            bullet.AddComponent<DestroyOnTrigger>().damage = m_magiaDaLanciare.dannoDellaMagia;
+            bullet.AddComponent<DestroyOnTrigger>();
+            bullet.GetComponent<DestroyOnTrigger>().SetLayer(m_magiaDaLanciare.ignoraCollisioni);
             bullet.AddComponent<DestroyAfterDistance>().MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
             bullet.AddComponent<DestroyAfterTime>().destroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
+            bullet.GetComponent<Magia>().SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
         }
         
         m_magiaDaLanciare = null;
