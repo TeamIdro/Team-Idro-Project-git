@@ -20,7 +20,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private float maxVelocityCap;
     [SerializeField] private float deceleration;
     [Range(0f, 5f)]
-    [SerializeField] private float maxCastDirection;
+    [SerializeField] private float maxCastDistance;
     [Space(10)]
     [Header("Debug values")]
     [SerializeField,ReadOnly] private Vector2 movementDirection;
@@ -152,7 +152,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         bool playerCanJump = false;
         RaycastHit2D hit;
-        hit = Physics2D.BoxCast(rayCastPosition.position, boxCastDimension, 0, Vector2.down, maxCastDirection,playerMask);
+        hit = Physics2D.BoxCast(rayCastPosition.position, boxCastDimension, 0, Vector2.down, maxCastDistance,playerMask);
         if (hit.collider != null)
         {
             playerCanJump = true;
