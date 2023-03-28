@@ -9,7 +9,7 @@ public class ExplosionDamage : MonoBehaviour
     public int damageExplosion = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (DamageContact.Contains(collision.gameObject.layer))
+        if (LayerMaskExtensions.IsInLayerMask(collision.gameObject,DamageContact))
         {
             if(collision.GetComponent<Rigidbody2D>() != null)
             {

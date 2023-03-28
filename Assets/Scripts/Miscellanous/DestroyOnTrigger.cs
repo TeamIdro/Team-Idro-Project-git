@@ -4,9 +4,9 @@ using UnityEngine;
 
 public static class LayerMaskExtensions
 {
-    public static bool Contains(this LayerMask mask, int layer)
+    public static bool IsInLayerMask(this GameObject obj, LayerMask mask)
     {
-        return mask == (mask | (1 << layer));
+        return ((mask.value & (1 << obj.layer)) > 0);
     }
 }
 
@@ -16,7 +16,7 @@ public class DestroyOnTrigger : MonoBehaviour
     public float damage = 0;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!ignoreContact.Contains(collision.gameObject.layer))
+        if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject,ignoreContact))
         {
             Destroy(gameObject);
         }

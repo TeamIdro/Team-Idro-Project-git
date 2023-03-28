@@ -14,12 +14,13 @@ public class PlayerCharacterController : MonoBehaviour
     [Space(10)]
     //VARIABILI IN INSPECTOR
     [Header("Player values")]
+    public float hp;
     [SerializeField] private float movementVelocity;
     [SerializeField] private float jumpVelocity;
     [SerializeField] private float maxVelocityCap;
     [SerializeField] private float deceleration;
     [Range(0f, 5f)]
-    [SerializeField] private float linearDrag;
+    [SerializeField] private float maxCastDirection;
     [Space(10)]
     [Header("Debug values")]
     [SerializeField,ReadOnly] private Vector2 movementDirection;
@@ -31,7 +32,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private Vector2 boxCastDimension;
     [SerializeField] private LayerMask playerMask;
 
-    public int hp;
+   
 
     //VARIABILI PRIVATE
     private Collider2D m_playerMageCollider;
@@ -66,9 +67,12 @@ public class PlayerCharacterController : MonoBehaviour
         m_gamePlayInputActions = new();
         animatorMago = GetComponentInChildren<Animator>();
         mageRenderer = GetComponentInChildren<SpriteRenderer>();
+        m_gamePlayInputActions.Mage.Jump.started += Jump;
     }
     private void Start()
     {
+       
+
     }
 
     private void Update()
@@ -82,7 +86,6 @@ public class PlayerCharacterController : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-        Jump();
     }
 
     private void GetInputDirection()
@@ -129,9 +132,10 @@ public class PlayerCharacterController : MonoBehaviour
             m_playerMageRB2D.velocity = Vector2.Lerp(new Vector2(m_playerMageRB2D.velocity.x, m_playerMageRB2D.velocity.y), new Vector2(0, m_playerMageRB2D.velocity.y), deceleration * Time.fixedDeltaTime);
         }
     }
-    private void Jump()
+    private void Jump(InputAction.CallbackContext context)
     {
-        Vector2 jump = new Vector2(0, movementDirection.y);
+        var inputJump = context.ReadValue<float>();
+        Vector2 jump = new Vector2(0, 1);
         if (CheckIfCanJump() && playerType == EPlayerType.Mago)
         {
             isJumping = !CheckIfCanJump();
@@ -148,7 +152,7 @@ public class PlayerCharacterController : MonoBehaviour
     {
         bool playerCanJump = false;
         RaycastHit2D hit;
-        hit = Physics2D.BoxCast(rayCastPosition.position, boxCastDimension, 0, Vector2.down, 0,playerMask);
+        hit = Physics2D.BoxCast(rayCastPosition.position, boxCastDimension, 0, Vector2.down, maxCastDirection,playerMask);
         if (hit.collider != null)
         {
             playerCanJump = true;
