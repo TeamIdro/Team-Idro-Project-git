@@ -31,7 +31,7 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private Vector2 boxCastDimension;
     [SerializeField] private LayerMask playerMask;
 
-    public int hp;
+    public float hp;
 
     //VARIABILI PRIVATE
     private Collider2D m_playerMageCollider;
@@ -178,7 +178,7 @@ public class PlayerCharacterController : MonoBehaviour
         Gizmos.DrawWireCube(rayCastPosition.position, boxCastDimension);
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(float damage)
     {
         hp -= damage;
         if(hp < 0)
