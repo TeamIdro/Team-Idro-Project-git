@@ -25,7 +25,7 @@ public class Magia : MonoBehaviour
         {
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
             if (magia == null) { return; }
-            else if (damageMask.Contains(collision.gameObject.layer))
+            else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject,damageMask))
             {
                 Debug.Log("Preso");
                 enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
