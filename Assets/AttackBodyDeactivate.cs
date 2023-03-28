@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackBodyDeactivate : MonoBehaviour
 {
     public float timeToDeactivate = 1f;
-    public int damage = 10;
+    public float damage = 10f;
     Coroutine coroutine;
 
     void OnEnable()

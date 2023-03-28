@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyRangedBullet : MonoBehaviour
 {
-   public int damage = 5;
+   public float damage = 5f;
    public float timeToDeath = 5f;
    float timer = 0;
 
