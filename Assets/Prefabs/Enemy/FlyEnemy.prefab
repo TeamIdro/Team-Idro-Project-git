@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6861427684917036645
 Transform:
   m_ObjectHideFlags: 0
@@ -306,7 +306,7 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
+  gizmoViewMode: 1
   showBehaviorDesignerGizmo: 1
 --- !u!114 &6861427684917036644
 MonoBehaviour:
@@ -320,8 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2094090e2c79384597c0a243b242d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <category>k__BackingField: 0
-  <weakness>k__BackingField: 0
   <hp>k__BackingField: 100
   <attack>k__BackingField: 0
   <speed>k__BackingField: 0
@@ -336,6 +334,8 @@ MonoBehaviour:
   setIncreasedAngle: 280
   setIncreasedFovAngle: 360
   setIncreasedViewDistance: 15
+  weakness: 0
+  resistance: 0
 --- !u!114 &1899079260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,5 +391,5 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
+  gizmoViewMode: 1
   showBehaviorDesignerGizmo: 1

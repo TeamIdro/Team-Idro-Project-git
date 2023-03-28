@@ -182,7 +182,7 @@ public class PlayerCharacterController : MonoBehaviour
         Gizmos.DrawWireCube(rayCastPosition.position, boxCastDimension);
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(float damage)
     {
         hp -= damage;
         if(hp < 0)
