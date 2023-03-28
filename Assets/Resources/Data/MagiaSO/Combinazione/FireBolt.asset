@@ -35,6 +35,6 @@ MonoBehaviour:
     m_Bits: 1280
   danneggiaTarget:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 6144
   placeHolder: 0
   posizioneDelNemicoPiuVicino: {fileID: 0}
