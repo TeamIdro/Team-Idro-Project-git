@@ -39,6 +39,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     public float setIncreasedViewDistance = 10f;
 
     public TipoMagia weakness; 
+    public TipoMagia resistance; 
 
     private void Awake() 
     {
@@ -84,17 +85,24 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 
     public void TakeDamage(float damageToTake, TipoMagia magicType)
     {
-        
-        if (hp > 0)
+        float damageCalculated = damageToTake;
+
+        if(magicType == weakness)
         {
-            Debug.Log("Prendo danno");
-            Debug.Log(damageToTake);
-            hp = hp - damageToTake;
+            damageCalculated = damageToTake * 1.5f;
         }
-        else
+        else if(magicType == resistance)
+        {
+            damageCalculated = damageToTake * 0.5f;
+        }
+            
+        hp -= damageCalculated;
+
+        if (hp < 0)
         {
             Destroy(this.gameObject);
         }
+
     }
 
     void OnDestroy()
