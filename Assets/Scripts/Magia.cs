@@ -25,7 +25,7 @@ public class Magia : MonoBehaviour
         {
             var enemy = collision.gameObject.GetComponent<EnemyScript>();
             if (magia == null) { return; }
-            else if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject,damageMask))
+            else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject,damageMask))
             {
                 Debug.Log("Preso");
                 enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
@@ -43,6 +43,6 @@ public class Magia : MonoBehaviour
 
     private void OnDisable()
     {
-        magia = null;
+        // magia = null;
     }
 }

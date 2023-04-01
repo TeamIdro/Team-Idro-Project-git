@@ -24,7 +24,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2672353208428643256
 Transform:
   m_ObjectHideFlags: 0
@@ -312,13 +312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <hp>k__BackingField: 50
-  <attack>k__BackingField: 10
-  <speed>k__BackingField: 0
-  <rigidBody>k__BackingField: {fileID: 0}
-  <spriteRenderer>k__BackingField: {fileID: 0}
-  <angle>k__BackingField: 0
-  <fovAngle>k__BackingField: 0
-  <viewDistance>k__BackingField: 0
   setReducedAngle: 280
   setReducedFovAngle: 360
   setReducedViewDistance: 7.4

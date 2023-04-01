@@ -185,10 +185,11 @@ public class PlayerCharacterController : MonoBehaviour
     public void GetDamage(float damage)
     {
         hp -= damage;
+
         if(hp < 0)
         {
-            Debug.Log("PLAYER DEATH");
-            //Reload scene
+            SpawnManager.Instance.Respawn();
+            hp = 50f;
         }
     }
 }

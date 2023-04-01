@@ -11,33 +11,31 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     // [field: SerializeField] public EnemyCategory category { get; set; }
     // [field: SerializeField] public Weakness weakness { get; set; }
     [field: SerializeField] public float hp { get; set; }
-    [field: SerializeField] public int attack { get; set; }
-    [field: SerializeField] public float speed { get; set; }
-    [field: SerializeField] public Rigidbody2D rigidBody { get; set; }
-    [field: SerializeField] public SpriteRenderer spriteRenderer { get; set; }
+    public int attack { get; set; }
+    public float speed { get; set; }
+    public Rigidbody2D rigidBody { get; set; }
+    public SpriteRenderer spriteRenderer { get; set; }
     
-    [field: SerializeField] public float angle { get; set; }
-    [field: SerializeField] public float fovAngle { get; set; }
-    [field: SerializeField] public float viewDistance { get; set; }
-    // [field: SerializeField] public bool canPatrol { get; set; }
+    float angle { get; set; }
+    float fovAngle { get; set; }
+    float viewDistance { get; set; }
 
     private NavMeshAgent agent;
     private BehaviorTree behaviorTree;
 
-    // public float attackCooldown = 0f;
-    // public float attackCooldownSet = 5f;
-
     [Space(10)]
-    [Header("Variabili Valori Inseguimento Player")]
-    [Header("SetReduce... sono quelli di partenza")]
+    [Header("Valori inseguimento player")]
+    [Header("SetReduce sono quelli di partenza")]
     public float setReducedAngle = 280f;
     public float setReducedFovAngle = 120f;
     public float setReducedViewDistance = 7.4f;
 
-     public float setIncreasedAngle = 280f;
+    public float setIncreasedAngle = 280f;
     public float setIncreasedFovAngle = 360f;
     public float setIncreasedViewDistance = 10f;
 
+    [Space(10)]
+    [Header("Weakness and Resistance")]
     public TipoMagia weakness; 
     public TipoMagia resistance; 
 
@@ -103,10 +101,5 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
             Destroy(this.gameObject);
         }
 
-    }
-
-    void OnDestroy()
-    {
-        // Debug.Log("MORTO" + this.gameObject.name);
     }
 }

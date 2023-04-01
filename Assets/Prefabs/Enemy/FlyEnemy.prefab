@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2143515512}
   - component: {fileID: 2143515511}
   - component: {fileID: 2143515510}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: AttackBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,13 +132,13 @@ GameObject:
   - component: {fileID: 6861427684917036644}
   - component: {fileID: 1899079260}
   - component: {fileID: 1899079261}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: FlyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6861427684917036645
 Transform:
   m_ObjectHideFlags: 0
@@ -217,7 +217,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -321,16 +321,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <hp>k__BackingField: 100
-  <attack>k__BackingField: 0
-  <speed>k__BackingField: 0
-  <rigidBody>k__BackingField: {fileID: 0}
-  <spriteRenderer>k__BackingField: {fileID: 0}
-  <angle>k__BackingField: 0
-  <fovAngle>k__BackingField: 0
-  <viewDistance>k__BackingField: 0
   setReducedAngle: 280
   setReducedFovAngle: 360
-  setReducedViewDistance: 7.4
+  setReducedViewDistance: 10
   setIncreasedAngle: 280
   setIncreasedFovAngle: 360
   setIncreasedViewDistance: 15
