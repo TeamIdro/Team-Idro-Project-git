@@ -16,9 +16,9 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     public Rigidbody2D rigidBody { get; set; }
     public SpriteRenderer spriteRenderer { get; set; }
     
-    float angle { get; set; }
-    float fovAngle { get; set; }
-    float viewDistance { get; set; }
+    public float angle { get; set; }
+    public float fovAngle { get; set; }
+    public float viewDistance { get; set; }
 
     private NavMeshAgent agent;
     private BehaviorTree behaviorTree;
