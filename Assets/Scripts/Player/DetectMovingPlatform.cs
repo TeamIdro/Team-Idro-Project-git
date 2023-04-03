@@ -19,10 +19,9 @@ public class DetectMovingPlatform : MonoBehaviour
     {
         hit = Physics2D.BoxCast(transform.position, boxCastDimension, 0, Vector2.down, maxCastDistance, terrainMask); 
 
-        if(hit != null || hit.collider != null)
+        if(hit.collider != null)
         {
-            if(hit.collider != null 
-                && hit.collider.CompareTag("MovingPlatform"))
+            if(hit.collider.CompareTag("MovingPlatform"))
             {
                 this.transform.SetParent(hit.transform);
             }
