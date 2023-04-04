@@ -20520,6 +20520,10 @@ PrefabInstance:
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[1]
       value: 
       objectReference: {fileID: 1484208896925170335}
+    - target: {fileID: 1970239925194487857, guid: a6603242b7cbfa6448c280a9d8c262d8, type: 3}
+      propertyPath: avoidancePriority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1970239925194487861, guid: a6603242b7cbfa6448c280a9d8c262d8, type: 3}
       propertyPath: m_RootOrder
       value: 22
