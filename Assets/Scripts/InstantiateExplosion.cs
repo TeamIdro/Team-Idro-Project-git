@@ -16,7 +16,7 @@ public class InstatiateExplosion : MonoBehaviour
     //    if (ExlDam != null)
     //    {
     //        ExlDam.setLayer(DamageContact);
-    //        ExlDam.ExplosionKnockbackForce = explosionKnockbackForce;
+    //        ExlDam.explosionKnockbackForce = explosionKnockbackForce;
     //        ExlDam.damageExplosion = damage;
     //    }
     //    else

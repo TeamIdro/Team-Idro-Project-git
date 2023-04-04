@@ -9,7 +9,7 @@ public class Magia : MonoBehaviour
     private PlayerFacing playerFacingOnInstance;
     private SpriteRenderer spriteRendererMagia;
     // Start is called before the first frame update
-    public float ExplosionKnockbackForce = 1;
+    public float explosionKnockbackForce = 1;
     public int damageExplosion = 0;
 
     public GameObject ExplosionPref;
@@ -34,13 +34,17 @@ public class Magia : MonoBehaviour
     }
     void Update()
     {
-        float distance = Vector3.Distance(position, transform.position);
-        if (distance >= MaxDistance)
-        {
-            Destroy(gameObject);
-        }
+        DestroyAfterDistance();
     }
+
+  
+
     void FixedUpdate()
+    {
+        BulletDeceleration();
+    }
+
+    private void BulletDeceleration()
     {
         if (bulletRigidbody.velocity.magnitude > 0f)
         {
@@ -51,6 +55,50 @@ public class Magia : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        CollisionsBehaviours(collision);
+    }
+
+
+    private void OnDestroy()
+    {
+        SpawnExplosionParticle();
+    }
+
+    private void SpawnExplosionParticle()
+    {
+        GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
+        if (expl != null)
+        {
+            Destroy(expl, 2);
+        }
+        else
+        {
+            Debug.LogWarning("Manca il component ExplosionDamage all'explosion prefab");
+        }
+    }
+
+    private void DestroyAfterDistance()
+    {
+        float distance = Vector3.Distance(position, transform.position);
+        if (distance >= MaxDistance)
+        {
+            Destroy(gameObject);
+        }
+    }
+    public void SetDamageLayer(LayerMask value)
+    {
+        damageMask = value;
+    }
+    public void SetIgnoreLayer(LayerMask value)
+    {
+        ignoreContact = value;
+    }
+    public void DestroyAfterTime(float MaxTime)
+    {
+        Destroy(gameObject, MaxTime);
+    }
+    private void CollisionsBehaviours(Collider2D collision)
     {
         isCasted = false;
         //TODO: risolvere questione layer
@@ -68,7 +116,7 @@ public class Magia : MonoBehaviour
         {
             if (collision.GetComponent<Rigidbody2D>() != null)
             {
-                collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * ExplosionKnockbackForce * 10);
+                collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * explosionKnockbackForce * 10);
             }
         }
         if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject, ignoreContact))
@@ -76,38 +124,6 @@ public class Magia : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    /// <summary>
-    /// set the damage layer that needs to check
-    /// </summary>
-    /// <param name="damageValue"></param>
- 
-    private void OnDisable()
-    {
-        magia = null;
-    }
-    private void OnDestroy()
-    {
-        GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
-        if (expl != null)
-        {
-            Destroy(expl, 2);
-        }
-        else
-        {
-            Debug.LogWarning("Manca il component ExplosionDamage all'explosion prefab");
-        }
-    }
-    public void SetDamageLayer(LayerMask value)
-    {
-        damageMask = value;
-    }
-    public void SetIgnoreLayer(LayerMask value)
-    {
-        ignoreContact = value;
-    }
-    public void DestroyAfterTime(float MaxTime)
-    {
-        Destroy(gameObject, MaxTime);
-    }
+
 
 }

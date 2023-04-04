@@ -273,7 +273,7 @@ public class MagicController : MonoBehaviour
         if (m_magiaDaLanciare.detonazioneAdImpatto)
         {
             magiaComponent.ExplosionPref = m_magiaDaLanciare.ExplosionPref;
-            magiaComponent.ExplosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
+            magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
             magiaComponent.damageMask = m_magiaDaLanciare.danneggiaTarget;
         }
 
