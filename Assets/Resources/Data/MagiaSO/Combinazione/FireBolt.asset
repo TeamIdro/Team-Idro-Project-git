@@ -21,7 +21,7 @@ MonoBehaviour:
   dannoDellaMagia: 10
   moltiplicatoreDanno: 0
   moltiplicatoreResistenza: 0
-  velocitaMagiaLanciata: 6.2
+  velocitaMagiaLanciata: 65.3
   rallentamentoGraduale: 0
   decellerazioneTime: 100
   distanzaMagiaLanciata: 100
