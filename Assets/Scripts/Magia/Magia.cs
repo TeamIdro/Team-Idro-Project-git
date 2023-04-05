@@ -6,7 +6,7 @@ public class Magia : MonoBehaviour
     public MagiaSO magia;
     public bool isCasted = false;
     public Animator animator;
-    private PlayerFacingXAxes playerFacingOnInstance;
+    private PlayerFacingDirections playerFacingOnInstance;
     private SpriteRenderer spriteRendererMagia;
     // Start is called before the first frame update
     public float explosionKnockbackForce = 1;

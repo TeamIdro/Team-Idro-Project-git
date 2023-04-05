@@ -266,23 +266,7 @@ public class MagicController : MonoBehaviour
 
     
 
-    private void AddForceToMagicBasedOnDirection(GameObject bullet,Vector2 direction)
-    {
-        bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
-
-        if (PlayerCharacterController.playerFacingDirectionXAxes is PlayerFacingXAxes.Left || PlayerCharacterController.playerFacingDirectionXAxes is PlayerFacingXAxes.Right)
-        {
-            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitaMagiaLanciata * direction.x * 10, 0));
-            return;
-        }
-        else if ((PlayerCharacterController.playerFacingDirectionYAxes is PlayerFacingYAxes.Up || PlayerCharacterController.playerFacingDirectionYAxes is PlayerFacingYAxes.Down)&&
-            m_facingDirectionForUpAndDown is not 0)
-        {
-            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, m_magiaDaLanciare.velocitaMagiaLanciata * direction.y * 10));
-            return;
-        }
-     
-    }
+    
 
   
 
@@ -339,36 +323,48 @@ public class MagicController : MonoBehaviour
     /// </summary>
     private void CheckForDirectionToGo(GameObject bullet)
     {
-        //if (PlayerCharacterController.playerFacingDirectionXAxes == PlayerFacingXAxes.Right) { m_facingDirectionForLeftAndRight = 1; }
-        //else if (PlayerCharacterController.playerFacingDirectionXAxes == PlayerFacingXAxes.Left) { m_facingDirectionForLeftAndRight = -1; }
-        //else if (PlayerCharacterController.playerFacingDirectionXAxes == PlayerFacingXAxes.Up) { m_facingDirectionForUpAndDown = 1; }
-        //else if (PlayerCharacterController.playerFacingDirectionXAxes == PlayerFacingXAxes.Down) { m_facingDirectionForUpAndDown = -1; }
-        //if (PlayerCharacterController.playerFacingDirectionXAxes == PlayerFacingXAxes.ZeroForLookUpandDown) { m_facingDirectionForUpAndDown = 0; 
-        switch (PlayerCharacterController.playerFacingDirectionXAxes)
-        {
-            case PlayerFacingXAxes.Left:
-                AddForceToMagicBasedOnDirection(bullet, Vector2.left);
-                break;
-            case PlayerFacingXAxes.Right:
-                AddForceToMagicBasedOnDirection(bullet, Vector2.right);
-                break;
-            default:
-                break;
-        }
-        switch (PlayerCharacterController.playerFacingDirectionYAxes)
-        {
-            case PlayerFacingYAxes.Up:
-                AddForceToMagicBasedOnDirection(bullet, Vector2.up);
-                break;
-            case PlayerFacingYAxes.Down:
-                AddForceToMagicBasedOnDirection(bullet, Vector2.down);
-                break;
-            case PlayerFacingYAxes.ZeroForLookUpandDown:
-                AddForceToMagicBasedOnDirection(bullet, Vector2.zero);
+
+            switch (PlayerCharacterController.playerFacingDirections)
+            {
+                case PlayerFacingDirections.Left:
+                    AddForceToMagicBasedOnDirection(bullet, Vector2.left);
+                    break;
+                case PlayerFacingDirections.Right:
+                    AddForceToMagicBasedOnDirection(bullet, Vector2.right);
+                    break;
+                case PlayerFacingDirections.Up:
+                    AddForceToMagicBasedOnDirection(bullet, Vector2.up);
+                    break;
+                case PlayerFacingDirections.Down:
+                    AddForceToMagicBasedOnDirection(bullet, Vector2.down);
+                    break;
+            case PlayerFacingDirections.ZeroForLookUpandDown:
+                AddForceToMagicBasedOnDirection(bullet, new Vector2(bullet.GetComponent<Rigidbody2D>().velocity.x, 0));
                 break;
             default:
-                break;
+                    break;
+            }
+       
+    }
+    private void AddForceToMagicBasedOnDirection(GameObject bullet, Vector2 direction)
+    {
+        bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
+        if (direction.y != 0)
+        {
+            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, m_magiaDaLanciare.velocitaMagiaLanciata * direction.y * 10));
+            if(direction.y < 0) { bullet.transform.Rotate(0, 0, 90); }
+            else if(direction.y > 0) { bullet.transform.Rotate(0, 0, -90); }
+            return;
         }
+        else if (direction.x != 0)
+        {
+            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitaMagiaLanciata * direction.x * 10, 0));
+            //if (direction.x < 0) { bullet.transform.Rotate(0, 0, -90); }
+             if (direction.x > 0) { bullet.transform.Rotate(0, 0, 180); }
+            return;
+        }
+
+
     }
     /// <summary>
     /// Inizializza l'object magia usando le variabili dello scriptableObject MagiaSO

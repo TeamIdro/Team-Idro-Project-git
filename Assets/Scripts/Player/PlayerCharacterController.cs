@@ -7,8 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    public static PlayerFacingXAxes playerFacingDirectionXAxes = PlayerFacingXAxes.Right;
-    public static PlayerFacingYAxes playerFacingDirectionYAxes = PlayerFacingYAxes.ZeroForLookUpandDown;
+    public static PlayerFacingDirections playerFacingDirections = PlayerFacingDirections.Right;
 
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
@@ -98,7 +97,8 @@ public class PlayerCharacterController : MonoBehaviour
         guardaSuValue = m_gamePlayInputActions.Mage.GuardaSu.ReadValue<float>();
         guardaGiuValue = m_gamePlayInputActions.Mage.GuardaGiu.ReadValue<float>();
 
-
+        Debug.Log("il valore del flip x è: "+mageRenderer.flipX +" mentre il valore della facing direction è: "+ PlayerCharacterController.playerFacingDirections.ToString());
+        Debug.Log("il valore di guarda su è: " + guardaSuValue + " mentre guarda giu è: " + guardaGiuValue);
 
         if (movementDirection.x != 0)
         {
@@ -108,30 +108,43 @@ public class PlayerCharacterController : MonoBehaviour
         {
             isMoving = false;
         }
+        if (guardaSuValue != 0)
+        {
+            playerFacingDirections = PlayerFacingDirections.Up;
+            guardaSuValue = 0;
+            return;
+        }
+        else if (guardaGiuValue != 0)
+        {
+            playerFacingDirections = PlayerFacingDirections.Down;
+            guardaGiuValue = 0;
+            return;
+        }
+        else if (mageRenderer.flipX == false)
+        {
+            playerFacingDirections = PlayerFacingDirections.Right;
+        }
+        else if(mageRenderer.flipX == true)
+        {
+            playerFacingDirections = PlayerFacingDirections.Left;
+        }
+
+
+       
+        
+     
+        //else
+        //{
+        //    playerFacingDirections = PlayerFacingDirections.ZeroForLookUpandDown;
+        //}
         if (movementDirection.x > 0)
         {
-            playerFacingDirectionXAxes = PlayerFacingXAxes.Right;
-            mageRenderer.flipX= false;
+            mageRenderer.flipX = false;
         }
         else if (movementDirection.x < 0)
         {
-            playerFacingDirectionXAxes= PlayerFacingXAxes.Left;
-            mageRenderer.flipX= true;
+            mageRenderer.flipX = true;
         }
-        
-        else if(guardaSuValue != 0)
-        {
-            playerFacingDirectionYAxes = PlayerFacingYAxes.Up;
-        }
-        else if(guardaGiuValue != 0)
-        {
-            playerFacingDirectionYAxes = PlayerFacingYAxes.Down;
-        }
-        else
-        {
-            playerFacingDirectionYAxes = PlayerFacingYAxes.ZeroForLookUpandDown;
-        }
-
     }
     private void AnimationUpdate()
     {
@@ -213,15 +226,12 @@ public class PlayerCharacterController : MonoBehaviour
         }
     }
 }
-public enum PlayerFacingXAxes
+public enum PlayerFacingDirections
 {
     Left,
     Right,
-
-}
-public enum PlayerFacingYAxes
-{
     Up,
     Down,
     ZeroForLookUpandDown,
 }
+
