@@ -30,7 +30,8 @@ public class MagicController : MonoBehaviour
     private MagiaSO m_magiaDaLanciare;
     private Magia magiaComponent;
     UIElementiMagia UIelementiMagia;
-    int m_facingDirection = 0;
+    int m_facingDirectionForLeftAndRight = 0;
+    int m_facingDirectionForUpAndDown = 0;
     private void Awake()
     {
         UIelementiMagia = m_UIPrefab.GetComponent<UIElementiMagia>();
@@ -252,10 +253,54 @@ public class MagicController : MonoBehaviour
         {
             magia = m_magiaDaLanciare.AlternativeBullet;
         }
-        if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Destra) { m_facingDirection = 1; }
-        else { m_facingDirection = -1; }
-        GameObject bullet = Instantiate(magia, gameObject.transform.position + new Vector3(m_facingDirection, 0, 0), gameObject.transform.rotation);
-        magiaComponent = bullet.GetComponent<Magia>();
+        CheckForDirectionToGo();
+        GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
+        CheckIfThereIsAnimatorAndGetIt(bullet);
+        AddForceToMagicBasedOnDirection(bullet);
+        MagicInitialize(bullet);
+    }
+
+    
+
+    private void AddForceToMagicBasedOnDirection(GameObject bullet)
+    {
+        bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
+
+        if (PlayerCharacterController.playerFacingDirection is PlayerFacing.Left || PlayerCharacterController.playerFacingDirection is PlayerFacing.Right)
+        {
+            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitaMagiaLanciata * m_facingDirectionForLeftAndRight * 10, 0));
+        }
+        else if (PlayerCharacterController.playerFacingDirection is PlayerFacing.Up || PlayerCharacterController.playerFacingDirection is PlayerFacing.Down)
+        {
+            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, m_magiaDaLanciare.velocitaMagiaLanciata * m_facingDirectionForUpAndDown * 10));
+        }
+    }
+
+  
+
+    private void ClearElementList()
+    {
+        m_listaValoriLancio.Clear();
+    }
+
+    private void OnEnable() => m_gamePlayInput.Mage.Enable();
+
+
+
+
+
+
+
+
+
+    //FUNZIONI PER AVER IL CODICE PIU PULITO
+
+    /// <summary>
+    /// Cerca e setta l'animator nell'object che verrà istanziato solo se lo contiene
+    /// </summary>
+    /// <param name="bullet"></param>
+    private void CheckIfThereIsAnimatorAndGetIt(GameObject bullet)
+    {
         GameObject animatorPrefabSpawned;
         if (m_magiaDaLanciare.prefabAnimatoriMagia != null)
         {
@@ -263,8 +308,41 @@ public class MagicController : MonoBehaviour
             animatorPrefabSpawned.transform.position = Vector2.zero;
             animatorPrefabSpawned.transform.SetParent(bullet.transform, false);
         }
-        bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
-        bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(-m_magiaDaLanciare.velocitaMagiaLanciata * 10, 0));
+    }
+    /// <summary>
+    /// Metodo in cui viene creata l'object su cui andra la magia
+    /// </summary>
+    /// <param name="magia"></param>
+    /// <returns></returns>
+    private GameObject IstanziaMagiaEPrendiIlComponent(GameObject magia)
+    {
+        GameObject bullet = Instantiate(magia, gameObject.transform.position + new Vector3(m_facingDirectionForLeftAndRight, m_facingDirectionForUpAndDown, 0), gameObject.transform.rotation);
+        if (bullet.GetComponent<Magia>() != null) { magiaComponent = bullet.GetComponent<Magia>(); }
+        else
+        {
+            bullet.AddComponent<Magia>();
+            magiaComponent = bullet.GetComponent<Magia>();
+        }
+
+        return bullet;
+    }
+    /// <summary>
+    /// Setta le direzioni che il proiettile deve prendere salvandosele poi in float locali
+    /// </summary>
+    private void CheckForDirectionToGo()
+    {
+        if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Right) { m_facingDirectionForLeftAndRight = 1; }
+        else if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Left) { m_facingDirectionForLeftAndRight = -1; }
+        else if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Up) { m_facingDirectionForUpAndDown = 1; }
+        else if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Down) { m_facingDirectionForUpAndDown = -1; }
+        else if (PlayerCharacterController.playerFacingDirection == PlayerFacing.Zero) { m_facingDirectionForUpAndDown = 0; }
+    }
+    /// <summary>
+    /// Inizializza l'object magia usando le variabili dello scriptableObject MagiaSO
+    /// </summary>
+    /// <param name="bullet"></param>
+    private void MagicInitialize(GameObject bullet)
+    {
         if (m_magiaDaLanciare.rallentamentoGraduale)
         {
             magiaComponent.decelerationTime = m_magiaDaLanciare.decellerazioneTime;
@@ -287,13 +365,6 @@ public class MagicController : MonoBehaviour
         magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
     }
 
-    private void ClearElementList()
-    {
-        m_listaValoriLancio.Clear();
-    }
-
-    private void OnEnable() => m_gamePlayInput.Mage.Enable();
-        
 }
 public enum FasiDiLancioMagia
 {
@@ -304,4 +375,12 @@ public enum FasiDiLancioMagia
     LancioMagia,
 
 }
+
+
+
+
+
+
+
+
 

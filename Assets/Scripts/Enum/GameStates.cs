@@ -2,11 +2,11 @@
 {
     Menu,
     Paused,
-    ChangingSceneFromKidToMage,
-    ChangingSceenFromMageToKid,
-    PlayerOnChessBoardScene,
-    PlayerOnLaytonScene,
-    PlayerOnMageDungeonScene,
+    //ChangingSceneFromKidToMage,
+    //ChangingSceenFromMageToKid,
+    //PlayerOnChessBoardScene,
+    //PlayerOnLaytonScene,
+    //PlayerOnMageDungeonScene,
     PlayerOnCombatScene,
 
 }

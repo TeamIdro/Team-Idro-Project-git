@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    public static PlayerFacing playerFacingDirection = PlayerFacing.Destra;
+    public static PlayerFacing playerFacingDirection = PlayerFacing.Right;
 
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
@@ -40,6 +40,8 @@ public class PlayerCharacterController : MonoBehaviour
     private GamePlayInputActions m_gamePlayInputActions;
     private Animator animatorMago;
     private SpriteRenderer mageRenderer;
+    private float guardaSuValue = 0;
+    private float guardaGiuValue = 0;
 
     //PROPRIETA
     public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
@@ -92,7 +94,11 @@ public class PlayerCharacterController : MonoBehaviour
     {
         movementDirection.x = m_gamePlayInputActions.Mage.Movimento.ReadValue<Vector2>().x;
         movementDirection.y = m_gamePlayInputActions.Mage.Jump.ReadValue<float>();
-       
+        guardaSuValue = m_gamePlayInputActions.Mage.GuardaSu.ReadValue<float>();
+        guardaGiuValue = m_gamePlayInputActions.Mage.GuardaGiu.ReadValue<float>();
+
+
+
         if (movementDirection.x != 0)
         {
             isMoving = true;
@@ -103,13 +109,25 @@ public class PlayerCharacterController : MonoBehaviour
         }
         if (movementDirection.x > 0)
         {
-            playerFacingDirection = PlayerFacing.Destra;
+            playerFacingDirection = PlayerFacing.Right;
             mageRenderer.flipX= false;
         }
         else if (movementDirection.x < 0)
         {
-            playerFacingDirection= PlayerFacing.Sinistra;
+            playerFacingDirection= PlayerFacing.Left;
             mageRenderer.flipX= true;
+        }
+        else if(guardaSuValue != 0)
+        {
+            playerFacingDirection = PlayerFacing.Up;
+        }
+        else if(guardaGiuValue != 0)
+        {
+            playerFacingDirection = PlayerFacing.Down;
+        }
+        else if(guardaGiuValue == 0 && guardaSuValue == 0)
+        {
+            playerFacingDirection = PlayerFacing.Zero;
         }
 
     }
@@ -195,6 +213,9 @@ public class PlayerCharacterController : MonoBehaviour
 }
 public enum PlayerFacing
 {
-    Sinistra,
-    Destra,
+    Left,
+    Right,
+    Up,
+    Down,
+    Zero,
 }

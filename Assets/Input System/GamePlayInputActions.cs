@@ -98,6 +98,24 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GuardaSu"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea5408d6-0d0a-47a1-947a-1705fa21c208"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GuardaGiu"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a2a646b-072f-49b7-b699-387ead0290f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -254,6 +272,28 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85648ba0-78fe-432d-bc6f-12f7f8b87b6e"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GuardaSu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6fea45bd-5d22-4ec7-bc30-0ab1eb4c3be6"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GuardaGiu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -304,6 +344,34 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""a717eb24-d839-448e-9794-cb4bd8ffc0be"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""ffa4e1ec-a99a-488a-8a4c-626665ce2544"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""efaeae8d-7c12-48b9-93aa-f2ae652bf037"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -318,10 +386,15 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         m_Mage_UsaElementoTerra = m_Mage.FindAction("UsaElementoTerra", throwIfNotFound: true);
         m_Mage_UsaElementoAria = m_Mage.FindAction("UsaElementoAria", throwIfNotFound: true);
         m_Mage_Fire = m_Mage.FindAction("Fire", throwIfNotFound: true);
+        m_Mage_GuardaSu = m_Mage.FindAction("GuardaSu", throwIfNotFound: true);
+        m_Mage_GuardaGiu = m_Mage.FindAction("GuardaGiu", throwIfNotFound: true);
         // Kid
         m_Kid = asset.FindActionMap("Kid", throwIfNotFound: true);
         m_Kid_MouseClick = m_Kid.FindAction("MouseClick", throwIfNotFound: true);
         m_Kid_MousePosition = m_Kid.FindAction("MousePosition", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -391,6 +464,8 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Mage_UsaElementoTerra;
     private readonly InputAction m_Mage_UsaElementoAria;
     private readonly InputAction m_Mage_Fire;
+    private readonly InputAction m_Mage_GuardaSu;
+    private readonly InputAction m_Mage_GuardaGiu;
     public struct MageActions
     {
         private @GamePlayInputActions m_Wrapper;
@@ -403,6 +478,8 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         public InputAction @UsaElementoTerra => m_Wrapper.m_Mage_UsaElementoTerra;
         public InputAction @UsaElementoAria => m_Wrapper.m_Mage_UsaElementoAria;
         public InputAction @Fire => m_Wrapper.m_Mage_Fire;
+        public InputAction @GuardaSu => m_Wrapper.m_Mage_GuardaSu;
+        public InputAction @GuardaGiu => m_Wrapper.m_Mage_GuardaGiu;
         public InputActionMap Get() { return m_Wrapper.m_Mage; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -436,6 +513,12 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
+            @GuardaSu.started += instance.OnGuardaSu;
+            @GuardaSu.performed += instance.OnGuardaSu;
+            @GuardaSu.canceled += instance.OnGuardaSu;
+            @GuardaGiu.started += instance.OnGuardaGiu;
+            @GuardaGiu.performed += instance.OnGuardaGiu;
+            @GuardaGiu.canceled += instance.OnGuardaGiu;
         }
 
         private void UnregisterCallbacks(IMageActions instance)
@@ -464,6 +547,12 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
+            @GuardaSu.started -= instance.OnGuardaSu;
+            @GuardaSu.performed -= instance.OnGuardaSu;
+            @GuardaSu.canceled -= instance.OnGuardaSu;
+            @GuardaGiu.started -= instance.OnGuardaGiu;
+            @GuardaGiu.performed -= instance.OnGuardaGiu;
+            @GuardaGiu.canceled -= instance.OnGuardaGiu;
         }
 
         public void RemoveCallbacks(IMageActions instance)
@@ -535,6 +624,52 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         }
     }
     public KidActions @Kid => new KidActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Newaction;
+    public struct UIActions
+    {
+        private @GamePlayInputActions m_Wrapper;
+        public UIActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IMageActions
     {
         void OnMovimento(InputAction.CallbackContext context);
@@ -545,10 +680,16 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         void OnUsaElementoTerra(InputAction.CallbackContext context);
         void OnUsaElementoAria(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnGuardaSu(InputAction.CallbackContext context);
+        void OnGuardaGiu(InputAction.CallbackContext context);
     }
     public interface IKidActions
     {
         void OnMouseClick(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
