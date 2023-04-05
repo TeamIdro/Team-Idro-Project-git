@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    public static PlayerFacing playerFacingDirection = PlayerFacing.Right;
+    public static PlayerFacingXAxes playerFacingDirectionXAxes = PlayerFacingXAxes.Right;
+    public static PlayerFacingYAxes playerFacingDirectionYAxes = PlayerFacingYAxes.ZeroForLookUpandDown;
 
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
@@ -109,25 +110,26 @@ public class PlayerCharacterController : MonoBehaviour
         }
         if (movementDirection.x > 0)
         {
-            playerFacingDirection = PlayerFacing.Right;
+            playerFacingDirectionXAxes = PlayerFacingXAxes.Right;
             mageRenderer.flipX= false;
         }
         else if (movementDirection.x < 0)
         {
-            playerFacingDirection= PlayerFacing.Left;
+            playerFacingDirectionXAxes= PlayerFacingXAxes.Left;
             mageRenderer.flipX= true;
         }
+        
         else if(guardaSuValue != 0)
         {
-            playerFacingDirection = PlayerFacing.Up;
+            playerFacingDirectionYAxes = PlayerFacingYAxes.Up;
         }
         else if(guardaGiuValue != 0)
         {
-            playerFacingDirection = PlayerFacing.Down;
+            playerFacingDirectionYAxes = PlayerFacingYAxes.Down;
         }
-        else if(guardaGiuValue == 0 && guardaSuValue == 0)
+        else
         {
-            playerFacingDirection = PlayerFacing.Zero;
+            playerFacingDirectionYAxes = PlayerFacingYAxes.ZeroForLookUpandDown;
         }
 
     }
@@ -211,11 +213,15 @@ public class PlayerCharacterController : MonoBehaviour
         }
     }
 }
-public enum PlayerFacing
+public enum PlayerFacingXAxes
 {
     Left,
     Right,
+
+}
+public enum PlayerFacingYAxes
+{
     Up,
     Down,
-    Zero,
+    ZeroForLookUpandDown,
 }
