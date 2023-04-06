@@ -6,5 +6,5 @@ using UnityEngine;
 public class SaveData
 {
    public PlayerData playerData = new PlayerData();
-   public MapData mapData = new MapData();
+   // public MapData mapData = new MapData();
 }

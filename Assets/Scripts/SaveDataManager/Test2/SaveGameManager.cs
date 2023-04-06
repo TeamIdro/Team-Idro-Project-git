@@ -13,6 +13,7 @@ public static class SaveGameManager
     public static bool SaveGame()
     {
         string  dir = Application.persistentDataPath + DIRECTORY;
+        Debug.Log("DIR: " + dir);
 
         if(!Directory.Exists(dir))
         {

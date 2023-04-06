@@ -7,31 +7,20 @@ public class PlayerSaveData : MonoBehaviour
     private PlayerData myPlayerData = new PlayerData();
     private MapData myMapData = new MapData();
 
-    // void Update()
-    // {
-    //     // myData.playerPos = transform.position;
-    //     // myData.playerRot = transform.rotation;
-    //     // myData.currentHealth = 10;
 
-    //     if(Input.GetKeyDown(KeyCode.Q))
-    //     {
-    //         // SaveGameManager.currentSaveData.playerData = myData;
-    //         SaveGameManager.SaveGame();
-    //     }
+    public void WriteData() 
+    {
 
-    //     if(Input.GetKeyDown(KeyCode.L))
-    //     {
-    //         SaveGameManager.LoadGame();
-    //         // myData = SaveGameManager.currentSaveData.playerData;
-    //         // transform.position = myData.playerPos;
-    //         // transform.rotation = myData.playerRot;
-    //     }
-    // }
+        myPlayerData.currentHealth = PlayerCharacterController.Instance.hp;
+        myPlayerData.playerPos = PlayerCharacterController.Instance.transform.position;
+        // SaveGameManager.currentSaveData.playerData = myPlayerData;
+        SavePlayerData();
+    }
 
     public void SaveMapData()
     {
-        SaveGameManager.currentSaveData.mapData = myMapData;
-        SaveGameManager.SaveGame();
+        // SaveGameManager.currentSaveData.mapData = myMapData;
+        // SaveGameManager.SaveGame();
     }
 
     public void SavePlayerData()
@@ -55,8 +44,7 @@ public class PlayerSaveData : MonoBehaviour
 public struct PlayerData
 {
     public Vector3 playerPos;
-    public Quaternion playerRot;
-    public int currentHealth;
+    public float currentHealth;
 }
 
 [System.Serializable]

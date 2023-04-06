@@ -58,10 +58,12 @@ public class PlayerCharacterController : MonoBehaviour
         }
     }
 
+    public PlayerSaveData playerSaveData;
 
     private void Awake()
     {
         _instance = this;
+        
         m_playerMageRB2D = GetComponent<Rigidbody2D>();
         m_playerMageCollider = GetComponent<Collider2D>();
         m_gamePlayInputActions = new();
@@ -71,14 +73,17 @@ public class PlayerCharacterController : MonoBehaviour
     }
     private void Start()
     {
+        // playerSaveData.WriteData();
        
-
     }
 
     private void Update()
     {
         GetInputDirection();
         AnimationUpdate();
+        // playerSaveData.LoadPlayerData();
+        // transform.position = SaveGameManager.currentSaveData.playerData.playerPos;
+        // hp = SaveGameManager.currentSaveData.playerData.currentHealth;
     }
 
    
