@@ -6,7 +6,7 @@ public class Magia : MonoBehaviour
     public MagiaSO magia;
     public bool isCasted = false;
     public Animator animator;
-    private PlayerFacing playerFacingOnInstance;
+    private PlayerFacingDirections playerFacingOnInstance;
     private SpriteRenderer spriteRendererMagia;
     // Start is called before the first frame update
     public float explosionKnockbackForce = 1;
@@ -67,15 +67,19 @@ public class Magia : MonoBehaviour
 
     private void SpawnExplosionParticle()
     {
-        GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
-        if (expl != null)
+        if(ExplosionPref != null)
         {
-            Destroy(expl, 2);
+            GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
+            if (expl != null)
+            {
+                Destroy(expl, 2);
+            }
+            else
+            {
+                Debug.LogWarning("Manca il component ExplosionDamage all'explosion prefab");
+            }
         }
-        else
-        {
-            Debug.LogWarning("Manca il component ExplosionDamage all'explosion prefab");
-        }
+     
     }
 
     private void DestroyAfterDistance()

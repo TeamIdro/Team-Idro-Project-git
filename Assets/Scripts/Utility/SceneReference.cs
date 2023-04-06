@@ -259,7 +259,7 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
             labelContent.tooltip = "This scene is in build settings and DISABLED.\nIt will be NOT included in builds.";
         }
 
-        // Sinistra status label
+        // Left status label
         using (new EditorGUI.DisabledScope(readOnly))
         {
             Rect labelRect = DrawUtils.GetLabelRect(position);
@@ -271,7 +271,7 @@ public class SceneReferencePropertyDrawer : PropertyDrawer
             EditorGUI.PrefixLabel(labelRect, sceneControlID, labelContent);
         }
 
-        // Destra context buttons
+        // Right context buttons
         Rect buttonRect = DrawUtils.GetFieldRect(position);
         buttonRect.width = (buttonRect.width) / 3;
 

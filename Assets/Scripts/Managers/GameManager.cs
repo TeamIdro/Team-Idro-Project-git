@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 [DisallowMultipleComponent]
 public class GameManager : Manager
@@ -12,7 +8,7 @@ public class GameManager : Manager
     {
         get
         {
-            if(m_instance == null)
+            if (m_instance == null)
             {
                 m_instance = FindObjectOfType<GameManager>();
                 if (m_instance == null)
@@ -36,25 +32,24 @@ public class GameManager : Manager
     {
         Cursor.SetCursor(baseMouseCursor, Vector2.zero, CursorMode.ForceSoftware);
     }
-    [ReadOnly] public GameStates currentGameState = GameStates.PlayerOnChessBoardScene;
+    [ReadOnly] public GameStates currentGameState;
     [Space(20)]
     public Texture2D baseMouseCursor;
-    [Space]
-    [Header("Player Reference(Chess Version)")]
-    public GameObject playerPrefab_ChessVersion;
-    [Header("Player Reference(Layton Type Version)")]
-    public GameObject playerPrefab_LaytonVersion;
-    [Space(20)]
+    //[Space]
+    //[Header("Player Reference(Chess Version)")]
+    //public GameObject playerPrefab_ChessVersion;
+    //[Header("Player Reference(Layton Type Version)")]
+    //public GameObject playerPrefab_LaytonVersion;
+    [Space(10)]
     [Header("Virtual Camera For Kid Chess Version")]
     public GameObject virtualCameraForChessKid;
 
 
 
 
-
     public delegate void OnChangedScene();
     public static event OnChangedScene onChangedSceneEvent;
-    
+
 
 
 
@@ -64,7 +59,7 @@ public class GameManager : Manager
         InitiliazeVariables();
     }
 
-   
+
 
     private void Start()
     {

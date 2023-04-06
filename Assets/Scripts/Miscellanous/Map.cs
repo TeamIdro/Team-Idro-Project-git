@@ -16,10 +16,10 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
-        if (GameManager.Instance.playerPrefab_ChessVersion != null)
-        {
-            m_playerReference = GameManager.Instance.playerPrefab_ChessVersion.GetComponent<KidControllerOnChessBoard>();
-        }
+        //if (GameManager.Instance.playerPrefab_ChessVersion != null)
+        //{
+        //    m_playerReference = GameManager.Instance.playerPrefab_ChessVersion.GetComponent<KidControllerOnChessBoard>();
+        //}
     }
     private void Start()
     {

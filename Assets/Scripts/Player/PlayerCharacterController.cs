@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacterController : MonoBehaviour
 {
-    public static PlayerFacing playerFacingDirection = PlayerFacing.Destra;
+    public static PlayerFacingDirections playerFacingDirections = PlayerFacingDirections.Right;
 
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
@@ -40,6 +40,8 @@ public class PlayerCharacterController : MonoBehaviour
     private GamePlayInputActions m_gamePlayInputActions;
     private Animator animatorMago;
     private SpriteRenderer mageRenderer;
+    private float guardaSuValue = 0;
+    private float guardaGiuValue = 0;
 
     //PROPRIETA
     public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
@@ -97,7 +99,12 @@ public class PlayerCharacterController : MonoBehaviour
     {
         movementDirection.x = m_gamePlayInputActions.Mage.Movimento.ReadValue<Vector2>().x;
         movementDirection.y = m_gamePlayInputActions.Mage.Jump.ReadValue<float>();
-       
+        guardaSuValue = m_gamePlayInputActions.Mage.GuardaSu.ReadValue<float>();
+        guardaGiuValue = m_gamePlayInputActions.Mage.GuardaGiu.ReadValue<float>();
+
+        Debug.Log("il valore del flip x è: "+mageRenderer.flipX +" mentre il valore della facing direction è: "+ PlayerCharacterController.playerFacingDirections.ToString());
+        Debug.Log("il valore di guarda su è: " + guardaSuValue + " mentre guarda giu è: " + guardaGiuValue);
+
         if (movementDirection.x != 0)
         {
             isMoving = true;
@@ -106,17 +113,43 @@ public class PlayerCharacterController : MonoBehaviour
         {
             isMoving = false;
         }
+        if (guardaSuValue != 0)
+        {
+            playerFacingDirections = PlayerFacingDirections.Up;
+            guardaSuValue = 0;
+            return;
+        }
+        else if (guardaGiuValue != 0)
+        {
+            playerFacingDirections = PlayerFacingDirections.Down;
+            guardaGiuValue = 0;
+            return;
+        }
+        else if (mageRenderer.flipX == false)
+        {
+            playerFacingDirections = PlayerFacingDirections.Right;
+        }
+        else if(mageRenderer.flipX == true)
+        {
+            playerFacingDirections = PlayerFacingDirections.Left;
+        }
+
+
+       
+        
+     
+        //else
+        //{
+        //    playerFacingDirections = PlayerFacingDirections.ZeroForLookUpandDown;
+        //}
         if (movementDirection.x > 0)
         {
-            playerFacingDirection = PlayerFacing.Destra;
-            mageRenderer.flipX= false;
+            mageRenderer.flipX = false;
         }
         else if (movementDirection.x < 0)
         {
-            playerFacingDirection= PlayerFacing.Sinistra;
-            mageRenderer.flipX= true;
+            mageRenderer.flipX = true;
         }
-
     }
     private void AnimationUpdate()
     {
@@ -198,8 +231,12 @@ public class PlayerCharacterController : MonoBehaviour
         }
     }
 }
-public enum PlayerFacing
+public enum PlayerFacingDirections
 {
-    Sinistra,
-    Destra,
+    Left,
+    Right,
+    Up,
+    Down,
+    ZeroForLookUpandDown,
 }
+
