@@ -1,41 +1,53 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public static class Publisher
+namespace PubSub
 {
-    private static Dictionary<Type, List<ISubscriber>> _allSubscribers = new Dictionary<Type, List<ISubscriber>>();
-
-    public static void Subscribe(ISubscriber subscriber, Type messageType)
+    public static class Publisher
     {
-        if (_allSubscribers.ContainsKey(messageType))
+        private static Dictionary<ValueType, List<ISubscriber>> _allSubscribers = new Dictionary<ValueType, List<ISubscriber>>();
+
+        public static void Subscribe(ISubscriber subscriber, ValueType messageType)
         {
-            _allSubscribers[messageType].Add(subscriber);
+            if (_allSubscribers.ContainsKey(messageType))
+            {
+                _allSubscribers[messageType].Add(subscriber);
+            }
+            else
+            {
+                List<ISubscriber> subscribers = new List<ISubscriber> { subscriber };
+
+                _allSubscribers.Add(messageType, subscribers);
+            }
         }
-        else
-        {
-            List<ISubscriber> subscribers = new List<ISubscriber> { subscriber };
 
-            _allSubscribers.Add(messageType, subscribers);
+        public static void Publish(IMessage message)
+        {
+            ValueType messageType = message as ValueType;
+
+            if (!_allSubscribers.ContainsKey(messageType))
+            {
+                Debug.Log("Messagio di tipo: "+messageType);
+                return;
+            }
+            else
+            {
+                Debug.LogWarning("Contengono la chiave");
+            }
+
+            foreach (ISubscriber subscriber in _allSubscribers[messageType])
+            {
+                subscriber.OnPublish(message);
+            }
         }
-    }
 
-    public static void Publish(IMessage message)
-    {
-        Type messageType = message.GetType();
-
-        if (!_allSubscribers.ContainsKey(messageType)) return;
-
-        foreach (ISubscriber subscriber in _allSubscribers[messageType])
+        public static void Unsubscribe(ISubscriber subscriber, ValueType messageType)
         {
-            subscriber.OnPublish(message);
-        }
-    }
-
-    public static void Unsubscribe(ISubscriber subscriber, Type messageType)
-    {
-        if (_allSubscribers.ContainsKey(messageType))
-        {
-            _allSubscribers[messageType].Remove(subscriber);
+            if (_allSubscribers.ContainsKey(messageType))
+            {
+                _allSubscribers[messageType].Remove(subscriber);
+            }
         }
     }
 }

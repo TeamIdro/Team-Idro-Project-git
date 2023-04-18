@@ -350,7 +350,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             ""id"": ""a717eb24-d839-448e-9794-cb4bd8ffc0be"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Attiva_Disattiva_Pausa"",
                     ""type"": ""Button"",
                     ""id"": ""ffa4e1ec-a99a-488a-8a4c-626665ce2544"",
                     ""expectedControlType"": ""Button"",
@@ -363,11 +363,11 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""efaeae8d-7c12-48b9-93aa-f2ae652bf037"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Attiva_Disattiva_Pausa"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -394,7 +394,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         m_Kid_MousePosition = m_Kid.FindAction("MousePosition", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        m_UI_Attiva_Disattiva_Pausa = m_UI.FindAction("Attiva_Disattiva_Pausa", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -628,12 +628,12 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Newaction;
+    private readonly InputAction m_UI_Attiva_Disattiva_Pausa;
     public struct UIActions
     {
         private @GamePlayInputActions m_Wrapper;
         public UIActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputAction @Attiva_Disattiva_Pausa => m_Wrapper.m_UI_Attiva_Disattiva_Pausa;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -643,16 +643,16 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Attiva_Disattiva_Pausa.started += instance.OnAttiva_Disattiva_Pausa;
+            @Attiva_Disattiva_Pausa.performed += instance.OnAttiva_Disattiva_Pausa;
+            @Attiva_Disattiva_Pausa.canceled += instance.OnAttiva_Disattiva_Pausa;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Attiva_Disattiva_Pausa.started -= instance.OnAttiva_Disattiva_Pausa;
+            @Attiva_Disattiva_Pausa.performed -= instance.OnAttiva_Disattiva_Pausa;
+            @Attiva_Disattiva_Pausa.canceled -= instance.OnAttiva_Disattiva_Pausa;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -690,6 +690,6 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
     }
     public interface IUIActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnAttiva_Disattiva_Pausa(InputAction.CallbackContext context);
     }
 }
