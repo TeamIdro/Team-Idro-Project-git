@@ -1,9 +1,8 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
-public struct StopOnOpenPauseMessage : IMessage
+public struct StopOnOpenPauseMessage: IMessage
 {
-  
+
 }

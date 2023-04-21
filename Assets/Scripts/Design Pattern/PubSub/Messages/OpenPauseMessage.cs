@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public struct StopOnOpenPauseMessage : IMessage
+public struct OpenPauseMessage : IMessage
 {
   
 }

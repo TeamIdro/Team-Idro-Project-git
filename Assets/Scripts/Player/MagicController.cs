@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class MagicController : MonoBehaviour
+public class MagicController : MonoBehaviour, ISubscriber
 {
     [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
@@ -30,16 +30,15 @@ public class MagicController : MonoBehaviour
     private List<ElementoMagiaSO> m_listaValoriLancio = new List<ElementoMagiaSO>();
     private MagiaSO m_magiaDaLanciare;
     private Magia magiaComponent;
-    UIElementiMagia UIelementiMagia;
-    int m_facingDirectionForLeftAndRight = 0;
-    int m_facingDirectionForUpAndDown = 0;
-
+    private UIElementiMagia UIelementiMagia;
+    private int m_facingDirectionForLeftAndRight = 0;
+    private int m_facingDirectionForUpAndDown = 0;
+    private bool magicIsBlocked = false;
 
     private void Awake()
     {
         UIelementiMagia = m_UIPrefab.GetComponent<UIElementiMagia>();
         m_gamePlayInput = new GamePlayInputActions();
-
         
         
         var magicTakenFromFolder = Resources.LoadAll<MagiaSO>("Data/MagiaSO/Combinazione");
@@ -77,6 +76,7 @@ public class MagicController : MonoBehaviour
 
     private void AddElement(InputAction.CallbackContext obj)
     {
+        if(magicIsBlocked == true) return;
         if (lastInFirstOut)
         {
             if (m_listaValoriLancio.Count < m_spellSlot)
@@ -118,7 +118,7 @@ public class MagicController : MonoBehaviour
 
     public void Start()
     {
-        
+      
     }
 
     public void Update()
@@ -127,7 +127,6 @@ public class MagicController : MonoBehaviour
         {
             CheckIfPlayerWantToStartMagic();
         }
-        
     }
 
 
@@ -211,7 +210,7 @@ public class MagicController : MonoBehaviour
         
     }
 
-
+    
     
     private void CheckIfPlayerWantToStartMagic()
     {
@@ -394,6 +393,17 @@ public class MagicController : MonoBehaviour
         magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
     }
 
+    public void OnPublish(IMessage message)
+    {
+        if(message is StopOnOpenPauseMessage)
+        {
+            magicIsBlocked = true;
+        }
+        else if(message is StartOnClosedPauseMessage)
+        {
+            magicIsBlocked = false;
+        }
+    }
 }
 public enum FasiDiLancioMagia
 {

@@ -4,6 +4,7 @@ using UnityEngine;
 using PubSub;
 using System;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class UIPauseMenu : MonoBehaviour, ISubscriber
 {
@@ -29,7 +30,7 @@ public class UIPauseMenu : MonoBehaviour, ISubscriber
     private void OnEnable()
     {
         inputActions.Enable();
-        Publisher.Subscribe(this, new StopOnOpenPauseMessage());
+        Publisher.Subscribe(this, new OpenPauseMessage());
         Publisher.Subscribe(this, new ClosePauseMessage());
     }
     private void Update()
@@ -46,15 +47,15 @@ public class UIPauseMenu : MonoBehaviour, ISubscriber
             {
                 Debug.Log("Entro nella pressione del tasto pausa 2");
 
-                PubSub.Publisher.Publish(new StopOnOpenPauseMessage());
+                PubSub.Publisher.Publish(new OpenPauseMessage());
             }
         }
     }
     public void OnPublish(IMessage message)
     {
-        if(message is StopOnOpenPauseMessage)
+        if(message is OpenPauseMessage)
         {
-            var openPauseMessage = (StopOnOpenPauseMessage)message;
+            var openPauseMessage = (OpenPauseMessage)message;
             Debug.Log(openPauseMessage);
             OpenPauseInternal();
             Publisher.Publish(new StopOnOpenPauseMessage());
@@ -70,12 +71,11 @@ public class UIPauseMenu : MonoBehaviour, ISubscriber
     }
 
   
-    
-
+     
 
     public void OpenPausa()
     {
-        PubSub.Publisher.Publish(new StopOnOpenPauseMessage());
+        PubSub.Publisher.Publish(new OpenPauseMessage());
     }
     public void ClosePause()
     {
@@ -87,20 +87,18 @@ public class UIPauseMenu : MonoBehaviour, ISubscriber
     }
     private void ClosePauseInternal()
     {
-        Time.timeScale = 1;
         currentStateOfPause = PauseState.PauseDeactivated;
         pauseMenuPrefab.SetActive(false);
     }
 
     private void OpenPauseInternal()
     {
-        Time.timeScale = 0;
         currentStateOfPause = PauseState.PauseActivated;
         pauseMenuPrefab.SetActive(true);
     }
     private void OnDisable()
     {
-        Publisher.Unsubscribe(this, new StopOnOpenPauseMessage());
+        Publisher.Unsubscribe(this, new OpenPauseMessage());
         Publisher.Unsubscribe(this, new ClosePauseMessage());
 
     }
