@@ -234,7 +234,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         }
         else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
         {
-            //TODO: CastMagiaStazionaria();
+            CastMagiaStazionaria();
         }
         else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Teleport)
         {
@@ -248,6 +248,17 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     }
 
+    private void CastMagiaStazionaria()
+    {
+        var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
+        GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
+        CheckIfThereIsAnimatorAndGetIt(bullet);
+        GenericMagicInitialize(bullet);
+        StaticMagicInitialize(bullet);
+        OnMagicCasted.Invoke();
+    }
+
+   
     private void CastMagiaLanciata()
     {
         var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
@@ -258,8 +269,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckForDirectionToGo(bullet);
         CheckIfThereIsAnimatorAndGetIt(bullet);
-       // AddForceToMagicBasedOnDirection(bullet);
-        MagicInitialize(bullet);
+        GenericMagicInitialize(bullet);
         OnMagicCasted.Invoke();
     }
 
@@ -369,29 +379,37 @@ public class MagicController : MonoBehaviour, ISubscriber
     /// Inizializza l'object magia usando le variabili dello scriptableObject MagiaSO
     /// </summary>
     /// <param name="bullet"></param>
-    private void MagicInitialize(GameObject bullet)
+    private void GenericMagicInitialize(GameObject bullet)
     {
-        if (m_magiaDaLanciare.rallentamentoGraduale)
+        if (m_magiaDaLanciare.rallentamentoGraduale is true)
         {
             magiaComponent.decelerationTime = m_magiaDaLanciare.decellerazioneTime;
         }
         magiaComponent.magia = m_magiaDaLanciare;
-        if (m_magiaDaLanciare.detonazioneAdImpatto)
+        if (m_magiaDaLanciare.detonazioneAdImpatto is true)
         {
             magiaComponent.ExplosionPref = m_magiaDaLanciare.ExplosionPref;
             magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
             magiaComponent.damageMask = m_magiaDaLanciare.danneggiaTarget;
         }
+        if(m_magiaDaLanciare.distanzaMagiaLanciata is not 0)
+        {
+            magiaComponent.MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
+        }
 
 
+        
+    }
+    private void StaticMagicInitialize(GameObject bullet)
+    {
         if (bullet.GetComponent<CircleCollider2D>() != null)
         { bullet.GetComponent<CircleCollider2D>().enabled = true; }
 
         magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.ignoraCollisioni);
-        magiaComponent.MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
         magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
         magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
     }
+
 
     public void OnPublish(IMessage message)
     {

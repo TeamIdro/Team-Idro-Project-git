@@ -1,3 +1,6 @@
+using Cinemachine;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Magia : MonoBehaviour
@@ -14,7 +17,6 @@ public class Magia : MonoBehaviour
 
     public GameObject ExplosionPref;
     public int damage;
-
     public float decelerationTime = 2f; // tempo in secondi per rallentare completamente il proiettile
     private Rigidbody2D bulletRigidbody;
 
@@ -22,7 +24,7 @@ public class Magia : MonoBehaviour
 
 
     Vector3 position;
-    public float MaxDistance;
+    public float MaxDistance = 100;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -58,6 +60,14 @@ public class Magia : MonoBehaviour
     {
         CollisionsBehaviours(collision);
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        CollisionsBehaviours(collision);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        StopCoroutine(DamageOrHealCouroutine(0,0,null,TipoMagia.Fuoco));
+    }
 
 
     private void OnDestroy()
@@ -69,6 +79,7 @@ public class Magia : MonoBehaviour
     {
         if(ExplosionPref != null)
         {
+            
             GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
             if (expl != null)
             {
@@ -106,17 +117,30 @@ public class Magia : MonoBehaviour
     {
         isCasted = false;
         //TODO: risolvere questione layer
-        if (collision.gameObject.GetComponent<EnemyScript>() != null)
+        if (collision.gameObject.GetComponent<IDamageable>() != null)
         {
-            var enemy = collision.gameObject.GetComponent<EnemyScript>();
+            var enemy = collision.gameObject.GetComponent<IDamageable>();
             if (magia == null) { return; }
             else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
             {
-                Debug.Log("Preso");
-                enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
+                if(magia.magicBehaviourType != TipoComportamentoMagia.Stazionaria)
+                {
+                    Debug.Log("Preso");
+                    enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
+                }
+                else
+                {
+                    Debug.Log("Preso con magia stazionaria");
+                    while (true)
+                    {
+                        StartCoroutine(DamageOrHealCouroutine(1, 5,enemy,magia.tipoMagia));
+                    }
+                }
+                
             }
+           
         }
-        if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
+        if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask) && magia.magicBehaviourType != TipoComportamentoMagia.Stazionaria)
         {
             if (collision.GetComponent<Rigidbody2D>() != null)
             {
@@ -128,6 +152,10 @@ public class Magia : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    private IEnumerator DamageOrHealCouroutine(float amountOfDamageOrHeal,float tick,IDamageable damageable, TipoMagia tipoMagia)
+    {
+        damageable.TakeDamage(amountOfDamageOrHeal, tipoMagia);
+        yield return new WaitForSeconds(tick);
+    }
 
 }

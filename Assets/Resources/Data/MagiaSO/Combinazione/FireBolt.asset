@@ -21,11 +21,11 @@ MonoBehaviour:
   dannoDellaMagia: 10
   moltiplicatoreDanno: 0
   moltiplicatoreResistenza: 0
-  velocitaMagiaLanciata: 65.3
+  velocitaMagiaLanciata: 73.7
   rallentamentoGraduale: 0
-  decellerazioneTime: 100
+  decellerazioneTime: 1
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 205
+  tempoMagiaLanciata: 279
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 7952463968355666411, guid: a334fe2610405a74889c731f40be3dc3, type: 3}
   AlternativeBullet: {fileID: 0}
@@ -35,6 +35,7 @@ MonoBehaviour:
     m_Bits: 1280
   danneggiaTarget:
     serializedVersion: 2
-    m_Bits: 6144
-  placeHolder: 0
+    m_Bits: 5879
+  tickTime: 0
+  sizeOfMagic: {x: 1, y: 1}
   posizioneDelNemicoPiuVicino: {fileID: 0}

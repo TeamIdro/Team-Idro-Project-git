@@ -38,5 +38,6 @@ MonoBehaviour:
   danneggiaTarget:
     serializedVersion: 2
     m_Bits: 6144
-  placeHolder: 0
+  tickTime: 1
+  sizeOfMagic: {x: 0, y: 0}
   posizioneDelNemicoPiuVicino: {fileID: 0}

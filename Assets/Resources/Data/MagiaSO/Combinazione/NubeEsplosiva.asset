@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: NubeEsplosiva
   m_EditorClassIdentifier: 
   prefabAnimatoriMagia: {fileID: 0}
-  magicBehaviourType: 0
-  tipoMagia: 0
-  damageType: 0
+  magicBehaviourType: 1
+  tipoMagia: 9
+  damageType: 1
   combinazioneDiElementi:
   - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
@@ -36,6 +36,7 @@ MonoBehaviour:
     m_Bits: 1792
   danneggiaTarget:
     serializedVersion: 2
-    m_Bits: 6903
-  placeHolder: 0
+    m_Bits: 6144
+  tickTime: 2
+  sizeOfMagic: {x: 1, y: 1}
   posizioneDelNemicoPiuVicino: {fileID: 0}

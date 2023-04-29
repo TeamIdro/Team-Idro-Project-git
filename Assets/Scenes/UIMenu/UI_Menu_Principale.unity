@@ -718,22 +718,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1952103443}
     m_Modifications:
-    - target: {fileID: 1441594211393279070, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_Spacing
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441594211393279070, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_ChildAlignment
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441594211393279070, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_ChildScaleWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441594211393279070, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_ChildScaleHeight
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1441594211474059140, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -750,14 +734,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1441594211474059146, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441594211474059146, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c68744c6c20de724baf8fa7b88770898, type: 3}
     - target: {fileID: 1441594212087017440, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -790,14 +766,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1441594212190652622, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1441594212190652622, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c166129f92f41784ba74ad992a701d2c, type: 3}
     - target: {fileID: 1441594212439098252, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
       propertyPath: m_Name
       value: UIMenuPrincipale
@@ -886,10 +854,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4305246699483638815, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 399ee583c33cc2449ac3bacada6b540b, type: 3}
     - target: {fileID: 8101950838603256844, guid: 994e63a2d6895d047ad4a49aed05be9b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

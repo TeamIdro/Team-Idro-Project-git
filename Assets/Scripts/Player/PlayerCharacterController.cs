@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerCharacterController : MonoBehaviour, ISubscriber
 {
     public static PlayerFacingDirections playerFacingDirections = PlayerFacingDirections.Right;
-
+    
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
     [Space(10)]
-    //VARIABILI IN INSPECTOR
+    [Header("GUI")]
+    [SerializeField] Slider m_healthSlider;
     [Header("Player values")]
     public float hp;
     [SerializeField] private float movementVelocity;
@@ -32,7 +35,8 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber
     [SerializeField] private Transform rayCastPosition;
     [SerializeField] private Vector2 boxCastDimension;
     [SerializeField] private LayerMask playerMask;
-
+    [Header("Unity Event")]
+    
    
 
     //VARIABILI PRIVATE
@@ -67,7 +71,6 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber
     private void Awake()
     {
         _instance = this;
-        
         m_playerMageRB2D = GetComponent<Rigidbody2D>();
         m_playerMageCollider = GetComponent<Collider2D>();
         m_gamePlayInputActions = new();
@@ -78,7 +81,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber
     private void Start()
     {
         // playerSaveData.WriteData();
-       
+        m_healthSlider.maxValue = hp;
     }
 
     private void Update()
@@ -223,14 +226,19 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber
 
     public void GetDamage(float damage)
     {
-        hp -= damage;
-
-        if(hp < 0)
+        if(hp > 0)
+        {
+            hp -= damage;
+            m_healthSlider.value = hp;
+        }
+        else if(hp <= 0)
         {
             SpawnManager.Instance.Respawn();
             hp = 50f;
+            m_healthSlider.value = hp;
         }
     }
+
 
     public void OnPublish(IMessage message)
     {
