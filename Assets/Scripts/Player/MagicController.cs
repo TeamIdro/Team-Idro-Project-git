@@ -3,12 +3,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class MagicController : MonoBehaviour
+public class MagicController : MonoBehaviour, ISubscriber
 {
     [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
@@ -30,16 +31,15 @@ public class MagicController : MonoBehaviour
     private List<ElementoMagiaSO> m_listaValoriLancio = new List<ElementoMagiaSO>();
     private MagiaSO m_magiaDaLanciare;
     private Magia magiaComponent;
-    UIElementiMagia UIelementiMagia;
-    int m_facingDirectionForLeftAndRight = 0;
-    int m_facingDirectionForUpAndDown = 0;
-
+    private UIElementiMagia UIelementiMagia;
+    private int m_facingDirectionForLeftAndRight = 0;
+    private int m_facingDirectionForUpAndDown = 0;
+    private bool magicIsBlocked = false;
 
     private void Awake()
     {
         UIelementiMagia = m_UIPrefab.GetComponent<UIElementiMagia>();
         m_gamePlayInput = new GamePlayInputActions();
-
         
         
         var magicTakenFromFolder = Resources.LoadAll<MagiaSO>("Data/MagiaSO/Combinazione");
@@ -77,6 +77,7 @@ public class MagicController : MonoBehaviour
 
     private void AddElement(InputAction.CallbackContext obj)
     {
+        if(magicIsBlocked == true) return;
         if (lastInFirstOut)
         {
             if (m_listaValoriLancio.Count < m_spellSlot)
@@ -118,7 +119,7 @@ public class MagicController : MonoBehaviour
 
     public void Start()
     {
-        
+      
     }
 
     public void Update()
@@ -127,14 +128,8 @@ public class MagicController : MonoBehaviour
         {
             CheckIfPlayerWantToStartMagic();
         }
-        
     }
 
-
-    private void InizializzaMagia()
-    {
-        m_magiaDaLanciare = null;
-    }
 
     private void DoSomethingOnMagicComposed()
     {
@@ -211,7 +206,7 @@ public class MagicController : MonoBehaviour
         
     }
 
-
+    
     
     private void CheckIfPlayerWantToStartMagic()
     {
@@ -235,7 +230,7 @@ public class MagicController : MonoBehaviour
         }
         else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
         {
-            //TODO: CastMagiaStazionaria();
+            CastMagiaStazionaria();
         }
         else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Teleport)
         {
@@ -249,6 +244,16 @@ public class MagicController : MonoBehaviour
 
     }
 
+    private void CastMagiaStazionaria()
+    {
+        var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
+        GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
+        CheckIfThereIsAnimatorAndGetIt(bullet);
+        StaticMagicInitialize(bullet);
+        OnMagicCasted.Invoke();
+    }
+
+   
     private void CastMagiaLanciata()
     {
         var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
@@ -259,8 +264,7 @@ public class MagicController : MonoBehaviour
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckForDirectionToGo(bullet);
         CheckIfThereIsAnimatorAndGetIt(bullet);
-       // AddForceToMagicBasedOnDirection(bullet);
-        MagicInitialize(bullet);
+        ThrowedMagicInitialize(bullet);
         OnMagicCasted.Invoke();
     }
 
@@ -299,8 +303,15 @@ public class MagicController : MonoBehaviour
             animatorPrefabSpawned = Instantiate(m_magiaDaLanciare.prefabAnimatoriMagia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
             animatorPrefabSpawned.transform.position = Vector2.zero;
             animatorPrefabSpawned.transform.SetParent(bullet.transform, false);
+            if (animatorPrefabSpawned.GetComponent<ParticleSystem>() != null)
+            {
+                ParticleSystem ps = animatorPrefabSpawned.GetComponent<ParticleSystem>();
+                ps.Play();
+            }
         }
+     
     }
+   
     /// <summary>
     /// Metodo in cui viene creata l'object su cui andra la magia
     /// </summary>
@@ -366,34 +377,52 @@ public class MagicController : MonoBehaviour
 
 
     }
-    /// <summary>
-    /// Inizializza l'object magia usando le variabili dello scriptableObject MagiaSO
-    /// </summary>
-    /// <param name="bullet"></param>
-    private void MagicInitialize(GameObject bullet)
+
+    private void StaticMagicInitialize(GameObject bullet)
     {
-        if (m_magiaDaLanciare.rallentamentoGraduale)
+        if (bullet.GetComponent<CircleCollider2D>() != null)
+        { bullet.GetComponent<CircleCollider2D>().enabled = true; }
+        magiaComponent.magia = m_magiaDaLanciare;
+        magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.ignoraCollisioni);
+        magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
+        magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
+    }
+    private void ThrowedMagicInitialize(GameObject bullet)
+    {
+        if (m_magiaDaLanciare.rallentamentoGraduale is true)
         {
             magiaComponent.decelerationTime = m_magiaDaLanciare.decellerazioneTime;
         }
         magiaComponent.magia = m_magiaDaLanciare;
-        if (m_magiaDaLanciare.detonazioneAdImpatto)
+        if (m_magiaDaLanciare.detonazioneAdImpatto is true)
         {
             magiaComponent.ExplosionPref = m_magiaDaLanciare.ExplosionPref;
             magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
             magiaComponent.damageMask = m_magiaDaLanciare.danneggiaTarget;
         }
-
-
+        if (m_magiaDaLanciare.distanzaMagiaLanciata is not 0)
+        {
+            magiaComponent.MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
+        }
         if (bullet.GetComponent<CircleCollider2D>() != null)
         { bullet.GetComponent<CircleCollider2D>().enabled = true; }
 
         magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.ignoraCollisioni);
-        magiaComponent.MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
         magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
         magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
     }
 
+    public void OnPublish(IMessage message)
+    {
+        if(message is StopOnOpenPauseMessage)
+        {
+            magicIsBlocked = true;
+        }
+        else if(message is StartOnClosedPauseMessage)
+        {
+            magicIsBlocked = false;
+        }
+    }
 }
 public enum FasiDiLancioMagia
 {

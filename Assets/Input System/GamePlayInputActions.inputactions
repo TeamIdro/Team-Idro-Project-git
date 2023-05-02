@@ -328,7 +328,7 @@
             "id": "a717eb24-d839-448e-9794-cb4bd8ffc0be",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Attiva_Disattiva_Pausa",
                     "type": "Button",
                     "id": "ffa4e1ec-a99a-488a-8a4c-626665ce2544",
                     "expectedControlType": "Button",
@@ -341,11 +341,11 @@
                 {
                     "name": "",
                     "id": "efaeae8d-7c12-48b9-93aa-f2ae652bf037",
-                    "path": "",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Attiva_Disattiva_Pausa",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

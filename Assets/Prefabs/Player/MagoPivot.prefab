@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1992483039
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 731325323, guid: 963899e9fb6036b44b8b3b26e01bf262, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -134,7 +134,7 @@ Transform:
   m_GameObject: {fileID: 4108159572990154237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1665347, y: 1.9841298, z: 0.11546653}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1285037267585120529}
@@ -155,11 +155,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 1
+  m_healthSlider: {fileID: 0}
+  hp: 50
   movementVelocity: 50
   jumpVelocity: 500
+  isBlocked: 0
   maxVelocityCap: 10
   deceleration: 50
-  linearDrag: 5
+  maxCastDistance: 0.86
   movementDirection: {x: 0, y: 0}
   isMoving: 0
   isJumping: 0
@@ -168,6 +171,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 512
+  playerSaveData: {fileID: 0}
 --- !u!114 &4357714081857353591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +190,7 @@ MonoBehaviour:
   m_basePrefabToShoot: {fileID: 2811095905312843416, guid: 1e486950aaa25c84196a0b0371c78c3e, type: 3}
   m_faseCorrente: 0
   m_tuttaLaListaDelleMagie: []
-  lastInFirstOut: 1
+  lastInFirstOut: 0
   m_elementiDaPrendere: []
   OnMagicComposed:
     m_PersistentCalls:
@@ -203,6 +207,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnMagicCasted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!70 &4337122286586203744
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

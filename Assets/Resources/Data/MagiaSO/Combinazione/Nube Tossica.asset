@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: Nube Tossica
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 0}
+  prefabAnimatoriMagia: {fileID: 1859015137868134137, guid: 873c9052f617cd64091dd9ff0d5ef04f, type: 3}
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
   rallentamentoGraduale: 1
   decellerazioneTime: 5
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 5
+  tempoMagiaLanciata: 100
   detonazioneAdImpatto: 0
   ExplosionPref: {fileID: 0}
   AlternativeBullet: {fileID: 1859015137868134137, guid: 873c9052f617cd64091dd9ff0d5ef04f, type: 3}
@@ -37,6 +37,7 @@ MonoBehaviour:
     m_Bits: 2039
   danneggiaTarget:
     serializedVersion: 2
-    m_Bits: 6144
-  placeHolder: 0
+    m_Bits: 6400
+  tickTime: 1
+  raggioArea: 0
   posizioneDelNemicoPiuVicino: {fileID: 0}

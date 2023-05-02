@@ -1,22 +1,27 @@
+using PubSub;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class PlayerCharacterController : MonoBehaviour
+public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
 {
     public static PlayerFacingDirections playerFacingDirections = PlayerFacingDirections.Right;
-
+    
     [Header("Player type")]
     [SerializeField] EPlayerType playerType;
     [Space(10)]
-    //VARIABILI IN INSPECTOR
+    [Header("GUI")]
+    [SerializeField] Slider m_healthSlider;
     [Header("Player values")]
     public float hp;
     [SerializeField] private float movementVelocity;
     [SerializeField] private float jumpVelocity;
+    [SerializeField, ReadOnly] private bool isBlocked = false;
     [SerializeField] private float maxVelocityCap;
     [SerializeField] private float deceleration;
     [Range(0f, 5f)]
@@ -31,7 +36,8 @@ public class PlayerCharacterController : MonoBehaviour
     [SerializeField] private Transform rayCastPosition;
     [SerializeField] private Vector2 boxCastDimension;
     [SerializeField] private LayerMask playerMask;
-
+    [Header("Unity Event")]
+    
    
 
     //VARIABILI PRIVATE
@@ -42,6 +48,7 @@ public class PlayerCharacterController : MonoBehaviour
     private SpriteRenderer mageRenderer;
     private float guardaSuValue = 0;
     private float guardaGiuValue = 0;
+
 
     //PROPRIETA
     public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
@@ -65,7 +72,6 @@ public class PlayerCharacterController : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        
         m_playerMageRB2D = GetComponent<Rigidbody2D>();
         m_playerMageCollider = GetComponent<Collider2D>();
         m_gamePlayInputActions = new();
@@ -76,11 +82,14 @@ public class PlayerCharacterController : MonoBehaviour
     private void Start()
     {
         // playerSaveData.WriteData();
-       
+        m_healthSlider.maxValue = hp;
+        Publisher.Subscribe(this, new StopOnOpenPauseMessage());
+        Publisher.Subscribe(this, new StartOnClosedPauseMessage());
     }
 
     private void Update()
     {
+        if (isBlocked) { return; }
         GetInputDirection();
         AnimationUpdate();
         // playerSaveData.LoadPlayerData();
@@ -92,6 +101,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isBlocked) { return; }
         Movement();
     }
 
@@ -102,8 +112,6 @@ public class PlayerCharacterController : MonoBehaviour
         guardaSuValue = m_gamePlayInputActions.Mage.GuardaSu.ReadValue<float>();
         guardaGiuValue = m_gamePlayInputActions.Mage.GuardaGiu.ReadValue<float>();
 
-        Debug.Log("il valore del flip x è: "+mageRenderer.flipX +" mentre il valore della facing direction è: "+ PlayerCharacterController.playerFacingDirections.ToString());
-        Debug.Log("il valore di guarda su è: " + guardaSuValue + " mentre guarda giu è: " + guardaGiuValue);
 
         if (movementDirection.x != 0)
         {
@@ -194,7 +202,6 @@ public class PlayerCharacterController : MonoBehaviour
         if (hit.collider != null)
         {
             playerCanJump = true;
-            //Setto il linear drag a 2.5
         }
         else
         {
@@ -222,13 +229,41 @@ public class PlayerCharacterController : MonoBehaviour
 
     public void GetDamage(float damage)
     {
-        hp -= damage;
-
-        if(hp < 0)
+        if(hp > 0)
+        {
+            hp -= damage;
+            m_healthSlider.value = hp;
+        }
+        else if(hp <= 0)
         {
             SpawnManager.Instance.Respawn();
             hp = 50f;
+            m_healthSlider.value = hp;
         }
+    }
+
+
+    public void OnPublish(IMessage message)
+    {
+        if(message is StopOnOpenPauseMessage)
+        {
+            isBlocked = true;
+            m_healthSlider.gameObject.SetActive(false);
+            animatorMago.enabled = false;
+        }
+        else if(message is StartOnClosedPauseMessage)
+        {
+            isBlocked = false;
+            m_healthSlider.gameObject.SetActive(true);
+            animatorMago.enabled = true;
+
+        }
+    }
+
+    public void TakeDamage(float damageToTake, TipoMagia magicType)
+    {
+        hp -= damageToTake;
+        m_healthSlider.value = hp;
     }
 }
 public enum PlayerFacingDirections

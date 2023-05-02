@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 //using UnityEditor.Animations;
 using UnityEngine;
 
@@ -54,7 +55,8 @@ public class MagiaSO : ScriptableObject,IMagia
     public LayerMask danneggiaTarget;
 
     [Header("Valori Per Magia Stazionaria")]
-    public int placeHolder;
+    public float tickTime;
+    public float raggioArea = 0;
     [Header("Valori Per Magia Teleport")]
     public Transform posizioneDelNemicoPiuVicino;
 
@@ -71,7 +73,6 @@ public class MagiaSO : ScriptableObject,IMagia
         if (combinazioneDiElementi.Count > 3)
         {
             combinazioneDiElementi.Remove(combinazioneDiElementi.Last());
-            
         }
     }
     

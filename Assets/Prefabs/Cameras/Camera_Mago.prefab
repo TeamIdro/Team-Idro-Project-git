@@ -98,6 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6032490257518914322}
   - component: {fileID: 3796242176450808851}
+  - component: {fileID: 5329549704616704472}
   m_Layer: 0
   m_Name: Camera_Mago
   m_TagString: Untagged
@@ -159,3 +160,16 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 6955820094237869523}
+--- !u!114 &5329549704616704472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008707901215777353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d96dd9a1dafb114e90999c717077893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeTimer: 0
