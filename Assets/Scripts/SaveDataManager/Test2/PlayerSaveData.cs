@@ -45,6 +45,15 @@ public struct PlayerData
 {
     public Vector3 playerPos;
     public float currentHealth;
+
+    //SpellSlot in MagicController.cs
+
+    //Checkpoint?
+
+    //ultima stanza visitata string
+
+    //
+
 }
 
 [System.Serializable]
