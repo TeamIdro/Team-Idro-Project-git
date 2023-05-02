@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using PubSub;
 using System;
-using Unity.PlasticSCM.Editor.WebApi;
-using Unity.Collections.LowLevel.Unsafe;
 
 public class UIPauseMenu : MonoBehaviour, ISubscriber
 {

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -130,11 +131,6 @@ public class MagicController : MonoBehaviour, ISubscriber
     }
 
 
-    private void InizializzaMagia()
-    {
-        m_magiaDaLanciare = null;
-    }
-
     private void DoSomethingOnMagicComposed()
     {
         m_listaValoriLancio.OrderBy(x => x.tipoDiMagia);
@@ -253,7 +249,6 @@ public class MagicController : MonoBehaviour, ISubscriber
         var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckIfThereIsAnimatorAndGetIt(bullet);
-        GenericMagicInitialize(bullet);
         StaticMagicInitialize(bullet);
         OnMagicCasted.Invoke();
     }
@@ -269,7 +264,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckForDirectionToGo(bullet);
         CheckIfThereIsAnimatorAndGetIt(bullet);
-        GenericMagicInitialize(bullet);
+        ThrowedMagicInitialize(bullet);
         OnMagicCasted.Invoke();
     }
 
@@ -308,8 +303,15 @@ public class MagicController : MonoBehaviour, ISubscriber
             animatorPrefabSpawned = Instantiate(m_magiaDaLanciare.prefabAnimatoriMagia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
             animatorPrefabSpawned.transform.position = Vector2.zero;
             animatorPrefabSpawned.transform.SetParent(bullet.transform, false);
+            if (animatorPrefabSpawned.GetComponent<ParticleSystem>() != null)
+            {
+                ParticleSystem ps = animatorPrefabSpawned.GetComponent<ParticleSystem>();
+                ps.Play();
+            }
         }
+     
     }
+   
     /// <summary>
     /// Metodo in cui viene creata l'object su cui andra la magia
     /// </summary>
@@ -375,11 +377,17 @@ public class MagicController : MonoBehaviour, ISubscriber
 
 
     }
-    /// <summary>
-    /// Inizializza l'object magia usando le variabili dello scriptableObject MagiaSO
-    /// </summary>
-    /// <param name="bullet"></param>
-    private void GenericMagicInitialize(GameObject bullet)
+
+    private void StaticMagicInitialize(GameObject bullet)
+    {
+        if (bullet.GetComponent<CircleCollider2D>() != null)
+        { bullet.GetComponent<CircleCollider2D>().enabled = true; }
+        magiaComponent.magia = m_magiaDaLanciare;
+        magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.ignoraCollisioni);
+        magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
+        magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
+    }
+    private void ThrowedMagicInitialize(GameObject bullet)
     {
         if (m_magiaDaLanciare.rallentamentoGraduale is true)
         {
@@ -392,16 +400,10 @@ public class MagicController : MonoBehaviour, ISubscriber
             magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
             magiaComponent.damageMask = m_magiaDaLanciare.danneggiaTarget;
         }
-        if(m_magiaDaLanciare.distanzaMagiaLanciata is not 0)
+        if (m_magiaDaLanciare.distanzaMagiaLanciata is not 0)
         {
             magiaComponent.MaxDistance = m_magiaDaLanciare.distanzaMagiaLanciata;
         }
-
-
-        
-    }
-    private void StaticMagicInitialize(GameObject bullet)
-    {
         if (bullet.GetComponent<CircleCollider2D>() != null)
         { bullet.GetComponent<CircleCollider2D>().enabled = true; }
 
@@ -409,7 +411,6 @@ public class MagicController : MonoBehaviour, ISubscriber
         magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
         magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
     }
-
 
     public void OnPublish(IMessage message)
     {

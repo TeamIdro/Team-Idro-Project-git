@@ -56,7 +56,7 @@ public class MagiaSO : ScriptableObject,IMagia
 
     [Header("Valori Per Magia Stazionaria")]
     public float tickTime;
-    public Vector2 sizeOfMagic = new Vector2(1, 1);
+    public float raggioArea = 0;
     [Header("Valori Per Magia Teleport")]
     public Transform posizioneDelNemicoPiuVicino;
 

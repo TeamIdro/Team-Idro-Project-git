@@ -7,10 +7,6 @@ public class Magia : MonoBehaviour
 {
     public LayerMask damageMask;
     public MagiaSO magia;
-    public bool isCasted = false;
-    public Animator animator;
-    private PlayerFacingDirections playerFacingOnInstance;
-    private SpriteRenderer spriteRendererMagia;
     // Start is called before the first frame update
     public float explosionKnockbackForce = 1;
     public int damageExplosion = 0;
@@ -23,8 +19,11 @@ public class Magia : MonoBehaviour
     public LayerMask ignoreContact;
 
 
+    IDamageable damageable1;
+    private float ticks;
     Vector3 position;
     public float MaxDistance = 100;
+    int isDone = 0;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -62,11 +61,15 @@ public class Magia : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+       
         CollisionsBehaviours(collision);
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StopCoroutine(DamageOrHealCouroutine(0,0,null,TipoMagia.Fuoco));
+        Debug.Log("coroutine stoppata");
+        //StopCoroutine("DamageOrHealCouroutine");
+        isDone = 0;
+        CancelInvoke("DamageOrHealCouroutine");
     }
 
 
@@ -83,6 +86,7 @@ public class Magia : MonoBehaviour
             GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
             if (expl != null)
             {
+                CameraShake.Instance.ShakeCamera(5, 0.1f);
                 Destroy(expl, 2);
             }
             else
@@ -111,51 +115,53 @@ public class Magia : MonoBehaviour
     }
     public void DestroyAfterTime(float MaxTime)
     {
+        //CameraShake.Instance.ShakeCamera(5, 0.1f);
         Destroy(gameObject, MaxTime);
     }
     private void CollisionsBehaviours(Collider2D collision)
     {
-        isCasted = false;
+
         //TODO: risolvere questione layer
-        if (collision.gameObject.GetComponent<IDamageable>() != null)
+        if (collision.gameObject.GetComponent<IDamageable>() is not null)
         {
-            var enemy = collision.gameObject.GetComponent<IDamageable>();
+            damageable1 = collision.gameObject.GetComponent<IDamageable>();
             if (magia == null) { return; }
             else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
             {
-                if(magia.magicBehaviourType != TipoComportamentoMagia.Stazionaria)
+                if(magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
                 {
                     Debug.Log("Preso");
-                    enemy.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
+                    damageable1.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
                 }
-                else
+                else if(magia.magicBehaviourType is TipoComportamentoMagia.Stazionaria && isDone is not 1)
                 {
-                    Debug.Log("Preso con magia stazionaria");
-                    while (true)
-                    {
-                        StartCoroutine(DamageOrHealCouroutine(1, 5,enemy,magia.tipoMagia));
-                    }
+                    isDone++;
+                    InvokeRepeating("DamageOrHealCouroutine",0,magia.tickTime);
                 }
                 
             }
            
         }
-        if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask) && magia.magicBehaviourType != TipoComportamentoMagia.Stazionaria)
+        if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
         {
-            if (collision.GetComponent<Rigidbody2D>() != null)
+            if (collision.GetComponent<Rigidbody2D>() is not null)
             {
                 collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * explosionKnockbackForce * 10);
             }
         }
-        if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject, ignoreContact))
+        if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject, ignoreContact) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
         {
             Destroy(gameObject);
         }
     }
-    private IEnumerator DamageOrHealCouroutine(float amountOfDamageOrHeal,float tick,IDamageable damageable, TipoMagia tipoMagia)
+    private void DamageOrHealCouroutine()
     {
-        damageable.TakeDamage(amountOfDamageOrHeal, tipoMagia);
-        yield return new WaitForSeconds(tick);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), magia.raggioArea,magia.danneggiaTarget);
+        foreach (Collider2D col in hitColliders)
+        {
+            Debug.Log(col);
+            col.gameObject.GetComponent<IDamageable>().TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
+        }
     }
 
 }

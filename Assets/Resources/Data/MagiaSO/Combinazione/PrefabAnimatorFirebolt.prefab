@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1397653852536814492}
   - component: {fileID: 7923358013772678696}
-  - component: {fileID: 7562378700935413238}
+  - component: {fileID: -7527870028010287342}
   m_Layer: 0
   m_Name: PrefabAnimatorFirebolt
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7562378700935413238
+--- !u!95 &-7527870028010287342
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0

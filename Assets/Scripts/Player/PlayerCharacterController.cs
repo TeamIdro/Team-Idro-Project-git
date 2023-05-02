@@ -1,3 +1,4 @@
+using PubSub;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerCharacterController : MonoBehaviour, ISubscriber
+public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
 {
     public static PlayerFacingDirections playerFacingDirections = PlayerFacingDirections.Right;
     
@@ -82,6 +83,8 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber
     {
         // playerSaveData.WriteData();
         m_healthSlider.maxValue = hp;
+        Publisher.Subscribe(this, new StopOnOpenPauseMessage());
+        Publisher.Subscribe(this, new StartOnClosedPauseMessage());
     }
 
     private void Update()
@@ -245,11 +248,22 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber
         if(message is StopOnOpenPauseMessage)
         {
             isBlocked = true;
+            m_healthSlider.gameObject.SetActive(false);
+            animatorMago.enabled = false;
         }
         else if(message is StartOnClosedPauseMessage)
         {
             isBlocked = false;
+            m_healthSlider.gameObject.SetActive(true);
+            animatorMago.enabled = true;
+
         }
+    }
+
+    public void TakeDamage(float damageToTake, TipoMagia magicType)
+    {
+        hp -= damageToTake;
+        m_healthSlider.value = hp;
     }
 }
 public enum PlayerFacingDirections

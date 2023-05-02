@@ -24,8 +24,8 @@ MonoBehaviour:
   velocitaMagiaLanciata: 73.7
   rallentamentoGraduale: 0
   decellerazioneTime: 1
-  distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 279
+  distanzaMagiaLanciata: 30.7
+  tempoMagiaLanciata: 36
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 7952463968355666411, guid: a334fe2610405a74889c731f40be3dc3, type: 3}
   AlternativeBullet: {fileID: 0}
