@@ -14,6 +14,7 @@ public class CameraShake : MonoBehaviour
         Instance = this;
         cinemachineVirtualCamera= GetComponent<CinemachineVirtualCamera>();
     }
+
     public void ShakeCamera(float intensity,float time)
     {
         if(cinemachineVirtualCamera == null)return;
@@ -22,8 +23,8 @@ public class CameraShake : MonoBehaviour
 
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain= intensity;
         shakeTimer = time;
-        
     }
+
     private void Update()
     {
         if(shakeTimer > 0)
@@ -38,5 +39,4 @@ public class CameraShake : MonoBehaviour
             }
         }
     }
-
 }

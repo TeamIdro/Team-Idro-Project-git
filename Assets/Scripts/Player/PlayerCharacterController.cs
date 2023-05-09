@@ -234,7 +234,8 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
             hp -= damage;
             m_healthSlider.value = hp;
         }
-        else if(hp <= 0)
+        
+        if(hp <= 0)
         {
             SpawnManager.Instance.Respawn();
             hp = 50f;
