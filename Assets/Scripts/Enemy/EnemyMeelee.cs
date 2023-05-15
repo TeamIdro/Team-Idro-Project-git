@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class EnemyMeelee : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class EnemyMeelee : MonoBehaviour
     public float rayGroundRadius;
     Rigidbody2D rigidbody;
     LayerMask layerMask;
+    NavMeshAgent navMeshAgent;
 
     public bool attackCooldown;
     public float timeCoolDown = 1.2f;
@@ -25,6 +26,8 @@ public class EnemyMeelee : MonoBehaviour
     void Awake()
     {
         layerMask = LayerMask.GetMask("Terreno");
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Start()
