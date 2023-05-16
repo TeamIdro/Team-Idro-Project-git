@@ -22,8 +22,8 @@ MonoBehaviour:
   moltiplicatoreDanno: 0
   moltiplicatoreResistenza: 0
   velocitaMagiaLanciata: 73.7
-  rallentamentoGraduale: 0
-  decellerazioneTime: 1
+  rallentamentoGraduale: 1
+  decellerazioneTime: 100
   distanzaMagiaLanciata: 30.7
   tempoMagiaLanciata: 36
   detonazioneAdImpatto: 1
@@ -37,5 +37,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 5879
   tickTime: 0
-  sizeOfMagic: {x: 1, y: 1}
+  raggioArea: 0
   posizioneDelNemicoPiuVicino: {fileID: 0}
