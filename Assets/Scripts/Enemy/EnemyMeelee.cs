@@ -36,18 +36,18 @@ public class EnemyMeelee : MonoBehaviour
     }
     void Update()
     {
-        RaycastHit2D raycastHit = Physics2D.CircleCast(transform.position, rayGroundRadius, Vector2.down, rayGroundLenght, layerMask);
+        // RaycastHit2D raycastHit = Physics2D.CircleCast(transform.position, rayGroundRadius, Vector2.down, rayGroundLenght, layerMask);
 
-        if(raycastHit.collider != null)
-        {
-            isOnGround = OnGround.Ground;
-            this.GetComponent<BehaviorTree>().EnableBehavior();
-        }
-        else if(raycastHit.collider == null)
-        {
-            isOnGround = OnGround.Air;
-            this.GetComponent<BehaviorTree>().DisableBehavior();
-        }
+        // if(raycastHit.collider != null)
+        // {
+        //     isOnGround = OnGround.Ground;
+        //     this.GetComponent<BehaviorTree>().EnableBehavior();
+        // }
+        // else if(raycastHit.collider == null)
+        // {
+        //     isOnGround = OnGround.Air;
+        //     this.GetComponent<BehaviorTree>().DisableBehavior();
+        // }
     }
 
     public void Jump()

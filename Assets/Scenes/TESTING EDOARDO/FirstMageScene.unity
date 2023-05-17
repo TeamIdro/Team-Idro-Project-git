@@ -19095,6 +19095,10 @@ PrefabInstance:
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[5]
       value: 
       objectReference: {fileID: 216111537}
+    - target: {fileID: 4963705300253753115, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
 --- !u!1001 &385787706
@@ -20271,6 +20275,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestRangedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5541718880415109895, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
 --- !u!1 &1866740840
@@ -20329,7 +20337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6861427684917036643, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6861427684917036645, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: m_RootOrder
@@ -20399,7 +20407,7 @@ PrefabInstance:
     - target: {fileID: 6245158806872014558, guid: 751fc335cc0bd8c41b74691448ebe63f, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: 8633a03d8952e2e4f9a5d7d93ef27d26, type: 2}
+      objectReference: {fileID: 23800000, guid: f77140f3911f66f41aa934a521b5dc58, type: 2}
     - target: {fileID: 6245158806872014558, guid: 751fc335cc0bd8c41b74691448ebe63f, type: 3}
       propertyPath: m_OverrideVoxelSize
       value: 0
