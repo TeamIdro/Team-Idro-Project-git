@@ -20,7 +20,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     [Header("Player values")]
     public float hp;
     [SerializeField] private float movementVelocity;
-    [SerializeField] private float jumpVelocity;
+    [SerializeField] public float jumpVelocity;
     [SerializeField, ReadOnly] private bool isBlocked = false;
     [SerializeField] private float maxVelocityCap;
     [SerializeField] private float deceleration;
@@ -48,7 +48,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private SpriteRenderer mageRenderer;
     private float guardaSuValue = 0;
     private float guardaGiuValue = 0;
-
+    private bool jumpIsOff;
 
     //PROPRIETA
     public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
@@ -182,7 +182,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     {
         var inputJump = context.ReadValue<float>();
         Vector2 jump = new Vector2(0, 1);
-        if (CheckIfCanJump() && playerType == EPlayerType.Mago)
+        if (CheckIfCanJump() && playerType == EPlayerType.Mago && !jumpIsOff)
         {
             isJumping = !CheckIfCanJump();
             Vector2 jumpWithVelocity = jump
@@ -192,6 +192,19 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         }
 
 
+    }
+    public void ToggleJump(bool toggle)
+    {
+        Debug.Log("TOGGLE JUMP");
+        Debug.Log(toggle);
+        if(!toggle)
+        {
+            jumpIsOff = true;
+        }
+        else
+        {
+            jumpIsOff = false;
+        }
     }
 
     private bool CheckIfCanJump()
