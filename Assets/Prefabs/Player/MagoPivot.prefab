@@ -158,7 +158,7 @@ MonoBehaviour:
   m_healthSlider: {fileID: 0}
   hp: 50
   movementVelocity: 50
-  jumpVelocity: 500
+  jumpVelocity: 600
   isBlocked: 0
   maxVelocityCap: 10
   deceleration: 50
