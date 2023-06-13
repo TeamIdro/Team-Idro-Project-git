@@ -19028,11 +19028,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &341830304 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8856069391249098123, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
-  m_PrefabInstance: {fileID: 6773468387359109554}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &365990079
 GameObject:
   m_ObjectHideFlags: 0
@@ -19127,7 +19122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2672353208428643257, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2672353208428643258, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
@@ -19171,8 +19166,12 @@ PrefabInstance:
       value: -2.13
       objectReference: {fileID: 0}
     - target: {fileID: 4108159572634377092, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_Size.x
+      value: 0.89208007
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108159572634377092, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_Offset.x
-      value: 0.03
+      value: -0.017416835
       objectReference: {fileID: 0}
     - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_RootOrder
@@ -21303,6 +21302,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 781300694745607371, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1451517824544624928, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: m_RootOrder
       value: 38
@@ -21351,45 +21354,121 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElementalTurret
       objectReference: {fileID: 0}
+    - target: {fileID: 1900824300988341902, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2605630830807219152, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: m_Radius
-      value: 6.4
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2605630830807219152, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: m_Offset.x
-      value: -5.49
+      value: -3.43
       objectReference: {fileID: 0}
-    - target: {fileID: 2605630830807219152, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
+    - target: {fileID: 4116929293575372107, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: danno
-      value: 0
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: durataPausa
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: durataAttacco
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: offsetCollider.x
-      value: -5.49
+      value: -3.43
       objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
-      propertyPath: elementoDaUsareSO
-      value: 
-      objectReference: {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
-    - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
-      propertyPath: distanzaProiettile
-      value: 1
+      propertyPath: direzioneTorretta
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
-      propertyPath: elementoDaSpawnare
-      value: 
-      objectReference: {fileID: 341830304}
+      propertyPath: tempoTickPerDanno
+      value: 3.61
+      objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: raggioCircleCollider
-      value: 6.4
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: playOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.octaves
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.quality
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.frequency
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.octaveScale
+      value: 1.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.remapEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.strength.scalar
+      value: -0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.octaveMultiplier
+      value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: NoiseModule.scrollSpeed.scalar
+      value: 3.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6568619255384114353, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 4352
+      objectReference: {fileID: 0}
+    - target: {fileID: 7040874594696853877, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856069391249098123, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8856069391249098123, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 858dd4bebd40d114895058a093d229c7, type: 3}

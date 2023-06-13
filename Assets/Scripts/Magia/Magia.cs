@@ -66,8 +66,6 @@ public class Magia : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("coroutine stoppata");
-        //StopCoroutine("DamageOrHealCouroutine");
         isDone = 0;
         CancelInvoke("DamageOrHealCouroutine");
     }

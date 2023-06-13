@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
+internal enum TurretDirection
+{
+    Sinistra,
+    Destra,
+}
 public class ElementTurret : MonoBehaviour
 {
     [Header("Valori per settare il behaviour dello sparo")]
+    [SerializeField] TurretDirection direzioneTorretta;
     [SerializeField] Transform puntoDiSparo;
     [Tooltip("Lunghezza del \"proiettile\"")]
     [SerializeField] float distanzaProiettile;
@@ -20,23 +27,36 @@ public class ElementTurret : MonoBehaviour
 
     [Header("Valori per settare danno e prefab dello sparo")]
     [SerializeField]
-    [Range(0f, 30f)] public int danno;
+    [Range(0f, 30f)] public float danno;
+    [SerializeField] float tempoTickPerDanno;
 
     [Tooltip("Prefab del proiettile base che poi la torretta sparerà")]
     [SerializeField] GameObject elementoDaSpawnare;
     [Tooltip("Tipo del'elemento che la magia spara")]
     [SerializeField] ElementoMagiaSO elementoDaUsareSO;
     [SerializeField] LayerMask layerDaColpire;
-    private ObjectForTurret objectForTurret = new ObjectForTurret();
+    [SerializeField] ObjectForTurret objectForTurret = new ObjectForTurret();
 
 
-
+    float durataAttaccoLocale = 0;
     public delegate void CoroutineCallback();
-    public event CoroutineCallback callback;
+    public event CoroutineCallback callback = delegate { };
+    private void Awake()
+    {
+        InvokeRepeating("DannoATick", 0.1f, tempoTickPerDanno);
+    }
     private void Start()
     {
-        StartCoroutine(IniziaAttacco(objectForTurret, callback));
+        durataAttaccoLocale = durataAttacco;
+        StartCoroutine(IniziaAttacco(() =>
+        {
+            elementoDaSpawnare.GetComponent<ParticleSystem>().Stop();
+        }));
         elementoDaSpawnare.transform.parent = puntoDiSparo;
+        if (direzioneTorretta == TurretDirection.Sinistra)
+            gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
+        else
+            gameObject.transform.rotation = new Quaternion(0, -180, 0, 0);
     }
     private void OnValidate()
     {
@@ -45,57 +65,77 @@ public class ElementTurret : MonoBehaviour
             circleColliderPerDetectIDamageable.radius = raggioCircleCollider;
             circleColliderPerDetectIDamageable.offset = offsetCollider;
         }
+        if(direzioneTorretta == TurretDirection.Sinistra)
+            gameObject.transform.rotation = new Quaternion(0,0,0,0);
+        else
+            gameObject.transform.rotation = new Quaternion(0,-180,0,0);
     }
     // PER CAPIRE SE IL PLAYER O UN NEMICO è DENTRO IL TRIGGER INIZIARE L'ATTACCO
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        callback += ElementTurret_callback;
-        objectForTurret.collision = collision;
-        objectForTurret.isInRange = true;
-    }
-
-    private void ElementTurret_callback()
-    {
-        elementoDaSpawnare.GetComponent<ParticleSystem>().Stop();
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if(collision.gameObject.GetComponent<IDamageable>() != null)
+        {
+            objectForTurret.collision = collision;
+            objectForTurret.isInRange = true;
+        }
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        objectForTurret.collision = collision;
+        objectForTurret.collision = null;
         objectForTurret.isInRange = false;
     }
 
-
-    private IEnumerator IniziaAttacco(ObjectForTurret objectForTurretInizioAttacco, CoroutineCallback callback)
+    private IEnumerator IniziaAttacco( CoroutineCallback callback)
     {
-        while (true)
+        while (durataAttaccoLocale > 0.0f)
         {
-            elementoDaSpawnare.GetComponent<ParticleSystem>().Play();  
-            Debug.Log("MESSAGGIO ATTACCO");
-            if (objectForTurretInizioAttacco.isInRange == false || objectForTurretInizioAttacco.collision == null)
-                yield break;
-
-            if (objectForTurretInizioAttacco.collision.gameObject.GetComponent<PlayerCharacterController>() != null)
+            durataAttaccoLocale -= Time.deltaTime;
+            Debug.Log(objectForTurret.collision != null
+                && objectForTurret.collision.gameObject.GetComponent<IDamageable>() != null
+                && objectForTurret.isInRange == true);
+            if (objectForTurret.collision != null 
+                && objectForTurret.collision.gameObject.GetComponent<IDamageable>() != null
+                && objectForTurret.isInRange == true)
             {
-                if (!LayerMaskExtensions.IsInLayerMask(objectForTurretInizioAttacco.collision.gameObject, layerDaColpire))
-                {
-                    yield break;
-                }
-                elementoDaSpawnare.SetActive(true);
-                Debug.Log("spawna il proiettile e mettilo come figlio");
-                Collider2D colliderProiettileSpawnato = elementoDaSpawnare.GetComponent<Collider2D>();
                 
             }
-            yield return new WaitForSeconds(durataPausa);
-            callback.Invoke();
-            yield return StartCoroutine(IniziaAttacco(objectForTurretInizioAttacco, callback));
+            if (durataAttaccoLocale <= 0.0f)
+            {
+                durataAttaccoLocale = durataAttacco;
+                callback.Invoke();
+                yield return new WaitForSeconds(durataPausa);
+                elementoDaSpawnare.GetComponent<ParticleSystem>().Play();
+
+            }
+
+            yield return null;
         }
-        
     }
+    private void DannoATick()
+    {
+        if (objectForTurret.isInRange && objectForTurret.collision != null)
+        {
+            IDamageable damageableObject = objectForTurret.collision.gameObject.GetComponent<IDamageable>();
+
+            if (damageableObject != null && elementoDaSpawnare.GetComponent<ParticleSystem>().isPlaying)
+            {
+                Debug.Log("FAI DANNO ");
+                damageableObject.TakeDamage(danno, elementoDaUsareSO.tipoDiMagia);
+            }
+        }
+    }
+
+
+
+
+
+
 }
+
+
+
+[Serializable]
 public struct ObjectForTurret
 {
     public bool isInRange;
