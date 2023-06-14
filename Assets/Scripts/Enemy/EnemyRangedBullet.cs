@@ -25,5 +25,7 @@ public class EnemyRangedBullet : MonoBehaviour
          other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
          Destroy(this.gameObject);
       }
+
+      Destroy(this.gameObject);
    }
 }
