@@ -67,6 +67,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         // canPatrol = true;
+        ReduceSeeRange();
     }
 
     public void Update()

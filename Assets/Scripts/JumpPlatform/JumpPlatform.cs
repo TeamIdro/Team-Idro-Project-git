@@ -9,11 +9,16 @@ public class JumpPlatform : MonoBehaviour
     [Header("Moltiplicatori di Salto")]
     [Range(1,3)]
     public float moltiplicatoreMassimoDiSalto = 1;
+    [Range(1,5)]
+    public float maxPressDuration = 1;
+    [Range(1,5)]
+    public float minPressDuration = 1;  
+    [ReadOnly]
+    public float pressDuration; 
 
-
-    public bool isOnPlatform = false;
+    bool isOnPlatform = false;
     float startTime;
-    float pressDuration;
+    
     private GamePlayInputActions inputActions;
     private PlayerCharacterController playerCaching;
     private void Awake()
@@ -28,12 +33,16 @@ public class JumpPlatform : MonoBehaviour
     {
         inputActions.Disable();
     }
-
+    private void OnValidate()
+    {
+        if(maxPressDuration < minPressDuration)
+            maxPressDuration = minPressDuration;
+    }
 
     private void Start()
     {
         inputActions.Mage.Jump.started += ctx => PrendoIlTempoDiPartenza(ctx);
-        inputActions.Mage.Jump.canceled+= ctx => FaiIlCalcoloDelJump(ctx);
+        inputActions.Mage.Jump.canceled += ctx => FaiIlCalcoloDelJump(ctx);
         
     }
     private void Update()
@@ -79,13 +88,13 @@ public class JumpPlatform : MonoBehaviour
         {
             pressDuration = Time.time - startTime;
             Debug.Log(pressDuration);
-            if(pressDuration < 1)
+            if(pressDuration < minPressDuration)
             {
-                pressDuration = 1;
+                pressDuration = minPressDuration;
             }
-            else if (pressDuration > 3) 
+            else if (pressDuration > maxPressDuration) 
             {
-                pressDuration = 3;
+                pressDuration = maxPressDuration;
             }
             playerCaching.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, playerCaching.jumpVelocity * moltiplicatoreMassimoDiSalto * pressDuration));
 
