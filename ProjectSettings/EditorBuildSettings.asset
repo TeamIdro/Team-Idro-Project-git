@@ -14,13 +14,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TESTING NICCO/ScenaTesting_Bambino_ProfLayton.unity
     guid: 942018a7766b9e14487092d4ae201953
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga.unity
     guid: 24bfd36ed8594cc47b0042cd60edbe71
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga 1.unity
     guid: fff92b2cbb8d4cf4898997162307e403
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga 2.unity
     guid: 408d55a92ff020d41b35a14ca99925c6
+  - enabled: 1
+    path: Assets/Scenes/TESTING EDOARDO/FirstMageScene.unity
+    guid: f291a5317bc83b342900fb29de0cc426
   m_configObjects: {}
