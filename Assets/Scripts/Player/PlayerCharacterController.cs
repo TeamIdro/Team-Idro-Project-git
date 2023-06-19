@@ -49,13 +49,13 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private float guardaSuValue = 0;
     private float guardaGiuValue = 0;
     private bool jumpIsOff;
-
+ 
     //PROPRIETA
     public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
     public Vector2 MovementDirection { get { return movementDirection; } set { movementDirection = value; } }
 
-    public bool IsJumping { get => isJumping; set => isJumping = value; }
     public bool IsMoving { get=> IsMoving; set => IsMoving = value; }
+    public bool IsAscendingForJump { get => IsAscendingForJump; set => IsAscendingForJump = value; }
 
     private static PlayerCharacterController _instance;
 
@@ -89,6 +89,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
 
     private void Update()
     {
+        isJumping = !CheckIfCanJump();
         if (isBlocked) { return; }
         GetInputDirection();
         AnimationUpdate();
@@ -162,8 +163,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private void AnimationUpdate()
     {
         animatorMago.SetBool("IsMoving",isMoving);
-        animatorMago.SetBool("isJumping",isJumping);
-
+        animatorMago.SetFloat("YVelocity",Mathf.Floor(m_playerMageRB2D.velocity.y));
     }
     private void Movement()
     {

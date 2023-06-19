@@ -19265,10 +19265,18 @@ PrefabInstance:
       propertyPath: maxCastDirection
       value: 0.73
       objectReference: {fileID: 0}
+    - target: {fileID: 6758082493375761218, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e60ecc478141a0647b5099bc50f52c37, type: 3}
     - target: {fileID: 7537261567199135306, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_Interpolate
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7604304924014332225, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 751245977176fc641a53c14fba5fc49e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
 --- !u!4 &385787707 stripped
@@ -21176,7 +21184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5044125674396587087, guid: 66b69a466759d584dbd7f1233810c128, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5044125674396587121, guid: 66b69a466759d584dbd7f1233810c128, type: 3}
       propertyPath: m_Size.x
@@ -21392,7 +21400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: tempoTickPerDanno
-      value: 3.61
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4870700815836137427, guid: 858dd4bebd40d114895058a093d229c7, type: 3}
       propertyPath: raggioCircleCollider
