@@ -1,9 +1,6 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
 
 internal enum TurretDirection
 {
@@ -91,9 +88,6 @@ public class ElementTurret : MonoBehaviour
         while (durataAttaccoLocale > 0.0f)
         {
             durataAttaccoLocale -= Time.deltaTime;
-            Debug.Log(objectForTurret.collision != null
-                && objectForTurret.collision.gameObject.GetComponent<IDamageable>() != null
-                && objectForTurret.isInRange == true);
             if (objectForTurret.collision != null 
                 && objectForTurret.collision.gameObject.GetComponent<IDamageable>() != null
                 && objectForTurret.isInRange == true)

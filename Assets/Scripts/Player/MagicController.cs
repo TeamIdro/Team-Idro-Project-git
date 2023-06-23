@@ -257,10 +257,6 @@ public class MagicController : MonoBehaviour, ISubscriber
     private void CastMagiaLanciata()
     {
         var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
-        if (m_magiaDaLanciare.AlternativeBullet != null)
-        {
-            magia = m_magiaDaLanciare.AlternativeBullet;
-        }
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckForDirectionToGo(bullet);
         CheckIfThereIsAnimatorAndGetIt(bullet);
@@ -362,14 +358,14 @@ public class MagicController : MonoBehaviour, ISubscriber
         bullet.transform.localScale = new Vector3(-bullet.transform.localScale.x, bullet.transform.localScale.y, bullet.transform.localScale.z);
         if (direction.y != 0)
         {
-            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, m_magiaDaLanciare.velocitaMagiaLanciata * direction.y * 10));
+            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, m_magiaDaLanciare.velocitaDellaMagiaLanciata * direction.y * 10));
             if(direction.y < 0) { bullet.transform.Rotate(0, 0, 90); }
             else if(direction.y > 0) { bullet.transform.Rotate(0, 0, -90); }
             return;
         }
         else if (direction.x != 0)
         {
-            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitaMagiaLanciata * direction.x * 10, 0));
+            bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitaDellaMagiaLanciata * direction.x * 10, 0));
             //if (direction.x < 0) { bullet.transform.Rotate(0, 0, -90); }
              if (direction.x > 0) { bullet.transform.Rotate(0, 0, 180); }
             return;
@@ -383,22 +379,22 @@ public class MagicController : MonoBehaviour, ISubscriber
         if (bullet.GetComponent<CircleCollider2D>() != null)
         { bullet.GetComponent<CircleCollider2D>().enabled = true; }
         magiaComponent.magia = m_magiaDaLanciare;
-        magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.ignoraCollisioni);
+        magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.layerMaskPerIgnoraCollisioni);
         magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
-        magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
+        magiaComponent.SetDamageLayer(m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
     }
     private void ThrowedMagicInitialize(GameObject bullet)
     {
         if (m_magiaDaLanciare.rallentamentoGraduale is true)
         {
-            magiaComponent.decelerationTime = m_magiaDaLanciare.decellerazioneTime;
+            magiaComponent.decelerationTime = m_magiaDaLanciare.tempoDecellerazioneMagiaLanciata;
         }
         magiaComponent.magia = m_magiaDaLanciare;
         if (m_magiaDaLanciare.detonazioneAdImpatto is true)
         {
             magiaComponent.ExplosionPref = m_magiaDaLanciare.ExplosionPref;
-            magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.explosionKnockbackForce;
-            magiaComponent.damageMask = m_magiaDaLanciare.danneggiaTarget;
+            magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.knockbackForzaEsplosione;
+            magiaComponent.damageMask = m_magiaDaLanciare.layerMaskPerDanneggiaTarget;
         }
         if (m_magiaDaLanciare.distanzaMagiaLanciata is not 0)
         {
@@ -407,9 +403,9 @@ public class MagicController : MonoBehaviour, ISubscriber
         if (bullet.GetComponent<CircleCollider2D>() != null)
         { bullet.GetComponent<CircleCollider2D>().enabled = true; }
 
-        magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.ignoraCollisioni);
+        magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.layerMaskPerIgnoraCollisioni);
         magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
-        magiaComponent.SetDamageLayer(m_magiaDaLanciare.danneggiaTarget);
+        magiaComponent.SetDamageLayer(m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
     }
 
     public void OnPublish(IMessage message)

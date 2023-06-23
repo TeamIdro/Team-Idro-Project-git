@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class Magia : MonoBehaviour
 {
-    public LayerMask damageMask;
-    public MagiaSO magia;
+    [HideInInspector]public LayerMask damageMask;
+    [HideInInspector]public MagiaSO magia;
     // Start is called before the first frame update
-    public float explosionKnockbackForce = 1;
-    public int damageExplosion = 0;
+    [HideInInspector]public float explosionKnockbackForce = 1;
+    [HideInInspector]public int damageExplosion = 0;
 
-    public GameObject ExplosionPref;
-    public int damage;
-    public float decelerationTime = 2f; // tempo in secondi per rallentare completamente il proiettile
+    [HideInInspector]public GameObject ExplosionPref;
+    [HideInInspector]public int damage;
+    [HideInInspector]public float decelerationTime = 2f; // tempo in secondi per rallentare completamente il proiettile
     private Rigidbody2D bulletRigidbody;
 
     public LayerMask ignoreContact;
@@ -32,44 +32,50 @@ public class Magia : MonoBehaviour
     void Start()
     {
         bulletRigidbody = GetComponent<Rigidbody2D>();
+        bulletRigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        bulletRigidbody.gravityScale = magia.forzaDiGravitaPerProiettile;
+        bulletRigidbody.freezeRotation = true;
     }
     void Update()
     {
         DestroyAfterDistance();
     }
-
-  
-
     void FixedUpdate()
     {
         BulletDeceleration();
+        Vector2 direction = bulletRigidbody.velocity.normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 180f;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
+    
     private void BulletDeceleration()
     {
         if (bulletRigidbody.velocity.magnitude > 0f)
         {
-            float decelerationRate = bulletRigidbody.velocity.magnitude / decelerationTime * 2;
-            Vector2 oppositeForce = -bulletRigidbody.velocity.normalized * decelerationRate;
-            bulletRigidbody.AddForce(oppositeForce, ForceMode2D.Force);
+            if(decelerationTime != 0)
+            {
+                float decelerationRate = bulletRigidbody.velocity.magnitude / decelerationTime * 2;
+                Vector2 oppositeForce = -bulletRigidbody.velocity.normalized * decelerationRate;
+                bulletRigidbody.AddForce(oppositeForce, ForceMode2D.Force);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+     
         CollisionsBehaviours(collision);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-       
         CollisionsBehaviours(collision);
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         isDone = 0;
         CancelInvoke("DamageOrHealCouroutine");
     }
-
 
     private void OnDestroy()
     {
@@ -84,7 +90,7 @@ public class Magia : MonoBehaviour
             GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
             if (expl != null)
             {
-                CameraShake.Instance.ShakeCamera(5, 0.1f);
+                CameraShake.Instance.ShakeCamera(magia.intensity, magia.shakeTime);
                 Destroy(expl, 2);
             }
             else
@@ -118,15 +124,18 @@ public class Magia : MonoBehaviour
     }
     private void CollisionsBehaviours(Collider2D collision)
     {
-
         //TODO: risolvere questione layer
-        if (collision.gameObject.GetComponent<IDamageable>() is not null)
+            Debug.Log(collision.name);
+        if (collision.gameObject.GetComponent<EnemyScript>() is not null)
         {
             damageable1 = collision.gameObject.GetComponent<IDamageable>();
+            EnemyScript enemyLocal = collision.gameObject.GetComponent<EnemyScript>();
             if (magia == null) { return; }
             else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
             {
-                if(magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
+                magia.ApplicaEffetti(enemyLocal);
+                magia.TogliEffettiDopoTempo(enemyLocal);
+                if (magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
                 {
                     Debug.Log("Preso");
                     damageable1.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
@@ -144,19 +153,25 @@ public class Magia : MonoBehaviour
         {
             Debug.Log("COLLISIONE");
             Debug.Log(collision);
-            if (collision.GetComponent<Rigidbody2D>() is not null && collision.GetComponent<Spawnpoint>() is null && collision.GetComponent<ElementalButton>() is null)
+            if (collision.gameObject.GetComponent<Rigidbody2D>() is not null && collision.gameObject.GetComponent<Spawnpoint>() is null && collision.gameObject.GetComponent<ElementalButton>() is null)
             {
-                collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * explosionKnockbackForce * 10);
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * explosionKnockbackForce * 10);
             }
         }
         if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject, ignoreContact) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
         {
+            if (magia.spawnaOggettoAdImpatto != null)
+            {
+                Instantiate(magia.spawnaOggettoAdImpatto, gameObject.transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
+
         }
+        
     }
     private void DamageOrHealCouroutine()
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), magia.raggioArea,magia.danneggiaTarget);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), magia.raggioArea,magia.layerMaskPerDanneggiaTarget);
         foreach (Collider2D col in hitColliders)
         {
             Debug.Log(col);

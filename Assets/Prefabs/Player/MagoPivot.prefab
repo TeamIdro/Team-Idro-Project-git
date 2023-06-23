@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575464462213413425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36, z: 0}
+  m_LocalPosition: {x: 0.04, y: -1.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1992483039
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 731325323, guid: 963899e9fb6036b44b8b3b26e01bf262, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e60ecc478141a0647b5099bc50f52c37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1575464462213413425}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: efc8eb264d279f04e82537ddfaebd942, type: 2}
+  m_Controller: {fileID: 9100000, guid: 751245977176fc641a53c14fba5fc49e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 4357714081857353591}
   - component: {fileID: 4337122286586203744}
   - component: {fileID: 7537261567199135306}
+  - component: {fileID: 1220166403}
   m_Layer: 8
   m_Name: MagoPivot
   m_TagString: Player
@@ -158,11 +159,11 @@ MonoBehaviour:
   m_healthSlider: {fileID: 0}
   hp: 50
   movementVelocity: 50
-  jumpVelocity: 600
+  jumpVelocity: 500
   isBlocked: 0
   maxVelocityCap: 10
   deceleration: 50
-  maxCastDistance: 0.86
+  maxCastDistance: 0.5
   movementDirection: {x: 0, y: 0}
   isMoving: 0
   isJumping: 0
@@ -223,8 +224,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.70016}
+  m_Size: {x: 1, y: 3.40032}
   m_Direction: 0
 --- !u!50 &7537261567199135306
 Rigidbody2D:
@@ -243,10 +244,27 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 3
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1220166403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108159572990154237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7079b704c916dc743ba52dd97879faf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCastDimension: {x: 0.45, y: 0.49}
+  maxCastDistance: 0.83
+  terrainMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &5351127479474757305
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +290,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5351127479474757305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.009, y: -0.73, z: 0}
+  m_LocalPosition: {x: 0.009, y: -2.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -292,7 +310,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0065431595, y: 0.11777675}
+  m_Offset: {x: -0.017416835, y: 0.11777675}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -303,5 +321,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9869137, y: 0.7644465}
+  m_Size: {x: 0.89208007, y: 0.7644465}
   m_EdgeRadius: 0

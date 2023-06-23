@@ -164,6 +164,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     {
         animatorMago.SetBool("IsMoving",isMoving);
         animatorMago.SetFloat("YVelocity",Mathf.Floor(m_playerMageRB2D.velocity.y));
+        animatorMago.SetBool("IsGrounded", !isJumping);
     }
     private void Movement()
     {
