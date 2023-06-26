@@ -12,7 +12,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     // [field: SerializeField] public Weakness weakness { get; set; }
     [field: SerializeField] public float hp { get; set; }
     public int attack { get; set; }
-    public float speed { get; set; }
+    [field: SerializeField] public float speed { get; set; }
     public Rigidbody2D rigidBody { get; set; }
     public SpriteRenderer spriteRenderer { get; set; }
     
