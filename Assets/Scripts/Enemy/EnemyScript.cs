@@ -12,13 +12,28 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     // [field: SerializeField] public Weakness weakness { get; set; }
     [field: SerializeField] public float hp { get; set; }
     public int attack { get; set; }
-    public float speed { get; set; }
     public Rigidbody2D rigidBody { get; set; }
     public SpriteRenderer spriteRenderer { get; set; }
     
     public float angle { get; set; }
     public float fovAngle { get; set; }
     public float viewDistance { get; set; }
+
+    
+    [field: Space(10)]
+    [field: Header("Valori Patroling")]
+    [field: Space(10)]
+    [field: SerializeField] public float patrol_Speed { get; set; }
+    [field: SerializeField] public float patrol_angularSpeed { get; set; }
+    [field: SerializeField] public float patrol_arriveDistance { get; set; }
+    // [field: SerializeField] public List<GameObject> patrol_wayPoints = new List<GameObject>();
+
+    [field: Space(10)]
+    [field: Header("Valori Seeking")]
+    [field: Space(10)]
+    [field: SerializeField, Tooltip("Velocità di inseguimento player")] public float speed { get; set; }
+    [field: SerializeField] public float seek_angularSpeed { get; set; }
+    [field: SerializeField] public float seek_arriveDistance { get; set; }
 
     private NavMeshAgent agent;
     private BehaviorTree behaviorTree;
@@ -27,6 +42,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     [Header("Valori inseguimento player")]
     [Header("SetReduce sono quelli di partenza")]
     [Space(10)]
+    
 
     public float setReducedAngle = 280f;
     public float setReducedFovAngle = 120f;
