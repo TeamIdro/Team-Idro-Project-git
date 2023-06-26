@@ -26,7 +26,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     [field: SerializeField] public float patrol_Speed { get; set; }
     [field: SerializeField] public float patrol_angularSpeed { get; set; }
     [field: SerializeField] public float patrol_arriveDistance { get; set; }
-    [field: SerializeField] public List<GameObject> patrol_wayPoints = new List<GameObject>();
+    // [field: SerializeField] public List<GameObject> patrol_wayPoints = new List<GameObject>();
 
     [field: Space(10)]
     [field: Header("Valori Seeking")]
