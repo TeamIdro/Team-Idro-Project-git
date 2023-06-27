@@ -91,6 +91,8 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
 
         // Debug.Log(behaviorTree.GetBehaviorSource().);
+        
+        FlipSprite();
     }
 
     
@@ -127,6 +129,18 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         {
             Destroy(this.gameObject);
         }
-
     }
+
+    void FlipSprite()
+    {
+        if(agent.velocity.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if(agent.velocity.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
+
 }

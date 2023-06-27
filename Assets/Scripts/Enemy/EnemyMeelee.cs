@@ -50,12 +50,17 @@ public class EnemyMeelee : MonoBehaviour
         // }
     }
 
+    // void FixedUpdate()
+    // {
+    //     Jump();
+    // }
+
     public void Jump()
     {
         if(isOnGround == OnGround.Ground)
         {
             Debug.Log("JUMP");
-            rigidbody.AddForce((Vector2.up + (Vector2)transform.forward) * jumpForce);
+            rigidbody.AddForce(((Vector2.up + (Vector2)transform.forward)).normalized * jumpForce, ForceMode2D.Impulse);
         }
     }
 
@@ -77,8 +82,8 @@ public class EnemyMeelee : MonoBehaviour
         StopCoroutine(attackCoroutine);
     }
 
-    private void OnDrawGizmos() 
-    {
-        Gizmos.DrawSphere(this.transform.position + (Vector3.down * rayGroundLenght), rayGroundRadius);
-    }
+    // private void OnDrawGizmos() 
+    // {
+    //     Gizmos.DrawSphere(this.transform.position + (Vector3.down * rayGroundLenght), rayGroundRadius);
+    // }
 }
