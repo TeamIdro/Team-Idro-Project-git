@@ -83,6 +83,14 @@ public class UIPauseMenu : MonoBehaviour, ISubscriber
     {
         //PubSub.Publisher.Publish()
     }
+    private void ExitButton()
+    {
+#if DEBUG
+        UnityEditor.EditorApplication.Exit(0);
+#endif
+        
+    
+    }
     private void ClosePauseInternal()
     {
         currentStateOfPause = PauseState.PauseDeactivated;

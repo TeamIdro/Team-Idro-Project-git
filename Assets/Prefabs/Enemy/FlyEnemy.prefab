@@ -85,7 +85,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6861427684917036645
 Transform:
   m_ObjectHideFlags: 0
@@ -167,18 +167,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.22531843, y: -0.7322881}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.37, y: 0.65}
+    oldSize: {x: 9.25, y: 16.25}
     newSize: {x: 5.69, y: 5.69}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.69, y: 5.69}
+  m_Size: {x: 6.1406364, y: 12.111591}
   m_EdgeRadius: 0
 --- !u!195 &6861427684917036641
 NavMeshAgent:
@@ -274,6 +274,7 @@ MonoBehaviour:
   setIncreasedAngle: 280
   setIncreasedFovAngle: 360
   setIncreasedViewDistance: 15
+  <attackDistance>k__BackingField: 0
   weakness: 0
   resistance: 0
 --- !u!114 &1899079260

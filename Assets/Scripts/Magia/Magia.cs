@@ -66,8 +66,6 @@ public class Magia : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("coroutine stoppata");
-        //StopCoroutine("DamageOrHealCouroutine");
         isDone = 0;
         CancelInvoke("DamageOrHealCouroutine");
     }
@@ -144,7 +142,9 @@ public class Magia : MonoBehaviour
         }
         if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
         {
-            if (collision.GetComponent<Rigidbody2D>() is not null && !collision.GetComponent<Spawnpoint>() && !collision.GetComponent<ElementalButton>())
+            Debug.Log("COLLISIONE");
+            Debug.Log(collision);
+            if (collision.GetComponent<Rigidbody2D>() is not null && collision.GetComponent<Spawnpoint>() is null && collision.GetComponent<ElementalButton>() is null)
             {
                 collision.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * explosionKnockbackForce * 10);
             }

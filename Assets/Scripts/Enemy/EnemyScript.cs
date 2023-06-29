@@ -26,6 +26,8 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     [Space(10)]
     [Header("Valori inseguimento player")]
     [Header("SetReduce sono quelli di partenza")]
+    [Space(10)]
+
     public float setReducedAngle = 280f;
     public float setReducedFovAngle = 120f;
     public float setReducedViewDistance = 7.4f;
@@ -33,6 +35,9 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     public float setIncreasedAngle = 280f;
     public float setIncreasedFovAngle = 360f;
     public float setIncreasedViewDistance = 10f;
+    
+    [field: SerializeField]
+    public float attackDistance { get; set; }
 
     [Space(10)]
     [Header("Weakness and Resistance")]
@@ -46,10 +51,12 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         viewDistance = setReducedAngle;
 
         agent = GetComponent<NavMeshAgent>();
-        behaviorTree = GetComponent<BehaviorTree>();
-
-		agent.updateRotation = false;
+        behaviorTree = GetComponent<BehaviorTree>();    
+            
+        agent.updateRotation = false;
 		agent.updateUpAxis = false;
+
+        ReduceSeeRange();
 
         // agent.stoppingDistance = behaviorTree.GetVariable()
     }
@@ -60,13 +67,17 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         // canPatrol = true;
+        ReduceSeeRange();
     }
 
     public void Update()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+
+        // Debug.Log(behaviorTree.GetBehaviorSource().);
     }
 
+    
     public void ReduceSeeRange()
     {
         angle = setReducedAngle;

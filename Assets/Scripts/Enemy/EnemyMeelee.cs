@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class EnemyMeelee : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class EnemyMeelee : MonoBehaviour
     public float rayGroundRadius;
     Rigidbody2D rigidbody;
     LayerMask layerMask;
+    NavMeshAgent navMeshAgent;
 
     public bool attackCooldown;
     public float timeCoolDown = 1.2f;
@@ -25,6 +26,8 @@ public class EnemyMeelee : MonoBehaviour
     void Awake()
     {
         layerMask = LayerMask.GetMask("Terreno");
+
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void Start()
@@ -33,18 +36,18 @@ public class EnemyMeelee : MonoBehaviour
     }
     void Update()
     {
-        RaycastHit2D raycastHit = Physics2D.CircleCast(transform.position, rayGroundRadius, Vector2.down, rayGroundLenght, layerMask);
+        // RaycastHit2D raycastHit = Physics2D.CircleCast(transform.position, rayGroundRadius, Vector2.down, rayGroundLenght, layerMask);
 
-        if(raycastHit.collider != null)
-        {
-            isOnGround = OnGround.Ground;
-            this.GetComponent<BehaviorTree>().EnableBehavior();
-        }
-        else if(raycastHit.collider == null)
-        {
-            isOnGround = OnGround.Air;
-            this.GetComponent<BehaviorTree>().DisableBehavior();
-        }
+        // if(raycastHit.collider != null)
+        // {
+        //     isOnGround = OnGround.Ground;
+        //     this.GetComponent<BehaviorTree>().EnableBehavior();
+        // }
+        // else if(raycastHit.collider == null)
+        // {
+        //     isOnGround = OnGround.Air;
+        //     this.GetComponent<BehaviorTree>().DisableBehavior();
+        // }
     }
 
     public void Jump()
