@@ -20,13 +20,6 @@ public class MagiaSO : ScriptableObject
     [Space(15)]
     [Header("Valori Magia Generici")]
     public float dannoDellaMagia;
-    [Space(5)]
-    [Range(0f, 10f)]
-    public float moltiplicatoreDelDannoDellaMagia;
-    [Space(5)]
-    [Range(0f, 10f)]
-    public float moltiplicatoreResistenzaAllaMagia;
-    [Space(5)]
     [Space()]
     [Header("Valori per fisica proiettili")]
     [Max(10)]
@@ -88,16 +81,6 @@ public class MagiaSO : ScriptableObject
             foreach(EffettoBaseSO effetto in effettiMagia)
             {
                 effetto.ApplicaEffetto(nemicoACuiApplicareGliEffetti);
-            }
-        }
-    }
-    public void TogliEffetti(EnemyScript nemicoACuiTogliereGliEffetti)
-    {
-        if(effettiMagia.Count > 0)
-        {
-            foreach (EffettoBaseSO effetto in effettiMagia)
-            {
-                effetto.TogliEffetto(nemicoACuiTogliereGliEffetti);
             }
         }
     }

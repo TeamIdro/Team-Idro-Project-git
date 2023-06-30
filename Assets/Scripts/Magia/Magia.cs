@@ -153,9 +153,12 @@ public class Magia : MonoBehaviour
         {
             Debug.Log("COLLISIONE");
             Debug.Log(collision);
-            if (collision.gameObject.GetComponent<Rigidbody2D>() is not null && collision.gameObject.GetComponent<Spawnpoint>() is null && collision.gameObject.GetComponent<ElementalButton>() is null)
+            if (collision.gameObject.GetComponent<Rigidbody2D>() is not null 
+                && collision.gameObject.GetComponent<EnemyScript>() is not null
+                && collision.gameObject.GetComponent<Spawnpoint>() is null 
+                && collision.gameObject.GetComponent<ElementalButton>() is null)
             {
-                collision.gameObject.GetComponent<Rigidbody2D>().AddForce((collision.transform.position - gameObject.transform.position).normalized * explosionKnockbackForce * 10);
+                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(10 * explosionKnockbackForce * (collision.transform.position - gameObject.transform.position).normalized);
             }
         }
         if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject, ignoreContact) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)

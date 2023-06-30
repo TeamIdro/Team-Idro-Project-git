@@ -12,31 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: Vapore
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 0}
+  prefabAnimatoriMagia: {fileID: 6971113163581192933, guid: 12cb742ab5724c94da15cd823eca76c5, type: 3}
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
-  combinazioneDiElementi: []
+  combinazioneDiElementi:
+  - {fileID: 11400000, guid: 8aa8c337adb74d6429acb70ac064d5f1, type: 2}
+  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   dannoDellaMagia: 0
-  moltiplicatoreDelDannoDellaMagia: 0
-  moltiplicatoreResistenzaAllaMagia: 0
   forzaDiGravitaPerProiettile: 0
-  velocitaDellaMagiaLanciata: 0
+  knockbackForzaEsplosione: 1
+  intensity: 0
+  shakeTime: 0
+  velocitaDellaMagiaLanciata: 31.6
   rallentamentoGraduale: 0
-  tempoDecellerazioneMagiaLanciata: 0
-  distanzaMagiaLanciata: 0
+  tempoDecellerazioneMagiaLanciata: 15.5
+  distanzaMagiaLanciata: 44.9
   tempoMagiaLanciata: 5
   detonazioneAdImpatto: 0
   ExplosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
     m_Bits: 0
   tickTime: 0
   raggioArea: 0
   effettiMagia: []
-  knockbackForzaEsplosione: 1
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0

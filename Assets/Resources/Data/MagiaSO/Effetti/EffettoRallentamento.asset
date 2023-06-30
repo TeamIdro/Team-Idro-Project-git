@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: EffettoRallentamento
   m_EditorClassIdentifier: 
   percentualeRallentamentoNemicoColpito: 75
-  durataRallentamento: 0
+  durataRallentamento: 3.73
   moltiplicatoreDiMagia: 2
+  coloreEffetto:
+    serializedVersion: 2
+    rgba: 4294921472

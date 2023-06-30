@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class EffettoRallentamentoSO : EffettoBaseSO
     public float durataRallentamento = 0f;
     [Range(0, 10)]
     public int moltiplicatoreDiMagia;
+    public Color32 coloreEffetto;
 
     private float valoreOriginaleNemici;
     public override void ApplicaEffetto(EnemyScript danneggiabile)
@@ -19,18 +21,31 @@ public class EffettoRallentamentoSO : EffettoBaseSO
         if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
         {
             valoreOriginaleNemici = danneggiabile.speed;
-            danneggiabile.speed /= moltiplicatoreDiMagia; 
+            danneggiabile.speed /= moltiplicatoreDiMagia;
+            Renderer renderer = danneggiabile.gameObject.GetComponent<Renderer>();
+            Material material = renderer.material;
+            if (material != null)
+            {
+                material.SetFloat("_OutlineThickness", 1f);
+                material.SetColor("_OutlineColor", coloreEffetto);
+                renderer.material = material;
+            }
         }
     }
-    public override void TogliEffetto(EnemyScript danneggiabile)
-    {
-        danneggiabile.speed = valoreOriginaleNemici;
-    }
-
     public override IEnumerator TogliEffettoDopoDelTempo(EnemyScript nemico)
     {
         yield return new WaitForSeconds(durataRallentamento);
+        nemico.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         Debug.LogWarning("EFFETTO TOLTO");
         nemico.speed = valoreOriginaleNemici;
+        Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
+        Material material = renderer.material;
+        if(material!= null)
+        {
+            material.SetFloat("_OutlineThickness", 0);
+            material.SetColor("_OutlineColor", Color.white);
+            renderer.material = material;
+
+        }
     }
 }

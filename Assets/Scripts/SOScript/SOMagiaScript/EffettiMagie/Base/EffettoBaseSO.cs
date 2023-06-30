@@ -9,6 +9,5 @@ public abstract class EffettoBaseSO : ScriptableObject
     /// </summary>
     /// <param name="nemico"></param>
     public abstract void ApplicaEffetto(EnemyScript nemico);
-    public abstract void TogliEffetto(EnemyScript nemico);
     public abstract IEnumerator TogliEffettoDopoDelTempo(EnemyScript nemico);
 }
