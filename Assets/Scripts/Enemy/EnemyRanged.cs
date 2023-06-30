@@ -9,7 +9,19 @@ public class EnemyRanged : MonoBehaviour
     public GameObject bullet;
     Coroutine attackCoroutine;
 
+    SpriteRenderer sr;
+
     public float force = 200f;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
+
+    void FixedUpdate()
+    {
+        FlipSpriteBasedOnPlayerPosition(PlayerCharacterController.Instance.transform);
+    }
 
     public void AttackEvent()//GameObject player
     {       
@@ -33,10 +45,23 @@ public class EnemyRanged : MonoBehaviour
 
     public void Shoot()
     {
-        var bulletInst = GameObject.Instantiate(bullet, transform.position, Quaternion.identity);
+        var bulletInst = GameObject.Instantiate(bullet, transform.position, Quaternion.Euler(-180, 0, 0));
         bulletInst.GetComponent<Rigidbody2D>().AddForce(
             new Vector2(PlayerCharacterController.Instance.transform.position.x - transform.position.x, 
                         PlayerCharacterController.Instance.transform.position.y - transform.position.y) * force, 
                         ForceMode2D.Force);
     }
+
+    public void FlipSpriteBasedOnPlayerPosition(Transform playerTransform)
+    {
+        if (playerTransform.position.x > transform.position.x)
+        {
+            sr.flipX = false;
+        }
+        else
+        {
+            sr.flipX = true;
+        }
+    }
+
 }
