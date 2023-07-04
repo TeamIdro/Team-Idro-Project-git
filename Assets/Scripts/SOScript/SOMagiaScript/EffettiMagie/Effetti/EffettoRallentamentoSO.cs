@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Magia/Effetti/EffettoRallentamentoSO", menuName = "Magia/Effetti/EffettoRallentamentoSO")]
+[CreateAssetMenu(fileName = "Magia/Effetti/EffettoRallentamentoSO", menuName = "Magia/Effetti/Effetto Rallentamento SO")]
 public class EffettoRallentamentoSO : EffettoBaseSO
 {
-    [Range(0, 100)]
+    [Range(0,100)]
     public int percentualeRallentamentoNemicoColpito = 0;
-    public float durataRallentamento = 0f;
     [Range(0, 10)]
     public int moltiplicatoreDiMagia;
     public Color32 coloreEffetto;
@@ -34,7 +33,7 @@ public class EffettoRallentamentoSO : EffettoBaseSO
     }
     public override IEnumerator TogliEffettoDopoDelTempo(EnemyScript nemico)
     {
-        yield return new WaitForSeconds(durataRallentamento);
+        yield return new WaitForSeconds(durataEffetto);
         nemico.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         Debug.LogWarning("EFFETTO TOLTO");
         nemico.speed = valoreOriginaleNemici;

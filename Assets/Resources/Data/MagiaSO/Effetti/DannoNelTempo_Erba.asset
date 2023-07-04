@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c16bb94379421e41aaaa95efd9d282b, type: 3}
-  m_Name: EffettoRallentamento
+  m_Script: {fileID: 11500000, guid: da372fedd2ac4934cacc618a690b8cd0, type: 3}
+  m_Name: DannoNelTempo_Erba
   m_EditorClassIdentifier: 
-  percentualeRallentamentoNemicoColpito: 75
-  durataRallentamento: 3.73
-  moltiplicatoreDiMagia: 2
-  coloreEffetto:
-    serializedVersion: 2
-    rgba: 4294921472
+  durataEffetto: 5
+  quantitaDiDanniNelTempo: 7
+  tipoMagiaDannoNelTempo: 6
+  tempoTick: 1
+  coloreEffetto: {r: 0.09654122, g: 0.41509432, b: 0.013314318, a: 0}

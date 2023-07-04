@@ -2,6 +2,8 @@ using PubSub;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -26,6 +28,8 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     [SerializeField] private float deceleration;
     [Range(0f, 5f)]
     [SerializeField] private float maxCastDistance;
+
+    [Header("Player Audios List")]
     [Space(10)]
     [Header("Debug values")]
     [SerializeField,ReadOnly] private Vector2 movementDirection;

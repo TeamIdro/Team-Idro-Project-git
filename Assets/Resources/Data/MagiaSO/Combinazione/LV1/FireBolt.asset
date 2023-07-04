@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: FireBolt
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 7754694216180532622, guid: f492f999ffb1dba449490d78b3870528, type: 3}
+  prefabAnimatoriMagia: {fileID: 2026087008462933487, guid: 40173528f26420948822dbef51454d5f, type: 3}
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 1
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   dannoDellaMagia: 10
+  suonoLancioMagia: {fileID: 0}
+  suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0.15
   knockbackForzaEsplosione: 1
   intensity: 6.04

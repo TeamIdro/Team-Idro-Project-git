@@ -21,6 +21,12 @@ public class MagiaSO : ScriptableObject
     [Header("Valori Magia Generici")]
     public float dannoDellaMagia;
     [Space()]
+
+    [Header("Suoni Per Magia")]
+    [SerializeField] AudioClip suonoLancioMagia;
+    [SerializeField] AudioClip suonoImpattoMagia;
+
+
     [Header("Valori per fisica proiettili")]
     [Max(10)]
     public float forzaDiGravitaPerProiettile = 0;

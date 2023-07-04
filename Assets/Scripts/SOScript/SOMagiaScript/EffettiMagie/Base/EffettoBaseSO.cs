@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class EffettoBaseSO : ScriptableObject
 {
+    public float durataEffetto = 0f;
+
     /// <summary>
     /// Funzione base per applicare l'effetto al nemico
     /// </summary>
