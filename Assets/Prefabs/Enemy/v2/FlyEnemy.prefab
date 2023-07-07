@@ -156,8 +156,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.78
-  m_BaseOffset: 0.33
+  m_Height: 0.54
+  m_BaseOffset: 0.2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
 --- !u!114 &2917369008224507157
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2094090e2c79384597c0a243b242d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <hp>k__BackingField: 100
+  <hp>k__BackingField: 1
   <patrol_Speed>k__BackingField: 5
   <patrol_angularSpeed>k__BackingField: 120
   <patrol_arriveDistance>k__BackingField: 1
@@ -308,8 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 0
-  timeCoolDown: 1.2
-  AttackBody: {fileID: 8594033055041396739}
+  timeCoolDown: 1
+  attackBody: {fileID: 8594033055041396739}
 --- !u!1 &8594033055041396739
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +370,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10418458, y: 0.2261682}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 8.791189
+  m_Radius: 0.65

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ElementalButton : MonoBehaviour
@@ -10,6 +11,15 @@ public class ElementalButton : MonoBehaviour
     public GameObject doorToOpen;
 
     public bool finalDoor;
+    
+    [SerializeField] private SpriteRenderer doorClosedsp;
+    
+    private const string DoorChildName = "Door_2";
+
+    private void Awake()
+    {
+        doorClosedsp = FindClosedDoorChild();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,16 +35,37 @@ public class ElementalButton : MonoBehaviour
             {
                 if(!CheckIfThereIsEnemies())
                 {
-                    Destroy(doorToOpen);
+                    OpenDoor();
                 }
             }
             else if(bulletElement == activationElement)
             {
-                Destroy(doorToOpen);
+                OpenDoor();
             }
         }
     }
 
+    private void OpenDoor()
+    {
+        doorClosedsp.enabled = false;
+        doorClosedsp = null;
+        doorToOpen.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    private SpriteRenderer FindClosedDoorChild()
+    {
+        foreach (SpriteRenderer child in doorToOpen.GetComponentsInChildren<SpriteRenderer>())
+        {
+            Debug.Log("SEARCHING");
+            if (child.sprite.name == DoorChildName)
+            {
+               return child;
+            }
+        }
+
+        return null;
+    }
+    
     private bool CheckIfThereIsEnemies()
     {
         EnemyScript[] enemiesInScene = FindObjectsOfType<EnemyScript>();

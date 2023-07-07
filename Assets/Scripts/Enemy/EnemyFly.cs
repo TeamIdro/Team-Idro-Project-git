@@ -1,36 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorDesigner.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 public class EnemyFly : MonoBehaviour
 {
 
-    public bool attackCooldown;
+    public bool attackCooldown = false;
     public float timeCoolDown = 1.2f;
 
-    // public float attackCooldownSet = 1.2f;
-
-    public GameObject AttackBody;
+    public GameObject attackBody;
 
     Coroutine attackCoroutine;
 
-    public void AttackEvent()//GameObject player
-    {       
+    private Animator _animator;
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+    
+    public void AttackEvent()
+    {
         if (!attackCooldown)
         {
-            Debug.Log("ATTACK");
-            AttackBody.SetActive(true);
             attackCooldown = true;
-            attackCoroutine = StartCoroutine(CooldownAttack());
+            _animator.SetTrigger("Attack");
         }
     }
-
-    private IEnumerator CooldownAttack()
+    
+    private void SetIdleAnimation()
     {
-        yield return new WaitForSeconds(timeCoolDown);
-        attackCooldown = false;
-        StopCoroutine(attackCoroutine);
+        _animator.SetTrigger("Idle");
+    }
+
+    private void ActivateAttackBody()
+    {
+        attackBody.SetActive(true);
+    }
+    
+    private void DeactivateAttackBody()
+    {
+        attackBody.SetActive(false);
     }
 }

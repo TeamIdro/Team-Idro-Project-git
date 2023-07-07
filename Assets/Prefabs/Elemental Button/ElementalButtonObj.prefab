@@ -134,6 +134,7 @@ MonoBehaviour:
   activationElement: 0
   doorToOpen: {fileID: 0}
   finalDoor: 1
+  doorClosedsp: {fileID: 0}
 --- !u!212 &2748246286675336848
 SpriteRenderer:
   m_ObjectHideFlags: 0
