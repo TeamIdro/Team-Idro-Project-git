@@ -50426,7 +50426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5541718880415109889, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 46.3
+      value: 45.68
       objectReference: {fileID: 0}
     - target: {fileID: 5541718880415109889, guid: 608ec8560816af64eb5217bda4bf7ed5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -50868,18 +50868,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6861427684917036642, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: mBehaviorSource.mTaskData.JSONSerialization
-      value: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(88.24996,98.12497)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.SelectorEvaluator","NodeData":{"Offset":"(30,159.999969)"},"ID":1,"Name":"Selector
-        Evaluator","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-180,120)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"Self","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.SelectorEvaluator","NodeData":{"Offset":"(-110,130)"},"ID":3,"Name":"Selector
-        Evaluator","Instant":true,"AbortTypeabortType":"Both","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.CanSeeObject","NodeData":{"Offset":"(-230,110)"},"ID":4,"Name":"Can
-        See Object","Instant":true,"BooleanusePhysics2D":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedGameObjectListtargetObjects":{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":null,"List`1mValue":[]},"SharedStringtargetTag":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"Player"},"LayerMaskobjectLayerMask":256,"Int32maxCollisionCount":200,"LayerMaskignoreLayerMask":3831,"SharedFloatfieldOfViewAngle":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FOVAngle","IsShared":true,"PropertyMapping":"EnemyScript/fovAngle","PropertyMappingOwner":0,"SinglemValue":0},"SharedFloatviewDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ViewDistance","IsShared":true,"PropertyMapping":"EnemyScript/viewDistance","PropertyMappingOwner":1,"SinglemValue":0},"SharedVector3offset":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"Vector3mValue":"(0,0,0)"},"SharedVector3targetOffset":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"Vector3mValue":"(0,0,0)"},"SharedFloatangleOffset2D":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"angle","IsShared":true,"PropertyMapping":"EnemyScript/angle","PropertyMappingOwner":2,"SinglemValue":0},"SharedBooluseTargetBone":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"HumanBodyBonestargetBone":"Hips","SharedBooldrawDebugRay":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBooldisableAgentColliderLayer":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedGameObjectreturnedObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"CanSeeObjectReturned","IsShared":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.ReturnFailure","NodeData":{"Offset":"(-59.99997,110)"},"ID":5,"Name":"Return
-        Failure","Instant":true,"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.InvokeMethod","NodeData":{"Offset":"(3.05175781E-05,110)"},"ID":6,"Name":"ReduceCanSeeRange","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringcomponentName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"EnemyScript"},"SharedStringmethodName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"ReduceSeeRange"}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Patrol","NodeData":{"Offset":"(100,110)"},"ID":7,"Name":"Patrol","Instant":true,"SharedBoolrandomPatrol":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatwaypointPauseDuration":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":0},"SharedGameObjectListwaypoints":{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":null,"List`1mValue":[3,4]},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":10},"SharedFloatangularSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":120},"SharedFloatarriveDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolupdateRotation":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.InvokeMethod","NodeData":{"Offset":"(340,240)"},"ID":8,"Name":"IncreaseCanSeeRange","Instant":true,"SharedGameObjecttargetGameObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":null},"SharedStringcomponentName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"EnemyScript"},"SharedStringmethodName":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":"IncreaseSeeRange"}},{"Type":"BehaviorDesigner.Runtime.Tasks.Movement.Seek","NodeData":{"Offset":"(490,240)"},"ID":9,"Name":"Seek","Instant":true,"SharedGameObjecttarget":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"CanSeeObjectReturned","IsShared":true},"SharedVector3targetPosition":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"Vector3mValue":"(0,0,0)"},"SharedFloatspeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":5},"SharedFloatangularSpeed":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":120},"SharedFloatarriveDistance":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":15},"SharedBoolstopOnTaskEnd":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolupdateRotation":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false}}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"FOVAngle","IsShared":true,"PropertyMapping":"EnemyScript/fovAngle","PropertyMappingOwner":5,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"ViewDistance","IsShared":true,"PropertyMapping":"EnemyScript/viewDistance","PropertyMappingOwner":6,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":"angle","IsShared":true,"PropertyMapping":"EnemyScript/angle","PropertyMappingOwner":7,"SinglemValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"CanSeeObjectReturned","IsShared":true}]}'
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036642, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036642, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[3]
       value: 
       objectReference: {fileID: 671282689}
@@ -50887,17 +50875,9 @@ PrefabInstance:
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[4]
       value: 
       objectReference: {fileID: 1790588659}
-    - target: {fileID: 6861427684917036642, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[5]
-      value: 
-      objectReference: {fileID: 2145850113}
     - target: {fileID: 6861427684917036643, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: m_Name
       value: FlyEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036643, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6861427684917036645, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: m_RootOrder
@@ -50942,14 +50922,6 @@ PrefabInstance:
     - target: {fileID: 6861427684917036645, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036647, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: m_Size.y
-      value: 8.699752
-      objectReference: {fileID: 0}
-    - target: {fileID: 6861427684917036647, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.66883564
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
@@ -51614,11 +51586,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
---- !u!1 &2145850113 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6861427684917036643, guid: 47b525f5bcbb52f469f4328ee509240b, type: 3}
-  m_PrefabInstance: {fileID: 1867706340}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1430256766623958292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52021,6 +51988,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 689679381532556618, guid: 30c5a443f9912f9469862e0b8bf8ac28, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.266
+      objectReference: {fileID: 0}
     - target: {fileID: 2748246286675336844, guid: 30c5a443f9912f9469862e0b8bf8ac28, type: 3}
       propertyPath: m_Name
       value: ElementalButtonObj
@@ -52047,7 +52018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748246286675336846, guid: 30c5a443f9912f9469862e0b8bf8ac28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 45.7
+      value: 46.37
       objectReference: {fileID: 0}
     - target: {fileID: 2748246286675336846, guid: 30c5a443f9912f9469862e0b8bf8ac28, type: 3}
       propertyPath: m_LocalPosition.z

@@ -5,15 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/UIMenu/UI_Menu_Principale.unity
-    guid: 5927e2c8a4366ae4cb351eaa097b3ac8
-  - enabled: 0
-    path: Assets/Scenes/TESTING NICCO/ScenaTest_Nicco_Movimento_Personaggio.unity
-    guid: 8c118ca9136b2e24992987d439451584
-  - enabled: 0
-    path: Assets/Scenes/TESTING NICCO/ScenaTesting_Bambino_ProfLayton.unity
-    guid: 942018a7766b9e14487092d4ae201953
   - enabled: 1
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga Liv Tutorial.unity
     guid: 5636ac5badbf8574b9e5d7be3f39f3bb
@@ -35,10 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga Liv 1.6.unity
     guid: fff92b2cbb8d4cf4898997162307e403
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga 2.unity
     guid: 408d55a92ff020d41b35a14ca99925c6
-  - enabled: 1
-    path: Assets/Scenes/TESTING EDOARDO/FirstMageScene.unity
-    guid: f291a5317bc83b342900fb29de0cc426
   m_configObjects: {}
