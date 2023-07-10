@@ -45,6 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGameState: 2
-  playerPrefab_ChessVersion: {fileID: 8409694806797848491, guid: 1ee84a131aa802e4f9a370f6ae8e9c3e, type: 3}
-  playerPrefab_LaytonVersion: {fileID: 8120271533676271947, guid: a85292b6803ae1e44af8ac265c0e45b2, type: 3}
+  baseMouseCursor: {fileID: 2800000, guid: 6fdfcd4167ed5e7488584241bb671bb2, type: 3}
   virtualCameraForChessKid: {fileID: 3623084029725276824, guid: 3f8b78aa64f03d44894ac49b47e069ad, type: 3}
