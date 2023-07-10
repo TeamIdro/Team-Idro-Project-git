@@ -10,6 +10,7 @@ public class EventActivator : MonoBehaviour
     {
         DialogController.Instance.dialogAsset = asset;
         DialogController.Instance.AddSpeaker();
+        DialogController.Instance.NextSentence();
     }
 
 }

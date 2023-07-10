@@ -58,7 +58,12 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     [Space(10)]
     [Header("Weakness and Resistance")]
     public TipoMagia weakness; 
-    public TipoMagia resistance; 
+    public TipoMagia resistance;
+
+    private GameObject ElementWeaknessObj;
+    
+    const string ElementWeakness = "ElementWeakness";
+
 
     private void Awake() 
     {
@@ -73,6 +78,14 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 		agent.updateUpAxis = false;
 
         ReduceSeeRange();
+        
+        foreach (Transform child in this.transform)
+        {
+            if (child.name == ElementWeakness)
+            {
+                ElementWeaknessObj = child.gameObject;
+            }
+        }
 
         // agent.stoppingDistance = behaviorTree.GetVariable()
     }
@@ -113,6 +126,11 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     public void TakeDamage(float damageToTake, TipoMagia magicType)
     {
         float damageCalculated = damageToTake;
+
+        if (!ElementWeaknessObj.gameObject.activeInHierarchy)
+        {
+            ElementWeaknessObj.SetActive(true);
+        }
 
         if(magicType == weakness)
         {
