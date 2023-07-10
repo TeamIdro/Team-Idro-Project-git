@@ -24,7 +24,7 @@ public class UIMenuPrincipale : MonoBehaviour
         Debug.Log("uscito debug");
 #else
      Application.Quit(); 
-     Debug.Log("uscito")
+     Debug.Log("uscito");
 #endif   
     }
 }
