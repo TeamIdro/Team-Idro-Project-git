@@ -45158,7 +45158,7 @@ PrefabInstance:
     - target: {fileID: 6245158806872014558, guid: 751fc335cc0bd8c41b74691448ebe63f, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: b739ac496a4b6ae499239df4c2bcf71b, type: 2}
+      objectReference: {fileID: 23800000, guid: 80bebfac693eb274882c96f853f97507, type: 2}
     - target: {fileID: 6245158806872014558, guid: 751fc335cc0bd8c41b74691448ebe63f, type: 3}
       propertyPath: m_OverrideVoxelSize
       value: 0

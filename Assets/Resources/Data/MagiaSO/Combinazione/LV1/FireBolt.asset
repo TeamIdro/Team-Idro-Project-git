@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
+  m_Name: FireBolt
+  m_EditorClassIdentifier: 
+  prefabAnimatoriMagia: {fileID: 2026087008462933487, guid: 40173528f26420948822dbef51454d5f, type: 3}
+  magicBehaviourType: 0
+  tipoMagia: 0
+  damageType: 1
+  combinazioneDiElementi:
+  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
+  dannoDellaMagia: 10
+  suonoLancioMagia: {fileID: 0}
+  suonoImpattoMagia: {fileID: 0}
+  forzaDiGravitaPerProiettile: 0.15
+  knockbackForzaEsplosione: 1
+  intensity: 6.04
+  shakeTime: 0.12
+  velocitaDellaMagiaLanciata: 100
+  rallentamentoGraduale: 1
+  tempoDecellerazioneMagiaLanciata: 0
+  distanzaMagiaLanciata: 100
+  tempoMagiaLanciata: 122
+  detonazioneAdImpatto: 1
+  ExplosionPref: {fileID: 3369253412745020790, guid: 7d0d13f9a6e23df4a93b8b4617b5edfa, type: 3}
+  layerMaskPerIgnoraCollisioni:
+    serializedVersion: 2
+    m_Bits: 1280
+  layerMaskPerDanneggiaTarget:
+    serializedVersion: 2
+    m_Bits: 4096
+  tickTime: 0
+  raggioArea: 4.04
+  effettiMagia:
+  - {fileID: 11400000, guid: ef4689bfb83898347b666670b872f3dd, type: 2}
+  spawnaOggettoAdImpatto: {fileID: 0}
+  dannoAreaOggettoAdImpattoSpawnato: 0

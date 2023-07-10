@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6097509770038259955}
   - component: {fileID: 2471006707099320217}
   - component: {fileID: 2203523069351047063}
-  m_Layer: 0
+  - component: {fileID: -8529626290507281372}
+  m_Layer: 10
   m_Name: PrefabMagia
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 2811095905312843416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.9824162, y: 3.768561, z: -0.097376354}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -103,8 +104,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   magia: {fileID: 0}
-  isCasted: 0
-  animator: {fileID: 2471006707099320217}
   explosionKnockbackForce: 1
   damageExplosion: 0
   ExplosionPref: {fileID: 7952463968355666411, guid: a334fe2610405a74889c731f40be3dc3, type: 3}
@@ -144,9 +143,30 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!50 &-8529626290507281372
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2811095905312843416}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0

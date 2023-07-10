@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82420e90972c5a4e9c06ae32c1bf401, type: 3}
   m_Name: Terra
   m_EditorClassIdentifier: 
-  spriteElemento: {fileID: 21300000, guid: 453526b4d8daa8247a66ec6386d55bb6, type: 3}
+  spriteElemento: {fileID: 1153537841, guid: 7039db287dace1842af893b7666286a7, type: 3}
   tipoDiMagia: 3

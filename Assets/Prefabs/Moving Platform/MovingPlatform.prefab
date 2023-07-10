@@ -156,7 +156,7 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 1
+  gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
 --- !u!195 &1970239925194487857
 NavMeshAgent:
