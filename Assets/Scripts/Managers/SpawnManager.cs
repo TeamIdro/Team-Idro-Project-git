@@ -29,6 +29,6 @@ public class SpawnManager : MonoBehaviour
     public void Respawn()
     {
         PlayerCharacterController.Instance.transform.position 
-            = actualSpawnPoint.transform.position;
+            = actualSpawnPoint.transform.position + new Vector3(0f, 1.5f);
     }
 }

@@ -165,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8173882275001059754, guid: bfe725090d6103b409a8a2d89c0a88e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.36
+      value: 14.67
       objectReference: {fileID: 0}
     - target: {fileID: 8173882275001059754, guid: bfe725090d6103b409a8a2d89c0a88e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -64522,7 +64522,7 @@ PrefabInstance:
     - target: {fileID: 6245158806872014558, guid: 751fc335cc0bd8c41b74691448ebe63f, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: ce2c75bceedd67b4f9f4684af2b8b83b, type: 2}
+      objectReference: {fileID: 23800000, guid: 9908b512e3790ed498ad98a51828bf8a, type: 2}
     - target: {fileID: 6245158806872014558, guid: 751fc335cc0bd8c41b74691448ebe63f, type: 3}
       propertyPath: m_OverrideVoxelSize
       value: 0
@@ -65531,7 +65531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8173882275001059754, guid: bfe725090d6103b409a8a2d89c0a88e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.59
+      value: -1.34
       objectReference: {fileID: 0}
     - target: {fileID: 8173882275001059754, guid: bfe725090d6103b409a8a2d89c0a88e8, type: 3}
       propertyPath: m_LocalPosition.z
