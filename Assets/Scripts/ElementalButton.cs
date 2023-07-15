@@ -35,12 +35,18 @@ public class ElementalButton : MonoBehaviour
             {
                 if(!CheckIfThereIsEnemies())
                 {
-                    OpenDoor();
+                    if (bulletElement == activationElement)
+                    {
+                        OpenDoor();
+                    }
                 }
             }
-            else if(bulletElement == activationElement)
+            else
             {
-                OpenDoor();
+                if (bulletElement == activationElement)
+                {
+                    OpenDoor();
+                }
             }
         }
     }
