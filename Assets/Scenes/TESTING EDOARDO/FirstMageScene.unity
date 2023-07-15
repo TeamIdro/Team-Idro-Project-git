@@ -19034,53 +19034,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1220166403, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: offsetXCast
-      value: 0.34
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220166403, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: maxCastDistance
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220166403, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: boxCastDimension.x
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220166403, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: boxCastDimension.y
-      value: 0.27
-      objectReference: {fileID: 0}
-    - target: {fileID: 1285037267585120529, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1285037267585120529, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2316705413653882135, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 2316705413653882135, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.16
-      objectReference: {fileID: 0}
     - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19126,30 +19082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mago
       objectReference: {fileID: 0}
-    - target: {fileID: 4108159572990154237, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4337122286586203744, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_Size.y
-      value: 2.5860755
-      objectReference: {fileID: 0}
-    - target: {fileID: 4337122286586203744, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 4337122286586203744, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.12
-      objectReference: {fileID: 0}
     - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_UIPrefab
       value: 
       objectReference: {fileID: 12901880}
-    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: jumpVelocity
-      value: 750
-      objectReference: {fileID: 0}
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_healthSlider
       value: 
@@ -19158,22 +19094,6 @@ PrefabInstance:
       propertyPath: playerSaveData
       value: 
       objectReference: {fileID: 853353173}
-    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: maxCastDistance
-      value: 0.652
-      objectReference: {fileID: 0}
-    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: maxCastDirection
-      value: 0.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 7537261567199135306, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_Interpolate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7537261567199135306, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
-      propertyPath: m_GravityScale
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
 --- !u!4 &385787707 stripped
@@ -20964,11 +20884,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1458658717643805668, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30.92
+      value: 30.95
       objectReference: {fileID: 0}
     - target: {fileID: 1458658717643805668, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.75
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 1458658717643805668, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21022,6 +20942,14 @@ PrefabInstance:
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[5]
       value: 
       objectReference: {fileID: 2008819357}
+    - target: {fileID: 1458658717643805678, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: m_Height
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542126691708464738, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
 --- !u!1001 &4761346465912059308
