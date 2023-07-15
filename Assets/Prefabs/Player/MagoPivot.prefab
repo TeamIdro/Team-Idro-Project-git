@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1575464462213413425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -1.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -232,8 +232,6 @@ GameObject:
   - component: {fileID: 7537261567199135306}
   - component: {fileID: 1220166403}
   - component: {fileID: 3804255805627570671}
-  - component: {fileID: 4668662934300849048}
-  - component: {fileID: 4782456325285946609}
   m_Layer: 8
   m_Name: MagoPivot
   m_TagString: Player
@@ -274,11 +272,11 @@ MonoBehaviour:
   m_healthSlider: {fileID: 0}
   hp: 50
   movementVelocity: 50
-  jumpVelocity: 600
+  jumpVelocity: 750
   isBlocked: 0
   maxVelocityCap: 10
   deceleration: 50
-  maxCastDistance: 0.5
+  maxCastDistance: 0.652
   movementDirection: {x: 0, y: 0}
   isMoving: 0
   isJumping: 0
@@ -341,8 +339,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.70016}
-  m_Size: {x: 1, y: 3.40032}
+  m_Offset: {x: -0.35, y: -0.12}
+  m_Size: {x: 1, y: 2.5860755}
   m_Direction: 0
 --- !u!50 &7537261567199135306
 Rigidbody2D:
@@ -377,11 +375,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7079b704c916dc743ba52dd97879faf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxCastDimension: {x: 0.45, y: 0.49}
-  maxCastDistance: 0.83
+  boxCastDimension: {x: 0.11, y: 0.27}
+  maxCastDistance: 1.5
   terrainMask:
     serializedVersion: 2
     m_Bits: 512
+  offsetXCast: 0.34
 --- !u!81 &3804255805627570671
 AudioListener:
   m_ObjectHideFlags: 0
@@ -390,40 +389,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4108159572990154237}
   m_Enabled: 1
---- !u!114 &4668662934300849048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4108159572990154237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7079b704c916dc743ba52dd97879faf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCastDimension: {x: 0.45, y: 0.49}
-  maxCastDistance: 0.83
-  terrainMask:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!114 &4782456325285946609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4108159572990154237}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7079b704c916dc743ba52dd97879faf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxCastDimension: {x: 0.45, y: 0.49}
-  maxCastDistance: 0.83
-  terrainMask:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &5351127479474757305
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5351127479474757305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.009, y: -2.13, z: 0}
+  m_LocalPosition: {x: -0.32, y: -1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
