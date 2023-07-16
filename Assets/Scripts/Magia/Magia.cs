@@ -167,7 +167,8 @@ public class Magia : MonoBehaviour
             {
                 Instantiate(magia.spawnaOggettoAdImpatto, gameObject.transform.position, Quaternion.identity);
             }
-            Destroy(gameObject);
+            if(magia.detonazioneAdImpatto == true)
+                Destroy(gameObject);
 
         }
         

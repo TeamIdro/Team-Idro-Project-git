@@ -19066,7 +19066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3780698863276552056, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_Volume
-      value: 0.247
+      value: 0.075
       objectReference: {fileID: 0}
     - target: {fileID: 3780698863276552056, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_PlayOnAwake
@@ -20569,6 +20569,10 @@ PrefabInstance:
     - target: {fileID: 2672353208428643257, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: m_Name
       value: TestMeleeEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672353209548899405, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
