@@ -270,9 +270,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerType: 1
   m_healthSlider: {fileID: 0}
-  hp: 50
+  hp: 100
   movementVelocity: 50
-  jumpVelocity: 750
+  jumpVelocity: 700
   isBlocked: 0
   maxVelocityCap: 10
   deceleration: 50

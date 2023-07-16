@@ -37075,11 +37075,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.75
+      value: 15.92
       objectReference: {fileID: 0}
     - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.23
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 4108159572990153987, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37122,8 +37122,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12901880}
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: jumpVelocity
-      value: 600
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_healthSlider
@@ -37557,11 +37561,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6032490257518914322, guid: b11eed8ad525a3145ac231edfbe1fef9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.75
+      value: 15.92
       objectReference: {fileID: 0}
     - target: {fileID: 6032490257518914322, guid: b11eed8ad525a3145ac231edfbe1fef9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.23
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 6032490257518914322, guid: b11eed8ad525a3145ac231edfbe1fef9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -38240,7 +38244,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322860242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 47.75, y: -1.23, z: -9.884533}
+  m_LocalPosition: {x: 15.92, y: -1.06, z: -9.884533}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -38546,6 +38550,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 695583313}
     m_Modifications:
+    - target: {fileID: 1392916962, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392916963, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392916963, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392916963, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1392916964, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -799248881, guid: ff6e1483294a5044d99f702a0994b97c, type: 3}
     - target: {fileID: 1458658717643805668, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -38596,7 +38620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1458658717643805669, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1458658717643805670, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: mBehaviorSource.mTaskData.JSONSerialization
@@ -38625,6 +38649,14 @@ PrefabInstance:
     - target: {fileID: 3542126691708464738, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: m_GravityScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542126693128566736, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: weakness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3542126693128566736, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
+      propertyPath: weaknessMultiplier
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
