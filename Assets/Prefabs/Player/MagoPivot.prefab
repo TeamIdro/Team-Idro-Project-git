@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 4337122286586203744}
   - component: {fileID: 7537261567199135306}
   - component: {fileID: 1220166403}
-  - component: {fileID: 3804255805627570671}
   m_Layer: 8
   m_Name: MagoPivot
   m_TagString: Player
@@ -381,14 +380,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   offsetXCast: 0.34
---- !u!81 &3804255805627570671
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4108159572990154237}
-  m_Enabled: 1
 --- !u!1 &5351127479474757305
 GameObject:
   m_ObjectHideFlags: 0

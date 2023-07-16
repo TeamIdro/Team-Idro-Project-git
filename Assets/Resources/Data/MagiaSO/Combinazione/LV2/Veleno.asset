@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabAnimatoriMagia: {fileID: 5539802468714161225, guid: 4b02007d99dc59d4888b7a9ff9edbd72, type: 3}
   magicBehaviourType: 0
-  tipoMagia: 0
+  tipoMagia: 9
   damageType: 0
   combinazioneDiElementi:
-  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
+  - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
   - {fileID: 11400000, guid: 883b13981282ae5478df3bd72ba83949, type: 2}
-  dannoDellaMagia: 0.37
+  dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
