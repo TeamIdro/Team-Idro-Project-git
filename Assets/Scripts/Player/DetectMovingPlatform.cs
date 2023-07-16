@@ -9,11 +9,9 @@ public class DetectMovingPlatform : MonoBehaviour
     public float maxCastDistance;
     public LayerMask terrainMask;
     RaycastHit2D hit;
+    public float offsetXCast;
 
-    void Awake()
-    {
-        // terrainMask = LayerMask.GetMask("Terreno");    
-    }
+
 
     private void Update() 
     {
@@ -36,8 +34,8 @@ public class DetectMovingPlatform : MonoBehaviour
         }
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireCube(new Vector3(transform.position.x,transform.position.y - maxCastDistance, 0), boxCastDimension);
-    // }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(new Vector3(transform.position.x - offsetXCast,transform.position.y - maxCastDistance, 0), boxCastDimension);
+    }
 }

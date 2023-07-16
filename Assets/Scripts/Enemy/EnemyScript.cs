@@ -57,7 +57,9 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 
     [Space(10)]
     [Header("Weakness and Resistance")]
-    public TipoMagia weakness; 
+    public TipoMagia weakness;
+    public float weaknessMultiplier = 1.5f;
+    
     public TipoMagia resistance;
 
     private GameObject ElementWeaknessObj;
@@ -134,11 +136,11 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 
         if(magicType == weakness)
         {
-            damageCalculated = damageToTake * 1.5f;
+            damageCalculated = damageToTake * weaknessMultiplier;
         }
-        else if(magicType == resistance)
+        else
         {
-            damageCalculated = damageToTake * 0.5f;
+            damageCalculated = damageToTake * 0;
         }
             
         hp -= damageCalculated;
