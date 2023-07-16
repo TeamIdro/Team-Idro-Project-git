@@ -12,31 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: RockBolt
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 0}
+  prefabAnimatoriMagia: {fileID: 2482630182511487331, guid: ee6b1af54e236aa46b7dea3c77c093bd, type: 3}
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
-  combinazioneDiElementi: []
+  combinazioneDiElementi:
+  - {fileID: 11400000, guid: 883b13981282ae5478df3bd72ba83949, type: 2}
   dannoDellaMagia: 0
+  suonoLancioMagia: {fileID: 0}
+  suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
   knockbackForzaEsplosione: 1
-  intensity: 0
-  shakeTime: 0
-  velocitaDellaMagiaLanciata: 0
-  rallentamentoGraduale: 0
-  tempoDecellerazioneMagiaLanciata: 0
-  distanzaMagiaLanciata: 0
-  tempoMagiaLanciata: 5
-  detonazioneAdImpatto: 0
-  ExplosionPref: {fileID: 0}
+  intensity: 0.12
+  shakeTime: 0.11
+  velocitaDellaMagiaLanciata: 100
+  rallentamentoGraduale: 1
+  tempoDecellerazioneMagiaLanciata: 69.1
+  distanzaMagiaLanciata: 100
+  tempoMagiaLanciata: 1000
+  detonazioneAdImpatto: 1
+  ExplosionPref: {fileID: 3311449554613764974, guid: 9085ace5e97ea174cb954f5fe97e0115, type: 3}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1280
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   tickTime: 0
   raggioArea: 0
+  lunghezzaLineCast: 0
   effettiMagia: []
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0
