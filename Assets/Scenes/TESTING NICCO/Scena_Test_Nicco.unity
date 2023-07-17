@@ -19056,6 +19056,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1285037267585120529, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285037267585120529, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.91
+      objectReference: {fileID: 0}
     - target: {fileID: 2316705413653882135, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.3
@@ -19171,6 +19179,10 @@ PrefabInstance:
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: movementVelocity
       value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 30209
       objectReference: {fileID: 0}
     - target: {fileID: 6758082493375761218, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -19933,6 +19945,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1253982597 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2672353209548899405, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+  m_PrefabInstance: {fileID: 1886761480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1322860242
 GameObject:
   m_ObjectHideFlags: 0
@@ -20514,6 +20531,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1379346316, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+      propertyPath: <speed>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379346316, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+      propertyPath: <patrol_Speed>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2672353208428643253, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: mBehaviorSource.mTaskData.fieldSerializationData.unityObjects.Array.data[0]
       value: 
@@ -20570,10 +20595,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestMeleeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2672353208428643257, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2672353209548899405, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2672353209548899405, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963705300253753115, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
+      propertyPath: attackBody
+      value: 
+      objectReference: {fileID: 1253982597}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
 --- !u!1001 &1936499073

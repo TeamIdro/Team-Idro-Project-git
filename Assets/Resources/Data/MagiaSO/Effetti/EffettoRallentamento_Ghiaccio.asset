@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EffettoRallentamento_Ghiaccio
   m_EditorClassIdentifier: 
   durataEffetto: 0
-  percentualeRallentamentoNemicoColpito: 75
+  percentualeRallentamentoNemicoColpito: 0
   moltiplicatoreDiMagia: 2
   coloreEffetto:
     serializedVersion: 2
