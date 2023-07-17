@@ -145,7 +145,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
             
         hp -= damageCalculated;
 
-        if (hp < 0)
+        if (hp <= 0)
         {
             Destroy(this.gameObject);
         }
