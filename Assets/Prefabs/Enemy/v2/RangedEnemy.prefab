@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 380765887}
   - component: {fileID: 380765888}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: ElementWeakness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4761346466113240260}
   - component: {fileID: 4761346466113240261}
   - component: {fileID: 4761346466113240266}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: RangedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
+  gizmoViewMode: 1
   showBehaviorDesignerGizmo: 1
 --- !u!114 &4761346466113240260
 MonoBehaviour:
@@ -365,7 +365,7 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 2
+  gizmoViewMode: 1
   showBehaviorDesignerGizmo: 1
 --- !u!114 &4761346466113240261
 MonoBehaviour:
