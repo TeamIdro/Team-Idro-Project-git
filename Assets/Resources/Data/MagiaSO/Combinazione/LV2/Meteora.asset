@@ -35,10 +35,10 @@ MonoBehaviour:
   ExplosionPref: {fileID: 3369253412745020790, guid: 7d0d13f9a6e23df4a93b8b4617b5edfa, type: 3}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   tickTime: 0
   raggioArea: 0
   lunghezzaLineCast: 0
