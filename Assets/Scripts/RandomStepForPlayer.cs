@@ -13,10 +13,10 @@ public class RandomStepForPlayer : MonoBehaviour
          passiPlayer = Resources.LoadAll<AudioClip>("Audio/PassiPlayer").ToList();
     }
     // Update is called once per frame
-    public void RandomStep()
+   public void RandomStep()
     {
-        int index = Random.Range(0,passiPlayer.Count);
-        playerStepSource.clip = passiPlayer[index];
-        playerStepSource.Play();
+      // int index = Random.Range(0,passiPlayer.Count);
+        //playerStepSource.clip = passiPlayer[index];
+       // playerStepSource.Play();
     }
 }

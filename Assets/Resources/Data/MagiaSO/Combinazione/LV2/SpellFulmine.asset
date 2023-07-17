@@ -12,31 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65823995ebd17dc4091420f7427126d7, type: 3}
   m_Name: SpellFulmine
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 0}
+  prefabAnimatoriMagia: {fileID: 7043036109183494557, guid: a5c3bf802a3f36045a5d0a2a34748a66, type: 3}
   magicBehaviourType: 0
-  tipoMagia: 0
+  tipoMagia: 8
   damageType: 0
-  combinazioneDiElementi: []
-  dannoDellaMagia: 0
+  combinazioneDiElementi:
+  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
+  - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
+  dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
   knockbackForzaEsplosione: 1
   intensity: 0
   shakeTime: 0
-  velocitaDellaMagiaLanciata: 0
+  velocitaDellaMagiaLanciata: 100
   rallentamentoGraduale: 0
-  tempoDecellerazioneMagiaLanciata: 0
-  distanzaMagiaLanciata: 0
-  tempoMagiaLanciata: 5
-  detonazioneAdImpatto: 0
+  tempoDecellerazioneMagiaLanciata: 1
+  distanzaMagiaLanciata: 100
+  tempoMagiaLanciata: 2
+  detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1280
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   tickTime: 0
   raggioArea: 0
   lunghezzaLineCast: 0

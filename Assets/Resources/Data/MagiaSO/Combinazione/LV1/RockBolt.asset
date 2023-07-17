@@ -14,22 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabAnimatoriMagia: {fileID: 2482630182511487331, guid: ee6b1af54e236aa46b7dea3c77c093bd, type: 3}
   magicBehaviourType: 0
-  tipoMagia: 0
+  tipoMagia: 3
   damageType: 0
   combinazioneDiElementi:
   - {fileID: 11400000, guid: 883b13981282ae5478df3bd72ba83949, type: 2}
-  dannoDellaMagia: 0
+  dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
   knockbackForzaEsplosione: 1
-  intensity: 0.12
-  shakeTime: 0.11
+  intensity: 0
+  shakeTime: 0
   velocitaDellaMagiaLanciata: 100
-  rallentamentoGraduale: 1
-  tempoDecellerazioneMagiaLanciata: 69.1
+  rallentamentoGraduale: 0
+  tempoDecellerazioneMagiaLanciata: 1
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 1000
+  tempoMagiaLanciata: 2
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 3311449554613764974, guid: 9085ace5e97ea174cb954f5fe97e0115, type: 3}
   layerMaskPerIgnoraCollisioni:
