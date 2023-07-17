@@ -28,9 +28,9 @@ MonoBehaviour:
   shakeTime: 0
   velocitaDellaMagiaLanciata: 100
   rallentamentoGraduale: 0
-  tempoDecellerazioneMagiaLanciata: 100
+  tempoDecellerazioneMagiaLanciata: 1
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 1000
+  tempoMagiaLanciata: 2
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
@@ -41,6 +41,7 @@ MonoBehaviour:
     m_Bits: 4096
   tickTime: 0
   raggioArea: 0
+  lunghezzaLineCast: 0
   effettiMagia: []
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0

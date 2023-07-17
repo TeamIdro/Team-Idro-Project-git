@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354a4563ac518b24e9dc33e1c1e3ace0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 35
   timeToDeath: 5
 --- !u!199 &3282306625285332500
 ParticleSystemRenderer:

@@ -15,21 +15,21 @@ MonoBehaviour:
   prefabAnimatoriMagia: {fileID: 2026087008462933487, guid: 40173528f26420948822dbef51454d5f, type: 3}
   magicBehaviourType: 0
   tipoMagia: 0
-  damageType: 1
+  damageType: 0
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
-  forzaDiGravitaPerProiettile: 0.15
+  forzaDiGravitaPerProiettile: 0
   knockbackForzaEsplosione: 1
-  intensity: 6.04
-  shakeTime: 0.12
+  intensity: 0
+  shakeTime: 0
   velocitaDellaMagiaLanciata: 100
-  rallentamentoGraduale: 1
+  rallentamentoGraduale: 0
   tempoDecellerazioneMagiaLanciata: 0
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 122
+  tempoMagiaLanciata: 2
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 3369253412745020790, guid: 7d0d13f9a6e23df4a93b8b4617b5edfa, type: 3}
   layerMaskPerIgnoraCollisioni:
@@ -40,6 +40,7 @@ MonoBehaviour:
     m_Bits: 4096
   tickTime: 0
   raggioArea: 4.04
+  lunghezzaLineCast: 0
   effettiMagia:
   - {fileID: 11400000, guid: ef4689bfb83898347b666670b872f3dd, type: 2}
   spawnaOggettoAdImpatto: {fileID: 0}
