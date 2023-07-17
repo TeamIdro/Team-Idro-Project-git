@@ -48019,6 +48019,10 @@ PrefabInstance:
       propertyPath: m_UIPrefab
       value: 
       objectReference: {fileID: 12901880}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_spellSlot
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: jumpVelocity
       value: 600

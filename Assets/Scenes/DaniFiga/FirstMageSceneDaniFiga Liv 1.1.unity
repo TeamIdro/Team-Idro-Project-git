@@ -37121,6 +37121,10 @@ PrefabInstance:
       propertyPath: m_UIPrefab
       value: 
       objectReference: {fileID: 12901880}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_spellSlot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: hp
       value: 100
@@ -37795,6 +37799,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886889962430917449, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d164c6a431b92b84cb562ece6da5488c, type: 3}
     - target: {fileID: 3974583486039379168, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 84.550415
