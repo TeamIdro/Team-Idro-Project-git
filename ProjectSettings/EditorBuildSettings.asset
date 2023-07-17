@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga Liv 1.4.unity
     guid: 6dc9d8680883bd642bc00c9e55b4cbfe
   - enabled: 1
+    path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga Liv Tutorial 2.unity
+    guid: 43e190b97bb4d8f47b4aefe6d4bb5719
+  - enabled: 1
     path: Assets/Scenes/DaniFiga/FirstMageSceneDaniFiga Liv 1.5.unity
     guid: 24bfd36ed8594cc47b0042cd60edbe71
   - enabled: 1

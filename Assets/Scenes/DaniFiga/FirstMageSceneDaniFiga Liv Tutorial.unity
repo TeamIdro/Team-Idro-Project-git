@@ -37731,13 +37731,14 @@ GameObject:
   - component: {fileID: 827037979}
   - component: {fileID: 827037978}
   - component: {fileID: 827037977}
+  - component: {fileID: 827037980}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &827037976
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37820,6 +37821,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &827037980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827037975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e22f99f1d10ba429d332e409bcf969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 10
 --- !u!1 &853353171
 GameObject:
   m_ObjectHideFlags: 0
@@ -38087,6 +38101,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2672353208428643256, guid: 9d91ddf6fad57354ea267da9eb4b83e3, type: 3}
   m_PrefabInstance: {fileID: 469609619}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &973250899 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2008705724177155112, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+  m_PrefabInstance: {fileID: 1023487736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &975480216
 GameObject:
   m_ObjectHideFlags: 0
@@ -39496,6 +39521,10 @@ PrefabInstance:
       propertyPath: m_spellSlot
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_healthSlider
+      value: 
+      objectReference: {fileID: 973250899}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
 --- !u!4 &1938051702 stripped
