@@ -21,15 +21,15 @@ MonoBehaviour:
   dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
-  forzaDiGravitaPerProiettile: 0.18
+  forzaDiGravitaPerProiettile: 0
   knockbackForzaEsplosione: 1
   intensity: 0
   shakeTime: 0
-  velocitaDellaMagiaLanciata: 74.7
+  velocitaDellaMagiaLanciata: 100
   rallentamentoGraduale: 0
   tempoDecellerazioneMagiaLanciata: 0
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 286
+  tempoMagiaLanciata: 2
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 2297003416483041500, guid: 05f69ec06508ac640b40a11bb29221f2, type: 3}
   layerMaskPerIgnoraCollisioni:
@@ -40,6 +40,7 @@ MonoBehaviour:
     m_Bits: 4096
   tickTime: 0
   raggioArea: 0
+  lunghezzaLineCast: 0
   effettiMagia: []
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0

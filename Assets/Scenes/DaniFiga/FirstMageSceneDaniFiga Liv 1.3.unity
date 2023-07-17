@@ -35871,6 +35871,10 @@ PrefabInstance:
       propertyPath: m_UIPrefab
       value: 
       objectReference: {fileID: 12901880}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_spellSlot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: jumpVelocity
       value: 600
@@ -36218,7 +36222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3542126693128566736, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
       propertyPath: <hp>k__BackingField
-      value: 75
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 898966ebadbc3f646bafb911a265a536, type: 3}
@@ -36630,6 +36634,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 886889962430917449, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d164c6a431b92b84cb562ece6da5488c, type: 3}
     - target: {fileID: 3974583486711666928, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -37274,7 +37282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2917369008224507155, guid: bbd7d732630a26044aa79ae80b55af8c, type: 3}
       propertyPath: <hp>k__BackingField
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2917369008224507156, guid: bbd7d732630a26044aa79ae80b55af8c, type: 3}
       propertyPath: m_Name

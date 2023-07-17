@@ -35,6 +35,7 @@ public class Magia : MonoBehaviour
         bulletRigidbody.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         bulletRigidbody.gravityScale = magia.forzaDiGravitaPerProiettile;
         bulletRigidbody.freezeRotation = true;
+        
     }
     void Update()
     {

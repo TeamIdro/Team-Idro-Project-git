@@ -1,10 +1,6 @@
-using Mono.Cecil.Cil;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -37,7 +33,8 @@ public class MagicController : MonoBehaviour, ISubscriber
     private int m_facingDirectionForLeftAndRight = 0;
     private int m_facingDirectionForUpAndDown = 0;
     private bool magicIsBlocked = false;
-
+    private int linePoints = 1;
+    
     private void Awake()
     {
         UIelementiMagia = m_UIPrefab.GetComponent<UIElementiMagia>();
@@ -142,7 +139,6 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     public void Start()
     {
-      
     }
 
     public void Update()
@@ -269,16 +265,62 @@ public class MagicController : MonoBehaviour, ISubscriber
         {
             CastMagiaStazionaria();
         }
-        else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Teleport)
+        else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
         {
-            //TODO?: CastMagiaTeleport();
+            CastMagiaLineCast();
         }
-        
+
         m_magiaDaLanciare = null;
         ClearElementList();
         UIelementiMagia.ClearUI();
         m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
 
+    }
+
+
+
+
+    private void CastMagiaLineCast()
+    {
+        Vector2 firePointPosition = gameObject.transform.position;
+        Vector2 endPosition;
+        if (PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right)
+        {
+            endPosition = firePointPosition + (Vector2)gameObject.transform.right * m_magiaDaLanciare.lunghezzaLineCast;
+        }
+        else
+        {
+            endPosition = firePointPosition - (Vector2)gameObject.transform.right * m_magiaDaLanciare.lunghezzaLineCast;
+        }
+        RaycastHit2D hit = Physics2D.Linecast(firePointPosition, endPosition,m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
+        Debug.DrawLine(firePointPosition, endPosition,Color.red);
+        Debug.Log(hit.collider);
+        LineRenderer lr = m_basePrefabToShoot.AddComponent<LineRenderer>();
+        lr.enabled = true;
+        var distance = hit.distance;
+        if(distance == 0)
+        {
+            distance = m_magiaDaLanciare.lunghezzaLineCast;
+        }
+        for (int i = 0; i < linePoints; i++)
+        {
+            var pos = lr.GetPosition(i);
+
+            //Debug.Log(rayEnd.x);
+            pos.x = (distance / linePoints * i) + UnityEngine.Random.Range(-.4f, .4f);
+            pos.y += UnityEngine.Random.Range(-.4f, .4f);
+
+            lr.SetPosition(i, pos);
+        }
+        if (distance < m_magiaDaLanciare.lunghezzaLineCast)
+        {
+            lr.SetPosition(linePoints, new Vector2(distance, 0f));
+        }
+        else
+        {
+            lr.SetPosition(linePoints, new Vector2(m_magiaDaLanciare.lunghezzaLineCast, 0f));
+
+        }
     }
 
     private void CastMagiaStazionaria()
@@ -299,13 +341,62 @@ public class MagicController : MonoBehaviour, ISubscriber
         CheckIfThereIsAnimatorAndGetIt(bullet);
         ThrowedMagicInitialize(bullet);
         OnMagicCasted.Invoke();
+        
     }
 
-    
 
-    
+    //Vector2 firePointPos = firePoint.position;
+    //Vector2 endPos = firePointPos + (Vector2)firePoint.right * rayLength;
+    //RaycastHit2D hit = Physics2D.Linecast(firePointPos, endPos, layerMask);
 
-  
+    //if (hit)
+    //{
+    //    Debug.Log(hit.transform.name);
+    //    rayEnd = hit.point;
+    //}
+    //else
+    //{
+    //    Debug.Log("nah man...................");
+    //    rayEnd = endPos;
+    //}
+
+    //lr.enabled = true;
+
+    //var distance = hit.distance;
+
+    //if (distance == 0)
+    //{
+    //    distance = rayLength;
+    //}
+
+    //for (int i = 1; i < linePoints; i++)
+    //{
+    //    var pos = lr.GetPosition(i);
+
+    //    //Debug.Log(rayEnd.x);
+    //    pos.x = (distance / linePoints * i) + Random.Range(-lightningNoiseX, lightningNoiseX);
+    //    pos.y += Random.Range(-lightningNoiseY, lightningNoiseY);
+
+    //    lr.SetPosition(i, pos);
+    //}
+
+    //if (distance < rayLength)
+    //{
+    //    lr.SetPosition(linePoints, new Vector2(distance, 0f));
+    //    lightningExplosion.transform.position = hit.point;
+    //}
+    //else
+    //{
+    //    lr.SetPosition(linePoints, new Vector2(rayLength, 0f));
+    //    lightningExplosion.transform.position = endPos;
+
+    //}
+    ////Debug.Log(distance.ToString());
+    ////Debug.Log(endPos.ToString());
+    //lightningExplosion.Play();
+
+
+
 
     private void ClearElementList()
     {
@@ -359,7 +450,6 @@ public class MagicController : MonoBehaviour, ISubscriber
             bullet.AddComponent<Magia>();
             magiaComponent = bullet.GetComponent<Magia>();
         }
-
         return bullet;
     }
     /// <summary>

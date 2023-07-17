@@ -23,8 +23,8 @@ public class MagiaSO : ScriptableObject
     [Space()]
 
     [Header("Suoni Per Magia")]
-    [SerializeField] AudioClip suonoLancioMagia;
-    [SerializeField] AudioClip suonoImpattoMagia;
+    public AudioClip suonoLancioMagia;
+    public AudioClip suonoImpattoMagia;
 
 
     [Header("Valori per fisica proiettili")]
@@ -63,7 +63,8 @@ public class MagiaSO : ScriptableObject
     [Header("Valori Per Magia Stazionaria")]
     public float tickTime;
     public float raggioArea = 0;
-
+    [Header("Valori Per Magia Linecast")]
+    public float lunghezzaLineCast = 0;
 
     [Space]
     [Header("Lista Effetti Magia")]
@@ -116,7 +117,7 @@ public enum TipoComportamentoMagia
 {
     Lanciata,
     Stazionaria,
-    Teleport,
+    LineCast,
 }
 public enum TipoDiDannoMagia
 {
