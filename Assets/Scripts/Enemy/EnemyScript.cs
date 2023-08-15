@@ -129,9 +129,12 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     {
         float damageCalculated = damageToTake;
 
-        if (!ElementWeaknessObj.gameObject.activeInHierarchy)
+        if(ElementWeaknessObj != null)
         {
-            ElementWeaknessObj.SetActive(true);
+            if (!ElementWeaknessObj.gameObject.activeInHierarchy)
+            {
+                ElementWeaknessObj.SetActive(true);
+            }
         }
 
         if(magicType == weakness)

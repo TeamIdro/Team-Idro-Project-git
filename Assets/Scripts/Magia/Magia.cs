@@ -13,7 +13,7 @@ public class Magia : MonoBehaviour
 
     [HideInInspector]public GameObject ExplosionPref;
     [HideInInspector]public int damage;
-    [HideInInspector]public float decelerationTime = 2f; // tempo in secondi per rallentare completamente il proiettile
+    [HideInInspector]public float decelerationTime = 0f; // tempo in secondi per rallentare completamente il proiettile
     private Rigidbody2D bulletRigidbody;
 
     public LayerMask ignoreContact;
@@ -126,7 +126,6 @@ public class Magia : MonoBehaviour
     private void CollisionsBehaviours(Collider2D collision)
     {
         //TODO: risolvere questione layer
-            Debug.Log(collision.name);
         if (collision.gameObject.GetComponent<EnemyScript>() is not null)
         {
             damageable1 = collision.gameObject.GetComponent<IDamageable>();
@@ -134,8 +133,8 @@ public class Magia : MonoBehaviour
             if (magia == null) { return; }
             else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
             {
-                magia.ApplicaEffetti(enemyLocal);
-                magia.TogliEffettiDopoTempo(enemyLocal);
+                magia.ApplicaEffettiAlNemico(enemyLocal);
+                magia.TogliEffettiDopoTempoAlNemico(enemyLocal);
                 if (magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
                 {
                     Debug.Log("Preso");
@@ -169,7 +168,20 @@ public class Magia : MonoBehaviour
                 Instantiate(magia.spawnaOggettoAdImpatto, gameObject.transform.position, Quaternion.identity);
             }
             if(magia.detonazioneAdImpatto == true)
+            {
+                SpriteRenderer temp = null;
+                if (gameObject.GetComponentInChildren<SpriteRenderer>() is not null)
+                {
+                    temp = gameObject.GetComponentInChildren<SpriteRenderer>();
+                    temp.enabled = false;
+                }
+                gameObject.transform.DetachChildren();
                 Destroy(gameObject);
+                if(temp != null)
+                {
+                    Destroy(temp.gameObject,2f);
+                }
+            }
 
         }
         

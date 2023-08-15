@@ -10,7 +10,7 @@ public class MagicController : MonoBehaviour, ISubscriber
     [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
     [SerializeField] [Range(1, 3)] private int m_spellSlot;
-    [SerializeField] private GameObject m_basePrefabToShoot;
+    [SerializeField] private GameObject m_basePrefabToShootForCombination;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
     [SerializeField, ReadOnly] private List<MagiaSO> magieDiLivelloUno;
     [SerializeField, ReadOnly] private List<MagiaSO> magieDiLivelloDue;
@@ -154,21 +154,7 @@ public class MagicController : MonoBehaviour, ISubscriber
     {
         m_listaValoriLancio.OrderBy(x => x.tipoDiMagia);
         List<MagiaSO> listaTutteMagieLocale = new List<MagiaSO>();
-        switch (m_spellSlot)
-        {
-            case 1:
-                listaTutteMagieLocale = magieDiLivelloUno;
-                break;
-            case 2:
-                listaTutteMagieLocale = magieDiLivelloUno.Concat(magieDiLivelloDue).ToList();
-                break;
-            case 3:
-                listaTutteMagieLocale = magieDiLivelloUno.Concat(magieDiLivelloDue).Concat(magieDiLivelloTre).ToList();
-                break;
-            default:
-                break;
-        }
-        //listaTutteMagieLocale = m_tuttaLaListaDelleMagie;
+        listaTutteMagieLocale = magieDiLivelloUno.Concat(magieDiLivelloDue).Concat(magieDiLivelloTre).ToList();
         listaTutteMagieLocale.OrderBy(x => x.name);
         int elementoMultiploRipetizioni = 0;
         ElementoMagiaSO elemMultiplo = ScriptableObject.CreateInstance("MagiaSO")as ElementoMagiaSO;
@@ -249,21 +235,40 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     private void Onfire(InputAction.CallbackContext obj)
     {
-        if (m_listaValoriLancio.Count <= 0) { return; }
-        m_faseCorrente = FasiDiLancioMagia.MagiaComposta;
-        DoSomethingOnMagicComposed();
+        
+        if (m_listaValoriLancio.Count <= 0) {
+            CastZeroCombinationSpell();
+        }
+        else
+        {
+            m_faseCorrente = FasiDiLancioMagia.MagiaComposta;
+            DoSomethingOnMagicComposed();
+            CastCombinationSpell();
+        }
     }
 
-    public void CastSpell()
+    private void CastZeroCombinationSpell()
+    {
+        var magia = Resources.Load("BulletPrefab/Bullet_No_Combination") as GameObject;
+        m_magiaDaLanciare = Resources.Load("Data/MagiaSO/Colpo_Base") as MagiaSO;
+
+        Debug.Log("COLPO BASE LANCIATO");
+        CastMagiaLanciata(magia);
+    }
+        
+    public void CastCombinationSpell()
     {
         m_faseCorrente = FasiDiLancioMagia.LancioMagia;
+        var magia = Resources.Load("BulletPrefab/Bullet_For_Combination") as GameObject;
+        m_magiaDaLanciare.ApplicaEffettoAMago(this);
+        m_magiaDaLanciare.TogliEffettoAMago(this);
         if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
         {
-            CastMagiaLanciata();
+            CastMagiaLanciata(magia);
         }
         else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
         {
-            CastMagiaStazionaria();
+            CastMagiaStazionaria(magia);
         }
         else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
         {
@@ -295,7 +300,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         RaycastHit2D hit = Physics2D.Linecast(firePointPosition, endPosition,m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
         Debug.DrawLine(firePointPosition, endPosition,Color.red);
         Debug.Log(hit.collider);
-        LineRenderer lr = m_basePrefabToShoot.AddComponent<LineRenderer>();
+        LineRenderer lr = m_basePrefabToShootForCombination.AddComponent<LineRenderer>();
         lr.enabled = true;
         var distance = hit.distance;
         if(distance == 0)
@@ -323,79 +328,24 @@ public class MagicController : MonoBehaviour, ISubscriber
         }
     }
 
-    private void CastMagiaStazionaria()
+    private void CastMagiaStazionaria(GameObject magia)
     {
-        var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
-        CheckIfThereIsAnimatorAndGetIt(bullet);
+        CheckIfThereIsParticleAndGetIt(bullet);
         StaticMagicInitialize(bullet);
         OnMagicCasted.Invoke();
     }
 
    
-    private void CastMagiaLanciata()
+    private void CastMagiaLanciata(GameObject magia)
     {
-        var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckForDirectionToGo(bullet);
-        CheckIfThereIsAnimatorAndGetIt(bullet);
+        CheckIfThereIsParticleAndGetIt(bullet);
         ThrowedMagicInitialize(bullet);
         OnMagicCasted.Invoke();
         
     }
-
-
-    //Vector2 firePointPos = firePoint.position;
-    //Vector2 endPos = firePointPos + (Vector2)firePoint.right * rayLength;
-    //RaycastHit2D hit = Physics2D.Linecast(firePointPos, endPos, layerMask);
-
-    //if (hit)
-    //{
-    //    Debug.Log(hit.transform.name);
-    //    rayEnd = hit.point;
-    //}
-    //else
-    //{
-    //    Debug.Log("nah man...................");
-    //    rayEnd = endPos;
-    //}
-
-    //lr.enabled = true;
-
-    //var distance = hit.distance;
-
-    //if (distance == 0)
-    //{
-    //    distance = rayLength;
-    //}
-
-    //for (int i = 1; i < linePoints; i++)
-    //{
-    //    var pos = lr.GetPosition(i);
-
-    //    //Debug.Log(rayEnd.x);
-    //    pos.x = (distance / linePoints * i) + Random.Range(-lightningNoiseX, lightningNoiseX);
-    //    pos.y += Random.Range(-lightningNoiseY, lightningNoiseY);
-
-    //    lr.SetPosition(i, pos);
-    //}
-
-    //if (distance < rayLength)
-    //{
-    //    lr.SetPosition(linePoints, new Vector2(distance, 0f));
-    //    lightningExplosion.transform.position = hit.point;
-    //}
-    //else
-    //{
-    //    lr.SetPosition(linePoints, new Vector2(rayLength, 0f));
-    //    lightningExplosion.transform.position = endPos;
-
-    //}
-    ////Debug.Log(distance.ToString());
-    ////Debug.Log(endPos.ToString());
-    //lightningExplosion.Play();
-
-
 
 
     private void ClearElementList()
@@ -419,12 +369,12 @@ public class MagicController : MonoBehaviour, ISubscriber
     /// Cerca e setta l'animator nell'object che verrà istanziato solo se lo contiene
     /// </summary>
     /// <param name="bullet"></param>
-    private void CheckIfThereIsAnimatorAndGetIt(GameObject bullet)
+    private void CheckIfThereIsParticleAndGetIt(GameObject bullet)
     {
         GameObject animatorPrefabSpawned;
-        if (m_magiaDaLanciare.prefabAnimatoriMagia != null)
+        if (m_magiaDaLanciare.prefabParticleMagia != null)
         {
-            animatorPrefabSpawned = Instantiate(m_magiaDaLanciare.prefabAnimatoriMagia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
+            animatorPrefabSpawned = Instantiate(m_magiaDaLanciare.prefabParticleMagia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
             animatorPrefabSpawned.transform.position = Vector2.zero;
             animatorPrefabSpawned.transform.SetParent(bullet.transform, false);
             if (animatorPrefabSpawned.GetComponent<ParticleSystem>() != null)
@@ -512,7 +462,7 @@ public class MagicController : MonoBehaviour, ISubscriber
     }
     private void ThrowedMagicInitialize(GameObject bullet)
     {
-        if (m_magiaDaLanciare.rallentamentoGraduale is true)
+        if (m_magiaDaLanciare.rallentamentoGraduale is not true)
         {
             magiaComponent.decelerationTime = m_magiaDaLanciare.tempoDecellerazioneMagiaLanciata;
         }
