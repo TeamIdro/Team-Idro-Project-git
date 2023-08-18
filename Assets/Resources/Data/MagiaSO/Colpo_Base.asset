@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65823995ebd17dc4091420f7427126d7, type: 3}
-  m_Name: Veleno
+  m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
+  m_Name: Colpo_Base
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 5539802468714161225, guid: 4b02007d99dc59d4888b7a9ff9edbd72, type: 3}
+  prefabParticleMagia: {fileID: 7043036109183494557, guid: a5c3bf802a3f36045a5d0a2a34748a66, type: 3}
   magicBehaviourType: 0
-  tipoMagia: 9
+  tipoMagia: 0
   damageType: 0
-  combinazioneDiElementi:
-  - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
-  - {fileID: 11400000, guid: 883b13981282ae5478df3bd72ba83949, type: 2}
-  dannoDellaMagia: 10
+  combinazioneDiElementi: []
+  dannoDellaMagia: 0.69
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
@@ -28,10 +26,10 @@ MonoBehaviour:
   shakeTime: 0
   velocitaDellaMagiaLanciata: 100
   rallentamentoGraduale: 0
-  tempoDecellerazioneMagiaLanciata: 1
+  tempoDecellerazioneMagiaLanciata: 69.6
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 2
-  detonazioneAdImpatto: 1
+  tempoMagiaLanciata: 1000
+  detonazioneAdImpatto: 0
   ExplosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2

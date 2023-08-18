@@ -10,10 +10,19 @@ public class EffettoRallentamentoSO : EffettoBaseSO
     public int percentualeRallentamentoNemicoColpito = 0;
     [Range(0, 10)]
     public int moltiplicatoreDiMagia;
-    public Color32 coloreEffetto;
 
     private float valoreOriginaleNemici;
-    public override void ApplicaEffetto(EnemyScript danneggiabile)
+
+    public override void ApplicaEffettoAlMago(MagicController mago)
+    {
+        return;
+    }
+    public override IEnumerator TogliEffettiAlMagoDopoTempo(MagicController mago)
+    {
+        yield return null;
+    }
+
+    public override void ApplicaEffettoANemico(EnemyScript danneggiabile)
     {
         Debug.LogWarning("EFFETTO APPLICATO");
         int valoreRandomicoPerPercentuale = Random.Range(0, 101);
@@ -31,7 +40,9 @@ public class EffettoRallentamentoSO : EffettoBaseSO
             }
         }
     }
-    public override IEnumerator TogliEffettoDopoDelTempo(EnemyScript nemico)
+
+
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
     {
         yield return new WaitForSeconds(durataEffetto);
         nemico.gameObject.GetComponent<SpriteRenderer>().color = Color.white;

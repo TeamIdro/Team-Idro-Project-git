@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: MagiaDiVento
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 2557486253436051690, guid: ce72d63015c03bf4d838cd70108c204c, type: 3}
+  prefabParticleMagia: {fileID: 2557486253436051690, guid: ce72d63015c03bf4d838cd70108c204c, type: 3}
   magicBehaviourType: 0
   tipoMagia: 2
   damageType: 0

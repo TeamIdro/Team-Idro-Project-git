@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: RockBolt
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 2482630182511487331, guid: ee6b1af54e236aa46b7dea3c77c093bd, type: 3}
+  prefabParticleMagia: {fileID: 2482630182511487331, guid: ee6b1af54e236aa46b7dea3c77c093bd, type: 3}
   magicBehaviourType: 0
   tipoMagia: 3
   damageType: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: FireBolt
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 2026087008462933487, guid: 40173528f26420948822dbef51454d5f, type: 3}
+  prefabParticleMagia: {fileID: 7754694216180532622, guid: f492f999ffb1dba449490d78b3870528, type: 3}
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
@@ -27,9 +27,9 @@ MonoBehaviour:
   shakeTime: 0
   velocitaDellaMagiaLanciata: 100
   rallentamentoGraduale: 0
-  tempoDecellerazioneMagiaLanciata: 0
+  tempoDecellerazioneMagiaLanciata: 100
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 2
+  tempoMagiaLanciata: 1000
   detonazioneAdImpatto: 1
   ExplosionPref: {fileID: 3369253412745020790, guid: 7d0d13f9a6e23df4a93b8b4617b5edfa, type: 3}
   layerMaskPerIgnoraCollisioni:
@@ -41,7 +41,8 @@ MonoBehaviour:
   tickTime: 0
   raggioArea: 4.04
   lunghezzaLineCast: 0
-  effettiMagia:
-  - {fileID: 11400000, guid: ef4689bfb83898347b666670b872f3dd, type: 2}
+  effettiMagiaQuandoColpito: []
+  effettiMagiaPerIlMago:
+  - {fileID: 11400000, guid: 4cbd0e18591272643a13907108f14895, type: 2}
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0

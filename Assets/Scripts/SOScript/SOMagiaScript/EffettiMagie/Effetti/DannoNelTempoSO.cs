@@ -8,8 +8,15 @@ public class DannoNelTempoSO : EffettoBaseSO
     public int quantitaDiDanniNelTempo;
     [ReadOnly] public TipoMagia tipoMagiaDannoNelTempo;
     public float tempoTick;
-    public Color coloreEffetto;
-    public override void ApplicaEffetto(EnemyScript nemico)
+    public override void ApplicaEffettoAlMago(MagicController mago)
+    {
+        return;
+    }
+    public override IEnumerator TogliEffettiAlMagoDopoTempo(MagicController mago)
+    {
+        yield return null;
+    }
+    public override void ApplicaEffettoANemico(EnemyScript nemico)
     {
         Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
         Material material = renderer.material;
@@ -27,7 +34,7 @@ public class DannoNelTempoSO : EffettoBaseSO
             yield return new WaitForSeconds(tempoTick);
         }
     }
-    public override IEnumerator TogliEffettoDopoDelTempo(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
     {
         yield return new WaitForSeconds(durataEffetto);
         Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
