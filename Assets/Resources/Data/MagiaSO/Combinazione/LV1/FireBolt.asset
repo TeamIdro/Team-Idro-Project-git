@@ -21,10 +21,10 @@ MonoBehaviour:
   dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
-  forzaDiGravitaPerProiettile: 0
+  forzaDiGravitaPerProiettile: 1.59
   knockbackForzaEsplosione: 1
-  intensity: 0
-  shakeTime: 0
+  intensity: 2.4
+  shakeTime: 0.07
   velocitaDellaMagiaLanciata: 100
   rallentamentoGraduale: 0
   tempoDecellerazioneMagiaLanciata: 100
@@ -41,8 +41,8 @@ MonoBehaviour:
   tickTime: 0
   raggioArea: 4.04
   lunghezzaLineCast: 0
-  effettiMagiaQuandoColpito: []
-  effettiMagiaPerIlMago:
-  - {fileID: 11400000, guid: 4cbd0e18591272643a13907108f14895, type: 2}
+  effettiMagiaQuandoColpito:
+  - {fileID: 11400000, guid: 53ec3024f19605c40bf6dbfa2f11019f, type: 2}
+  effettiMagiaPerIlMago: []
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0
