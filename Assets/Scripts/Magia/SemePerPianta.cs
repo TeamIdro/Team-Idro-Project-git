@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 public class SemePerPianta : MonoBehaviour
 {
     public Tilemap tileMapScale;
-
+    [Range(0f, 100f)]
+    public int altezzaPianta;
     private void OnTriggerEnter2D(Collider2D collision) => StartCoroutine(CostruisciScala(collision));
 
     private IEnumerator CostruisciScala(Collider2D collision)
@@ -19,7 +20,7 @@ public class SemePerPianta : MonoBehaviour
                 EffettoSpawnPiantaSO effettoSpawnPianta = magiaSo.effettiMagiaQuandoColpito.Find(x => x as EffettoSpawnPiantaSO) as EffettoSpawnPiantaSO;
                 Vector3Int positionOfStart = tileMapScale.WorldToCell(collision.gameObject.transform.position);
 
-                for (int i = 0; i < effettoSpawnPianta.altezzaPianta; i++)
+                for (int i = 0; i < altezzaPianta; i++)
                 {
                     Vector3Int tilePosition = new Vector3Int(positionOfStart.x, positionOfStart.y + i, positionOfStart.z);
                     tileMapScale.SetTile(tilePosition, effettoSpawnPianta.corpoPianta);
@@ -28,7 +29,6 @@ public class SemePerPianta : MonoBehaviour
             }
 
         }
-        Destroy(this);
     }
     //private bool IsTileInLayerMask(Vector3Int tilePosition)
     //{

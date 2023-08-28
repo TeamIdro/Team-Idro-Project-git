@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class InterazioneAcqua : MonoBehaviour
 {
     private Tilemap tilemapSuCuiSiPosaQuestoOggetto;
+    public Tilemap tileSuCuiDisegnareBlocchi;
     [SerializeField] private LayerMask layerMaskDiQuestoOggetto;
 
     private void Awake()
@@ -25,14 +27,17 @@ public class InterazioneAcqua : MonoBehaviour
                 EffettoCambioTileSO effettoCambioTile = magiaSo.effettiMagiaQuandoColpito.Find(x => x as EffettoCambioTileSO) as EffettoCambioTileSO;
                 foreach (var tileChange in effettoCambioTile.tileChanges)
                 {
-                    BoundsInt bounds = tilemapSuCuiSiPosaQuestoOggetto.cellBounds;
+                    Vector3Int hitTilePosition = tilemapSuCuiSiPosaQuestoOggetto.WorldToCell(collision.transform.position);
+                    BoundsInt bounds = new BoundsInt(
+                        hitTilePosition.x, hitTilePosition.y-1, 0,
+                        effettoCambioTile.tileChangeArea.x, effettoCambioTile.tileChangeArea.y, 1);
                     TileBase[] allTiles = tilemapSuCuiSiPosaQuestoOggetto.GetTilesBlock(bounds);
 
                     for (int x = 0; x < bounds.size.x; x++)
                     {
                         for (int y = 0; y < bounds.size.y; y++)
                         {
-                            TileBase tile = tilemapSuCuiSiPosaQuestoOggetto.GetTile(new Vector3Int(bounds.x + x, bounds.y + y, 0));
+                            TileBase tile = allTiles[x + y * bounds.size.x];
                             if(tile != null)
                             {
                                 Debug.ClearDeveloperConsole();
@@ -40,9 +45,8 @@ public class InterazioneAcqua : MonoBehaviour
                                 if (tile == tileChange.originalTile)
                                 {
                                     Vector3Int pos = new Vector3Int(bounds.x + x, bounds.y + y, 0);
-                                    Debug.Log("ENTRO PER SETTARE I TILE");
-                                    tilemapSuCuiSiPosaQuestoOggetto.SetTile(pos, tileChange.replacementTile);
-
+                                    Debug.Log("ENTRO PER SETTARE I TILE ALL POS: "+pos);
+                                    tileSuCuiDisegnareBlocchi.SetTile(pos, tileChange.replacementTile);
 
                                 }
 
@@ -50,11 +54,8 @@ public class InterazioneAcqua : MonoBehaviour
                         }
                     }
                 }
-                CompositeCollider2D compositeCollider2D = gameObject.GetComponent<CompositeCollider2D>();
-                compositeCollider2D.isTrigger = false;
-                gameObject.layer = LayerMask.NameToLayer("Terreno");
+                tileSuCuiDisegnareBlocchi.gameObject.layer = LayerMask.NameToLayer("Terreno");
             }
-            Destroy(this);
         }
     }
     private bool IsTileInLayerMask(Vector3Int tilePosition)

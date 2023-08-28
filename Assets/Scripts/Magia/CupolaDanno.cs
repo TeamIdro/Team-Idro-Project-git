@@ -6,19 +6,23 @@ using UnityEngine;
 
 public class CupolaDanno : MonoBehaviour
 {
-    [HideInInspector] public float tickCupola;
-    [HideInInspector] public float raggioCupola;
-    [HideInInspector] public int dannoCupola;
-    [HideInInspector] public float durataCupola;
+    [SerializeField] private float tickCupola;
+    [SerializeField] private float raggioCupola;
+    [SerializeField]private int dannoCupola;
+    [SerializeField] private float durataCupola;
     [SerializeField] List<EffettoBaseSO> effettiCupola;
 
     EnemyScript nemicoACuiApplicareIlDanno;
 
-    private void Start()
+    private void Awake()
     {
-       
+        ParticleSystem particleSystemCupola = gameObject.GetComponentInChildren<ParticleSystem>();
+        ParticleSystem.MainModule mainModule = particleSystemCupola.main;
+        mainModule.startLifetime = durataCupola;
+        mainModule.startSize = raggioCupola* 2;
+        SetRaggioCupola(raggioCupola);
+        Destroy(gameObject, durataCupola);
     }
-
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,14 +31,14 @@ public class CupolaDanno : MonoBehaviour
         {
             if(collision.gameObject.GetComponent<EnemyScript>() != null)
             {
-                nemicoACuiApplicareIlDanno= collision.gameObject.GetComponent<EnemyScript>();
+                nemicoACuiApplicareIlDanno = collision.gameObject.GetComponent<EnemyScript>();
                 foreach (var effetto in effettiCupola)
                 {
-                    effetto.ApplicaEffettoANemico(nemicoACuiApplicareIlDanno);
-                    effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno);
+                    effetto.ApplicaEffettoANemico(nemicoACuiApplicareIlDanno.gameObject);
+                    effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno.gameObject);
                 }
-                Debug.LogWarning("DANNO AL NEMICO DA CUPOLA");
-                nemicoACuiApplicareIlDanno.TakeDamage(dannoCupola, TipoMagia.Fuoco);
+                StartCoroutine(DannoATickCupola());
+               
             }
         }
     }
@@ -56,5 +60,13 @@ public class CupolaDanno : MonoBehaviour
     public void SetDannoCupola(int dannoCupola)
     {
         this.dannoCupola = dannoCupola;
+    }
+    public IEnumerator DannoATickCupola()
+    {
+        while(nemicoACuiApplicareIlDanno != null)
+        {
+            nemicoACuiApplicareIlDanno.TakeDamage(dannoCupola, TipoMagia.Fuoco);
+            yield return new WaitForSeconds(tickCupola);
+        }
     }
 }

@@ -20,3 +20,4 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  tileChangeArea: {x: 2, y: 1}

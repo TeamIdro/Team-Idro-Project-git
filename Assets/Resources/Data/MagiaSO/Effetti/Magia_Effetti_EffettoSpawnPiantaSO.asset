@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durataEffetto: 0
   coloreEffetto: {r: 0, g: 0, b: 0, a: 0}
-  altezzaPianta: 135
-  testaPianta: {fileID: 11400000, guid: 641b3b595ae7a0247b059ffb35ddb996, type: 2}
-  corpoPianta: {fileID: 11400000, guid: d4c84b9b199e40246b53ab92c3782071, type: 2}
+  altezzaPianta: 10
+  testaPianta: {fileID: 11400000, guid: f938ca3e79c0a394882cc6ddb8250326, type: 2}
+  corpoPianta: {fileID: 11400000, guid: e904129e9936ed24591fd4dc08f1fb8e, type: 2}

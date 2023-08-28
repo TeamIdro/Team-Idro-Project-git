@@ -126,18 +126,20 @@ public class Magia : MonoBehaviour
     private void CollisionsBehaviours(Collider2D collision)
     {
         //TODO: risolvere questione layer
+        magia.ApplicaEffettiATarget(collision.gameObject);
+        magia.TogliEffettiDopoTempoAlTarget(collision.gameObject); 
         if (collision.gameObject.GetComponent<EnemyScript>() is not null)
         {
             damageable1 = collision.gameObject.GetComponent<IDamageable>();
-            EnemyScript enemyLocal = collision.gameObject.GetComponent<EnemyScript>();
-            if (magia == null) { return; }
-            else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
+            if (magia == null) 
             {
-                magia.ApplicaEffettiAlNemico(enemyLocal);
-                magia.TogliEffettiDopoTempoAlNemico(enemyLocal);
+                return;
+            }
+            if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
+            {
+
                 if (magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
                 {
-                    Debug.Log("Preso");
                     damageable1.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
                 }
                 else if(magia.magicBehaviourType is TipoComportamentoMagia.Stazionaria && isDone is not 1)

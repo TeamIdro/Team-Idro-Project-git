@@ -258,27 +258,32 @@ public class MagicController : MonoBehaviour, ISubscriber
         
     public void CastCombinationSpell()
     {
-        m_faseCorrente = FasiDiLancioMagia.LancioMagia;
-        var magia = Resources.Load("BulletPrefab/Bullet_For_Combination") as GameObject;
-        m_magiaDaLanciare.ApplicaEffettoAMago(this);
-        m_magiaDaLanciare.TogliEffettoAMago(this);
-        if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
+        if(m_magiaDaLanciare != null)
         {
-            CastMagiaLanciata(magia);
-        }
-        else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
-        {
-            CastMagiaStazionaria(magia);
-        }
-        else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
-        {
-            CastMagiaLineCast();
-        }
+            m_faseCorrente = FasiDiLancioMagia.LancioMagia;
+            var magia = Resources.Load("BulletPrefab/Bullet_For_Combination") as GameObject;
+            m_magiaDaLanciare.ApplicaEffettoAMago(this);
+            m_magiaDaLanciare.TogliEffettoAMago(this);
+            if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
+            {
+                CastMagiaLanciata(magia);
+            }
+            else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
+            {
+                CastMagiaStazionaria(magia);
+            }
+            else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
+            {
+                CastMagiaLineCast();
+            }
 
-        m_magiaDaLanciare = null;
-        ClearElementList();
-        UIelementiMagia.ClearUI();
-        m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+            m_magiaDaLanciare = null;
+            ClearElementList();
+            UIelementiMagia.ClearUI();
+            m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+
+        }
+        else { return; }
 
     }
 

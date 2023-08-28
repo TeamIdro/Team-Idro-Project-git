@@ -278,9 +278,11 @@ MonoBehaviour:
   maxVelocityCap: 10
   deceleration: 50
   maxCastDistance: 0.652
+  climbSpeed: 0
   movementDirection: {x: 0, y: 0}
   isMoving: 0
   isJumping: 0
+  isOnStairs: 0
   rayCastPosition: {fileID: 2316705413653882135}
   boxCastDimension: {x: 0.5, y: 0.29}
   playerMask:
@@ -340,8 +342,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.35, y: -0.12}
-  m_Size: {x: 1, y: 2.5860755}
+  m_Offset: {x: -0.38174152, y: -0.120000005}
+  m_Size: {x: 0.7778034, y: 2.5860755}
   m_Direction: 0
 --- !u!50 &7537261567199135306
 Rigidbody2D:
@@ -395,7 +397,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.8374615, y: -0.50465137}
+  m_Offset: {x: -0.71879196, y: -0.50465137}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -421,7 +423,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13908005, y: -0.5328894}
+  m_Offset: {x: -0.03946972, y: -0.5328894}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -432,7 +434,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.124320984, y: 1.7473959}
+  m_Size: {x: 0.1481266, y: 1.7473959}
   m_EdgeRadius: 0
 --- !u!1 &5351127479474757305
 GameObject:

@@ -52,3 +52,9 @@ TagManager:
   - name: Player
     uniqueID: 1992483039
     locked: 0
+  - name: Cupola
+    uniqueID: 511931347
+    locked: 0
+  - name: Terreno
+    uniqueID: 2998814013
+    locked: 0

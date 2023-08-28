@@ -22,15 +22,16 @@ public class EffettoRallentamentoSO : EffettoBaseSO
         yield return null;
     }
 
-    public override void ApplicaEffettoANemico(EnemyScript danneggiabile)
+    public override void ApplicaEffettoANemico(GameObject target)
     {
         Debug.LogWarning("EFFETTO APPLICATO");
+        EnemyScript enemyScript = target.GetComponent<EnemyScript>();
         int valoreRandomicoPerPercentuale = Random.Range(0, 101);
         if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
         {
-            valoreOriginaleNemici = danneggiabile.speed;
-            danneggiabile.speed /= moltiplicatoreDiMagia;
-            Renderer renderer = danneggiabile.gameObject.GetComponent<Renderer>();
+            valoreOriginaleNemici = enemyScript.speed;
+            enemyScript.speed /= moltiplicatoreDiMagia;
+            Renderer renderer = target.gameObject.GetComponent<Renderer>();
             Material material = renderer.material;
             if (material != null)
             {
@@ -42,13 +43,14 @@ public class EffettoRallentamentoSO : EffettoBaseSO
     }
 
 
-    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject target)
     {
         yield return new WaitForSeconds(durataEffetto);
-        nemico.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        EnemyScript enemyScript = target.GetComponent<EnemyScript>();
+        target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         Debug.LogWarning("EFFETTO TOLTO");
-        nemico.speed = valoreOriginaleNemici;
-        Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
+        enemyScript.speed = valoreOriginaleNemici;
+        Renderer renderer = target.gameObject.GetComponent<Renderer>();
         Material material = renderer.material;
         if(material!= null)
         {
