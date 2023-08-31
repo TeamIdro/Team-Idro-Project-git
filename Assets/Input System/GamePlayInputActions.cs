@@ -357,6 +357,33 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""cecf10e4-5df1-4540-b28b-bcdb9e57a0b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f2dd3b2-82d3-4210-a657-420eacdbae11"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnterOption"",
+                    ""type"": ""Button"",
+                    ""id"": ""83c7780c-1dc9-4108-b5ab-9c2f0fa3134b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -368,6 +395,39 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Attiva_Disattiva_Pausa"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b863e19-6102-4ca5-8408-1ed4fd26c54f"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e86d7e5a-f853-44de-a9e0-26b375b14749"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f80ef34-5e5d-4160-ae47-85ecaa63a35d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnterOption"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -395,6 +455,9 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Attiva_Disattiva_Pausa = m_UI.FindAction("Attiva_Disattiva_Pausa", throwIfNotFound: true);
+        m_UI_SelectUp = m_UI.FindAction("SelectUp", throwIfNotFound: true);
+        m_UI_SelectDown = m_UI.FindAction("SelectDown", throwIfNotFound: true);
+        m_UI_EnterOption = m_UI.FindAction("EnterOption", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -629,11 +692,17 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_Attiva_Disattiva_Pausa;
+    private readonly InputAction m_UI_SelectUp;
+    private readonly InputAction m_UI_SelectDown;
+    private readonly InputAction m_UI_EnterOption;
     public struct UIActions
     {
         private @GamePlayInputActions m_Wrapper;
         public UIActions(@GamePlayInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Attiva_Disattiva_Pausa => m_Wrapper.m_UI_Attiva_Disattiva_Pausa;
+        public InputAction @SelectUp => m_Wrapper.m_UI_SelectUp;
+        public InputAction @SelectDown => m_Wrapper.m_UI_SelectDown;
+        public InputAction @EnterOption => m_Wrapper.m_UI_EnterOption;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -646,6 +715,15 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @Attiva_Disattiva_Pausa.started += instance.OnAttiva_Disattiva_Pausa;
             @Attiva_Disattiva_Pausa.performed += instance.OnAttiva_Disattiva_Pausa;
             @Attiva_Disattiva_Pausa.canceled += instance.OnAttiva_Disattiva_Pausa;
+            @SelectUp.started += instance.OnSelectUp;
+            @SelectUp.performed += instance.OnSelectUp;
+            @SelectUp.canceled += instance.OnSelectUp;
+            @SelectDown.started += instance.OnSelectDown;
+            @SelectDown.performed += instance.OnSelectDown;
+            @SelectDown.canceled += instance.OnSelectDown;
+            @EnterOption.started += instance.OnEnterOption;
+            @EnterOption.performed += instance.OnEnterOption;
+            @EnterOption.canceled += instance.OnEnterOption;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -653,6 +731,15 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @Attiva_Disattiva_Pausa.started -= instance.OnAttiva_Disattiva_Pausa;
             @Attiva_Disattiva_Pausa.performed -= instance.OnAttiva_Disattiva_Pausa;
             @Attiva_Disattiva_Pausa.canceled -= instance.OnAttiva_Disattiva_Pausa;
+            @SelectUp.started -= instance.OnSelectUp;
+            @SelectUp.performed -= instance.OnSelectUp;
+            @SelectUp.canceled -= instance.OnSelectUp;
+            @SelectDown.started -= instance.OnSelectDown;
+            @SelectDown.performed -= instance.OnSelectDown;
+            @SelectDown.canceled -= instance.OnSelectDown;
+            @EnterOption.started -= instance.OnEnterOption;
+            @EnterOption.performed -= instance.OnEnterOption;
+            @EnterOption.canceled -= instance.OnEnterOption;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -691,5 +778,8 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
     public interface IUIActions
     {
         void OnAttiva_Disattiva_Pausa(InputAction.CallbackContext context);
+        void OnSelectUp(InputAction.CallbackContext context);
+        void OnSelectDown(InputAction.CallbackContext context);
+        void OnEnterOption(InputAction.CallbackContext context);
     }
 }

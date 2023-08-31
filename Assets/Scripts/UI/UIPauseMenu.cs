@@ -49,6 +49,7 @@ public class UIPauseMenu : MonoBehaviour, ISubscriber
             }
         }
     }
+    
     public void OnPublish(IMessage message)
     {
         if(message is OpenPauseMessage)
