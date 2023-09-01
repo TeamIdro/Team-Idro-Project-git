@@ -45,5 +45,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 53ec3024f19605c40bf6dbfa2f11019f, type: 2}
   - {fileID: 11400000, guid: 546944cbb7fb2a8448b9aaa134b7be45, type: 2}
   effettiMagiaPerIlMago: []
-  spawnaOggettoAdImpatto: {fileID: 7481740816993939608, guid: 815a91a07930f754289cb39b5579ff6b, type: 3}
+  spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0

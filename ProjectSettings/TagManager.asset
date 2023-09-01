@@ -24,7 +24,7 @@ TagManager:
   - SpawnPoint
   - EnemyBullet
   - Acqua
-  - 
+  - Pianta
   - 
   - 
   - 
@@ -49,8 +49,14 @@ TagManager:
   - name: Acqua
     uniqueID: 4047499365
     locked: 0
+  - name: Props
+    uniqueID: 22376733
+    locked: 0
   - name: Player
     uniqueID: 1992483039
+    locked: 0
+  - name: Magia
+    uniqueID: 241662131
     locked: 0
   - name: Cupola
     uniqueID: 511931347

@@ -2,6 +2,7 @@ using BehaviorDesigner.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "Magia/Effetti/EffettoRallentamentoSO", menuName = "Magia/Effetti/Effetto Rallentamento SO")]
 public class EffettoRallentamentoSO : EffettoBaseSO
@@ -25,19 +26,33 @@ public class EffettoRallentamentoSO : EffettoBaseSO
     public override void ApplicaEffettoANemico(GameObject target)
     {
         Debug.LogWarning("EFFETTO APPLICATO");
-        EnemyScript enemyScript = target.GetComponent<EnemyScript>();
-        int valoreRandomicoPerPercentuale = Random.Range(0, 101);
-        if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
+        if (target.GetComponent<EnemyScript>())
         {
-            valoreOriginaleNemici = enemyScript.speed;
-            enemyScript.speed /= moltiplicatoreDiMagia;
-            Renderer renderer = target.gameObject.GetComponent<Renderer>();
-            Material material = renderer.material;
-            if (material != null)
+            EnemyScript enemyScript = target.GetComponent<EnemyScript>();
+            int valoreRandomicoPerPercentuale = Random.Range(0, 101);
+            if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
             {
-                material.SetFloat("_OutlineThickness", 1f);
-                material.SetColor("_OutlineColor", coloreEffetto);
-                renderer.material = material;
+                valoreOriginaleNemici = enemyScript.speed;
+                enemyScript.speed /= moltiplicatoreDiMagia;
+                //Renderer renderer = target.gameObject.GetComponent<Renderer>();
+                //Material material = renderer.material;
+                //if (material != null)
+                //{
+                //    material.SetFloat("_OutlineThickness", 1f);
+                //    material.SetColor("_OutlineColor", coloreEffetto);
+                //    renderer.material = material;
+                //}
+            }
+
+        }
+        else if (target.GetComponent<MovingPlatform>() && target.GetComponent<NavMeshAgent>())
+        {
+            NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
+            int valoreRandomicoPerPercentuale = Random.Range(0, 101);
+            if (valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
+            {
+                valoreOriginaleNemici = agent.speed;
+                agent.speed /= moltiplicatoreDiMagia;
             }
         }
     }

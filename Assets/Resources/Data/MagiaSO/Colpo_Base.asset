@@ -17,7 +17,7 @@ MonoBehaviour:
   tipoMagia: 0
   damageType: 0
   combinazioneDiElementi: []
-  dannoDellaMagia: 0.69
+  dannoDellaMagia: 5
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
@@ -29,7 +29,8 @@ MonoBehaviour:
   tempoDecellerazioneMagiaLanciata: 69.6
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
-  detonazioneAdImpatto: 0
+  detonazioneAdImpatto: 1
+  staccaFiglioAllesplosione: 1
   ExplosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2

@@ -15,8 +15,8 @@ MonoBehaviour:
   durataEffetto: 0
   coloreEffetto: {r: 0, g: 0, b: 0, a: 0}
   tileChanges:
-  - originalTile: {fileID: 11400000, guid: d4c84b9b199e40246b53ab92c3782071, type: 2}
-    replacementTile: {fileID: 11400000, guid: dc7ce715ed12af14abbb748f0d471f03, type: 2}
+  - originalTile: {fileID: 11400000, guid: 36541d629a3e1a9498f993a0c4d802c3, type: 2}
+    replacementTile: {fileID: 11400000, guid: 41f6c2359bc226549b5ccdcea58496ad, type: 2}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 0

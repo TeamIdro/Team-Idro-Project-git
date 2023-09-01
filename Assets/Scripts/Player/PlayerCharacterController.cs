@@ -167,13 +167,17 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         animatorMago.SetFloat("YVelocity",Mathf.Floor(m_playerMageRB2D.velocity.y));
         animatorMago.SetBool("IsGrounded", !isJumping);
         animatorMago.SetBool("IsClimbing", IsOnStairs);
-        if (isOnStairs && Mathf.Floor(m_playerMageRB2D.velocity.y) > 0)
+        if (isOnStairs)
         {
             animatorMago.Play("MageClimbing");
-        }
-        else if (isOnStairs && Mathf.Floor(m_playerMageRB2D.velocity.y) <= 0)
-        {
-            animatorMago.speed = 0;
+            if(Mathf.Floor(m_playerMageRB2D.velocity.y) > 0)
+            {
+                animatorMago.speed = 1;
+            }
+            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) <= 0)
+            {
+                animatorMago.speed = 0;
+            }
         }
     }
     private void Movement()

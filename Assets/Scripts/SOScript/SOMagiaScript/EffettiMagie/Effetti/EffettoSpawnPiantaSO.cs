@@ -6,9 +6,9 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "Magia/Effetti/EffettoSpawnPiantaSO", menuName = "Magia/Effetti/EffettoSpawnPiantaSO")]
 public class EffettoSpawnPiantaSO : EffettoBaseSO
 {
-    public int altezzaPianta = 1;
     public Tile testaPianta;
     public Tile corpoPianta;
+    public Tile basePianta;
 
     public override void ApplicaEffettoAlMago(MagicController mago)
     {
