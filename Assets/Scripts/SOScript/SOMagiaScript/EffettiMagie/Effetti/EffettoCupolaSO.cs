@@ -14,31 +14,26 @@ public class EffettoCupolaSO : EffettoBaseSO
     private GameObject tempInstatieted;
     public override void ApplicaEffettoAlMago(MagicController mago)
     {
-        Debug.Log("Effetto Mago Applicato a:" + mago);
-        float durataEffettoInterno = durataEffetto;
-        if(mago.GetComponentInChildren<CupolaDanno>()==null)
-        {
-            GameObject cupolaIstanziata = Instantiate(cupolaSulPlayer);
-            cupolaIstanziata.SetActive(true);
-            cupolaIstanziata.transform.SetParent(mago.transform);
-            cupolaIstanziata.transform.SetLocalPositionAndRotation(Vector3.zero,Quaternion.identity);
-            cupolaIstanziata.GetComponent<CupolaDanno>()?.SetRaggioCupola(raggioCupola);
-            cupolaIstanziata.GetComponent<CupolaDanno>()?.SetDannoCupola(dannoCupola);
-            Destroy(cupolaIstanziata, durataEffettoInterno);
-        }
+        return;
     }
     public override IEnumerator TogliEffettiAlMagoDopoTempo(MagicController mago)
     {
-        yield return new WaitForSeconds(durataEffetto);
-        Debug.Log("Effetto Mago tolto a:" + mago);
+        yield return null;
     }
-    public override void ApplicaEffettoANemico(EnemyScript nemico)
+    public override void ApplicaEffettoANemico(GameObject target)
     {
-        return;
+        float durataEffettoInterno = durataEffetto;
+        GameObject cupolaIstanziata = Instantiate(cupolaSulPlayer);
+        cupolaIstanziata.SetActive(true);
+        cupolaIstanziata.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+        cupolaIstanziata.GetComponent<CupolaDanno>()?.SetRaggioCupola(raggioCupola);
+        cupolaIstanziata.GetComponent<CupolaDanno>()?.SetDannoCupola(dannoCupola);
+        Destroy(cupolaIstanziata, durataEffettoInterno);
     }
 
-    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject target)
     {
-        yield return null;
+        yield return new WaitForSeconds(durataEffetto);
+        Debug.Log("Effetto Mago tolto a:" + target);
     }
 }

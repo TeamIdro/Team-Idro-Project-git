@@ -52,6 +52,7 @@ public class MagiaSO : ScriptableObject
     public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
+    public bool staccaFiglioAllesplosione;
     [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto � spuntata")]
     public GameObject ExplosionPref;
    
@@ -101,7 +102,7 @@ public class MagiaSO : ScriptableObject
     }
 
 
-    public void ApplicaEffettiAlNemico(EnemyScript nemicoACuiApplicareGliEffetti)
+    public void ApplicaEffettiATarget(GameObject nemicoACuiApplicareGliEffetti)
     {
         if (effettiMagiaQuandoColpito.Count > 0)
         {
@@ -111,13 +112,21 @@ public class MagiaSO : ScriptableObject
             }
         }
     }
-    public void TogliEffettiDopoTempoAlNemico(EnemyScript nemicoACuiTogliereGliEffetti)
+    public void TogliEffettiDopoTempoAlTarget(GameObject nemicoACuiTogliereGliEffetti)
     {
         if (effettiMagiaQuandoColpito.Count > 0)
         {
             foreach (EffettoBaseSO effetto in effettiMagiaQuandoColpito)
             {
-                nemicoACuiTogliereGliEffetti.StartCoroutine(effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiTogliereGliEffetti));
+                MonoBehaviour monoBehaviour = nemicoACuiTogliereGliEffetti.GetComponent<MonoBehaviour>();
+                if (monoBehaviour != null)
+                {
+                    monoBehaviour.StartCoroutine(effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiTogliereGliEffetti));
+                }
+                else
+                {
+                    return;
+                }
             }
         }
     }

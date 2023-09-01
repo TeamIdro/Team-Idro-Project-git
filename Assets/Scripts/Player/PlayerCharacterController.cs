@@ -111,18 +111,13 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private void FixedUpdate()
     {
         if (isBlocked) { return; }
-        if (isOnStairs)
-        {
-            ClimbStairs(); // Chiamare la funzione di salita delle scale
-        }
-        else
-        {
-            Movement(); // Chiamare la funzione di movimento normale
-        }
+        (IsOnStairs ? (Action)ClimbStairs : Movement)();
+
     }
 
     private void ClimbStairs()
     {
+        isJumping = false;
         float horizontalInput = movementDirection.x;
         float verticalInput = movementDirection.y;
         Debug.Log(verticalInput);
@@ -167,9 +162,23 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     }
     private void AnimationUpdate()
     {
+        animatorMago.speed = 1;
         animatorMago.SetBool("IsMoving",isMoving);
         animatorMago.SetFloat("YVelocity",Mathf.Floor(m_playerMageRB2D.velocity.y));
         animatorMago.SetBool("IsGrounded", !isJumping);
+        animatorMago.SetBool("IsClimbing", IsOnStairs);
+        if (isOnStairs)
+        {
+            animatorMago.Play("MageClimbing");
+            if(Mathf.Floor(m_playerMageRB2D.velocity.y) > 0)
+            {
+                animatorMago.speed = 1;
+            }
+            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) <= 0)
+            {
+                animatorMago.speed = 0;
+            }
+        }
     }
     private void Movement()
     {
