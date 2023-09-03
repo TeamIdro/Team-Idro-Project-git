@@ -13,8 +13,8 @@ public class SbloccaMagia : MonoBehaviour
         {
             MagicController controller = collision.GetComponent<MagicController>();
             controller.AggiungiMagiaAllaLista(magiaDaSbloccare);
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 
 

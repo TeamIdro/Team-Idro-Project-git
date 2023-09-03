@@ -9,39 +9,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65823995ebd17dc4091420f7427126d7, type: 3}
-  m_Name: SpellFulmine
+  m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
+  m_Name: MagiaFulmine
   m_EditorClassIdentifier: 
-  prefabAnimatoriMagia: {fileID: 7043036109183494557, guid: a5c3bf802a3f36045a5d0a2a34748a66, type: 3}
-  magicBehaviourType: 0
-  tipoMagia: 8
+  prefabParticleMagia: {fileID: 1119873908899744654, guid: d002d467f3ae3624faa2bc0a3df56741, type: 3}
+  magicBehaviourType: 2
+  tipoMagia: 0
   damageType: 0
   combinazioneDiElementi:
-  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
-  dannoDellaMagia: 10
+  - {fileID: 11400000, guid: 8aa8c337adb74d6429acb70ac064d5f1, type: 2}
+  dannoDellaMagia: 0
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
   knockbackForzaEsplosione: 1
   intensity: 0
   shakeTime: 0
-  velocitaDellaMagiaLanciata: 100
+  velocitaDellaMagiaLanciata: 0
   rallentamentoGraduale: 0
-  tempoDecellerazioneMagiaLanciata: 1
-  distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 2
-  detonazioneAdImpatto: 1
-  ExplosionPref: {fileID: 0}
+  tempoDecellerazioneMagiaLanciata: 0
+  distanzaMagiaLanciata: 0
+  tempoMagiaLanciata: 5
+  detonazioneAdImpatto: 0
+  staccaFiglioAllesplosione: 0
+  explosionPref: {fileID: 2297003416483041500, guid: 05f69ec06508ac640b40a11bb29221f2, type: 3}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 256
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 12288
   tickTime: 0
   raggioArea: 0
-  lunghezzaLineCast: 0
-  effettiMagia: []
+  lunghezzaLineCast: 10
+  XNoise: 0
+  YNoise: 1.79
+  effettiMagiaQuandoColpito: []
+  effettiMagiaPerIlMago: []
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0

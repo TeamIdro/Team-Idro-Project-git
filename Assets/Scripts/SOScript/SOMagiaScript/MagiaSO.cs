@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Unity.VisualScripting;
 //using UnityEditor.Animations;
@@ -38,23 +39,23 @@ public class MagiaSO : ScriptableObject
     [Header("Valori Per Magia Lanciata")]
     [Range(0, 100)]
     [Tooltip("Velocita del proiettile")]
-    public float velocitaDellaMagiaLanciata;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Lanciata")] public float velocitaDellaMagiaLanciata;
     [Tooltip("Se il proiettile deve rallentare fino a fermarsi")]
-    public bool rallentamentoGraduale;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Lanciata")] public bool rallentamentoGraduale;
     [Tooltip("Tempo che ci mette il proiettile a fermarsi rallentando gradualmente")]
     [Range(1, 100)]
-    public float tempoDecellerazioneMagiaLanciata;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Lanciata")] public float tempoDecellerazioneMagiaLanciata;
     [Range(0, 100)]
     [Tooltip("Distanza percorsa dal proiettile prima di essere distrutto")]
-    public float distanzaMagiaLanciata;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Lanciata")] public float distanzaMagiaLanciata;
     [Range(1, 1000)]
     [Tooltip("Durata in secondi del proiettile prima di essere distrutto")]
-    public float tempoMagiaLanciata = 5;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Lanciata")] public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
     public bool staccaFiglioAllesplosione;
     [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto � spuntata")]
-    public GameObject ExplosionPref;
+    public GameObject explosionPref;
    
     [Tooltip("I layer con cui il proiettile non collide, pu� comunque infliggere danni ai nemici impostati su layerMaskPerDanneggiaTarget ma infligger� danno solo una volta per ognuno sulla traiettoria e passer� oltre")]
     public LayerMask layerMaskPerIgnoraCollisioni;
@@ -62,11 +63,17 @@ public class MagiaSO : ScriptableObject
     public LayerMask layerMaskPerDanneggiaTarget;
 
     [Header("Valori Per Magia Stazionaria")]
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Stazionaria")]
     public float tickTime;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Stazionaria")]
     public float raggioArea = 0;
     [Header("Valori Per Magia Linecast")]
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.LineCast")]
+    public int conditionalVariable;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.LineCast")]
     public float lunghezzaLineCast = 0;
-
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.LineCast")]public float XNoise;
+    [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.LineCast")] public float YNoise;
     [Space]
     [Header("Lista Effetti Magia OnHit")]
     public List<EffettoBaseSO> effettiMagiaQuandoColpito;
@@ -79,6 +86,17 @@ public class MagiaSO : ScriptableObject
     [Space]
     public GameObject spawnaOggettoAdImpatto;
     public float dannoAreaOggettoAdImpattoSpawnato;
+
+
+    public void PlayCastingSound(AudioSource audioSource)
+    {
+        if(suonoLancioMagia != null && audioSource != null)
+        {
+            audioSource.clip = suonoLancioMagia;
+            audioSource.Play();
+        }
+
+    }
 
     public void ApplicaEffettoAMago(MagicController objectMago)
     {
@@ -100,7 +118,6 @@ public class MagiaSO : ScriptableObject
             }
         }
     }
-
 
     public void ApplicaEffettiATarget(GameObject nemicoACuiApplicareGliEffetti)
     {

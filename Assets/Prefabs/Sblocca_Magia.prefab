@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 136309098327170032}
   - component: {fileID: 136309098327170038}
   - component: {fileID: 5591611431921024330}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sblocca_Magia
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -19,7 +19,7 @@ MonoBehaviour:
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   dannoDellaMagia: 10
-  suonoLancioMagia: {fileID: 0}
+  suonoLancioMagia: {fileID: 8300000, guid: d20ff6706b8223944935087d2ce2fac0, type: 3}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 1.59
   knockbackForzaEsplosione: 1
@@ -31,16 +31,20 @@ MonoBehaviour:
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
   detonazioneAdImpatto: 1
-  ExplosionPref: {fileID: 3369253412745020790, guid: 7d0d13f9a6e23df4a93b8b4617b5edfa, type: 3}
+  staccaFiglioAllesplosione: 0
+  explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1312
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
     m_Bits: 4096
   tickTime: 0
   raggioArea: 4.04
+  conditionalVariable: 0
   lunghezzaLineCast: 0
+  XNoise: 0
+  YNoise: 0
   effettiMagiaQuandoColpito:
   - {fileID: 11400000, guid: 53ec3024f19605c40bf6dbfa2f11019f, type: 2}
   - {fileID: 11400000, guid: 546944cbb7fb2a8448b9aaa134b7be45, type: 2}

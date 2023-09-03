@@ -49,6 +49,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private float guardaSuValue = 0;
     private float guardaGiuValue = 0;
     private bool jumpIsOff;
+    private float m_maxHealth;
     //PROPRIETA
     public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
     public Vector2 MovementDirection { get { return movementDirection; } set { movementDirection = value; } }
@@ -86,8 +87,10 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     {
         // playerSaveData.WriteData();
         m_healthSlider.maxValue = hp;
+        m_maxHealth = hp;
         Publisher.Subscribe(this, new StopOnOpenPauseMessage());
         Publisher.Subscribe(this, new StartOnClosedPauseMessage());
+
     }
 
     private void Update()
@@ -265,7 +268,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         if(hp <= 0)
         {
             SpawnManager.Instance?.Respawn();
-            hp = 50f;
+            hp = m_maxHealth;
             m_healthSlider.value = hp;
         }
     }
@@ -288,10 +291,20 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         }
     }
 
-    public void TakeDamage(float damageToTake, TipoMagia magicType)
+    public void TakeDamage(float damageToTake,TipoMagia magicType)
     {
-        hp -= damageToTake;
-        m_healthSlider.value = hp;
+        if (hp > 0)
+        {
+            hp -= damageToTake;
+            m_healthSlider.value = hp;
+        }
+
+        if (hp <= 0)
+        {
+            SpawnManager.Instance?.Respawn();
+            hp = m_maxHealth;
+            m_healthSlider.value = hp;
+        }
     }
 
 }
