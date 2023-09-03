@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 
 public class DetectMovingPlatform : MonoBehaviour
@@ -10,32 +9,58 @@ public class DetectMovingPlatform : MonoBehaviour
     public LayerMask terrainMask;
     RaycastHit2D hit;
     public float offsetXCast;
+    public float jumpForceBoost;
+    private float defaultJumpForce;
 
+    private Rigidbody2D rb;
 
-
-    private void Update() 
+    void Awake()
     {
-        hit = Physics2D.BoxCast(transform.position, boxCastDimension, 0, Vector2.down, maxCastDistance, terrainMask); 
+        rb = GetComponentInParent<Rigidbody2D>();
+        defaultJumpForce = GetComponentInParent<PlayerCharacterController>().jumpVelocity;
+    }
 
-        if(hit.collider != null)
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        
+        if(other.CompareTag("MovingPlatform"))   
         {
-            if(hit.collider.CompareTag("MovingPlatform"))
+            Debug.Log("entrato");
+            this.transform.parent.transform.SetParent(other.transform);
+                            
+            float platformVelocity = other.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity.x;
+            if(platformVelocity > 0f && rb.velocity.x > 0f
+                || platformVelocity < 0f && rb.velocity.x < 0f)
             {
-                this.transform.SetParent(hit.transform);
+                GetComponentInParent<PlayerCharacterController>().jumpVelocity = defaultJumpForce;
+            }
+            else if(platformVelocity == 0f)
+            {
+                GetComponentInParent<PlayerCharacterController>().jumpVelocity = defaultJumpForce;
             }
             else
             {
-                this.transform.SetParent(null);
+                GetComponentInParent<PlayerCharacterController>().jumpVelocity = jumpForceBoost;
             }
+
         }
-        else
+        // else
+        // {
+        //     this.transform.parent?.transform.SetParent(null);
+        //     GetComponentInParent<PlayerCharacterController>().jumpVelocity = 700f;
+        // }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("MovingPlatform"))
+            // && this.transform.parent?.transform == other.transform)
         {
-            this.transform.SetParent(null);
+            Debug.Log("uscito");
+            this.transform.parent?.transform.SetParent(null);
+            GetComponentInParent<PlayerCharacterController>().jumpVelocity = 700f;
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(new Vector3(transform.position.x - offsetXCast,transform.position.y - maxCastDistance, 0), boxCastDimension);
-    }
+    
 }
