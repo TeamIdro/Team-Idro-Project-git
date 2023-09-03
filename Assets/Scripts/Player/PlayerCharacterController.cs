@@ -51,7 +51,8 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private bool jumpIsOff;
     private float m_maxHealth;
     //PROPRIETA
-    public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
+    public float MageAcceleration { get { return movementVelocity; } set { movementVelocity = value; } }
+    public float MaxVelocityCap { get { return maxVelocityCap; } set { maxVelocityCap = value; } }
     public Vector2 MovementDirection { get { return movementDirection; } set { movementDirection = value; } }
 
     public bool IsMoving { get=> IsMoving; set => IsMoving = value; }

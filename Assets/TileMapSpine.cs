@@ -7,19 +7,10 @@ public class TileMapSpine : MonoBehaviour
 {
     [SerializeField, Range(0, 100)] public float dannoSpine;
     [SerializeField, Range(0.2f, 50)] public float waitTick;
-    [SerializeField, Range(0f, 5f)] public float velocityMultiplier;
+    [SerializeField, Range(1f, 5f)] public float velocityMultiplier;
 
     private float temp = 0f;
     private bool dentroSpine = false;
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision != null)
@@ -31,8 +22,8 @@ public class TileMapSpine : MonoBehaviour
                     dentroSpine = true;
                     PlayerCharacterController controller = collision.gameObject.GetComponent<PlayerCharacterController>();
                     StartCoroutine(DannoATickSpine(controller));
-                    temp = controller.MageVelocity;
-                    controller.MageVelocity = controller.MageVelocity / velocityMultiplier;
+                    temp = controller.MaxVelocityCap;
+                    controller.MaxVelocityCap = controller.MaxVelocityCap / velocityMultiplier;
                     Debug.Log("ENTRO NELLE SPINE, ENTRATA: " + temp);
                 }
                 else if(collision.gameObject.GetComponent<EnemyScript>() != null) 
@@ -50,7 +41,7 @@ public class TileMapSpine : MonoBehaviour
             {
                 dentroSpine = false;
                 PlayerCharacterController controller = collision.gameObject.GetComponent<PlayerCharacterController>();
-                controller.MageVelocity = temp * velocityMultiplier;
+                controller.MaxVelocityCap  = temp;
                 Debug.Log("ENTRO NELLE SPINE, VELOCITA USCITA: " + temp);
             }
         }
