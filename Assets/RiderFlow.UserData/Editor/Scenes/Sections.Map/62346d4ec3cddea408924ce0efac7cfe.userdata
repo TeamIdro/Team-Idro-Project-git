@@ -1,4 +1,24 @@
 {
+  "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1458030965-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1458030965-0",
+    "SectionColorRed": 0.0,
+    "SectionColorGreen": 0.77,
+    "SectionColorBlue": 0.77,
+    "SectionAltColorRed": 0.0,
+    "SectionAltColorGreen": 0.77,
+    "SectionAltColorBlue": 0.77,
+    "RemoveSectionDuringBuild": false
+  },
+  "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1889306743-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1889306743-0",
+    "SectionColorRed": 0.76,
+    "SectionColorGreen": 0.56,
+    "SectionColorBlue": 0.3,
+    "SectionAltColorRed": 0.76,
+    "SectionAltColorGreen": 0.56,
+    "SectionAltColorBlue": 0.3,
+    "RemoveSectionDuringBuild": false
+  },
   "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1615817047-0": {
     "GameObjectId": "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1615817047-0",
     "SectionColorRed": 0.35,
@@ -9,16 +29,6 @@
     "SectionAltColorBlue": 0.35,
     "RemoveSectionDuringBuild": false
   },
-  "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1409750878-0": {
-    "GameObjectId": "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1409750878-0",
-    "SectionColorRed": 0.76,
-    "SectionColorGreen": 0.56,
-    "SectionColorBlue": 0.3,
-    "SectionAltColorRed": 0.76,
-    "SectionAltColorGreen": 0.56,
-    "SectionAltColorBlue": 0.3,
-    "RemoveSectionDuringBuild": false
-  },
   "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1866740840-0": {
     "GameObjectId": "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1866740840-0",
     "SectionColorRed": 0.35,
@@ -27,6 +37,16 @@
     "SectionAltColorRed": 0.35,
     "SectionAltColorGreen": 0.5,
     "SectionAltColorBlue": 0.77,
+    "RemoveSectionDuringBuild": false
+  },
+  "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1409750878-0": {
+    "GameObjectId": "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-1409750878-0",
+    "SectionColorRed": 0.76,
+    "SectionColorGreen": 0.56,
+    "SectionColorBlue": 0.3,
+    "SectionAltColorRed": 0.76,
+    "SectionAltColorGreen": 0.56,
+    "SectionAltColorBlue": 0.3,
     "RemoveSectionDuringBuild": false
   },
   "GlobalObjectId_V1-2-62346d4ec3cddea408924ce0efac7cfe-743390590-0": {
