@@ -16,4 +16,4 @@ MonoBehaviour:
   coloreEffetto: {r: 0, g: 0, b: 0, a: 0}
   raggioCupola: 5
   dannoCupola: 10
-  cupolaSulPlayer: {fileID: 0}
+  cupolaSulPlayer: {fileID: 7481740816993939608, guid: 815a91a07930f754289cb39b5579ff6b, type: 3}

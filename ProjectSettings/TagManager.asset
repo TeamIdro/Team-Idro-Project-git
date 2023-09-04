@@ -18,12 +18,12 @@ TagManager:
   - Mage/Player
   - Terreno
   - Bullets
-  - 
+  - Scale
   - Enemy
   - EnemyRanged
   - SpawnPoint
   - EnemyBullet
-  - 
+  - Acqua
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
     locked: 0
   - name: Casella
     uniqueID: 753149549
+    locked: 0
+  - name: Acqua
+    uniqueID: 4047499365
     locked: 0
   - name: Player
     uniqueID: 1992483039
