@@ -31,7 +31,8 @@ MonoBehaviour:
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 2
   detonazioneAdImpatto: 1
-  ExplosionPref: {fileID: 3311449554613764974, guid: 9085ace5e97ea174cb954f5fe97e0115, type: 3}
+  staccaFiglioAllesplosione: 0
+  explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
     m_Bits: 1280
@@ -40,7 +41,11 @@ MonoBehaviour:
     m_Bits: 4096
   tickTime: 0
   raggioArea: 0
+  conditionalVariable: 0
   lunghezzaLineCast: 0
-  effettiMagia: []
+  XNoise: 0
+  YNoise: 0
+  effettiMagiaQuandoColpito: []
+  effettiMagiaPerIlMago: []
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0
