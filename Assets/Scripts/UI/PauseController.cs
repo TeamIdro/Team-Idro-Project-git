@@ -26,10 +26,13 @@ public class PauseController : MonoBehaviour
         {
             PauseUI.SetActive(true);
 
+            // Pause the behavior of all enemy scripts
             foreach (var item in FindObjectsOfType<EnemyScript>())
             {
                 item.PauseBehavior();
             }
+
+            // PlayerCharacterController.Instance.
         }
     }
 }
