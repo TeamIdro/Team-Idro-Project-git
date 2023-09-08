@@ -31,14 +31,14 @@ MonoBehaviour:
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
   detonazioneAdImpatto: 1
-  staccaFiglioAllesplosione: 0
+  staccaFiglioAllesplosione: 1
   explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
     m_Bits: 1312
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 528384
   tickTime: 0
   raggioArea: 4.04
   conditionalVariable: 0

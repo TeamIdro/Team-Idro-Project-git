@@ -307,7 +307,14 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
             m_healthSlider.value = hp;
         }
     }
-
+    public void EnableController()
+    {
+        m_gamePlayInputActions.Mage.Enable();
+    }
+    public void DisableControl()
+    {
+        m_gamePlayInputActions.Mage.Disable();
+    }
 }
 public enum PlayerFacingDirections
 {

@@ -26,6 +26,7 @@ public class TileMapSpine : MonoBehaviour
                     controller.MaxVelocityCap = controller.MaxVelocityCap / velocityMultiplier;
                     Debug.Log("ENTRO NELLE SPINE, ENTRATA: " + temp);
                 }
+                // Aggiungere Danno anche per mostri
                 else if(collision.gameObject.GetComponent<EnemyScript>() != null) 
                 {
                     return;
