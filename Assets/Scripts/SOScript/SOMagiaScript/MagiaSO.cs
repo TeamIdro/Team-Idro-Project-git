@@ -55,7 +55,7 @@ public class MagiaSO : ScriptableObject
     [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Lanciata")] public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
-    public bool staccaFiglioAllesplosione;
+    public bool staccaFiglioAllEsplosione;
     [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto � spuntata")]
     public GameObject explosionPref;
    

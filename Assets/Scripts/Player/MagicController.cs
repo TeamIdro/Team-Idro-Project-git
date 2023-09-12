@@ -231,6 +231,8 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     public void CastCombinationSpell()
     {
+        ClearElementList();
+        UIelementiMagia.ClearUI();
         if (m_magiaDaLanciare != null)
         {
             if (!IsOnCooldown(m_magiaDaLanciare))
@@ -240,6 +242,8 @@ public class MagicController : MonoBehaviour, ISubscriber
                 m_magiaDaLanciare.ApplicaEffettoAMago(this);
                 m_magiaDaLanciare.TogliEffettoAMago(this);
                 m_magiaDaLanciare.PlayCastingSound(m_playerAudioSource);
+                float cooldownTime = m_magiaDaLanciare.tempoDiAttesaDellaMagia; // Imposta il tempo di cooldown desiderato
+                SetCooldown(m_magiaDaLanciare, cooldownTime);
                 if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
                 {
                     CastMagiaLanciata(magia);
@@ -254,11 +258,8 @@ public class MagicController : MonoBehaviour, ISubscriber
                 }
 
                 m_magiaDaLanciare = null;
-                ClearElementList();
-                UIelementiMagia.ClearUI();
                 m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
-                float cooldownTime = m_magiaDaLanciare.tempoDiAttesaDellaMagia; // Imposta il tempo di cooldown desiderato
-                SetCooldown(m_magiaDaLanciare, cooldownTime);
+
             }
         }
         else { return; }

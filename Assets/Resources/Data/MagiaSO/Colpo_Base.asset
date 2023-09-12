@@ -31,7 +31,7 @@ MonoBehaviour:
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
   detonazioneAdImpatto: 1
-  staccaFiglioAllesplosione: 1
+  staccaFiglioAllEsplosione: 1
   explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
