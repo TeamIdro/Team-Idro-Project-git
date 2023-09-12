@@ -179,9 +179,14 @@ public class Magia : MonoBehaviour
                     temp = gameObject.GetComponentInChildren<SpriteRenderer>();
                     temp.enabled = false;
                 }
-                if(magia.staccaFiglioAllesplosione is true)
+                if(magia.staccaFiglioAllEsplosione is true)
                 {
-                    gameObject.transform.DetachChildren();
+                    GameObject obj = gameObject.transform.GetChild(0).gameObject;
+                    if (obj != null)
+                    {
+                        gameObject.transform.DetachChildren();
+                        Destroy(obj,5);
+                    }
                 }
                 Destroy(gameObject);
                 if(temp != null)

@@ -39,7 +39,7 @@ public static class DamageCalculator
                 }
             }
             else if(magicType == TipoMagia.Terra)
-            {
+            {   
                 if(enemyWeakness == TipoMagia.Acqua)
                 {
                     return 1;

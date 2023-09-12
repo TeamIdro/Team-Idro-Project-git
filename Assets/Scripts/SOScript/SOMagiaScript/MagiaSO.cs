@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-[CreateAssetMenu(fileName = "Magia/MagiaSO", menuName = "Magia/MagiaSO")]
+[CreateAssetMenu(fileName = "Magia/TipoMagia", menuName = "Magia/TipoMagia")]
 public class MagiaSO : ScriptableObject
 {
     public GameObject prefabParticleMagia;
@@ -16,6 +16,8 @@ public class MagiaSO : ScriptableObject
     [Space]
     public TipoMagia tipoMagia;
     public TipoDiDannoMagia damageType;
+    [Space, Range(0, 100)] public float tempoDiAttesaDellaMagia; 
+
     [Header("Lista Combinazioni")]
     public List<ElementoMagiaSO> combinazioneDiElementi;
     [Space(15)]
@@ -53,7 +55,7 @@ public class MagiaSO : ScriptableObject
     [ControlVisibility("magicBehaviourType == TipoComportamentoMagia.Lanciata")] public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
-    public bool staccaFiglioAllesplosione;
+    public bool staccaFiglioAllEsplosione;
     [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto � spuntata")]
     public GameObject explosionPref;
    

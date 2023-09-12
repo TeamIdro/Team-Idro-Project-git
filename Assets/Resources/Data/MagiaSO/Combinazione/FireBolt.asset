@@ -16,6 +16,7 @@ MonoBehaviour:
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
+  tempoDiAttesaDellaMagia: 15
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   dannoDellaMagia: 10
@@ -31,7 +32,7 @@ MonoBehaviour:
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
   detonazioneAdImpatto: 1
-  staccaFiglioAllesplosione: 1
+  staccaFiglioAllEsplosione: 0
   explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
