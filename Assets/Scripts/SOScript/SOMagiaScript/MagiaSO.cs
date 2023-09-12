@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-[CreateAssetMenu(fileName = "Magia/MagiaSO", menuName = "Magia/MagiaSO")]
+[CreateAssetMenu(fileName = "Magia/TipoMagia", menuName = "Magia/TipoMagia")]
 public class MagiaSO : ScriptableObject
 {
     public GameObject prefabParticleMagia;
@@ -16,6 +16,8 @@ public class MagiaSO : ScriptableObject
     [Space]
     public TipoMagia tipoMagia;
     public TipoDiDannoMagia damageType;
+    [Space, Range(0, 100)] public float tempoDiAttesaDellaMagia; 
+
     [Header("Lista Combinazioni")]
     public List<ElementoMagiaSO> combinazioneDiElementi;
     [Space(15)]

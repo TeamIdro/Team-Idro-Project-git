@@ -23,7 +23,6 @@ public class Knockable : MonoBehaviour
     {
         if (isKnockingBack)
         {
-            // Calcola la nuova posizione in base alla velocità
             float moveDistance = knockbackSpeed * Time.deltaTime;
             Vector2 newPosition;
             if (directionOfKnockBack == Vector2.right)
@@ -36,13 +35,11 @@ public class Knockable : MonoBehaviour
                 newPosition = new Vector2(transform.position.x - moveDistance, transform.position.y);
                 rb.MovePosition(newPosition);
             }
-
             distanceKnocked += moveDistance;
-
             if (distanceKnocked >= knockbackDistance)
             {
                 isKnockingBack = false;
-                rb.velocity = Vector2.zero; // Arresta l'oggetto quando il knockback è completo
+                rb.velocity = Vector2.zero; 
             }
         }
     }
