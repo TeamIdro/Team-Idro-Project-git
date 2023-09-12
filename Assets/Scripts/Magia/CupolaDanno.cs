@@ -6,35 +6,51 @@ using UnityEngine;
 
 public class CupolaDanno : MonoBehaviour
 {
-    [HideInInspector] public float tickCupola;
-    [HideInInspector] public float raggioCupola;
-    [HideInInspector] public int dannoCupola;
-    [HideInInspector] public float durataCupola;
+    [SerializeField] private float tickCupola;
+    [SerializeField] private float raggioCupola;
+    [SerializeField]private int dannoCupola;
+    [SerializeField] private float durataCupola;
     [SerializeField] List<EffettoBaseSO> effettiCupola;
 
     EnemyScript nemicoACuiApplicareIlDanno;
-
-    private void Start()
+    Platform piattaformaDaSpostare;
+    private void Awake()
     {
-       
+        ParticleSystem particleSystemCupola = gameObject.GetComponentInChildren<ParticleSystem>();
+        ParticleSystem.MainModule mainModule = particleSystemCupola.main;
+        mainModule.startLifetime = durataCupola;
+        mainModule.startSize = raggioCupola* 2;
     }
-
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject != null)
         {
-            if(collision.gameObject.GetComponent<EnemyScript>() != null)
+            if(collision.gameObject.GetComponent<EnemyScript>() != null || collision.gameObject.GetComponent<Platform>() != null)
             {
-                nemicoACuiApplicareIlDanno= collision.gameObject.GetComponent<EnemyScript>();
-                foreach (var effetto in effettiCupola)
+                Debug.Log("ENTRATO "+ collision.gameObject.name);
+                if(collision.gameObject.GetComponent<EnemyScript>() != null)
                 {
-                    effetto.ApplicaEffettoANemico(nemicoACuiApplicareIlDanno);
-                    effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno);
+                    nemicoACuiApplicareIlDanno = collision.gameObject?.GetComponent<EnemyScript>();
+                    foreach (var effetto in effettiCupola)
+                    {
+                        effetto.ApplicaEffettoANemico(nemicoACuiApplicareIlDanno.gameObject, gameObject.transform.position);
+                        effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno.gameObject);
+                    }
                 }
-                Debug.LogWarning("DANNO AL NEMICO DA CUPOLA");
-                nemicoACuiApplicareIlDanno.TakeDamage(dannoCupola, TipoMagia.Fuoco);
+                else if(collision.gameObject.GetComponent<Platform>() != null)
+                {
+                    piattaformaDaSpostare = collision.gameObject?.GetComponent<Platform>();
+                    foreach (var effetto in effettiCupola)
+                    {
+                        effetto.ApplicaEffettoANemico(piattaformaDaSpostare.gameObject, gameObject.transform.position);
+                        effetto.TogliEffettoDopoDelTempoANemico(piattaformaDaSpostare.gameObject);
+                    }
+                }
+               
+                StartCoroutine(DannoATickCupola());
+               
             }
         }
     }
@@ -42,12 +58,9 @@ public class CupolaDanno : MonoBehaviour
     {
         StopAllCoroutines();
         nemicoACuiApplicareIlDanno = null;
+        piattaformaDaSpostare = null;
     }
 
-    public void Update()
-    {
-        
-    }
     public void SetRaggioCupola(float raggioCupola)
     {
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();
@@ -56,5 +69,13 @@ public class CupolaDanno : MonoBehaviour
     public void SetDannoCupola(int dannoCupola)
     {
         this.dannoCupola = dannoCupola;
+    }
+    public IEnumerator DannoATickCupola()
+    {
+        while(nemicoACuiApplicareIlDanno != null)
+        {
+            nemicoACuiApplicareIlDanno.TakeDamage(dannoCupola, TipoMagia.Fuoco);
+            yield return new WaitForSeconds(tickCupola);
+        }
     }
 }

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da372fedd2ac4934cacc618a690b8cd0, type: 3}
   m_Name: DannoNelTempoCupolaSO
   m_EditorClassIdentifier: 
-  durataEffetto: 0
+  durataEffetto: 5
   coloreEffetto: {r: 0, g: 0, b: 0, a: 0}
-  quantitaDiDanniNelTempo: 0
+  quantitaDiDanniNelTempo: 10
   tipoMagiaDannoNelTempo: 0
-  tempoTick: 0
+  tempoTick: 5

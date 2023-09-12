@@ -8,13 +8,13 @@ public class EffettoCambioTileSO : EffettoBaseSO
 {
     public TileChange[] tileChanges;
     public LayerMask targetLayerMask;
-
+    public Vector2Int tileChangeArea;
     public override void ApplicaEffettoAlMago(MagicController mago)
     {
         return;
     }
 
-    public override void ApplicaEffettoANemico(EnemyScript nemico)
+    public override void ApplicaEffettoANemico(GameObject nemico, Vector2 position)
     {
         return;
     }
@@ -24,7 +24,7 @@ public class EffettoCambioTileSO : EffettoBaseSO
         yield return null;
     }
 
-    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject nemico)
     {
         yield return null;
     }

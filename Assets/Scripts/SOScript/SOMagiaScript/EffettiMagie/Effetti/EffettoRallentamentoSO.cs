@@ -1,15 +1,17 @@
 using BehaviorDesigner.Runtime;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Analytics.Internal;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "Magia/Effetti/EffettoRallentamentoSO", menuName = "Magia/Effetti/Effetto Rallentamento SO")]
 public class EffettoRallentamentoSO : EffettoBaseSO
 {
     [Range(0,100)]
     public int percentualeRallentamentoNemicoColpito = 0;
-    [Range(0, 10)]
-    public int moltiplicatoreDiMagia;
+    [Range(0, 100)]
+    public float moltiplicatoreDiMagia;
 
     private float valoreOriginaleNemici;
 
@@ -22,40 +24,55 @@ public class EffettoRallentamentoSO : EffettoBaseSO
         yield return null;
     }
 
-    public override void ApplicaEffettoANemico(EnemyScript danneggiabile)
+    public override void ApplicaEffettoANemico(GameObject target,Vector2 position)
     {
         Debug.LogWarning("EFFETTO APPLICATO");
-        int valoreRandomicoPerPercentuale = Random.Range(0, 101);
-        if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
+        if (target.GetComponent<EnemyScript>())
         {
-            valoreOriginaleNemici = danneggiabile.speed;
-            danneggiabile.speed /= moltiplicatoreDiMagia;
-            Renderer renderer = danneggiabile.gameObject.GetComponent<Renderer>();
-            Material material = renderer.material;
-            if (material != null)
+            EnemyScript enemyScript = target.GetComponent<EnemyScript>();
+            int valoreRandomicoPerPercentuale = Random.Range(0, 101);
+            if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
             {
-                material.SetFloat("_OutlineThickness", 1f);
-                material.SetColor("_OutlineColor", coloreEffetto);
-                renderer.material = material;
+                valoreOriginaleNemici = enemyScript.speed;
+                enemyScript.speed /= moltiplicatoreDiMagia;
+            }
+
+        }
+        else if (target.GetComponent<MovingPlatform>() && target.GetComponent<NavMeshAgent>())
+        {
+            NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
+            MovingPlatform temp = agent.GetComponent<MovingPlatform>();
+            if(temp.isAffectedByEffect == false)
+            {
+                int valoreRandomicoPerPercentuale = Random.Range(0, 101);
+                if (valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
+                {
+                    float percentuale = moltiplicatoreDiMagia / 100;
+                    valoreOriginaleNemici = agent.speed;
+                    agent.speed *= percentuale;
+                    temp.isAffectedByEffect = true;
+                }
+
             }
         }
     }
 
 
-    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject target)
     {
         yield return new WaitForSeconds(durataEffetto);
-        nemico.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        Debug.LogWarning("EFFETTO TOLTO");
-        nemico.speed = valoreOriginaleNemici;
-        Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
-        Material material = renderer.material;
-        if(material!= null)
+        if(target.GetComponent<EnemyScript>() != null)
         {
-            material.SetFloat("_OutlineThickness", 0);
-            material.SetColor("_OutlineColor", Color.white);
-            renderer.material = material;
-
+            EnemyScript enemyScript = target.GetComponent<EnemyScript>();
+            target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            Debug.LogWarning("EFFETTO TOLTO");
+            enemyScript.speed = valoreOriginaleNemici;
         }
+        else if(target.GetComponent<MovingPlatform>() != null)
+        {
+            MovingPlatform temp = target.GetComponent<MovingPlatform>();
+            temp.isAffectedByEffect = false;
+        }
+       
     }
 }

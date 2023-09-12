@@ -6,16 +6,16 @@ using UnityEngine.Tilemaps;
 [CreateAssetMenu(fileName = "Magia/Effetti/EffettoSpawnPiantaSO", menuName = "Magia/Effetti/EffettoSpawnPiantaSO")]
 public class EffettoSpawnPiantaSO : EffettoBaseSO
 {
-    public int altezzaPianta = 1;
     public Tile testaPianta;
     public Tile corpoPianta;
+    public Tile basePianta;
 
     public override void ApplicaEffettoAlMago(MagicController mago)
     {
         return;
     }
 
-    public override void ApplicaEffettoANemico(EnemyScript nemico)
+    public override void ApplicaEffettoANemico(GameObject nemico, Vector2 position)
     {
         return;
     }
@@ -25,7 +25,7 @@ public class EffettoSpawnPiantaSO : EffettoBaseSO
         yield return null;
     }
 
-    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject nemico)
     {
         yield return null;
     }

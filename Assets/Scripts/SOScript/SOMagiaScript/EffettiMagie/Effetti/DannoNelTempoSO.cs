@@ -16,31 +16,33 @@ public class DannoNelTempoSO : EffettoBaseSO
     {
         yield return null;
     }
-    public override void ApplicaEffettoANemico(EnemyScript nemico)
+    public override void ApplicaEffettoANemico(GameObject nemico, Vector2 position)
     {
         Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
         Material material = renderer.material;
         material.SetFloat("_OutlineThickness", 1f);
         material.SetColor("_OutlineColor", coloreEffetto);
-        nemico.StartCoroutine(DanniATick(nemico));
+        MonoBehaviour monoBehaviour = nemico.GetComponent<MonoBehaviour>();
+        monoBehaviour.StartCoroutine(DanniATick(nemico));
     }
-    public IEnumerator DanniATick(EnemyScript nemico)
+    public IEnumerator DanniATick(GameObject nemico)
     {
         int quantitaDITick = Mathf.FloorToInt(durataEffetto / tempoTick);
         for (int i = 0; i < quantitaDITick; i++)
         {
             Debug.LogWarning("DANNO TICK "+ i);
-            nemico.TakeDamage(quantitaDiDanniNelTempo, tipoMagiaDannoNelTempo);
+            nemico.GetComponent<EnemyScript>().TakeDamage(quantitaDiDanniNelTempo, tipoMagiaDannoNelTempo);
             yield return new WaitForSeconds(tempoTick);
         }
     }
-    public override IEnumerator TogliEffettoDopoDelTempoANemico(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject nemico)
     {
         yield return new WaitForSeconds(durataEffetto);
         Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
         Material material = renderer.material;
         material.SetFloat("_OutlineThickness", 0);
         material.SetColor("_OutlineColor", Color.white);
-        nemico.StopCoroutine(DanniATick(nemico));
+        MonoBehaviour monoBehaviour = nemico.GetComponent<MonoBehaviour>();
+        monoBehaviour.StopCoroutine(DanniATick(nemico));
     }
 }

@@ -49,8 +49,11 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private float guardaSuValue = 0;
     private float guardaGiuValue = 0;
     private bool jumpIsOff;
+    private float m_maxHealth;
+    float verticalInput = 0;
     //PROPRIETA
-    public float MageVelocity { get { return movementVelocity; } set { movementVelocity = value; } }
+    public float MageAcceleration { get { return movementVelocity; } set { movementVelocity = value; } }
+    public float MaxVelocityCap { get { return maxVelocityCap; } set { maxVelocityCap = value; } }
     public Vector2 MovementDirection { get { return movementDirection; } set { movementDirection = value; } }
 
     public bool IsMoving { get=> IsMoving; set => IsMoving = value; }
@@ -86,14 +89,17 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     {
         // playerSaveData.WriteData();
         m_healthSlider.maxValue = hp;
+        m_maxHealth = hp;
         Publisher.Subscribe(this, new StopOnOpenPauseMessage());
         Publisher.Subscribe(this, new StartOnClosedPauseMessage());
+
     }
 
     private void Update()
     {
         GetInputDirection();
         AnimationUpdate();
+        (IsOnStairs ? (Action)ClimbStairs : Movement)();
         if (!isOnStairs)
         {
             isJumping = !CheckIfCanJump();
@@ -103,7 +109,6 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
             return;
         }
         if (isBlocked) { return; }
-
     }
 
    
@@ -111,20 +116,18 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private void FixedUpdate()
     {
         if (isBlocked) { return; }
-        if (isOnStairs)
-        {
-            ClimbStairs(); // Chiamare la funzione di salita delle scale
-        }
-        else
-        {
-            Movement(); // Chiamare la funzione di movimento normale
-        }
     }
+
 
     private void ClimbStairs()
     {
+        isJumping = false;
         float horizontalInput = movementDirection.x;
-        float verticalInput = movementDirection.y;
+        if (m_gamePlayInputActions.Mage.GuardaSu.ReadValue<float>()== 1)
+            verticalInput = 1;
+        else if (m_gamePlayInputActions.Mage.GuardaGiu.ReadValue<float>() == 1)
+            verticalInput = -1;
+        else { verticalInput = 0; }
         Debug.Log(verticalInput);
         Vector2 climbVelocity = new Vector2(horizontalInput * movementVelocity * Time.fixedDeltaTime, verticalInput * climbSpeed * Time.fixedDeltaTime);
         m_playerMageRB2D.velocity = climbVelocity;
@@ -167,9 +170,24 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     }
     private void AnimationUpdate()
     {
+        animatorMago.speed = 1;
         animatorMago.SetBool("IsMoving",isMoving);
         animatorMago.SetFloat("YVelocity",Mathf.Floor(m_playerMageRB2D.velocity.y));
         animatorMago.SetBool("IsGrounded", !isJumping);
+        animatorMago.SetBool("IsClimbing", IsOnStairs);
+        if (isOnStairs)
+        {
+            if(Mathf.Floor(m_playerMageRB2D.velocity.y) > 0)
+                animatorMago.speed = 1;
+            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) == 0)
+                animatorMago.speed = 0;
+            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) < 0)
+            {
+                Debug.LogAssertion("ANIMATION CLIP AL CONTRARIO");
+                animatorMago.speed = -1;
+            }
+            animatorMago.Play("MageClimbing");
+        }
     }
     private void Movement()
     {
@@ -256,7 +274,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         if(hp <= 0)
         {
             SpawnManager.Instance?.Respawn();
-            hp = 50f;
+            hp = m_maxHealth;
             m_healthSlider.value = hp;
         }
     }
@@ -279,12 +297,29 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         }
     }
 
-    public void TakeDamage(float damageToTake, TipoMagia magicType)
+    public void TakeDamage(float damageToTake,TipoMagia magicType)
     {
-        hp -= damageToTake;
-        m_healthSlider.value = hp;
-    }
+        if (hp > 0)
+        {
+            hp -= damageToTake;
+            m_healthSlider.value = hp;
+        }
 
+        if (hp <= 0)
+        {
+            SpawnManager.Instance?.Respawn();
+            hp = m_maxHealth;
+            m_healthSlider.value = hp;
+        }
+    }
+    public void EnableController()
+    {
+        m_gamePlayInputActions.Mage.Enable();
+    }
+    public void DisableControl()
+    {
+        m_gamePlayInputActions.Mage.Disable();
+    }
 }
 public enum PlayerFacingDirections
 {

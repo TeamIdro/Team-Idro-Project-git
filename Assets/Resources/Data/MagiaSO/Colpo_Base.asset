@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: Colpo_Base
   m_EditorClassIdentifier: 
-  prefabParticleMagia: {fileID: 7043036109183494557, guid: a5c3bf802a3f36045a5d0a2a34748a66, type: 3}
+  prefabParticleMagia: {fileID: 6952349668586854344, guid: eb7af1483896311439eacf0941c20742, type: 3}
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
   combinazioneDiElementi: []
-  dannoDellaMagia: 0.69
+  dannoDellaMagia: 5
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
@@ -29,8 +29,9 @@ MonoBehaviour:
   tempoDecellerazioneMagiaLanciata: 69.6
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
-  detonazioneAdImpatto: 0
-  ExplosionPref: {fileID: 0}
+  detonazioneAdImpatto: 1
+  staccaFiglioAllesplosione: 1
+  explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
     m_Bits: 1280
@@ -39,7 +40,11 @@ MonoBehaviour:
     m_Bits: 4096
   tickTime: 0
   raggioArea: 0
+  conditionalVariable: 0
   lunghezzaLineCast: 0
-  effettiMagia: []
+  XNoise: 0
+  YNoise: 0
+  effettiMagiaQuandoColpito: []
+  effettiMagiaPerIlMago: []
   spawnaOggettoAdImpatto: {fileID: 0}
   dannoAreaOggettoAdImpattoSpawnato: 0

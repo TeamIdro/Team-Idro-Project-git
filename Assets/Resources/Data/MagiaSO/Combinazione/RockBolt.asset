@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
+  m_Name: RockBolt
+  m_EditorClassIdentifier: 
+  prefabParticleMagia: {fileID: 2482630182511487331, guid: ee6b1af54e236aa46b7dea3c77c093bd, type: 3}
+  magicBehaviourType: 0
+  tipoMagia: 3
+  damageType: 0
+  combinazioneDiElementi:
+  - {fileID: 11400000, guid: 883b13981282ae5478df3bd72ba83949, type: 2}
+  dannoDellaMagia: 10
+  suonoLancioMagia: {fileID: 0}
+  suonoImpattoMagia: {fileID: 0}
+  forzaDiGravitaPerProiettile: 0
+  knockbackForzaEsplosione: 1
+  intensity: 0
+  shakeTime: 0
+  velocitaDellaMagiaLanciata: 100
+  rallentamentoGraduale: 0
+  tempoDecellerazioneMagiaLanciata: 1
+  distanzaMagiaLanciata: 100
+  tempoMagiaLanciata: 2
+  detonazioneAdImpatto: 1
+  staccaFiglioAllesplosione: 0
+  explosionPref: {fileID: 0}
+  layerMaskPerIgnoraCollisioni:
+    serializedVersion: 2
+    m_Bits: 1280
+  layerMaskPerDanneggiaTarget:
+    serializedVersion: 2
+    m_Bits: 4096
+  tickTime: 0
+  raggioArea: 0
+  conditionalVariable: 0
+  lunghezzaLineCast: 0
+  XNoise: 0
+  YNoise: 0
+  effettiMagiaQuandoColpito: []
+  effettiMagiaPerIlMago: []
+  spawnaOggettoAdImpatto: {fileID: 0}
+  dannoAreaOggettoAdImpattoSpawnato: 0
