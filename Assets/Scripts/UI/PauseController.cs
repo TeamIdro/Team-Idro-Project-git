@@ -32,7 +32,9 @@ public class PauseController : MonoBehaviour
                 item.PauseBehavior();
             }
 
-            // PlayerCharacterController.Instance.
+            
+
+            PlayerCharacterController.Instance.DisableController();
         }
     }
 }

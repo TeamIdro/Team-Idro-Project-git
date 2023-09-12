@@ -98,5 +98,7 @@ public class UIMenuPrincipale : MonoBehaviour
         }
         
         this.gameObject.SetActive(false);
+
+        PlayerCharacterController.instance.EnableController();
     }
 }
