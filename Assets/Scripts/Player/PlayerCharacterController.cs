@@ -50,6 +50,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private float guardaGiuValue = 0;
     private bool jumpIsOff;
     private float m_maxHealth;
+    float verticalInput = 0;
     //PROPRIETA
     public float MageAcceleration { get { return movementVelocity; } set { movementVelocity = value; } }
     public float MaxVelocityCap { get { return maxVelocityCap; } set { maxVelocityCap = value; } }
@@ -98,6 +99,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     {
         GetInputDirection();
         AnimationUpdate();
+        (IsOnStairs ? (Action)ClimbStairs : Movement)();
         if (!isOnStairs)
         {
             isJumping = !CheckIfCanJump();
@@ -107,7 +109,6 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
             return;
         }
         if (isBlocked) { return; }
-
     }
 
    
@@ -115,15 +116,18 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     private void FixedUpdate()
     {
         if (isBlocked) { return; }
-        (IsOnStairs ? (Action)ClimbStairs : Movement)();
-
     }
+
 
     private void ClimbStairs()
     {
         isJumping = false;
         float horizontalInput = movementDirection.x;
-        float verticalInput = movementDirection.y;
+        if (m_gamePlayInputActions.Mage.GuardaSu.ReadValue<float>()== 1)
+            verticalInput = 1;
+        else if (m_gamePlayInputActions.Mage.GuardaGiu.ReadValue<float>() == 1)
+            verticalInput = -1;
+        else { verticalInput = 0; }
         Debug.Log(verticalInput);
         Vector2 climbVelocity = new Vector2(horizontalInput * movementVelocity * Time.fixedDeltaTime, verticalInput * climbSpeed * Time.fixedDeltaTime);
         m_playerMageRB2D.velocity = climbVelocity;
@@ -173,15 +177,16 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         animatorMago.SetBool("IsClimbing", IsOnStairs);
         if (isOnStairs)
         {
-            animatorMago.Play("MageClimbing");
             if(Mathf.Floor(m_playerMageRB2D.velocity.y) > 0)
-            {
                 animatorMago.speed = 1;
-            }
-            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) <= 0)
-            {
+            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) == 0)
                 animatorMago.speed = 0;
+            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) < 0)
+            {
+                Debug.LogAssertion("ANIMATION CLIP AL CONTRARIO");
+                animatorMago.speed = -1;
             }
+            animatorMago.Play("MageClimbing");
         }
     }
     private void Movement()

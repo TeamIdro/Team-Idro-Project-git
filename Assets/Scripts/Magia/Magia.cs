@@ -126,7 +126,7 @@ public class Magia : MonoBehaviour
     private void CollisionsBehaviours(Collider2D collision)
     {
         //TODO: risolvere questione layer
-        magia.ApplicaEffettiATarget(collision.gameObject);
+        magia.ApplicaEffettiATarget(collision.gameObject,gameObject.transform.position);
         magia.TogliEffettiDopoTempoAlTarget(collision.gameObject); 
         if (collision.gameObject.GetComponent<EnemyScript>() is not null)
         {

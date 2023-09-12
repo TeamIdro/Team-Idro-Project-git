@@ -15,7 +15,7 @@ public class EffettoSpawnPiantaSO : EffettoBaseSO
         return;
     }
 
-    public override void ApplicaEffettoANemico(GameObject nemico)
+    public override void ApplicaEffettoANemico(GameObject nemico, Vector2 position)
     {
         return;
     }

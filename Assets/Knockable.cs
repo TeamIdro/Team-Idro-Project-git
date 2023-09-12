@@ -5,12 +5,14 @@ using UnityEngine;
 public class Knockable : MonoBehaviour
 {
     public float knockbackSpeed = 5.0f; // La velocità del knockback
-    public float knockbackDistance = 3.0f; // La distanza del knockback
+    public float knockbackDistance = 100.0f; // La distanza del knockback desiderata
 
     private Rigidbody2D rb;
     private Vector2 initialPosition;
     private bool isKnockingBack = false;
     private Vector2 directionOfKnockBack;
+    private float distanceKnocked = 0.0f; // Distanza percorsa durante il knockback
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,16 +31,15 @@ public class Knockable : MonoBehaviour
                 newPosition = new Vector2(transform.position.x + moveDistance, transform.position.y);
                 rb.MovePosition(newPosition);
             }
-            else if(directionOfKnockBack == Vector2.left)
+            else if (directionOfKnockBack == Vector2.left)
             {
                 newPosition = new Vector2(transform.position.x - moveDistance, transform.position.y);
                 rb.MovePosition(newPosition);
             }
 
-            // Sposta l'oggetto
+            distanceKnocked += moveDistance;
 
-            // Verifica se il knockback è completo
-            if (Mathf.Abs(transform.position.x - initialPosition.x) >= knockbackDistance)
+            if (distanceKnocked >= knockbackDistance)
             {
                 isKnockingBack = false;
                 rb.velocity = Vector2.zero; // Arresta l'oggetto quando il knockback è completo
@@ -46,11 +47,12 @@ public class Knockable : MonoBehaviour
         }
     }
 
-    // Attiva l'effetto di knockback
     public void ActivateKnockback(Vector2 direction)
     {
         directionOfKnockBack = direction;
         isKnockingBack = true;
         initialPosition = transform.position;
+        distanceKnocked = 0.0f;
+        gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, 3, 0);
     }
 }

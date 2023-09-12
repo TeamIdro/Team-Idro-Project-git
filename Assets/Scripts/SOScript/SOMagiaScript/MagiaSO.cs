@@ -119,13 +119,13 @@ public class MagiaSO : ScriptableObject
         }
     }
 
-    public void ApplicaEffettiATarget(GameObject nemicoACuiApplicareGliEffetti)
+    public void ApplicaEffettiATarget(GameObject nemicoACuiApplicareGliEffetti,Vector2 position)
     {
         if (effettiMagiaQuandoColpito.Count > 0)
         {
             foreach(EffettoBaseSO effetto in effettiMagiaQuandoColpito)
             {
-                effetto.ApplicaEffettoANemico(nemicoACuiApplicareGliEffetti);
+                effetto.ApplicaEffettoANemico(nemicoACuiApplicareGliEffetti, position);
             }
         }
     }

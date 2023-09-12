@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7481740816993939610}
   - component: {fileID: 7481740816993939611}
   - component: {fileID: 8209113225570966832}
+  - component: {fileID: 4926556505637189487}
   m_Layer: 10
   m_Name: CupolaPlayer
   m_TagString: Untagged
@@ -68,6 +69,27 @@ MonoBehaviour:
   durataCupola: 5
   effettiCupola:
   - {fileID: 11400000, guid: d21e8c4acb1187949bede748a9355c5b, type: 2}
+--- !u!50 &4926556505637189487
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481740816993939608}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1000000
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1001 &3452783361309206713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75,13 +97,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7481740816993939610}
     m_Modifications:
+    - target: {fileID: 2945912708838756560, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2945912708838756575, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: InitialModule.startSize.minScalar
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2945912709039892784, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2945912709039892799, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2945912709908135049, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2945912710118780932, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: CustomDataModule.mode0
@@ -143,13 +177,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: IceDome
       objectReference: {fileID: 0}
+    - target: {fileID: 2945912710118780934, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2945912710118780935, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: m_AllowRoll
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2945912710118780935, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2945912710118780935, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: m_SortingLayerID
