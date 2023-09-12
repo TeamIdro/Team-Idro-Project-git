@@ -22,8 +22,10 @@ public class PauseController : MonoBehaviour
 
     private void Pause(CallbackContext ctx)
     {
-        if(!PauseUI.activeInHierarchy)
+        if(PauseUI && !PauseUI.activeInHierarchy)
         {
+            PlayerCharacterController.Instance.DisableControl();
+
             PauseUI.SetActive(true);
 
             // Pause the behavior of all enemy scripts
@@ -32,9 +34,11 @@ public class PauseController : MonoBehaviour
                 item.PauseBehavior();
             }
 
-            
+            foreach (EnemyRangedBullet item in FindObjectsOfType<EnemyRangedBullet>())
+            {
+                item.PauseObject();
+            }
 
-            PlayerCharacterController.Instance.DisableController();
         }
     }
 }

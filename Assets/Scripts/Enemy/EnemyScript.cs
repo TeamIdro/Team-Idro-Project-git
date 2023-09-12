@@ -171,9 +171,19 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         Debug.Log("PauseBehavior");
         foreach (BehaviorTree item in GetComponents<BehaviorTree>())
         {
-            Debug.Log(item.BehaviorName);
+            if (item.isActiveAndEnabled)
+            {
+                GetComponent<Animator>().speed = 0;
+            }
+            else 
+            {
+                GetComponent<Animator>().speed = 1;
+            }
+
             item.enabled = !item.isActiveAndEnabled;
         }
+
+        
         
     }
 
