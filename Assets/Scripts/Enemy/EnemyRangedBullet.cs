@@ -30,8 +30,9 @@ public class EnemyRangedBullet : MonoBehaviour
       if(other.gameObject.GetComponent<PlayerCharacterController>())
       {
          //Damage Player
-         other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
-         Destroy(this.gameObject);
+            other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
+            other.gameObject.GetComponent<PlayerCharacterController>().KnockBack(this.transform);
+            Destroy(this.gameObject);
       }
 
       Destroy(this.gameObject);
@@ -51,4 +52,5 @@ public class EnemyRangedBullet : MonoBehaviour
         GetComponent<ParticleSystem>().Play();
         lastVelocity = Vector2.negativeInfinity;
     }
+
 }

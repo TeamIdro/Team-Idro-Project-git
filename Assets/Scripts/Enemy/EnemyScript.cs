@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
 using System;
+using System.Runtime.CompilerServices;
 
 public enum OnGround {Ground, Air}
 public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
@@ -65,6 +66,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     private GameObject ElementWeaknessObj;
     
     const string ElementWeakness = "ElementWeakness";
+
 
 
     private void Awake() 
@@ -168,7 +170,6 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 
     public void PauseBehavior()
     {
-        Debug.Log("PauseBehavior");
         foreach (BehaviorTree item in GetComponents<BehaviorTree>())
         {
             if (item.isActiveAndEnabled)
@@ -182,9 +183,7 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
 
             item.enabled = !item.isActiveAndEnabled;
         }
-
-        
-        
     }
 
+    
 }

@@ -572,6 +572,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12901880}
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_healthSlider
       value: 
       objectReference: {fileID: 1428774516}
