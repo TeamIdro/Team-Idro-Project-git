@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 703073531, guid: ff6e1483294a5044d99f702a0994b97c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -433,7 +433,7 @@ MonoBehaviour:
   <patrol_Speed>k__BackingField: 5
   <patrol_angularSpeed>k__BackingField: 120
   <patrol_arriveDistance>k__BackingField: 1
-  <speed>k__BackingField: 10
+  <speed>k__BackingField: 7
   <seek_angularSpeed>k__BackingField: 120
   <seek_arriveDistance>k__BackingField: 15
   setReducedAngle: 280
