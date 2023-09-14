@@ -18,13 +18,13 @@ TagManager:
   - Mage/Player
   - Terreno
   - Bullets
-  - 
+  - Scale
   - Enemy
   - EnemyRanged
   - SpawnPoint
   - EnemyBullet
-  - 
-  - 
+  - Acqua
+  - Pianta
   - 
   - 
   - 
@@ -46,6 +46,21 @@ TagManager:
   - name: Casella
     uniqueID: 753149549
     locked: 0
+  - name: Acqua
+    uniqueID: 4047499365
+    locked: 0
+  - name: Props
+    uniqueID: 22376733
+    locked: 0
   - name: Player
     uniqueID: 1992483039
+    locked: 0
+  - name: Magia
+    uniqueID: 241662131
+    locked: 0
+  - name: Cupola
+    uniqueID: 511931347
+    locked: 0
+  - name: Terreno
+    uniqueID: 2998814013
     locked: 0

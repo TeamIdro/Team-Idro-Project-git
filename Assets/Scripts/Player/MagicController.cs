@@ -10,11 +10,9 @@ public class MagicController : MonoBehaviour, ISubscriber
     [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
     [SerializeField] [Range(1, 3)] private int m_spellSlot;
-    [SerializeField] private GameObject m_basePrefabToShoot;
+    [SerializeField] private GameObject m_basePrefabToShootForCombination;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
-    [SerializeField, ReadOnly] private List<MagiaSO> magieDiLivelloUno;
-    [SerializeField, ReadOnly] private List<MagiaSO> magieDiLivelloDue;
-    [SerializeField, ReadOnly] private List<MagiaSO> magieDiLivelloTre;
+    [SerializeField] private List<MagiaSO> listaMagieDisponibili;
     [Tooltip("Se spuntato fa si che se la lista degli elementi � piena e provi ad inserirne uno nuovo viene buttato fuori il primo elemento della lista per fare spazio, se non � spuntato una volta che la lista � piena non si potr� pi� aggiungere elementi")]
     [SerializeField] private bool lastInFirstOut = true;
     [Space(15)]
@@ -41,47 +39,20 @@ public class MagicController : MonoBehaviour, ISubscriber
         m_gamePlayInput = new GamePlayInputActions();
         
         
-        var magicTakenFromFolderLv1 = Resources.LoadAll<MagiaSO>("Data/MagiaSO/Combinazione/LV1");
-        var magicTakenFromFolderLv2 = Resources.LoadAll<MagiaSO>("Data/MagiaSO/Combinazione/LV2");
-        var magicTakenFromFolderLv3 = Resources.LoadAll<MagiaSO>("Data/MagiaSO/Combinazione/LV3");
-        foreach (var magia in magicTakenFromFolderLv1)
-        {
-            var tempMagia = (MagiaSO)magia;
-            magieDiLivelloUno.Add(tempMagia);
-        }
-        foreach (var magia in magicTakenFromFolderLv2)
-        {
-            var tempMagia = (MagiaSO)magia;
-            magieDiLivelloDue.Add(tempMagia);
-        }
-        foreach (var magia in magicTakenFromFolderLv3)
-        {
-            var tempMagia = (MagiaSO)magia;
-            magieDiLivelloTre.Add(tempMagia);
-        }
+
         var elementsTakenFromFolder = Resources.LoadAll("Data/MagiaSO/Elementi", typeof(ElementoMagiaSO));
        
         foreach (var item in elementsTakenFromFolder)
         {
             var elementTemp = item as ElementoMagiaSO;
-            // Debug.Log(item);
             m_elementiDaPrendere.Add(elementTemp);
         }
-        for (int i = 0; i < magieDiLivelloUno.Count; i++)
+        for (int i = 0; i < listaMagieDisponibili.Count; i++)
         {
-            magieDiLivelloUno.OrderBy(x => x.combinazioneDiElementi);
-            magieDiLivelloUno[i].combinazioneDiElementi.OrderBy(x => x.tipoDiMagia);
+            listaMagieDisponibili.OrderBy(x => x.combinazioneDiElementi);
+            listaMagieDisponibili[i].combinazioneDiElementi.OrderBy(x => x.tipoDiMagia);
         }
-        for (int i = 0; i < magieDiLivelloDue.Count; i++)
-        {
-            magieDiLivelloDue.OrderBy(x => x.combinazioneDiElementi);
-            magieDiLivelloDue[i].combinazioneDiElementi.OrderBy(x => x.tipoDiMagia);
-        }
-        for (int i = 0; i < magieDiLivelloTre.Count; i++)
-        {
-            magieDiLivelloTre.OrderBy(x => x.combinazioneDiElementi);
-            magieDiLivelloTre[i].combinazioneDiElementi.OrderBy(x => x.tipoDiMagia);
-        }
+
 
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoAcqua, TipoMagia.Acqua);
         m_dizionariElementi.Add(m_gamePlayInput.Mage.UsaElementoTerra, TipoMagia.Terra);
@@ -154,21 +125,7 @@ public class MagicController : MonoBehaviour, ISubscriber
     {
         m_listaValoriLancio.OrderBy(x => x.tipoDiMagia);
         List<MagiaSO> listaTutteMagieLocale = new List<MagiaSO>();
-        switch (m_spellSlot)
-        {
-            case 1:
-                listaTutteMagieLocale = magieDiLivelloUno;
-                break;
-            case 2:
-                listaTutteMagieLocale = magieDiLivelloUno.Concat(magieDiLivelloDue).ToList();
-                break;
-            case 3:
-                listaTutteMagieLocale = magieDiLivelloUno.Concat(magieDiLivelloDue).Concat(magieDiLivelloTre).ToList();
-                break;
-            default:
-                break;
-        }
-        //listaTutteMagieLocale = m_tuttaLaListaDelleMagie;
+        listaTutteMagieLocale = listaMagieDisponibili;
         listaTutteMagieLocale.OrderBy(x => x.name);
         int elementoMultiploRipetizioni = 0;
         ElementoMagiaSO elemMultiplo = ScriptableObject.CreateInstance("MagiaSO")as ElementoMagiaSO;
@@ -249,31 +206,55 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     private void Onfire(InputAction.CallbackContext obj)
     {
-        if (m_listaValoriLancio.Count <= 0) { return; }
-        m_faseCorrente = FasiDiLancioMagia.MagiaComposta;
-        DoSomethingOnMagicComposed();
+        
+        if (m_listaValoriLancio.Count <= 0) {
+            CastZeroCombinationSpell();
+        }
+        else
+        {
+            m_faseCorrente = FasiDiLancioMagia.MagiaComposta;
+            DoSomethingOnMagicComposed();
+            CastCombinationSpell();
+        }
     }
 
-    public void CastSpell()
+    private void CastZeroCombinationSpell()
     {
-        m_faseCorrente = FasiDiLancioMagia.LancioMagia;
-        if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
-        {
-            CastMagiaLanciata();
-        }
-        else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
-        {
-            CastMagiaStazionaria();
-        }
-        else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
-        {
-            CastMagiaLineCast();
-        }
+        var magia = Resources.Load("BulletPrefab/Bullet_No_Combination") as GameObject;
+        m_magiaDaLanciare = Resources.Load("Data/MagiaSO/Colpo_Base") as MagiaSO;
 
-        m_magiaDaLanciare = null;
-        ClearElementList();
-        UIelementiMagia.ClearUI();
-        m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+        Debug.Log("COLPO BASE LANCIATO");
+        CastMagiaLanciata(magia);
+    }
+        
+    public void CastCombinationSpell()
+    {
+        if(m_magiaDaLanciare != null)
+        {
+            m_faseCorrente = FasiDiLancioMagia.LancioMagia;
+            var magia = Resources.Load("BulletPrefab/Bullet_For_Combination") as GameObject;
+            m_magiaDaLanciare.ApplicaEffettoAMago(this);
+            m_magiaDaLanciare.TogliEffettoAMago(this);
+            if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
+            {
+                CastMagiaLanciata(magia);
+            }
+            else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
+            {
+                CastMagiaStazionaria(magia);
+            }
+            else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
+            {
+                CastMagiaLineCast();
+            }
+
+            m_magiaDaLanciare = null;
+            ClearElementList();
+            UIelementiMagia.ClearUI();
+            m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+
+        }
+        else { return; }
 
     }
 
@@ -295,7 +276,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         RaycastHit2D hit = Physics2D.Linecast(firePointPosition, endPosition,m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
         Debug.DrawLine(firePointPosition, endPosition,Color.red);
         Debug.Log(hit.collider);
-        LineRenderer lr = m_basePrefabToShoot.AddComponent<LineRenderer>();
+        LineRenderer lr = m_basePrefabToShootForCombination.AddComponent<LineRenderer>();
         lr.enabled = true;
         var distance = hit.distance;
         if(distance == 0)
@@ -323,79 +304,24 @@ public class MagicController : MonoBehaviour, ISubscriber
         }
     }
 
-    private void CastMagiaStazionaria()
+    private void CastMagiaStazionaria(GameObject magia)
     {
-        var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
-        CheckIfThereIsAnimatorAndGetIt(bullet);
+        CheckIfThereIsParticleAndGetIt(bullet);
         StaticMagicInitialize(bullet);
         OnMagicCasted.Invoke();
     }
 
    
-    private void CastMagiaLanciata()
+    private void CastMagiaLanciata(GameObject magia)
     {
-        var magia = Resources.Load("BulletPrefab/Bullet") as GameObject;
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckForDirectionToGo(bullet);
-        CheckIfThereIsAnimatorAndGetIt(bullet);
+        CheckIfThereIsParticleAndGetIt(bullet);
         ThrowedMagicInitialize(bullet);
         OnMagicCasted.Invoke();
         
     }
-
-
-    //Vector2 firePointPos = firePoint.position;
-    //Vector2 endPos = firePointPos + (Vector2)firePoint.right * rayLength;
-    //RaycastHit2D hit = Physics2D.Linecast(firePointPos, endPos, layerMask);
-
-    //if (hit)
-    //{
-    //    Debug.Log(hit.transform.name);
-    //    rayEnd = hit.point;
-    //}
-    //else
-    //{
-    //    Debug.Log("nah man...................");
-    //    rayEnd = endPos;
-    //}
-
-    //lr.enabled = true;
-
-    //var distance = hit.distance;
-
-    //if (distance == 0)
-    //{
-    //    distance = rayLength;
-    //}
-
-    //for (int i = 1; i < linePoints; i++)
-    //{
-    //    var pos = lr.GetPosition(i);
-
-    //    //Debug.Log(rayEnd.x);
-    //    pos.x = (distance / linePoints * i) + Random.Range(-lightningNoiseX, lightningNoiseX);
-    //    pos.y += Random.Range(-lightningNoiseY, lightningNoiseY);
-
-    //    lr.SetPosition(i, pos);
-    //}
-
-    //if (distance < rayLength)
-    //{
-    //    lr.SetPosition(linePoints, new Vector2(distance, 0f));
-    //    lightningExplosion.transform.position = hit.point;
-    //}
-    //else
-    //{
-    //    lr.SetPosition(linePoints, new Vector2(rayLength, 0f));
-    //    lightningExplosion.transform.position = endPos;
-
-    //}
-    ////Debug.Log(distance.ToString());
-    ////Debug.Log(endPos.ToString());
-    //lightningExplosion.Play();
-
-
 
 
     private void ClearElementList()
@@ -419,12 +345,12 @@ public class MagicController : MonoBehaviour, ISubscriber
     /// Cerca e setta l'animator nell'object che verrà istanziato solo se lo contiene
     /// </summary>
     /// <param name="bullet"></param>
-    private void CheckIfThereIsAnimatorAndGetIt(GameObject bullet)
+    private void CheckIfThereIsParticleAndGetIt(GameObject bullet)
     {
         GameObject animatorPrefabSpawned;
-        if (m_magiaDaLanciare.prefabAnimatoriMagia != null)
+        if (m_magiaDaLanciare.prefabParticleMagia != null)
         {
-            animatorPrefabSpawned = Instantiate(m_magiaDaLanciare.prefabAnimatoriMagia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
+            animatorPrefabSpawned = Instantiate(m_magiaDaLanciare.prefabParticleMagia, gameObject.transform.position + new Vector3(-1, 0, 0), gameObject.transform.rotation);
             animatorPrefabSpawned.transform.position = Vector2.zero;
             animatorPrefabSpawned.transform.SetParent(bullet.transform, false);
             if (animatorPrefabSpawned.GetComponent<ParticleSystem>() != null)
@@ -512,14 +438,14 @@ public class MagicController : MonoBehaviour, ISubscriber
     }
     private void ThrowedMagicInitialize(GameObject bullet)
     {
-        if (m_magiaDaLanciare.rallentamentoGraduale is true)
+        if (m_magiaDaLanciare.rallentamentoGraduale is not true)
         {
             magiaComponent.decelerationTime = m_magiaDaLanciare.tempoDecellerazioneMagiaLanciata;
         }
         magiaComponent.magia = m_magiaDaLanciare;
         if (m_magiaDaLanciare.detonazioneAdImpatto is true)
         {
-            magiaComponent.ExplosionPref = m_magiaDaLanciare.ExplosionPref;
+            magiaComponent.explosionPref = m_magiaDaLanciare.ExplosionPref;
             magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.knockbackForzaEsplosione;
             magiaComponent.damageMask = m_magiaDaLanciare.layerMaskPerDanneggiaTarget;
         }
@@ -544,6 +470,13 @@ public class MagicController : MonoBehaviour, ISubscriber
         else if(message is StartOnClosedPauseMessage)
         {
             magicIsBlocked = false;
+        }
+    }
+    public void AggiungiMagiaAllaLista(MagiaSO magiaSO)
+    {
+        if(listaMagieDisponibili.Find(x=>x == magiaSO) == null)
+        {
+            listaMagieDisponibili.Add(magiaSO);
         }
     }
 }

@@ -11,9 +11,9 @@ public class Magia : MonoBehaviour
     [HideInInspector]public float explosionKnockbackForce = 1;
     [HideInInspector]public int damageExplosion = 0;
 
-    [HideInInspector]public GameObject ExplosionPref;
+    [HideInInspector]public GameObject explosionPref;
     [HideInInspector]public int damage;
-    [HideInInspector]public float decelerationTime = 2f; // tempo in secondi per rallentare completamente il proiettile
+    [HideInInspector]public float decelerationTime = 0f; // tempo in secondi per rallentare completamente il proiettile
     private Rigidbody2D bulletRigidbody;
 
     public LayerMask ignoreContact;
@@ -53,7 +53,7 @@ public class Magia : MonoBehaviour
     {
         if (bulletRigidbody.velocity.magnitude > 0f)
         {
-            if(decelerationTime != 0)
+            if(decelerationTime is not 0)
             {
                 float decelerationRate = bulletRigidbody.velocity.magnitude / decelerationTime * 2;
                 Vector2 oppositeForce = -bulletRigidbody.velocity.normalized * decelerationRate;
@@ -85,11 +85,11 @@ public class Magia : MonoBehaviour
 
     private void SpawnExplosionParticle()
     {
-        if(ExplosionPref != null)
+        if(explosionPref != null)
         {
             
-            GameObject expl = Instantiate(ExplosionPref, gameObject.transform.position, gameObject.transform.rotation);
-            if (expl != null)
+            GameObject expl = Instantiate(explosionPref, gameObject.transform.position, gameObject.transform.rotation);
+            if (expl is not null)
             {
                 CameraShake.Instance.ShakeCamera(magia.intensity, magia.shakeTime);
                 Destroy(expl, 2);
@@ -126,19 +126,20 @@ public class Magia : MonoBehaviour
     private void CollisionsBehaviours(Collider2D collision)
     {
         //TODO: risolvere questione layer
-            Debug.Log(collision.name);
+        magia.ApplicaEffettiATarget(collision.gameObject);
+        magia.TogliEffettiDopoTempoAlTarget(collision.gameObject); 
         if (collision.gameObject.GetComponent<EnemyScript>() is not null)
         {
             damageable1 = collision.gameObject.GetComponent<IDamageable>();
-            EnemyScript enemyLocal = collision.gameObject.GetComponent<EnemyScript>();
-            if (magia == null) { return; }
-            else if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
+            if (magia is null) 
             {
-                magia.ApplicaEffetti(enemyLocal);
-                magia.TogliEffettiDopoTempo(enemyLocal);
+                return;
+            }
+            if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
+            {
+
                 if (magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
                 {
-                    Debug.Log("Preso");
                     damageable1.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
                 }
                 else if(magia.magicBehaviourType is TipoComportamentoMagia.Stazionaria && isDone is not 1)
@@ -154,7 +155,7 @@ public class Magia : MonoBehaviour
         {
             Debug.Log("COLLISIONE");
             Debug.Log(collision);
-            if (collision.gameObject.GetComponent<Rigidbody2D>() is not null 
+            if (collision.gameObject.GetComponent<Rigidbody2D>() is not null
                 && collision.gameObject.GetComponent<EnemyScript>() is not null
                 && collision.gameObject.GetComponent<Spawnpoint>() is null 
                 && collision.gameObject.GetComponent<ElementalButton>() is null)
@@ -168,8 +169,24 @@ public class Magia : MonoBehaviour
             {
                 Instantiate(magia.spawnaOggettoAdImpatto, gameObject.transform.position, Quaternion.identity);
             }
-            if(magia.detonazioneAdImpatto == true)
+            if(magia.detonazioneAdImpatto is true)
+            {
+                SpriteRenderer temp = null;
+                if (gameObject.GetComponentInChildren<SpriteRenderer>() != null)
+                {
+                    temp = gameObject.GetComponentInChildren<SpriteRenderer>();
+                    temp.enabled = false;
+                }
+                if(magia.staccaFiglioAllesplosione is true)
+                {
+                    gameObject.transform.DetachChildren();
+                }
                 Destroy(gameObject);
+                if(temp != null)
+                {
+                    Destroy(temp.gameObject,2f);
+                }
+            }
 
         }
         

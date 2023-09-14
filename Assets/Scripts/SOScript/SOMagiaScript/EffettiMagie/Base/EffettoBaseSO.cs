@@ -5,11 +5,13 @@ using UnityEngine;
 public abstract class EffettoBaseSO : ScriptableObject
 {
     public float durataEffetto = 0f;
-
+    public Color coloreEffetto;
     /// <summary>
     /// Funzione base per applicare l'effetto al nemico
     /// </summary>
     /// <param name="nemico"></param>
-    public abstract void ApplicaEffetto(EnemyScript nemico);
-    public abstract IEnumerator TogliEffettoDopoDelTempo(EnemyScript nemico);
+    public abstract void ApplicaEffettoANemico(GameObject nemico);
+    public abstract IEnumerator TogliEffettoDopoDelTempoANemico(GameObject nemico);
+    public abstract void ApplicaEffettoAlMago(MagicController mago);
+    public abstract IEnumerator TogliEffettiAlMagoDopoTempo(MagicController mago);
 }

@@ -10,7 +10,7 @@ using UnityEngine.Rendering.PostProcessing;
 [CreateAssetMenu(fileName = "Magia/MagiaSO", menuName = "Magia/MagiaSO")]
 public class MagiaSO : ScriptableObject
 {
-    public GameObject prefabAnimatoriMagia;
+    public GameObject prefabParticleMagia;
     public TipoComportamentoMagia magicBehaviourType;
     [Space]
     public TipoMagia tipoMagia;
@@ -52,6 +52,7 @@ public class MagiaSO : ScriptableObject
     public float tempoMagiaLanciata = 5;
     [Tooltip("Se la magia deve detonare all'impatto con qualcosa")]
     public bool detonazioneAdImpatto;
+    public bool staccaFiglioAllesplosione;
     [Tooltip("Inserire prefab dell'esplosione desiderata, obbligatorio se detonazioneAdImpatto � spuntata")]
     public GameObject ExplosionPref;
    
@@ -67,37 +68,65 @@ public class MagiaSO : ScriptableObject
     public float lunghezzaLineCast = 0;
 
     [Space]
-    [Header("Lista Effetti Magia")]
-    public List<EffettoBaseSO> effettiMagia;
+    [Header("Lista Effetti Magia OnHit")]
+    public List<EffettoBaseSO> effettiMagiaQuandoColpito;
+
+    [Space]
+    [Header("Lista Effetti Magia Per Il Mago")]
+    public List<EffettoBaseSO> effettiMagiaPerIlMago;
 
 
     [Space]
     public GameObject spawnaOggettoAdImpatto;
     public float dannoAreaOggettoAdImpattoSpawnato;
 
-
-
-    
-    
-
-
-    public void ApplicaEffetti(EnemyScript nemicoACuiApplicareGliEffetti)
+    public void ApplicaEffettoAMago(MagicController objectMago)
     {
-        if (effettiMagia.Count > 0)
+        if(effettiMagiaPerIlMago.Count > 0)
         {
-            foreach(EffettoBaseSO effetto in effettiMagia)
+            foreach(EffettoBaseSO effetto in effettiMagiaPerIlMago)
             {
-                effetto.ApplicaEffetto(nemicoACuiApplicareGliEffetti);
+                effetto.ApplicaEffettoAlMago(objectMago);
             }
         }
     }
-    public void TogliEffettiDopoTempo(EnemyScript nemicoACuiTogliereGliEffetti)
+    public void TogliEffettoAMago(MagicController objectMago)
     {
-        if (effettiMagia.Count > 0)
+        if (effettiMagiaPerIlMago.Count > 0)
         {
-            foreach (EffettoBaseSO effetto in effettiMagia)
+            foreach (EffettoBaseSO effetto in effettiMagiaPerIlMago)
             {
-                nemicoACuiTogliereGliEffetti.StartCoroutine(effetto.TogliEffettoDopoDelTempo(nemicoACuiTogliereGliEffetti));
+                objectMago.StartCoroutine(effetto.TogliEffettiAlMagoDopoTempo(objectMago));
+            }
+        }
+    }
+
+
+    public void ApplicaEffettiATarget(GameObject nemicoACuiApplicareGliEffetti)
+    {
+        if (effettiMagiaQuandoColpito.Count > 0)
+        {
+            foreach(EffettoBaseSO effetto in effettiMagiaQuandoColpito)
+            {
+                effetto.ApplicaEffettoANemico(nemicoACuiApplicareGliEffetti);
+            }
+        }
+    }
+    public void TogliEffettiDopoTempoAlTarget(GameObject nemicoACuiTogliereGliEffetti)
+    {
+        if (effettiMagiaQuandoColpito.Count > 0)
+        {
+            foreach (EffettoBaseSO effetto in effettiMagiaQuandoColpito)
+            {
+                MonoBehaviour monoBehaviour = nemicoACuiTogliereGliEffetti.GetComponent<MonoBehaviour>();
+                if (monoBehaviour != null)
+                {
+                    monoBehaviour.StartCoroutine(effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiTogliereGliEffetti));
+                }
+                else
+                {
+                    return;
+                }
             }
         }
     }

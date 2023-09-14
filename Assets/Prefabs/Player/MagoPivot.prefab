@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1992483039
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e60ecc478141a0647b5099bc50f52c37, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -231,6 +231,8 @@ GameObject:
   - component: {fileID: 4337122286586203744}
   - component: {fileID: 7537261567199135306}
   - component: {fileID: 1220166403}
+  - component: {fileID: 5316201503002039672}
+  - component: {fileID: 1017595657492390576}
   m_Layer: 8
   m_Name: MagoPivot
   m_TagString: Player
@@ -276,9 +278,11 @@ MonoBehaviour:
   maxVelocityCap: 10
   deceleration: 50
   maxCastDistance: 0.652
+  climbSpeed: 0
   movementDirection: {x: 0, y: 0}
   isMoving: 0
   isJumping: 0
+  isOnStairs: 0
   rayCastPosition: {fileID: 2316705413653882135}
   boxCastDimension: {x: 0.5, y: 0.29}
   playerMask:
@@ -300,11 +304,9 @@ MonoBehaviour:
   timeBeforeShoot: 0
   m_UIPrefab: {fileID: 0}
   m_spellSlot: 3
-  m_basePrefabToShoot: {fileID: 2811095905312843416, guid: 1e486950aaa25c84196a0b0371c78c3e, type: 3}
+  m_basePrefabToShootForCombination: {fileID: 0}
   m_faseCorrente: 0
-  magieDiLivelloUno: []
-  magieDiLivelloDue: []
-  magieDiLivelloTre: []
+  listaMagieDisponibili: []
   lastInFirstOut: 0
   m_elementiDaPrendere: []
   OnMagicComposed:
@@ -338,8 +340,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.35, y: -0.12}
-  m_Size: {x: 1, y: 2.5860755}
+  m_Offset: {x: -0.38174152, y: -0.120000005}
+  m_Size: {x: 0.6673641, y: 2.5860755}
   m_Direction: 0
 --- !u!50 &7537261567199135306
 Rigidbody2D:
@@ -380,6 +382,58 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   offsetXCast: 0.34
+--- !u!61 &5316201503002039672
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108159572990154237}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 828715ad4b343224eb9d901caf91493c, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.71879196, y: -0.50465137}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16254044, y: 1.7374004}
+  m_EdgeRadius: 0
+--- !u!61 &1017595657492390576
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4108159572990154237}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 828715ad4b343224eb9d901caf91493c, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03946972, y: -0.5328894}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1481266, y: 1.7473959}
+  m_EdgeRadius: 0
 --- !u!1 &5351127479474757305
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5351127479474757305}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32, y: -1.16, z: 0}
+  m_LocalPosition: {x: -0.365, y: -1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -425,7 +479,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017416835, y: 0.11777675}
+  m_Offset: {x: -0.026085734, y: 0.11777675}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -436,5 +490,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.89208007, y: 0.7644465}
+  m_Size: {x: 0.78244895, y: 0.7644465}
   m_EdgeRadius: 0

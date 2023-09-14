@@ -8,32 +8,41 @@ public class DannoNelTempoSO : EffettoBaseSO
     public int quantitaDiDanniNelTempo;
     [ReadOnly] public TipoMagia tipoMagiaDannoNelTempo;
     public float tempoTick;
-    public Color coloreEffetto;
-    public override void ApplicaEffetto(EnemyScript nemico)
+    public override void ApplicaEffettoAlMago(MagicController mago)
+    {
+        return;
+    }
+    public override IEnumerator TogliEffettiAlMagoDopoTempo(MagicController mago)
+    {
+        yield return null;
+    }
+    public override void ApplicaEffettoANemico(GameObject nemico)
     {
         Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
         Material material = renderer.material;
         material.SetFloat("_OutlineThickness", 1f);
         material.SetColor("_OutlineColor", coloreEffetto);
-        nemico.StartCoroutine(DanniATick(nemico));
+        MonoBehaviour monoBehaviour = nemico.GetComponent<MonoBehaviour>();
+        monoBehaviour.StartCoroutine(DanniATick(nemico));
     }
-    public IEnumerator DanniATick(EnemyScript nemico)
+    public IEnumerator DanniATick(GameObject nemico)
     {
         int quantitaDITick = Mathf.FloorToInt(durataEffetto / tempoTick);
         for (int i = 0; i < quantitaDITick; i++)
         {
             Debug.LogWarning("DANNO TICK "+ i);
-            nemico.TakeDamage(quantitaDiDanniNelTempo, tipoMagiaDannoNelTempo);
+            nemico.GetComponent<EnemyScript>().TakeDamage(quantitaDiDanniNelTempo, tipoMagiaDannoNelTempo);
             yield return new WaitForSeconds(tempoTick);
         }
     }
-    public override IEnumerator TogliEffettoDopoDelTempo(EnemyScript nemico)
+    public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject nemico)
     {
         yield return new WaitForSeconds(durataEffetto);
         Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
         Material material = renderer.material;
         material.SetFloat("_OutlineThickness", 0);
         material.SetColor("_OutlineColor", Color.white);
-        nemico.StopCoroutine(DanniATick(nemico));
+        MonoBehaviour monoBehaviour = nemico.GetComponent<MonoBehaviour>();
+        monoBehaviour.StopCoroutine(DanniATick(nemico));
     }
 }
