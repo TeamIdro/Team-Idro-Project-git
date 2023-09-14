@@ -16,7 +16,7 @@ public class DannoNelTempoSO : EffettoBaseSO
     {
         yield return null;
     }
-    public override void ApplicaEffettoANemico(GameObject nemico)
+    public override void ApplicaEffettoANemico(GameObject nemico, Vector2 position)
     {
         Renderer renderer = nemico.gameObject.GetComponent<Renderer>();
         Material material = renderer.material;

@@ -20,20 +20,22 @@ public class EffettoCupolaSO : EffettoBaseSO
     {
         yield return null;
     }
-    public override void ApplicaEffettoANemico(GameObject target)
-    {
-        float durataEffettoInterno = durataEffetto;
-        GameObject cupolaIstanziata = Instantiate(cupolaSulPlayer);
-        cupolaIstanziata.SetActive(true);
-        cupolaIstanziata.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-        cupolaIstanziata.GetComponent<CupolaDanno>()?.SetRaggioCupola(raggioCupola);
-        cupolaIstanziata.GetComponent<CupolaDanno>()?.SetDannoCupola(dannoCupola);
-        Destroy(cupolaIstanziata, durataEffettoInterno);
-    }
+
 
     public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject target)
     {
         yield return new WaitForSeconds(durataEffetto);
-        Debug.Log("Effetto Mago tolto a:" + target);
+    }
+
+    public override void ApplicaEffettoANemico(GameObject nemico, Vector2 position)
+    {
+        if(nemico.GetComponent<PlayerCharacterController>() != null) { return;}
+        float durataEffettoInterno = durataEffetto;
+        GameObject cupolaIstanziata = Instantiate(cupolaSulPlayer);
+        cupolaIstanziata.SetActive(true);
+        cupolaIstanziata.transform.SetPositionAndRotation(position, Quaternion.identity);
+        cupolaIstanziata.GetComponent<CupolaDanno>()?.SetRaggioCupola(raggioCupola);
+        cupolaIstanziata.GetComponent<CupolaDanno>()?.SetDannoCupola(dannoCupola);
+        Destroy(cupolaIstanziata, durataEffettoInterno);
     }
 }

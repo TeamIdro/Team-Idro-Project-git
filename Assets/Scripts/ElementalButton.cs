@@ -24,8 +24,6 @@ public class ElementalButton : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         Magia magicBullet = other.gameObject.GetComponent<Magia>();
-        //MAGIA.CS
-        //ONDISABLE(){MAGIA = NULL}
         if(magicBullet != null)
         {
             MagiaSO magicSO = magicBullet.magia;

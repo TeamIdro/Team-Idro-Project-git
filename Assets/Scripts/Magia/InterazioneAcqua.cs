@@ -57,7 +57,12 @@ public class InterazioneAcqua : MonoBehaviour
                 tileSuCuiDisegnareBlocchi.gameObject.layer = LayerMask.NameToLayer("Terreno");
             }
         }
+        else if(collision.gameObject.GetComponent<IDamageable>() != null)
+        {
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(1000000, TipoMagia.Acqua);
+        }
     }
+
     private bool IsTileInLayerMask(Vector3Int tilePosition)
     {
         Debug.Log("è NELLA LAYER MASK?");

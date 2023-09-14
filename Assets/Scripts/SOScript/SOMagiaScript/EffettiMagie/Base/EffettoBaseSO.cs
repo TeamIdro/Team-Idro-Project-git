@@ -10,7 +10,7 @@ public abstract class EffettoBaseSO : ScriptableObject
     /// Funzione base per applicare l'effetto al nemico
     /// </summary>
     /// <param name="nemico"></param>
-    public abstract void ApplicaEffettoANemico(GameObject nemico);
+    public abstract void ApplicaEffettoANemico(GameObject nemico,Vector2 position);
     public abstract IEnumerator TogliEffettoDopoDelTempoANemico(GameObject nemico);
     public abstract void ApplicaEffettoAlMago(MagicController mago);
     public abstract IEnumerator TogliEffettiAlMagoDopoTempo(MagicController mago);

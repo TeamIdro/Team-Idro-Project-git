@@ -13,15 +13,13 @@ public class CupolaDanno : MonoBehaviour
     [SerializeField] List<EffettoBaseSO> effettiCupola;
 
     EnemyScript nemicoACuiApplicareIlDanno;
-
+    Platform piattaformaDaSpostare;
     private void Awake()
     {
         ParticleSystem particleSystemCupola = gameObject.GetComponentInChildren<ParticleSystem>();
         ParticleSystem.MainModule mainModule = particleSystemCupola.main;
         mainModule.startLifetime = durataCupola;
         mainModule.startSize = raggioCupola* 2;
-        SetRaggioCupola(raggioCupola);
-        Destroy(gameObject, durataCupola);
     }
 
 
@@ -29,14 +27,28 @@ public class CupolaDanno : MonoBehaviour
     {
         if(collision.gameObject != null)
         {
-            if(collision.gameObject.GetComponent<EnemyScript>() != null)
+            if(collision.gameObject.GetComponent<EnemyScript>() != null || collision.gameObject.GetComponent<Platform>() != null)
             {
-                nemicoACuiApplicareIlDanno = collision.gameObject.GetComponent<EnemyScript>();
-                foreach (var effetto in effettiCupola)
+                Debug.Log("ENTRATO "+ collision.gameObject.name);
+                if(collision.gameObject.GetComponent<EnemyScript>() != null)
                 {
-                    effetto.ApplicaEffettoANemico(nemicoACuiApplicareIlDanno.gameObject);
-                    effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno.gameObject);
+                    nemicoACuiApplicareIlDanno = collision.gameObject?.GetComponent<EnemyScript>();
+                    foreach (var effetto in effettiCupola)
+                    {
+                        effetto.ApplicaEffettoANemico(nemicoACuiApplicareIlDanno.gameObject, gameObject.transform.position);
+                        effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno.gameObject);
+                    }
                 }
+                else if(collision.gameObject.GetComponent<Platform>() != null)
+                {
+                    piattaformaDaSpostare = collision.gameObject?.GetComponent<Platform>();
+                    foreach (var effetto in effettiCupola)
+                    {
+                        effetto.ApplicaEffettoANemico(piattaformaDaSpostare.gameObject, gameObject.transform.position);
+                        effetto.TogliEffettoDopoDelTempoANemico(piattaformaDaSpostare.gameObject);
+                    }
+                }
+               
                 StartCoroutine(DannoATickCupola());
                
             }
@@ -46,12 +58,9 @@ public class CupolaDanno : MonoBehaviour
     {
         StopAllCoroutines();
         nemicoACuiApplicareIlDanno = null;
+        piattaformaDaSpostare = null;
     }
 
-    public void Update()
-    {
-        
-    }
     public void SetRaggioCupola(float raggioCupola)
     {
         CircleCollider2D circleCollider2D = GetComponent<CircleCollider2D>();

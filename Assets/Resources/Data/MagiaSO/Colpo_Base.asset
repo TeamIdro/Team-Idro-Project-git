@@ -16,6 +16,7 @@ MonoBehaviour:
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
+  tempoDiAttesaDellaMagia: 1
   combinazioneDiElementi: []
   dannoDellaMagia: 5
   suonoLancioMagia: {fileID: 0}
@@ -30,8 +31,8 @@ MonoBehaviour:
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
   detonazioneAdImpatto: 1
-  staccaFiglioAllesplosione: 1
-  ExplosionPref: {fileID: 0}
+  staccaFiglioAllEsplosione: 1
+  explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
     m_Bits: 1280
@@ -40,7 +41,10 @@ MonoBehaviour:
     m_Bits: 4096
   tickTime: 0
   raggioArea: 0
+  conditionalVariable: 0
   lunghezzaLineCast: 0
+  XNoise: 0
+  YNoise: 0
   effettiMagiaQuandoColpito: []
   effettiMagiaPerIlMago: []
   spawnaOggettoAdImpatto: {fileID: 0}

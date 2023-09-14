@@ -126,7 +126,7 @@ public class Magia : MonoBehaviour
     private void CollisionsBehaviours(Collider2D collision)
     {
         //TODO: risolvere questione layer
-        magia.ApplicaEffettiATarget(collision.gameObject);
+        magia.ApplicaEffettiATarget(collision.gameObject,gameObject.transform.position);
         magia.TogliEffettiDopoTempoAlTarget(collision.gameObject); 
         if (collision.gameObject.GetComponent<EnemyScript>() is not null)
         {
@@ -155,12 +155,14 @@ public class Magia : MonoBehaviour
         {
             Debug.Log("COLLISIONE");
             Debug.Log(collision);
-            if (collision.gameObject.GetComponent<Rigidbody2D>() is not null
-                && collision.gameObject.GetComponent<EnemyScript>() is not null
-                && collision.gameObject.GetComponent<Spawnpoint>() is null 
-                && collision.gameObject.GetComponent<ElementalButton>() is null)
+            if (collision.gameObject.GetComponent<Rigidbody2D>() != null
+                && collision.gameObject.GetComponent<Knockable>() != null
+                && collision.gameObject.GetComponent<Spawnpoint>() == null 
+                && collision.gameObject.GetComponent<ElementalButton>() == null)
             {
-                collision.gameObject.GetComponent<Rigidbody2D>().AddForce(10 * explosionKnockbackForce * (collision.transform.position - gameObject.transform.position).normalized);
+                Vector2 direction = PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right? Vector2.right : Vector2.left;
+                Debug.Log(direction);
+                collision.gameObject.GetComponent<Knockable>().ActivateKnockback(direction);
             }
         }
         if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject, ignoreContact) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
@@ -177,9 +179,14 @@ public class Magia : MonoBehaviour
                     temp = gameObject.GetComponentInChildren<SpriteRenderer>();
                     temp.enabled = false;
                 }
-                if(magia.staccaFiglioAllesplosione is true)
+                if(magia.staccaFiglioAllEsplosione is true)
                 {
-                    gameObject.transform.DetachChildren();
+                    GameObject obj = gameObject.transform.GetChild(0).gameObject;
+                    if (obj != null)
+                    {
+                        gameObject.transform.DetachChildren();
+                        Destroy(obj,5);
+                    }
                 }
                 Destroy(gameObject);
                 if(temp != null)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class MagicController : MonoBehaviour, ISubscriber
 {
     [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
-    [SerializeField] [Range(1, 3)] private int m_spellSlot;
+    [SerializeField][Range(1, 3)] private int m_spellSlot;
     [SerializeField] private GameObject m_basePrefabToShootForCombination;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
     [SerializeField] private List<MagiaSO> listaMagieDisponibili;
@@ -22,6 +23,9 @@ public class MagicController : MonoBehaviour, ISubscriber
     public UnityEvent OnMagicComposed;
     public UnityEvent OnMagicCasted;
 
+    private Dictionary<MagiaSO, float> cooldowns = new Dictionary<MagiaSO, float>();
+
+
     private GamePlayInputActions m_gamePlayInput;
     private Dictionary<InputAction, TipoMagia> m_dizionariElementi = new Dictionary<InputAction, TipoMagia>();
     private List<ElementoMagiaSO> m_listaValoriLancio = new List<ElementoMagiaSO>();
@@ -31,17 +35,16 @@ public class MagicController : MonoBehaviour, ISubscriber
     private int m_facingDirectionForLeftAndRight = 0;
     private int m_facingDirectionForUpAndDown = 0;
     private bool magicIsBlocked = false;
-    private int linePoints = 1;
-    
+    private int linePoints = 0;
+    private AudioSource m_playerAudioSource;
     private void Awake()
     {
         UIelementiMagia = m_UIPrefab.GetComponent<UIElementiMagia>();
         m_gamePlayInput = new GamePlayInputActions();
-        
-        
+        m_playerAudioSource = gameObject.GetComponent<AudioSource>();
 
         var elementsTakenFromFolder = Resources.LoadAll("Data/MagiaSO/Elementi", typeof(ElementoMagiaSO));
-       
+
         foreach (var item in elementsTakenFromFolder)
         {
             var elementTemp = item as ElementoMagiaSO;
@@ -68,7 +71,7 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     private void AddElement(InputAction.CallbackContext obj)
     {
-        if(magicIsBlocked == true) return;
+        if (magicIsBlocked == true) return;
         if (lastInFirstOut)
         {
             if (m_listaValoriLancio.Count < m_spellSlot)
@@ -101,19 +104,14 @@ public class MagicController : MonoBehaviour, ISubscriber
                 return;
             }
         }
-        
-      
 
-    }
 
-  
 
-    public void Start()
-    {
     }
 
     public void Update()
     {
+        UpdateCooldowns();
         if (m_faseCorrente == FasiDiLancioMagia.AspettoComponimentoMagia)
         {
             CheckIfPlayerWantToStartMagic();
@@ -128,7 +126,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         listaTutteMagieLocale = listaMagieDisponibili;
         listaTutteMagieLocale.OrderBy(x => x.name);
         int elementoMultiploRipetizioni = 0;
-        ElementoMagiaSO elemMultiplo = ScriptableObject.CreateInstance("MagiaSO")as ElementoMagiaSO;
+        ElementoMagiaSO elemMultiplo = ScriptableObject.CreateInstance("MagiaSO") as ElementoMagiaSO;
 
         for (int i = 0; i < m_listaValoriLancio.Count; i++)
         {
@@ -139,7 +137,7 @@ public class MagicController : MonoBehaviour, ISubscriber
                 break;
             }
         }
-        
+
         foreach (MagiaSO spell in listaTutteMagieLocale)
         {
             if (spell.combinazioneDiElementi.Count > m_listaValoriLancio.Count)
@@ -147,7 +145,7 @@ public class MagicController : MonoBehaviour, ISubscriber
                 continue;
             }
 
-            if (elemMultiplo!= null && elementoMultiploRipetizioni > 1)
+            if (elemMultiplo != null && elementoMultiploRipetizioni > 1)
             {
                 if (spell.combinazioneDiElementi.FindAll(f => f == elemMultiplo).Count == elementoMultiploRipetizioni)
                 {
@@ -156,7 +154,7 @@ public class MagicController : MonoBehaviour, ISubscriber
                         m_magiaDaLanciare = spell;
                         break;
                     }
-                    else if (m_listaValoriLancio.Find(f => f != elemMultiplo) == spell.combinazioneDiElementi.Find(f=>f != elemMultiplo))
+                    else if (m_listaValoriLancio.Find(f => f != elemMultiplo) == spell.combinazioneDiElementi.Find(f => f != elemMultiplo))
                     {
                         m_magiaDaLanciare = spell;
                         break;
@@ -180,7 +178,7 @@ public class MagicController : MonoBehaviour, ISubscriber
                     m_magiaDaLanciare = spell;
                     break;
                 }
-            }                        
+            }
         }
 
         if (m_magiaDaLanciare == null)
@@ -193,21 +191,20 @@ public class MagicController : MonoBehaviour, ISubscriber
         }
         m_faseCorrente = FasiDiLancioMagia.AspettandoLancioMagia;
         OnMagicComposed.Invoke();
-        
+
     }
 
-    
-    
+
+
     private void CheckIfPlayerWantToStartMagic()
     {
         if (m_listaValoriLancio.Count > 0) { m_faseCorrente = FasiDiLancioMagia.ComponendoMagia; }
-       
     }
 
     private void Onfire(InputAction.CallbackContext obj)
     {
-        
-        if (m_listaValoriLancio.Count <= 0) {
+        if (m_listaValoriLancio.Count <= 0)
+        {
             CastZeroCombinationSpell();
         }
         else
@@ -222,37 +219,48 @@ public class MagicController : MonoBehaviour, ISubscriber
     {
         var magia = Resources.Load("BulletPrefab/Bullet_No_Combination") as GameObject;
         m_magiaDaLanciare = Resources.Load("Data/MagiaSO/Colpo_Base") as MagiaSO;
-
-        Debug.Log("COLPO BASE LANCIATO");
-        CastMagiaLanciata(magia);
+        if (!IsOnCooldown(m_magiaDaLanciare))
+        {
+            Debug.Log("COLPO BASE LANCIATO");
+            CastMagiaLanciata(magia);
+            float cooldownTime = m_magiaDaLanciare.tempoDiAttesaDellaMagia; // Imposta il tempo di cooldown desiderato
+            SetCooldown(m_magiaDaLanciare, cooldownTime);
+            
+        }
     }
-        
+
     public void CastCombinationSpell()
     {
-        if(m_magiaDaLanciare != null)
+        ClearElementList();
+        UIelementiMagia.ClearUI();
+        if (m_magiaDaLanciare != null)
         {
-            m_faseCorrente = FasiDiLancioMagia.LancioMagia;
-            var magia = Resources.Load("BulletPrefab/Bullet_For_Combination") as GameObject;
-            m_magiaDaLanciare.ApplicaEffettoAMago(this);
-            m_magiaDaLanciare.TogliEffettoAMago(this);
-            if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
+            if (!IsOnCooldown(m_magiaDaLanciare))
             {
-                CastMagiaLanciata(magia);
-            }
-            else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
-            {
-                CastMagiaStazionaria(magia);
-            }
-            else if(m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
-            {
-                CastMagiaLineCast();
-            }
+                m_faseCorrente = FasiDiLancioMagia.LancioMagia;
+                var magia = Resources.Load("BulletPrefab/Bullet_For_Combination") as GameObject;
+                m_magiaDaLanciare.ApplicaEffettoAMago(this);
+                m_magiaDaLanciare.TogliEffettoAMago(this);
+                m_magiaDaLanciare.PlayCastingSound(m_playerAudioSource);
+                float cooldownTime = m_magiaDaLanciare.tempoDiAttesaDellaMagia; // Imposta il tempo di cooldown desiderato
+                SetCooldown(m_magiaDaLanciare, cooldownTime);
+                if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Lanciata)
+                {
+                    CastMagiaLanciata(magia);
+                }
+                else if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.Stazionaria)
+                {
+                    CastMagiaStazionaria(magia);
+                }
+                else if (m_magiaDaLanciare.magicBehaviourType == TipoComportamentoMagia.LineCast)
+                {
+                    CastMagiaLineCast(magia);
+                }
 
-            m_magiaDaLanciare = null;
-            ClearElementList();
-            UIelementiMagia.ClearUI();
-            m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+                m_magiaDaLanciare = null;
+                m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
 
+            }
         }
         else { return; }
 
@@ -261,48 +269,88 @@ public class MagicController : MonoBehaviour, ISubscriber
 
 
 
-    private void CastMagiaLineCast()
+    private void CastMagiaLineCast(GameObject magia)
     {
+        GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
+        CheckIfThereIsParticleAndGetIt(bullet);
+        StaticMagicInitialize(magia);
         Vector2 firePointPosition = gameObject.transform.position;
         Vector2 endPosition;
+        Debug.Log(PlayerCharacterController.playerFacingDirections);
         if (PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right)
         {
             endPosition = firePointPosition + (Vector2)gameObject.transform.right * m_magiaDaLanciare.lunghezzaLineCast;
         }
         else
         {
-            endPosition = firePointPosition - (Vector2)gameObject.transform.right * m_magiaDaLanciare.lunghezzaLineCast;
+            endPosition = firePointPosition + (Vector2)gameObject.transform.right * (-m_magiaDaLanciare.lunghezzaLineCast);
         }
-        RaycastHit2D hit = Physics2D.Linecast(firePointPosition, endPosition,m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
-        Debug.DrawLine(firePointPosition, endPosition,Color.red);
-        Debug.Log(hit.collider);
-        LineRenderer lr = m_basePrefabToShootForCombination.AddComponent<LineRenderer>();
+        RaycastHit2D hit = Physics2D.Linecast(firePointPosition, endPosition, m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
+        Debug.DrawLine(firePointPosition, endPosition, Color.red);
+        LineRenderer lr = bullet.GetComponentInChildren<LineRenderer>();
         lr.enabled = true;
+        Debug.Log(hit.collider);
+        linePoints = lr.positionCount - 1;
         var distance = hit.distance;
-        if(distance == 0)
+        if (distance == 0)
         {
             distance = m_magiaDaLanciare.lunghezzaLineCast;
         }
         for (int i = 0; i < linePoints; i++)
         {
-            var pos = lr.GetPosition(i);
 
-            //Debug.Log(rayEnd.x);
+            Vector3 pos = lr.GetPosition(i);
+            float t = (float)i / (linePoints - 1);  // Valore normalizzato tra 0 e 1
             pos.x = (distance / linePoints * i) + UnityEngine.Random.Range(-.4f, .4f);
-            pos.y += UnityEngine.Random.Range(-.4f, .4f);
-
+            if (PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right)
+                pos.x = -pos.x;
+            pos.y += UnityEngine.Random.Range(-m_magiaDaLanciare.YNoise, m_magiaDaLanciare.YNoise);
+            pos.z = 0;
+            Debug.Log("settato all'indice: " + i + "\n con valore: " + pos);
             lr.SetPosition(i, pos);
         }
         if (distance < m_magiaDaLanciare.lunghezzaLineCast)
         {
-            lr.SetPosition(linePoints, new Vector2(distance, 0f));
+
+            var finalPosition = new Vector2((PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Left) ? distance : -distance, 0);
+
+            lr.SetPosition(linePoints, finalPosition);
+            if (m_magiaDaLanciare.explosionPref != null)
+            {
+                var obj = Instantiate(m_magiaDaLanciare.explosionPref, (Vector3)hit.point, Quaternion.identity);
+                Destroy(obj, 6);
+            }
         }
         else
         {
-            lr.SetPosition(linePoints, new Vector2(m_magiaDaLanciare.lunghezzaLineCast, 0f));
+            var finalPosition = new Vector2((PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Left) ? m_magiaDaLanciare.lunghezzaLineCast : -m_magiaDaLanciare.lunghezzaLineCast, 0);
+            lr.SetPosition(linePoints, finalPosition);
+            if (m_magiaDaLanciare.explosionPref != null)
+            {
+                var obj = Instantiate(m_magiaDaLanciare.explosionPref, endPosition, Quaternion.identity);
+                Destroy(obj, 6);
+            }
+        }
+        StartCoroutine(DisableLine(bullet));
+    }
 
+
+
+
+    public IEnumerator DisableLine(GameObject bullet)
+    {
+        LineRenderer lr = bullet.GetComponentInChildren<LineRenderer>();
+        yield return new WaitForSeconds(0.2f);
+        lr.enabled = false;
+        for (int i = 1; i < linePoints; i++)
+        {
+            var pos = lr.GetPosition(i);
+            pos.x = i;
+            pos.y = 0f;
+            lr.SetPosition(i, pos);
         }
     }
+
 
     private void CastMagiaStazionaria(GameObject magia)
     {
@@ -312,15 +360,16 @@ public class MagicController : MonoBehaviour, ISubscriber
         OnMagicCasted.Invoke();
     }
 
-   
+
     private void CastMagiaLanciata(GameObject magia)
     {
+
         GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
         CheckForDirectionToGo(bullet);
         CheckIfThereIsParticleAndGetIt(bullet);
         ThrowedMagicInitialize(bullet);
         OnMagicCasted.Invoke();
-        
+
     }
 
 
@@ -359,9 +408,9 @@ public class MagicController : MonoBehaviour, ISubscriber
                 ps.Play();
             }
         }
-     
+
     }
-   
+
     /// <summary>
     /// Metodo in cui viene creata l'object su cui andra la magia
     /// </summary>
@@ -384,27 +433,27 @@ public class MagicController : MonoBehaviour, ISubscriber
     private void CheckForDirectionToGo(GameObject bullet)
     {
 
-            switch (PlayerCharacterController.playerFacingDirections)
-            {
-                case PlayerFacingDirections.Left:
-                    AddForceToMagicBasedOnDirection(bullet, Vector2.left);
-                    break;
-                case PlayerFacingDirections.Right:
-                    AddForceToMagicBasedOnDirection(bullet, Vector2.right);
-                    break;
-                case PlayerFacingDirections.Up:
-                    AddForceToMagicBasedOnDirection(bullet, Vector2.up);
-                    break;
-                case PlayerFacingDirections.Down:
-                    AddForceToMagicBasedOnDirection(bullet, Vector2.down);
-                    break;
+        switch (PlayerCharacterController.playerFacingDirections)
+        {
+            case PlayerFacingDirections.Left:
+                AddForceToMagicBasedOnDirection(bullet, Vector2.left);
+                break;
+            case PlayerFacingDirections.Right:
+                AddForceToMagicBasedOnDirection(bullet, Vector2.right);
+                break;
+            case PlayerFacingDirections.Up:
+                AddForceToMagicBasedOnDirection(bullet, Vector2.up);
+                break;
+            case PlayerFacingDirections.Down:
+                AddForceToMagicBasedOnDirection(bullet, Vector2.down);
+                break;
             case PlayerFacingDirections.ZeroForLookUpandDown:
                 AddForceToMagicBasedOnDirection(bullet, new Vector2(bullet.GetComponent<Rigidbody2D>().velocity.x, 0));
                 break;
             default:
-                    break;
-            }
-       
+                break;
+        }
+
     }
     private void AddForceToMagicBasedOnDirection(GameObject bullet, Vector2 direction)
     {
@@ -412,15 +461,15 @@ public class MagicController : MonoBehaviour, ISubscriber
         if (direction.y != 0)
         {
             bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, m_magiaDaLanciare.velocitaDellaMagiaLanciata * direction.y * 10));
-            if(direction.y < 0) { bullet.transform.Rotate(0, 0, 90); }
-            else if(direction.y > 0) { bullet.transform.Rotate(0, 0, -90); }
+            if (direction.y < 0) { bullet.transform.Rotate(0, 0, 90); }
+            else if (direction.y > 0) { bullet.transform.Rotate(0, 0, -90); }
             return;
         }
         else if (direction.x != 0)
         {
             bullet.GetComponent<Rigidbody2D>().AddForce(new Vector2(m_magiaDaLanciare.velocitaDellaMagiaLanciata * direction.x * 10, 0));
             //if (direction.x < 0) { bullet.transform.Rotate(0, 0, -90); }
-             if (direction.x > 0) { bullet.transform.Rotate(0, 0, 180); }
+            if (direction.x > 0) { bullet.transform.Rotate(0, 0, 180); }
             return;
         }
 
@@ -445,7 +494,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         magiaComponent.magia = m_magiaDaLanciare;
         if (m_magiaDaLanciare.detonazioneAdImpatto is true)
         {
-            magiaComponent.explosionPref = m_magiaDaLanciare.ExplosionPref;
+            magiaComponent.explosionPref = m_magiaDaLanciare.explosionPref;
             magiaComponent.explosionKnockbackForce = m_magiaDaLanciare.knockbackForzaEsplosione;
             magiaComponent.damageMask = m_magiaDaLanciare.layerMaskPerDanneggiaTarget;
         }
@@ -463,22 +512,52 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     public void OnPublish(IMessage message)
     {
-        if(message is StopOnOpenPauseMessage)
+        if (message is StopOnOpenPauseMessage)
         {
             magicIsBlocked = true;
         }
-        else if(message is StartOnClosedPauseMessage)
+        else if (message is StartOnClosedPauseMessage)
         {
             magicIsBlocked = false;
         }
     }
     public void AggiungiMagiaAllaLista(MagiaSO magiaSO)
     {
-        if(listaMagieDisponibili.Find(x=>x == magiaSO) == null)
+        if (listaMagieDisponibili.Find(x => x == magiaSO) == null)
         {
+            cooldowns.Clear();
             listaMagieDisponibili.Add(magiaSO);
+            foreach (MagiaSO magiaSOf in listaMagieDisponibili)
+            {
+                cooldowns[magiaSOf] = 0f;
+            }
         }
     }
+    private bool IsOnCooldown(MagiaSO magiaSO)
+    {
+        return cooldowns.ContainsKey(magiaSO) && cooldowns[magiaSO] > 0f;
+    }
+
+    private void SetCooldown(MagiaSO magiaSO, float cooldownTime)
+    {
+        cooldowns[magiaSO] = cooldownTime;
+    }
+
+    private void UpdateCooldowns()
+    {
+        foreach (MagiaSO magiaSO in cooldowns.Keys.ToList())
+        {
+            if (cooldowns[magiaSO] > 0f)
+            {
+                cooldowns[magiaSO] -= Time.deltaTime;
+                if (cooldowns[magiaSO] < 0f)
+                {
+                    cooldowns[magiaSO] = 0f;
+                }
+            }
+        }
+    }
+
 }
 public enum FasiDiLancioMagia
 {
@@ -489,12 +568,3 @@ public enum FasiDiLancioMagia
     LancioMagia,
 
 }
-
-
-
-
-
-
-
-
-

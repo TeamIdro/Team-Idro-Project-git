@@ -16,6 +16,9 @@ public class EnemyRanged : MonoBehaviour
 
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
+
+    public float attackRange = 18.2f;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
