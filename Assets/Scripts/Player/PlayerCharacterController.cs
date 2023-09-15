@@ -72,6 +72,9 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
 
     public PlayerSaveData playerSaveData;
 
+    public float knockbackForce = 25f;
+    public float knockbackForceVertical = 1.5f;
+
     private void Awake()
     {
         _instance = this;
@@ -319,6 +322,12 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     public void DisableControl()
     {
         m_gamePlayInputActions.Mage.Disable();
+    }
+
+    public void KnockBack(Transform enemy)
+    {
+        //m_playerMageRB2D.AddForce(Vector2.up * knockbackForceVertical, ForceMode2D.Impulse);
+        //m_playerMageRB2D.AddForce((this.transform.position - enemy.position).normalized * knockbackForce, ForceMode2D.Impulse);
     }
 }
 public enum PlayerFacingDirections

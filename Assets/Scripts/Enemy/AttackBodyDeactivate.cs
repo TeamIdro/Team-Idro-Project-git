@@ -9,8 +9,11 @@ public class AttackBodyDeactivate : MonoBehaviour
         if(other.gameObject.GetComponent<PlayerCharacterController>())
         {
             other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
-            
+            other.gameObject.GetComponent<PlayerCharacterController>().KnockBack(this.transform);
+
             this.gameObject.SetActive(false);
         }
     }
+
+
 }

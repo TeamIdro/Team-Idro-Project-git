@@ -64,7 +64,7 @@ public class UIMenuPrincipale : MonoBehaviour
     private void EnterOption(CallbackContext ctx)
     {
         // Debug.Log("enter");
-        selectorObj.transform.parent.gameObject.GetComponent<Button>().onClick.Invoke();
+        selectorObj?.transform.parent.gameObject.GetComponent<Button>().onClick.Invoke();
     }
 
     public void ExitGame()
@@ -96,7 +96,15 @@ public class UIMenuPrincipale : MonoBehaviour
         {
             item.PauseBehavior();
         }
-        
+
+        foreach (EnemyRangedBullet item in FindObjectsOfType<EnemyRangedBullet>())
+        {
+            item.StartObject();
+        }
+
         this.gameObject.SetActive(false);
+
+        PlayerCharacterController.Instance.EnableController();
+
     }
 }
