@@ -326,8 +326,8 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
 
     public void KnockBack(Transform enemy)
     {
-        m_playerMageRB2D.AddForce(Vector2.up * knockbackForceVertical, ForceMode2D.Impulse);
-        m_playerMageRB2D.AddForce((this.transform.position - enemy.position).normalized * knockbackForce, ForceMode2D.Impulse);
+        //m_playerMageRB2D.AddForce(Vector2.up * knockbackForceVertical, ForceMode2D.Impulse);
+        //m_playerMageRB2D.AddForce((this.transform.position - enemy.position).normalized * knockbackForce, ForceMode2D.Impulse);
     }
 }
 public enum PlayerFacingDirections
