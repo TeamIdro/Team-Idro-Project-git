@@ -364,11 +364,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2094090e2c79384597c0a243b242d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <hp>k__BackingField: 100
+  <hp>k__BackingField: 75
   <patrol_Speed>k__BackingField: 5
   <patrol_angularSpeed>k__BackingField: 120
   <patrol_arriveDistance>k__BackingField: 1
-  <speed>k__BackingField: 10
+  <speed>k__BackingField: 5
   <seek_angularSpeed>k__BackingField: 120
   <seek_arriveDistance>k__BackingField: 25
   setReducedAngle: 280
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0194310d194b7de40849825f775c9c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
+  damage: 15
 --- !u!58 &8594033055041396737
 CircleCollider2D:
   m_ObjectHideFlags: 0
