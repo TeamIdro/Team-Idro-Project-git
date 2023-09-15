@@ -69,6 +69,9 @@ MonoBehaviour:
   durataCupola: 5
   effettiCupola:
   - {fileID: 11400000, guid: d21e8c4acb1187949bede748a9355c5b, type: 2}
+  sparkFade: {fileID: 507565544171848070}
+  snowFlakes: {fileID: 507565542892573773}
+  iceClouds: {fileID: 507565543970207846}
 --- !u!50 &4926556505637189487
 Rigidbody2D:
   serializedVersion: 4
@@ -105,6 +108,10 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.minScalar
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2945912708838756575, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2945912709039892784, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -116,6 +123,14 @@ PrefabInstance:
     - target: {fileID: 2945912709908135049, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2945912709908135156, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 5.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 2945912709908135156, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 15.31
       objectReference: {fileID: 0}
     - target: {fileID: 2945912710118780932, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
       propertyPath: CustomDataModule.mode0
@@ -215,8 +230,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+--- !u!198 &507565542892573773 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2945912709908135156, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+  m_PrefabInstance: {fileID: 3452783361309206713}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &507565543101225148 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2945912710118780933, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+  m_PrefabInstance: {fileID: 3452783361309206713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &507565543970207846 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2945912708838756575, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
+  m_PrefabInstance: {fileID: 3452783361309206713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &507565544171848070 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2945912709039892799, guid: b9c1882f8dc71514ab40ac4dda5df233, type: 3}
   m_PrefabInstance: {fileID: 3452783361309206713}
   m_PrefabAsset: {fileID: 0}

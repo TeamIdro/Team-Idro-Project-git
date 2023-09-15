@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ccc22d0d83c00d4bb7c24e365b31730, type: 3}
   m_Name: Magia_Effetti_EffettoSpawnPiantaSO
   m_EditorClassIdentifier: 
-  durataEffetto: 0
+  durataEffetto: 5
   coloreEffetto: {r: 0, g: 0, b: 0, a: 0}
   testaPianta: {fileID: 11400000, guid: 701e874af129cfc4cb6130afbcf4980d, type: 2}
   corpoPianta: {fileID: 11400000, guid: e904129e9936ed24591fd4dc08f1fb8e, type: 2}

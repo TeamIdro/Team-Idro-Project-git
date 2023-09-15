@@ -12,14 +12,25 @@ public class CupolaDanno : MonoBehaviour
     [SerializeField] private float durataCupola;
     [SerializeField] List<EffettoBaseSO> effettiCupola;
 
+    [Space(20)]
+    [SerializeField] private ParticleSystem sparkFade;
+    [SerializeField] private ParticleSystem snowFlakes;
+    [SerializeField] private ParticleSystem iceClouds;
+    
     EnemyScript nemicoACuiApplicareIlDanno;
     Platform piattaformaDaSpostare;
     private void Awake()
     {
         ParticleSystem particleSystemCupola = gameObject.GetComponentInChildren<ParticleSystem>();
-        ParticleSystem.MainModule mainModule = particleSystemCupola.main;
-        mainModule.startLifetime = durataCupola;
-        mainModule.startSize = raggioCupola* 2;
+        ParticleSystem.MainModule mainModuleCupolaPrincipale = particleSystemCupola.main;
+
+        ParticleSystem.MainModule mainModuleSnow = snowFlakes.main;
+        ParticleSystem.EmissionModule emissionModuleSnow = snowFlakes.emission;
+        emissionModuleSnow.rateOverTime = (raggioCupola * 2) * 2;
+
+        mainModuleSnow.startLifetime = durataCupola;
+        mainModuleCupolaPrincipale.startLifetime = durataCupola;
+        mainModuleCupolaPrincipale.startSize = raggioCupola * 2;
     }
 
 
@@ -36,7 +47,7 @@ public class CupolaDanno : MonoBehaviour
                     foreach (var effetto in effettiCupola)
                     {
                         effetto.ApplicaEffettoANemico(nemicoACuiApplicareIlDanno.gameObject, gameObject.transform.position);
-                        effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno.gameObject);
+                        StartCoroutine(effetto.TogliEffettoDopoDelTempoANemico(nemicoACuiApplicareIlDanno.gameObject));
                     }
                 }
                 else if(collision.gameObject.GetComponent<Platform>() != null)
@@ -44,13 +55,31 @@ public class CupolaDanno : MonoBehaviour
                     piattaformaDaSpostare = collision.gameObject?.GetComponent<Platform>();
                     foreach (var effetto in effettiCupola)
                     {
-                        effetto.ApplicaEffettoANemico(piattaformaDaSpostare.gameObject, gameObject.transform.position);
-                        effetto.TogliEffettoDopoDelTempoANemico(piattaformaDaSpostare.gameObject);
+                        if(effetto is EffettoRallentamentoSO)
+                        {
+                            effetto.ApplicaEffettoANemico(piattaformaDaSpostare.gameObject, gameObject.transform.position);
+                        }
+                        else
+                        {
+                            effetto.ApplicaEffettoANemico(piattaformaDaSpostare.gameObject, gameObject.transform.position);
+                            StartCoroutine(effetto.TogliEffettoDopoDelTempoANemico(piattaformaDaSpostare.gameObject));
+                        }
                     }
                 }
                
                 StartCoroutine(DannoATickCupola());
                
+            }
+        }
+    }
+    private void OnDestroy()
+    {
+        foreach (var effetto in effettiCupola)
+        {
+            Debug.LogWarning("CIAOO");
+            if(piattaformaDaSpostare != null)
+            {
+                effetto.TogliEffettoANemico(piattaformaDaSpostare.gameObject);
             }
         }
     }

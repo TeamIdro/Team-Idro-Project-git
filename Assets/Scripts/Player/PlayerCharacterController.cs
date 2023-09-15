@@ -132,7 +132,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
             verticalInput = -1;
         else { verticalInput = 0; }
         Debug.Log(verticalInput);
-        Vector2 climbVelocity = new Vector2(horizontalInput * movementVelocity * Time.fixedDeltaTime, verticalInput * climbSpeed * Time.fixedDeltaTime);
+        Vector2 climbVelocity = new Vector2(horizontalInput * climbSpeed * Time.fixedDeltaTime, verticalInput * climbSpeed * Time.fixedDeltaTime);
         m_playerMageRB2D.velocity = climbVelocity;
     }
 

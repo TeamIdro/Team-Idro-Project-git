@@ -25,6 +25,11 @@ public class EffettoSpawnPiantaSO : EffettoBaseSO
         yield return null;
     }
 
+    public override void TogliEffettoANemico(GameObject nemico)
+    {
+        return;
+    }
+
     public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject nemico)
     {
         yield return null;

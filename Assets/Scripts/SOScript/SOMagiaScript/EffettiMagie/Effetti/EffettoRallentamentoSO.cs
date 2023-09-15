@@ -2,6 +2,7 @@ using BehaviorDesigner.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Services.Analytics.Internal;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,9 +13,13 @@ public class EffettoRallentamentoSO : EffettoBaseSO
     public int percentualeRallentamentoNemicoColpito = 0;
     [Range(0, 100)]
     public float moltiplicatoreDiMagia;
-
     private float valoreOriginaleNemici;
 
+
+    private void Awake()
+    {
+        
+    }
     public override void ApplicaEffettoAlMago(MagicController mago)
     {
         return;
@@ -54,25 +59,46 @@ public class EffettoRallentamentoSO : EffettoBaseSO
                 }
 
             }
+            temp.StartCoroutine(TogliEffettoDopoDelTempoANemico(target));
         }
+       
     }
-
 
     public override IEnumerator TogliEffettoDopoDelTempoANemico(GameObject target)
     {
-        yield return new WaitForSeconds(durataEffetto);
+        float durataEffettoLocale = durataEffetto;
+        yield return new WaitForSecondsRealtime(durataEffettoLocale);
         if(target.GetComponent<EnemyScript>() != null)
         {
             EnemyScript enemyScript = target.GetComponent<EnemyScript>();
             target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-            Debug.LogWarning("EFFETTO TOLTO");
             enemyScript.speed = valoreOriginaleNemici;
         }
         else if(target.GetComponent<MovingPlatform>() != null)
         {
             MovingPlatform temp = target.GetComponent<MovingPlatform>();
+            NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
             temp.isAffectedByEffect = false;
+            agent.speed = valoreOriginaleNemici;
         }
-       
+        yield return null;
+    }
+
+    public override void TogliEffettoANemico(GameObject target)
+    {
+        float durataEffettoLocale = durataEffetto;
+        if (target.GetComponent<EnemyScript>() != null)
+        {
+            EnemyScript enemyScript = target.GetComponent<EnemyScript>();
+            target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            enemyScript.speed = valoreOriginaleNemici;
+        }
+        else if (target.GetComponent<MovingPlatform>() != null)
+        {
+            MovingPlatform temp = target.GetComponent<MovingPlatform>();
+            NavMeshAgent agent = target.GetComponent<NavMeshAgent>();
+            temp.isAffectedByEffect = false;
+            agent.speed = valoreOriginaleNemici;
+        }
     }
 }

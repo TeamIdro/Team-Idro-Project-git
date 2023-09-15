@@ -45,4 +45,9 @@ public class DannoNelTempoSO : EffettoBaseSO
         MonoBehaviour monoBehaviour = nemico.GetComponent<MonoBehaviour>();
         monoBehaviour.StopCoroutine(DanniATick(nemico));
     }
+
+    public override void TogliEffettoANemico(GameObject nemico)
+    {
+        return;
+    }
 }
