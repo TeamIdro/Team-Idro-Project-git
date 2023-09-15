@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 703073531, guid: ff6e1483294a5044d99f702a0994b97c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -412,3 +412,4 @@ MonoBehaviour:
   timeCoolDown: 1.2
   bullet: {fileID: 8059223698733719944, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
   force: 50
+  attackRange: 18.2
