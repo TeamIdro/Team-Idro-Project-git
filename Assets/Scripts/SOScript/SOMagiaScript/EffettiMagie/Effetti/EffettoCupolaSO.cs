@@ -38,4 +38,9 @@ public class EffettoCupolaSO : EffettoBaseSO
         cupolaIstanziata.GetComponent<CupolaDanno>()?.SetDannoCupola(dannoCupola);
         Destroy(cupolaIstanziata, durataEffettoInterno);
     }
+
+    public override void TogliEffettoANemico(GameObject nemico)
+    {
+        return;
+    }
 }

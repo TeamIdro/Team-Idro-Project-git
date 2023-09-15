@@ -16,7 +16,7 @@ MonoBehaviour:
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
-  tempoDiAttesaDellaMagia: 15
+  tempoDiAttesaDellaMagia: 0
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   dannoDellaMagia: 10

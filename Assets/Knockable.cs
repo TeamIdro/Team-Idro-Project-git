@@ -50,6 +50,5 @@ public class Knockable : MonoBehaviour
         isKnockingBack = true;
         initialPosition = transform.position;
         distanceKnocked = 0.0f;
-        gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, 3, 0);
     }
 }

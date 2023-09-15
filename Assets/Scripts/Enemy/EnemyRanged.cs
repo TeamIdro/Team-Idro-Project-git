@@ -44,31 +44,21 @@ public class EnemyRanged : MonoBehaviour
         {
             Debug.Log("ATTACK");
 
-            // Shoot();
-
             attackCooldown = true;
             
             _animator.ResetTrigger("Moving");
             _animator.ResetTrigger("Idle");
             _animator.SetTrigger("Attack");
-            // attackCoroutine = StartCoroutine(CooldownAttack());
         }
     }
 
-    // private IEnumerator CooldownAttack()
-    // {
-    //     yield return new WaitForSeconds(timeCoolDown);
-    //     attackCooldown = false;
-    //     StopCoroutine(attackCoroutine);
-    // }
-
     public void Shoot()
     {
-        Debug.Log("SHOOT");
+        // Debug.Log("SHOOT");
         var bulletInst = GameObject.Instantiate(bullet, transform.position, Quaternion.Euler(-180, 0, 0));
         bulletInst.GetComponent<Rigidbody2D>().AddForce(
             new Vector2(PlayerCharacterController.Instance.transform.position.x - transform.position.x, 
-                        PlayerCharacterController.Instance.transform.position.y - transform.position.y) * force, 
+                        PlayerCharacterController.Instance.transform.position.y - transform.position.y).normalized * force, 
                         ForceMode2D.Force);
     }
 
