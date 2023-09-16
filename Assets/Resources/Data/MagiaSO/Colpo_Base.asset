@@ -16,7 +16,7 @@ MonoBehaviour:
   magicBehaviourType: 0
   tipoMagia: 0
   damageType: 0
-  tempoDiAttesaDellaMagia: 1
+  tempoDiAttesaDellaMagia: 0.75
   combinazioneDiElementi: []
   dannoDellaMagia: 5
   suonoLancioMagia: {fileID: 0}
