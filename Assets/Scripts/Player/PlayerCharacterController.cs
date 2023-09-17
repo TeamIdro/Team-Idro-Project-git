@@ -29,6 +29,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     [SerializeField,ReadOnly] private Vector2 movementDirection;
     [SerializeField, ReadOnly] private bool isMoving;
     [SerializeField,ReadOnly] private bool isJumping;
+    [SerializeField,ReadOnly] private bool isGrounded;
     [SerializeField, ReadOnly] private bool isOnStairs = false;
 
     [Space(10)]
@@ -100,15 +101,18 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
 
     private void Update()
     {
+        isGrounded = CheckIfCanJump();
         GetInputDirection();
         AnimationUpdate();
         (IsOnStairs ? (Action)ClimbStairs : Movement)();
         if (!isOnStairs)
         {
+            m_playerMageRB2D.gravityScale = 3;
             isJumping = !CheckIfCanJump();
         }
         else
         {
+            m_playerMageRB2D.gravityScale = 0;
             return;
         }
         if (isBlocked) { return; }
@@ -124,6 +128,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
 
     private void ClimbStairs()
     {
+        m_playerMageRB2D.gravityScale = 0;
         isJumping = false;
         float horizontalInput = movementDirection.x;
         if (m_gamePlayInputActions.Mage.GuardaSu.ReadValue<float>()== 1)
@@ -301,7 +306,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     }
 
     public void TakeDamage(float damageToTake,TipoMagia magicType)
-    {
+     {
         if (hp > 0)
         {
             hp -= damageToTake;

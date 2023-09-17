@@ -23,7 +23,7 @@ MonoBehaviour:
   dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
-  forzaDiGravitaPerProiettile: 0
+  forzaDiGravitaPerProiettile: 0.22
   knockbackForzaEsplosione: 1
   intensity: 0
   shakeTime: 0

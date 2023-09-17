@@ -158,7 +158,18 @@ public class MagiaSO : ScriptableObject
             combinazioneDiElementi.Remove(combinazioneDiElementi.Last());
         }
     }
-    
+    public bool HasEffect(EffettoBaseSO effettoDaCercare)
+    {
+        
+        foreach (var effetto in effettiMagiaQuandoColpito)
+        {
+            if(effetto.GetType() == effettoDaCercare.GetType())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 public enum TipoComportamentoMagia

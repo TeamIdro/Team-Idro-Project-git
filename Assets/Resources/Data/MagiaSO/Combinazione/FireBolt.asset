@@ -32,7 +32,7 @@ MonoBehaviour:
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
   detonazioneAdImpatto: 1
-  staccaFiglioAllEsplosione: 0
+  staccaFiglioAllEsplosione: 1
   explosionPref: {fileID: 0}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
@@ -47,7 +47,7 @@ MonoBehaviour:
   XNoise: 0
   YNoise: 0
   effettiMagiaQuandoColpito:
-  - {fileID: 11400000, guid: 4cbd0e18591272643a13907108f14895, type: 2}
+  - {fileID: 11400000, guid: 248781b46e5c40f43a8345818debded6, type: 2}
   - {fileID: 11400000, guid: 53ec3024f19605c40bf6dbfa2f11019f, type: 2}
   effettiMagiaPerIlMago: []
   spawnaOggettoAdImpatto: {fileID: 0}

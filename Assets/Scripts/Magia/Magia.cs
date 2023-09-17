@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Magia : MonoBehaviour
     [HideInInspector]public GameObject explosionPref;
     [HideInInspector]public int damage;
     [HideInInspector]public float decelerationTime = 0f; // tempo in secondi per rallentare completamente il proiettile
+    [HideInInspector] public Vector2 shootDirection;
     private Rigidbody2D bulletRigidbody;
 
     public LayerMask ignoreContact;
@@ -153,16 +155,16 @@ public class Magia : MonoBehaviour
         }
         if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
         {
-            Debug.Log("COLLISIONE");
-            Debug.Log(collision);
             if (collision.gameObject.GetComponent<Rigidbody2D>() != null
                 && collision.gameObject.GetComponent<Knockable>() != null
                 && collision.gameObject.GetComponent<Spawnpoint>() == null 
                 && collision.gameObject.GetComponent<ElementalButton>() == null)
             {
-                Vector2 direction = PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right? Vector2.right : Vector2.left;
-                Debug.Log(direction);
-                collision.gameObject.GetComponent<Knockable>().ActivateKnockback(direction);
+                EffettoKnockableSO effetto = new EffettoKnockableSO();
+                if (magia.HasEffect(effetto))
+                {
+                    collision.gameObject.GetComponent<Knockable>().ActivateKnockback(shootDirection);
+                }
             }
         }
         if (!LayerMaskExtensions.IsInLayerMask(collision.gameObject, ignoreContact) && magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
@@ -179,7 +181,7 @@ public class Magia : MonoBehaviour
                     temp = gameObject.GetComponentInChildren<SpriteRenderer>();
                     temp.enabled = false;
                 }
-                if(magia.staccaFiglioAllEsplosione is true)
+                if(magia.staccaFiglioAllEsplosione == true && gameObject.transform.GetChild(0).gameObject != null)
                 {
                     GameObject obj = gameObject.transform.GetChild(0).gameObject;
                     if (obj != null)

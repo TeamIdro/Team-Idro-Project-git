@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 
 public class MagicController : MonoBehaviour, ISubscriber
 {
+    [SerializeField] private GameObject m_spellNotReadyToCastParticle;
     [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
     [SerializeField][Range(1, 3)] private int m_spellSlot;
@@ -261,6 +262,11 @@ public class MagicController : MonoBehaviour, ISubscriber
                 m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
 
             }
+            else
+            {
+                Debug.Log("SPELL NOT READY");
+                m_spellNotReadyToCastParticle.GetComponent<ParticleSystem>().Play();
+            }
         }
         else { return; }
 
@@ -481,6 +487,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         if (bullet.GetComponent<CircleCollider2D>() != null)
         { bullet.GetComponent<CircleCollider2D>().enabled = true; }
         magiaComponent.magia = m_magiaDaLanciare;
+        magiaComponent.shootDirection = PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right ? Vector2.right : Vector2.left;
         magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.layerMaskPerIgnoraCollisioni);
         magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
         magiaComponent.SetDamageLayer(m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
@@ -508,6 +515,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         magiaComponent.SetIgnoreLayer(m_magiaDaLanciare.layerMaskPerIgnoraCollisioni);
         magiaComponent.DestroyAfterTime(m_magiaDaLanciare.tempoMagiaLanciata);
         magiaComponent.SetDamageLayer(m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
+        magiaComponent.shootDirection = PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right ? Vector2.right : Vector2.left;
     }
 
     public void OnPublish(IMessage message)
