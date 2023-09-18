@@ -39,6 +39,13 @@ public class UIMenuPrincipale : MonoBehaviour
         m_enterOption.performed += EnterOption;
     }
 
+    private void OnEnable()
+    {
+        m_selectUp.performed += Up;
+        m_selectDown.performed += Down;
+        m_enterOption.performed += EnterOption;
+    }
+
     public void GoToCurrentScene()
     {
         /*Prendi il json e guarda la stringa dell'ultima scena salvata 
@@ -106,5 +113,12 @@ public class UIMenuPrincipale : MonoBehaviour
 
         PlayerCharacterController.Instance.EnableController();
 
+    }
+
+    private void OnDisable()
+    {
+        m_selectUp.performed -= Up;
+        m_selectDown.performed -= Down;
+        m_enterOption.performed -= EnterOption;
     }
 }
