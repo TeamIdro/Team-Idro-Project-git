@@ -23,7 +23,7 @@ MonoBehaviour:
   dannoDellaMagia: 10
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
-  forzaDiGravitaPerProiettile: 0.22
+  forzaDiGravitaPerProiettile: 5.92
   knockbackForzaEsplosione: 1
   intensity: 0
   shakeTime: 0
@@ -32,15 +32,15 @@ MonoBehaviour:
   tempoDecellerazioneMagiaLanciata: 0
   distanzaMagiaLanciata: 100
   tempoMagiaLanciata: 1000
-  detonazioneAdImpatto: 0
-  staccaFiglioAllEsplosione: 0
-  explosionPref: {fileID: 0}
+  detonazioneAdImpatto: 1
+  staccaFiglioAllEsplosione: 1
+  explosionPref: {fileID: 3369253412745020790, guid: 7d0d13f9a6e23df4a93b8b4617b5edfa, type: 3}
   layerMaskPerIgnoraCollisioni:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1312
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 537088
   tickTime: 0
   raggioArea: 0
   conditionalVariable: 0

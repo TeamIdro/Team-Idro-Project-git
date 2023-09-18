@@ -39,7 +39,7 @@ MonoBehaviour:
     m_Bits: 1312
   layerMaskPerDanneggiaTarget:
     serializedVersion: 2
-    m_Bits: 528896
+    m_Bits: 537088
   tickTime: 0
   raggioArea: 4.04
   conditionalVariable: 0
@@ -47,7 +47,6 @@ MonoBehaviour:
   XNoise: 0
   YNoise: 0
   effettiMagiaQuandoColpito:
-  - {fileID: 11400000, guid: 248781b46e5c40f43a8345818debded6, type: 2}
   - {fileID: 11400000, guid: 53ec3024f19605c40bf6dbfa2f11019f, type: 2}
   effettiMagiaPerIlMago: []
   spawnaOggettoAdImpatto: {fileID: 0}

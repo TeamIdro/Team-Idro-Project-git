@@ -90,7 +90,7 @@ public class Magia : MonoBehaviour
         if(explosionPref != null)
         {
             
-            GameObject expl = Instantiate(explosionPref, gameObject.transform.position, gameObject.transform.rotation);
+            GameObject expl = Instantiate(explosionPref, gameObject.transform.position, Quaternion.identity);
             if (expl is not null)
             {
                 CameraShake.Instance.ShakeCamera(magia.intensity, magia.shakeTime);
@@ -181,7 +181,7 @@ public class Magia : MonoBehaviour
                     temp = gameObject.GetComponentInChildren<SpriteRenderer>();
                     temp.enabled = false;
                 }
-                if(magia.staccaFiglioAllEsplosione == true && gameObject.transform.GetChild(0).gameObject != null)
+                if(magia.staccaFiglioAllEsplosione == true && gameObject.transform.childCount > 0)
                 {
                     GameObject obj = gameObject.transform.GetChild(0).gameObject;
                     if (obj != null)
