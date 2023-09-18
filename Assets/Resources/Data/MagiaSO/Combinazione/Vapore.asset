@@ -16,11 +16,11 @@ MonoBehaviour:
   magicBehaviourType: 0
   tipoMagia: 4
   damageType: 0
-  tempoDiAttesaDellaMagia: 0
+  tempoDiAttesaDellaMagia: 2
   combinazioneDiElementi:
   - {fileID: 11400000, guid: 8aa8c337adb74d6429acb70ac064d5f1, type: 2}
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
-  dannoDellaMagia: 10
+  dannoDellaMagia: 0
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0
@@ -30,8 +30,8 @@ MonoBehaviour:
   velocitaDellaMagiaLanciata: 100
   rallentamentoGraduale: 0
   tempoDecellerazioneMagiaLanciata: 1
-  distanzaMagiaLanciata: 10.8
-  tempoMagiaLanciata: 2
+  distanzaMagiaLanciata: 11
+  tempoMagiaLanciata: 500
   detonazioneAdImpatto: 1
   staccaFiglioAllEsplosione: 1
   explosionPref: {fileID: 9091867967075717533, guid: 4fb38a81f09bb084ead06380af45e1c8, type: 3}

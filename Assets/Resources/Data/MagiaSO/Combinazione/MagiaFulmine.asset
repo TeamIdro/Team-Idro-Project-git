@@ -16,11 +16,11 @@ MonoBehaviour:
   magicBehaviourType: 2
   tipoMagia: 0
   damageType: 0
-  tempoDiAttesaDellaMagia: 0
+  tempoDiAttesaDellaMagia: 2
   combinazioneDiElementi:
   - {fileID: 11400000, guid: 436770fa779528b4bbb03af027c65bee, type: 2}
-  - {fileID: 11400000, guid: 8aa8c337adb74d6429acb70ac064d5f1, type: 2}
-  dannoDellaMagia: 100
+  - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
+  dannoDellaMagia: 50
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
   forzaDiGravitaPerProiettile: 0

@@ -20,10 +20,10 @@ MonoBehaviour:
   combinazioneDiElementi:
   - {fileID: 11400000, guid: b038221a3fc4d0543a9abcff8a17e92a, type: 2}
   - {fileID: 11400000, guid: 883b13981282ae5478df3bd72ba83949, type: 2}
-  dannoDellaMagia: 10
+  dannoDellaMagia: 50
   suonoLancioMagia: {fileID: 0}
   suonoImpattoMagia: {fileID: 0}
-  forzaDiGravitaPerProiettile: 5.92
+  forzaDiGravitaPerProiettile: 2.5
   knockbackForzaEsplosione: 1
   intensity: 0
   shakeTime: 0
