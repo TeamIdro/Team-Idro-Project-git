@@ -181,21 +181,30 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         animatorMago.speed = 1;
         animatorMago.SetBool("IsMoving",isMoving);
         animatorMago.SetFloat("YVelocity",Mathf.Floor(m_playerMageRB2D.velocity.y));
-        animatorMago.SetBool("IsGrounded", !isJumping);
+        animatorMago.SetBool("IsGrounded", isGrounded);
         animatorMago.SetBool("IsClimbing", IsOnStairs);
         if (isOnStairs)
         {
-            if(Mathf.Floor(m_playerMageRB2D.velocity.y) > 0)
-                animatorMago.speed = 1;
-            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) == 0)
-                animatorMago.speed = 0;
-            else if(Mathf.Floor(m_playerMageRB2D.velocity.y) < 0)
+            if (isGrounded) 
             {
-                Debug.LogAssertion("ANIMATION CLIP AL CONTRARIO");
-                animatorMago.speed = -1;
+                animatorMago.SetBool("IsClimbing", false);
             }
-            animatorMago.Play("MageClimbing");
+            else
+            {
+                if(Mathf.Floor(m_playerMageRB2D.velocity.y) > 0)
+                    animatorMago.speed = 1;
+                else if(Mathf.Floor(m_playerMageRB2D.velocity.y) == 0)
+                    animatorMago.speed = 0;
+                else if(Mathf.Floor(m_playerMageRB2D.velocity.y) < 0)
+                {
+                    Debug.LogAssertion("ANIMATION CLIP AL CONTRARIO");
+                    animatorMago.speed = -1;
+                }
+                animatorMago.Play("MageClimbing");
+
+            }
         }
+
     }
     private void Movement()
     {

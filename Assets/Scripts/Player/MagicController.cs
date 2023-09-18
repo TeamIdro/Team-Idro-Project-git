@@ -277,67 +277,95 @@ public class MagicController : MonoBehaviour, ISubscriber
 
     private void CastMagiaLineCast(GameObject magia)
     {
-        GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
-        CheckIfThereIsParticleAndGetIt(bullet);
-        StaticMagicInitialize(magia);
-        Vector2 firePointPosition = gameObject.transform.position;
-        Vector2 endPosition;
-        Debug.Log(PlayerCharacterController.playerFacingDirections);
-        if (PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right)
+        try
         {
-            endPosition = firePointPosition + (Vector2)gameObject.transform.right * m_magiaDaLanciare.lunghezzaLineCast;
-        }
-        else
-        {
-            endPosition = firePointPosition + (Vector2)gameObject.transform.right * (-m_magiaDaLanciare.lunghezzaLineCast);
-        }
-        RaycastHit2D hit = Physics2D.Linecast(firePointPosition, endPosition, m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
-        Debug.DrawLine(firePointPosition, endPosition, Color.red);
-        LineRenderer lr = bullet.GetComponentInChildren<LineRenderer>();
-        lr.enabled = true;
-        Debug.Log(hit.collider);
-        linePoints = lr.positionCount - 1;
-        var distance = hit.distance;
-        if (distance == 0)
-        {
-            distance = m_magiaDaLanciare.lunghezzaLineCast;
-        }
-        for (int i = 0; i < linePoints; i++)
-        {
-
-            Vector3 pos = lr.GetPosition(i);
-            float t = (float)i / (linePoints - 1);  // Valore normalizzato tra 0 e 1
-            pos.x = (distance / linePoints * i) + UnityEngine.Random.Range(-.4f, .4f);
+            GameObject bullet = IstanziaMagiaEPrendiIlComponent(magia);
+            CheckIfThereIsParticleAndGetIt(bullet);
+            StaticMagicInitialize(magia);
+            Vector2 firePointPosition = gameObject.transform.position;
+            Vector2 endPosition;
+            Debug.Log(PlayerCharacterController.playerFacingDirections);
             if (PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right)
-                pos.x = -pos.x;
-            pos.y += UnityEngine.Random.Range(-m_magiaDaLanciare.YNoise, m_magiaDaLanciare.YNoise);
-            pos.z = 0;
-            Debug.Log("settato all'indice: " + i + "\n con valore: " + pos);
-            lr.SetPosition(i, pos);
-        }
-        if (distance < m_magiaDaLanciare.lunghezzaLineCast)
-        {
-
-            var finalPosition = new Vector2((PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Left) ? distance : -distance, 0);
-
-            lr.SetPosition(linePoints, finalPosition);
-            if (m_magiaDaLanciare.explosionPref != null)
             {
-                var obj = Instantiate(m_magiaDaLanciare.explosionPref, (Vector3)hit.point, Quaternion.identity);
-                Destroy(obj, 6);
+                endPosition = firePointPosition + (Vector2)gameObject.transform.right * m_magiaDaLanciare.lunghezzaLineCast;
             }
-        }
-        else
-        {
-            var finalPosition = new Vector2((PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Left) ? m_magiaDaLanciare.lunghezzaLineCast : -m_magiaDaLanciare.lunghezzaLineCast, 0);
-            lr.SetPosition(linePoints, finalPosition);
-            if (m_magiaDaLanciare.explosionPref != null)
+            else
             {
-                var obj = Instantiate(m_magiaDaLanciare.explosionPref, endPosition, Quaternion.identity);
-                Destroy(obj, 6);
+                endPosition = firePointPosition + (Vector2)gameObject.transform.right * (-m_magiaDaLanciare.lunghezzaLineCast);
             }
+            RaycastHit2D hit = Physics2D.Linecast(firePointPosition, endPosition, m_magiaDaLanciare.layerMaskPerDanneggiaTarget);
+            Debug.DrawLine(firePointPosition, endPosition, Color.red);
+            LineRenderer lr = bullet.GetComponentInChildren<LineRenderer>();
+            lr.enabled = true;
+            Debug.Log(hit.collider);
+            linePoints = lr.positionCount - 1;
+            var distance = hit.distance;
+            if (distance == 0)
+            {
+                distance = m_magiaDaLanciare.lunghezzaLineCast;
+            }
+            for (int i = 0; i < linePoints; i++)
+            {
+
+                Vector3 pos = lr.GetPosition(i);
+                float t = (float)i / (linePoints - 1);  // Valore normalizzato tra 0 e 1
+                pos.x = (distance / linePoints * i) + UnityEngine.Random.Range(-.4f, .4f);
+                if (PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right)
+                    pos.x = -pos.x;
+                pos.y += UnityEngine.Random.Range(-m_magiaDaLanciare.YNoise, m_magiaDaLanciare.YNoise);
+                pos.z = 0;
+                Debug.Log("settato all'indice: " + i + "\n con valore: " + pos);
+                lr.SetPosition(i, pos);
+            }
+            if (distance < m_magiaDaLanciare.lunghezzaLineCast)
+            {
+
+                var finalPosition = new Vector2((PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Left) ? distance : -distance, 0);
+
+                lr.SetPosition(linePoints, finalPosition);
+                if (hit.collider != null)
+                {
+                    if (hit.collider.GetComponent<EnemyScript>() != null)
+                    {
+                        EnemyScript enemy = hit.collider.GetComponent<EnemyScript>();
+                        enemy.TakeDamage(m_magiaDaLanciare.dannoDellaMagia, m_magiaDaLanciare.tipoMagia);
+                    }
+                }
+                if (m_magiaDaLanciare.explosionPref != null)
+                {
+                    var obj = Instantiate(m_magiaDaLanciare.explosionPref, (Vector3)hit.point, Quaternion.identity);
+
+                    Destroy(obj, 6);
+                }
+            }
+            else
+            {
+                var finalPosition = new Vector2((PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Left) ? m_magiaDaLanciare.lunghezzaLineCast : -m_magiaDaLanciare.lunghezzaLineCast, 0);
+                lr.SetPosition(linePoints, finalPosition);
+                if(hit.collider != null)
+                {
+                    if (hit.collider.GetComponent<EnemyScript>() != null)
+                    {
+                        EnemyScript enemy = hit.collider.GetComponent<EnemyScript>();
+                        
+                        enemy.TakeDamage(m_magiaDaLanciare.dannoDellaMagia, m_magiaDaLanciare.tipoMagia);
+                    }
+                }
+                if (m_magiaDaLanciare.explosionPref != null)
+                {
+                    var obj = Instantiate(m_magiaDaLanciare.explosionPref, endPosition, Quaternion.identity);
+
+                    Destroy(obj, 6);
+                }
+            }
+            StartCoroutine(DisableLine(bullet));
         }
-        StartCoroutine(DisableLine(bullet));
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+            throw;
+        }
+        
     }
 
 
