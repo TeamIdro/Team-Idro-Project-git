@@ -329,12 +329,12 @@ public class MagicController : MonoBehaviour, ISubscriber
                     {
                         EnemyScript enemy = hit.collider.GetComponent<EnemyScript>();
                         enemy.TakeDamage(m_magiaDaLanciare.dannoDellaMagia, m_magiaDaLanciare.tipoMagia);
+                        m_magiaDaLanciare.ApplicaEffettiATarget(enemy.gameObject, enemy.gameObject.transform.position);
                     }
                 }
                 if (m_magiaDaLanciare.explosionPref != null)
                 {
                     var obj = Instantiate(m_magiaDaLanciare.explosionPref, (Vector3)hit.point, Quaternion.identity);
-
                     Destroy(obj, 6);
                 }
             }
@@ -347,8 +347,8 @@ public class MagicController : MonoBehaviour, ISubscriber
                     if (hit.collider.GetComponent<EnemyScript>() != null)
                     {
                         EnemyScript enemy = hit.collider.GetComponent<EnemyScript>();
-                        
                         enemy.TakeDamage(m_magiaDaLanciare.dannoDellaMagia, m_magiaDaLanciare.tipoMagia);
+                        m_magiaDaLanciare.ApplicaEffettiATarget(enemy.gameObject, enemy.gameObject.transform.position);
                     }
                 }
                 if (m_magiaDaLanciare.explosionPref != null)

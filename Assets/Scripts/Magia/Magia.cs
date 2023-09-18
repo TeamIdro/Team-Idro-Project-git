@@ -128,23 +128,26 @@ public class Magia : MonoBehaviour
     private void CollisionsBehaviours(Collider2D collision)
     {
         //TODO: risolvere questione layer
-        magia.ApplicaEffettiATarget(collision.gameObject,gameObject.transform.position);
-        magia.TogliEffettiDopoTempoAlTarget(collision.gameObject); 
-        if (collision.gameObject.GetComponent<EnemyScript>() is not null)
+        if(magia.magicBehaviourType != TipoComportamentoMagia.LineCast)
+        {
+            magia.ApplicaEffettiATarget(collision.gameObject, gameObject.transform.position);
+            magia.TogliEffettiDopoTempoAlTarget(collision.gameObject);
+        }
+        if (collision.gameObject.GetComponent<EnemyScript>() != null)
         {
             damageable1 = collision.gameObject.GetComponent<IDamageable>();
-            if (magia is null) 
+            if (magia == null) 
             {
                 return;
             }
             if (LayerMaskExtensions.IsInLayerMask(collision.gameObject, damageMask))
             {
 
-                if (magia.magicBehaviourType is not TipoComportamentoMagia.Stazionaria)
+                if (magia.magicBehaviourType != TipoComportamentoMagia.Stazionaria && magia.magicBehaviourType != TipoComportamentoMagia.LineCast)
                 {
                     damageable1.TakeDamage(magia.dannoDellaMagia, magia.tipoMagia);
                 }
-                else if(magia.magicBehaviourType is TipoComportamentoMagia.Stazionaria && isDone is not 1)
+                else if(magia.magicBehaviourType == TipoComportamentoMagia.Stazionaria && isDone != 1)
                 {
                     isDone++;
                     InvokeRepeating("DamageOrHealCouroutine",0,magia.tickTime);
