@@ -131,22 +131,22 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
     {
         float damageCalculated = damageToTake;
 
-        if(ElementWeaknessObj != null)
-        {
-            if (!ElementWeaknessObj.gameObject.activeInHierarchy)
-            {
-                ElementWeaknessObj.SetActive(true);
-            }
-        }
+        //if(ElementWeaknessObj != null)
+        //{
+        //    if (!ElementWeaknessObj.gameObject.activeInHierarchy)
+        //    {
+        //        ElementWeaknessObj.SetActive(true);
+        //    }
+        //}
 
-        if(magicType == weakness)
-        {
-            damageCalculated = damageToTake * weaknessMultiplier;
-        }
-        else
-        {
-            damageCalculated = damageToTake * 0;
-        }
+        //if(magicType == weakness)
+        //{
+        //    damageCalculated = damageToTake * weaknessMultiplier;
+        //}
+        //else
+        //{
+        //    damageCalculated = damageToTake * 0;
+        //}
             
         hp -= damageCalculated;
 
