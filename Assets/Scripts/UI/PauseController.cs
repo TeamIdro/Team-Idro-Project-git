@@ -22,14 +22,16 @@ public class PauseController : MonoBehaviour
 
     private void Pause(CallbackContext ctx)
     {
-        if(PauseUI && !PauseUI.activeInHierarchy)
+        Debug.Log("TATSO PAUSA");
+        if(PauseUI 
+            && !PauseUI.activeInHierarchy)
         {
             PlayerCharacterController.Instance.DisableControl();
 
             PauseUI.SetActive(true);
 
             // Pause the behavior of all enemy scripts
-            foreach (var item in FindObjectsOfType<EnemyScript>())
+            foreach (EnemyScript item in FindObjectsOfType<EnemyScript>())
             {
                 item.PauseBehavior();
             }
@@ -40,5 +42,12 @@ public class PauseController : MonoBehaviour
             }
 
         }
+    }
+
+    private void OnDisable()
+    {
+        m_activePause.performed -= Pause;
+        m_activePause.Disable();
+
     }
 }
