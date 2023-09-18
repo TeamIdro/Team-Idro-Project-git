@@ -31,7 +31,7 @@ MonoBehaviour:
   rallentamentoGraduale: 0
   tempoDecellerazioneMagiaLanciata: 1
   distanzaMagiaLanciata: 100
-  tempoMagiaLanciata: 1000
+  tempoMagiaLanciata: 3
   detonazioneAdImpatto: 1
   staccaFiglioAllEsplosione: 1
   explosionPref: {fileID: 0}
