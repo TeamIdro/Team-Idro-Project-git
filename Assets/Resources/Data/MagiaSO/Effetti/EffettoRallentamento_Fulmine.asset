@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c16bb94379421e41aaaa95efd9d282b, type: 3}
   m_Name: EffettoRallentamento_Fulmine
   m_EditorClassIdentifier: 
-  durataEffetto: 3.3
+  durataEffetto: 1
   coloreEffetto: {r: 0, g: 0, b: 0, a: 0}
   percentualeRallentamentoNemicoColpito: 100
-  moltiplicatoreDiMagia: 50
+  moltiplicatoreDiMagia: 0
