@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: EffettoRallentamento_Fulmine
   m_EditorClassIdentifier: 
   durataEffetto: 3.3
+  coloreEffetto: {r: 0, g: 0, b: 0, a: 0}
   percentualeRallentamentoNemicoColpito: 100
-  moltiplicatoreDiMagia: 0
-  coloreEffetto:
-    serializedVersion: 2
-    rgba: 12529
+  moltiplicatoreDiMagia: 50

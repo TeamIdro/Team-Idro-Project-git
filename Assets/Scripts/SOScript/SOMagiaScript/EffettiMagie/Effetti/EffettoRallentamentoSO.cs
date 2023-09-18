@@ -36,11 +36,14 @@ public class EffettoRallentamentoSO : EffettoBaseSO
         {
             EnemyScript enemyScript = target.GetComponent<EnemyScript>();
             int valoreRandomicoPerPercentuale = Random.Range(0, 101);
-            if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito)
+            if(valoreRandomicoPerPercentuale <= percentualeRallentamentoNemicoColpito && enemyScript.slowEffect == false)
             {
+                float percentuale = moltiplicatoreDiMagia / 100;
                 valoreOriginaleNemici = enemyScript.speed;
-                enemyScript.speed /= moltiplicatoreDiMagia;
+                enemyScript.speed *= percentuale;
+                enemyScript.slowEffect = true;
             }
+            enemyScript.StartCoroutine(TogliEffettoDopoDelTempoANemico(target));
 
         }
         else if (target.GetComponent<MovingPlatform>() && target.GetComponent<NavMeshAgent>())
@@ -68,11 +71,13 @@ public class EffettoRallentamentoSO : EffettoBaseSO
     {
         float durataEffettoLocale = durataEffetto;
         yield return new WaitForSecondsRealtime(durataEffettoLocale);
+        Debug.LogWarning("EFFETTO TOLTO");
         if(target.GetComponent<EnemyScript>() != null)
         {
             EnemyScript enemyScript = target.GetComponent<EnemyScript>();
             target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             enemyScript.speed = valoreOriginaleNemici;
+            enemyScript.slowEffect = false;
         }
         else if(target.GetComponent<MovingPlatform>() != null)
         {
@@ -92,6 +97,7 @@ public class EffettoRallentamentoSO : EffettoBaseSO
             EnemyScript enemyScript = target.GetComponent<EnemyScript>();
             target.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
             enemyScript.speed = valoreOriginaleNemici;
+            enemyScript.slowEffect = false;
         }
         else if (target.GetComponent<MovingPlatform>() != null)
         {
