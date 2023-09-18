@@ -411,5 +411,5 @@ MonoBehaviour:
   attackCooldown: 0
   timeCoolDown: 1.2
   bullet: {fileID: 8059223698733719944, guid: 090b3a3a26fc6744db77c9764375da97, type: 3}
-  force: 50
+  force: 500
   attackRange: 18.2
