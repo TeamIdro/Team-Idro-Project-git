@@ -3,14 +3,23 @@ using UnityEngine;
 public class AttackBodyDeactivate : MonoBehaviour
 {
     public float damage = 10f;
+    private bool isFirstAttack = true;
+
+    private void OnEnable()
+    {
+        Debug.Log("AttackBodyDeactivate");
+        isFirstAttack = true;
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.GetComponent<PlayerCharacterController>())
+        if (other.gameObject.GetComponent<PlayerCharacterController>()
+            && isFirstAttack)
         {
-            other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
-            other.gameObject.GetComponent<PlayerCharacterController>().KnockBack(this.transform);
+            Debug.Log($"HIT {damage} name {other.gameObject.GetType()}");
 
+            other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
+            isFirstAttack = false;
             this.gameObject.SetActive(false);
         }
     }
