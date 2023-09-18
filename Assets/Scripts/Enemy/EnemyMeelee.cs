@@ -87,24 +87,7 @@ public class EnemyMeelee : MonoBehaviour
             _animator.SetTrigger("Attack");
 
         }
-        // else
-        // {
-        //     _animator.ResetTrigger("Attack");
-        // }
     }
-
-    // private IEnumerator CooldownAttack()
-    // {
-    //     yield return new WaitForSeconds(timeCoolDown);
-    //     _animator.SetTrigger("Attack");
-    //     attackCooldown = false;
-    //     StopCoroutine(attackCoroutine);
-    // }
-
-    // private void OnDrawGizmos() 
-    // {
-    //     Gizmos.DrawSphere(this.transform.position + (Vector3.down * rayGroundLenght), rayGroundRadius);
-    // }
     
     private void SetMovementAnimation()
     {
@@ -122,9 +105,10 @@ public class EnemyMeelee : MonoBehaviour
     private void ActivateAttackBody()
     {
         attackBody.SetActive(true);
+        Debug.Log("ATTACKBODY");
     }
     
-    private void DeactivateAttackBody()
+    public void DeactivateAttackBody()
     {
         attackBody.SetActive(false);
     }
