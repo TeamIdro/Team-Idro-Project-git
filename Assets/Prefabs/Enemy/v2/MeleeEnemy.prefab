@@ -403,6 +403,7 @@ MonoBehaviour:
   weakness: 0
   weaknessMultiplier: 5
   resistance: 0
+  slowEffect: 0
 --- !u!114 &8487797514348883783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,7 +433,7 @@ GameObject:
   - component: {fileID: 1458658718670771216}
   - component: {fileID: 3542126691605201692}
   - component: {fileID: 3542126691605201693}
-  m_Layer: 12
+  m_Layer: 20
   m_Name: AttackBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
