@@ -164,6 +164,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4698670178176940991, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
   m_PrefabInstance: {fileID: 385787706}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &44990850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9079036231601045988, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+  m_PrefabInstance: {fileID: 1023487736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &50188311
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +274,11 @@ SpriteRenderer:
 TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 5235692217242591848, guid: e49bcaeda80a1c74da21416ecc0ff5e7, type: 3}
   m_PrefabInstance: {fileID: 180223185}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &174994013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1353758346164149591, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+  m_PrefabInstance: {fileID: 1023487736}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &180223185
 PrefabInstance:
@@ -25063,6 +25073,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12901880}
     - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_libroAperto
+      value: 
+      objectReference: {fileID: 44990850}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_libroChiuso
+      value: 
+      objectReference: {fileID: 1349705114}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_prefabScritte
+      value: 
+      objectReference: {fileID: 573185707373050514, guid: 43d3b4c0d99268141b146845e5236ea6, type: 3}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_libroMagiaSbloccato
+      value: 
+      objectReference: {fileID: 174994013}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_spellNotReadyToCastParticle
       value: 
       objectReference: {fileID: 43861349}
@@ -25074,6 +25100,10 @@ PrefabInstance:
       propertyPath: listaMagieDisponibili.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: m_puntoEsclamativoMagiaSbloccata
+      value: 
+      objectReference: {fileID: 174994013}
     - target: {fileID: 4357714081857353591, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: listaMagieDisponibili.Array.data[0]
       value: 
@@ -25109,6 +25139,10 @@ PrefabInstance:
     - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: playerMask.m_Bits
       value: 524800
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109723017421688552, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
+      propertyPath: maxRayCastDistance
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6758082493375761218, guid: 38b38972599bb4e49ab7991ab9e73bbd, type: 3}
       propertyPath: m_SortingLayer
@@ -25902,6 +25936,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3327879265913170439, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3327879265913170439, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3327879265913170439, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3974583486711666928, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -25990,6 +26036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4665390264066066425, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6704346167150457823, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -26036,6 +26086,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6704346167150457823, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187206015757304764, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 61
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187206015757304764, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: -196
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079036231601045988, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -26220,6 +26282,11 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1349705114 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4665390264066066425, guid: e01279becf3f01b4fbb9dbfd4bed27fc, type: 3}
+  m_PrefabInstance: {fileID: 1023487736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1358965957 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3655880809643128197, guid: a2ff8da3344beb147a595c09f316f0cb, type: 3}

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ParallaxEffect : MonoBehaviour
 {
-    public float parallaxScale = 0.5f; // Controllo la velocità del parallasse
-    public float smoothing = 1f; // Controllo la fluidità del movimento
+    public float parallaxScale = 0.5f; // Controllo la velocitï¿½ del parallasse
+    public float smoothing = 1f; // Controllo la fluiditï¿½ del movimento
 
     private Vector3 previousPlayerPosition;
 
@@ -17,9 +17,10 @@ public class ParallaxEffect : MonoBehaviour
     void Update()
     {
 
-        float parallax = (previousPlayerPosition.x - PlayerCharacterController.Instance.gameObject.transform.position.x) * parallaxScale;
+        float parallaxX = (previousPlayerPosition.x - PlayerCharacterController.Instance.gameObject.transform.position.x) * parallaxScale;
+        float parallaxY = (previousPlayerPosition.y - PlayerCharacterController.Instance.gameObject.transform.position.y) * parallaxScale;
 
-        Vector3 targetPosition = transform.position + Vector3.right * parallax;
+        Vector3 targetPosition = transform.position + new Vector3(parallaxX, parallaxY, 0f);
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime);
 
         previousPlayerPosition = PlayerCharacterController.Instance.gameObject.transform.position;
