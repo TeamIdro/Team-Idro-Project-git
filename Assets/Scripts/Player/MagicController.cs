@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 public class MagicController : MonoBehaviour, ISubscriber
 {
     [SerializeField] private GameObject m_spellNotReadyToCastParticle;
-    [SerializeField] private float timeBeforeShoot;
     [SerializeField] private GameObject m_UIPrefab;
     [SerializeField][Range(1, 3)] private int m_spellSlot;
     [SerializeField] private GameObject m_basePrefabToShootForCombination;
@@ -23,6 +22,7 @@ public class MagicController : MonoBehaviour, ISubscriber
     [SerializeField] private List<ElementoMagiaSO> m_elementiDaPrendere;
     public UnityEvent OnMagicComposed;
     public UnityEvent OnMagicCasted;
+    public UnityEvent OnMagiaSbloccata;
 
     private Dictionary<MagiaSO, float> cooldowns = new Dictionary<MagiaSO, float>();
 
@@ -34,7 +34,6 @@ public class MagicController : MonoBehaviour, ISubscriber
     private Magia magiaComponent;
     private UIElementiMagia UIelementiMagia;
     private int m_facingDirectionForLeftAndRight = 0;
-    private int m_facingDirectionForUpAndDown = 0;
     private bool magicIsBlocked = false;
     private int linePoints = 0;
     private AudioSource m_playerAudioSource;
@@ -266,6 +265,7 @@ public class MagicController : MonoBehaviour, ISubscriber
             {
                 Debug.Log("SPELL NOT READY");
                 m_spellNotReadyToCastParticle.GetComponent<ParticleSystem>().Play();
+                m_magiaDaLanciare = null;
             }
         }
         else { return; }
@@ -297,6 +297,8 @@ public class MagicController : MonoBehaviour, ISubscriber
             Debug.DrawLine(firePointPosition, endPosition, Color.red);
             LineRenderer lr = bullet.GetComponentInChildren<LineRenderer>();
             lr.enabled = true;
+            lr.positionCount = 6;
+            lr.gameObject.SetActive(false);
             Debug.Log(hit.collider);
             linePoints = lr.positionCount - 1;
             var distance = hit.distance;
@@ -306,17 +308,38 @@ public class MagicController : MonoBehaviour, ISubscriber
             }
             for (int i = 0; i < linePoints; i++)
             {
-
                 Vector3 pos = lr.GetPosition(i);
                 float t = (float)i / (linePoints - 1);  // Valore normalizzato tra 0 e 1
-                pos.x = (distance / linePoints * i) + UnityEngine.Random.Range(-.4f, .4f);
                 if (PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Right)
+                {
+                    if (i != 0)
+                        pos.x = (distance / linePoints * i);
+                    else
+                        pos.x = (distance / linePoints * i) + UnityEngine.Random.Range(-.4f, .4f);
+
                     pos.x = -pos.x;
-                pos.y += UnityEngine.Random.Range(-m_magiaDaLanciare.YNoise, m_magiaDaLanciare.YNoise);
+                }
+                else if(PlayerCharacterController.playerFacingDirections == PlayerFacingDirections.Left)
+                {
+                    if (i == 0)
+                    {
+                        pos.x = (distance / linePoints * i);
+                    }
+                    else
+                    {
+                        pos.x = (distance / linePoints * i) + UnityEngine.Random.Range(-.4f, .4f);
+                    }
+                    
+                }
+                if(i != 0)
+                {
+                    pos.y += UnityEngine.Random.Range(-m_magiaDaLanciare.YNoise, m_magiaDaLanciare.YNoise);
+                }
                 pos.z = 0;
                 Debug.Log("settato all'indice: " + i + "\n con valore: " + pos);
                 lr.SetPosition(i, pos);
             }
+            lr.gameObject.SetActive(true);
             if (distance < m_magiaDaLanciare.lunghezzaLineCast)
             {
 
@@ -567,8 +590,17 @@ public class MagicController : MonoBehaviour, ISubscriber
             {
                 cooldowns[magiaSOf] = 0f;
             }
+            OnMagiaSbloccata.Invoke();
+
         }
     }
+
+    public void MagiaSbloccata()
+    {
+
+    }
+
+
     private bool IsOnCooldown(MagiaSO magiaSO)
     {
         return cooldowns.ContainsKey(magiaSO) && cooldowns[magiaSO] > 0f;
