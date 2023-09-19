@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class EnemyRangedBullet : MonoBehaviour
 {
-   public float damage = 5f;
-   public float timeToDeath = 5f;
-   float timer = 0;
+    public float damage = 5f;
+    public float timeToDeath = 5f;
+    float timer = 0;
     Vector2 lastVelocity = Vector2.negativeInfinity;
+    private bool isFirstAttack = true;
 
     private void Awake()
     {
-        //
+        isFirstAttack = true;
     }
+
     void Update()
    {
         if (lastVelocity == Vector2.negativeInfinity)
@@ -27,11 +29,13 @@ public class EnemyRangedBullet : MonoBehaviour
 
    void OnTriggerEnter2D(Collider2D other)
    {
-      if(other.gameObject.GetComponent<PlayerCharacterController>())
+      if(other.gameObject.GetComponent<PlayerCharacterController>()
+            && isFirstAttack)
       {
          //Damage Player
             other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
             other.gameObject.GetComponent<PlayerCharacterController>().KnockBack(this.transform);
+            isFirstAttack = false;
             Destroy(this.gameObject);
       }
 
