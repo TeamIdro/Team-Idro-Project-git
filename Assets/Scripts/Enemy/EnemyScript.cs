@@ -147,13 +147,22 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         //{
         //    damageCalculated = damageToTake * 0;
         //}
-            
+        
+        StartCoroutine(SpriteHitFlash());
+
         hp -= damageCalculated;
 
         if (hp <= 0)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    private IEnumerator SpriteHitFlash()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        spriteRenderer.color = Color.white;
     }
 
     void FlipSprite()

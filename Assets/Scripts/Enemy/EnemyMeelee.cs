@@ -69,7 +69,6 @@ public class EnemyMeelee : MonoBehaviour
     {
         if(isOnGround == OnGround.Ground)
         {
-            Debug.Log("JUMP");
             rigidbody.AddForce(((Vector2.up + (Vector2)transform.forward)).normalized * jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -78,7 +77,6 @@ public class EnemyMeelee : MonoBehaviour
     {       
         if (!attackCooldown)
         {
-            Debug.Log("ATTACK");
             
             attackCooldown = true;
             
@@ -105,7 +103,6 @@ public class EnemyMeelee : MonoBehaviour
     private void ActivateAttackBody()
     {
         attackBody.SetActive(true);
-        Debug.Log("ATTACKBODY");
     }
     
     public void DeactivateAttackBody()

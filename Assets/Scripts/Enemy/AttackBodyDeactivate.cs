@@ -7,7 +7,6 @@ public class AttackBodyDeactivate : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("AttackBodyDeactivate");
         isFirstAttack = true;
     }
 
@@ -16,7 +15,6 @@ public class AttackBodyDeactivate : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerCharacterController>()
             && isFirstAttack)
         {
-            Debug.Log($"HIT {damage} name {other.gameObject.GetType()}");
 
             other.gameObject.GetComponent<PlayerCharacterController>().GetDamage(damage);
             isFirstAttack = false;
