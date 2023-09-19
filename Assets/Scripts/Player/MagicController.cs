@@ -645,14 +645,26 @@ public class MagicController : MonoBehaviour, ISubscriber
         foreach (var magieSo in listaMagieDisponibili)
         {
             GameObject objScritte = Instantiate(m_prefabScritte, m_libroAperto.transform.GetChild(0));
+
             if (objScritte.GetComponentInChildren<TMP_Text>())
             {
                 objScritte.GetComponentInChildren<TMP_Text>().text = magieSo.nomeDellaMagia;
             }
-            if(objScritte.GetComponentInChildren<Image>() != null)
+
+            int i = 0;
+            foreach (Image sp_magia in objScritte.GetComponentsInChildren<Image>())
             {
-                objScritte.GetComponentInChildren<Image>().sprite = magieSo.spriteMagia;
+                sp_magia.sprite = magieSo.combinazioneDiElementi[i].spriteElemento;
+                i++;
             }
+
+            //if(objScritte.GetComponentsInChildren<Image>() != null)
+            //{
+            //    foreach (var element in magieSo.combinazioneDiElementi)
+            //    {
+            //        objScritte.GetComponentInChildren<Image>().sprite = element.spriteElemento;
+            //    }
+            //}
         }
     }
 

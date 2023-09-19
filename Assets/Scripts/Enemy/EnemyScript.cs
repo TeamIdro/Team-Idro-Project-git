@@ -183,13 +183,13 @@ public class EnemyScript : MonoBehaviour, IEnemy, IDamageable
         {
             if (item.isActiveAndEnabled)
             {
-                Debug.Log("PAUSE B");
+                //Debug.Log("PAUSE B");
                 GetComponent<Animator>().speed = 0;
                 item.enabled = false;
             }
             else 
             {
-                Debug.Log("START B");
+                //Debug.Log("START B");
                 GetComponent<Animator>().speed = 1;
 
                 item.enabled = true;

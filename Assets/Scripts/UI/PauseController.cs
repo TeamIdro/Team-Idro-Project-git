@@ -22,7 +22,6 @@ public class PauseController : MonoBehaviour
 
     private void Pause(CallbackContext ctx)
     {
-        Debug.Log("TATSO PAUSA");
         if(PauseUI 
             && !PauseUI.activeInHierarchy)
         {

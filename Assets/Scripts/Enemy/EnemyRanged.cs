@@ -42,7 +42,7 @@ public class EnemyRanged : MonoBehaviour
     {       
         if (!attackCooldown)
         {
-            Debug.Log("ATTACK");
+            //Debug.Log("ATTACK");
 
             attackCooldown = true;
             

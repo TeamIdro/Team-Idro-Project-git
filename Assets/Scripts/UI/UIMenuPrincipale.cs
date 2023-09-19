@@ -70,7 +70,7 @@ public class UIMenuPrincipale : MonoBehaviour
 
     private void EnterOption(CallbackContext ctx)
     {
-        // Debug.Log("enter");
+        //Debug.Log("enter");
         selectorObj?.transform.parent.gameObject.GetComponent<Button>().onClick.Invoke();
     }
 

@@ -1,5 +1,6 @@
 using PubSub;
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -286,6 +287,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
         {
             hp -= damage;
             m_healthSlider.value = hp;
+            StartCoroutine(SpriteHitFlash());
         }
         
         if(hp <= 0)
@@ -294,6 +296,13 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
             hp = m_maxHealth;
             m_healthSlider.value = hp;
         }
+    }
+
+    private IEnumerator SpriteHitFlash()
+    {
+        mageRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        mageRenderer.color = Color.white;
     }
 
 

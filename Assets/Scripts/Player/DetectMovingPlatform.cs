@@ -1,7 +1,5 @@
 using UnityEngine;
 
-
-
 public class DetectMovingPlatform : MonoBehaviour
 {
     public Vector2 boxCastDimension;
@@ -22,12 +20,13 @@ public class DetectMovingPlatform : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        
         if(other.CompareTag("MovingPlatform"))   
         {
-            Debug.Log("entrato");
+            //Debug.Log("entrato");
             this.transform.parent.transform.SetParent(other.transform);
-                            
+            //this.transform.parent.position = other.transform.position + new Vector3(0f, 1.51f, 0f);
+
+
             float platformVelocity = other.gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>().velocity.x;
             if(platformVelocity > 0f && rb.velocity.x > 0f
                 || platformVelocity < 0f && rb.velocity.x < 0f)
@@ -44,19 +43,13 @@ public class DetectMovingPlatform : MonoBehaviour
             }
 
         }
-        // else
-        // {
-        //     this.transform.parent?.transform.SetParent(null);
-        //     GetComponentInParent<PlayerCharacterController>().jumpVelocity = 700f;
-        // }
+
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         if(other.CompareTag("MovingPlatform"))
-            // && this.transform.parent?.transform == other.transform)
         {
-            Debug.Log("uscito");
             this.transform.parent?.transform.SetParent(null);
             GetComponentInParent<PlayerCharacterController>().jumpVelocity = 700f;
         }
