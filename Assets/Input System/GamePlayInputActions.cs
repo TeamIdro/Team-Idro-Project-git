@@ -125,6 +125,15 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SpellBook"",
+                    ""type"": ""Button"",
+                    ""id"": ""c6bc7e38-23b9-4e06-aa71-749711df522e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -314,6 +323,17 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""KillPlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91716cb4-1bbe-4017-9311-d07aca879a64"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SpellBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -469,6 +489,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         m_Mage_GuardaSu = m_Mage.FindAction("GuardaSu", throwIfNotFound: true);
         m_Mage_GuardaGiu = m_Mage.FindAction("GuardaGiu", throwIfNotFound: true);
         m_Mage_KillPlayer = m_Mage.FindAction("KillPlayer", throwIfNotFound: true);
+        m_Mage_SpellBook = m_Mage.FindAction("SpellBook", throwIfNotFound: true);
         // Kid
         m_Kid = asset.FindActionMap("Kid", throwIfNotFound: true);
         m_Kid_MouseClick = m_Kid.FindAction("MouseClick", throwIfNotFound: true);
@@ -551,6 +572,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Mage_GuardaSu;
     private readonly InputAction m_Mage_GuardaGiu;
     private readonly InputAction m_Mage_KillPlayer;
+    private readonly InputAction m_Mage_SpellBook;
     public struct MageActions
     {
         private @GamePlayInputActions m_Wrapper;
@@ -566,6 +588,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         public InputAction @GuardaSu => m_Wrapper.m_Mage_GuardaSu;
         public InputAction @GuardaGiu => m_Wrapper.m_Mage_GuardaGiu;
         public InputAction @KillPlayer => m_Wrapper.m_Mage_KillPlayer;
+        public InputAction @SpellBook => m_Wrapper.m_Mage_SpellBook;
         public InputActionMap Get() { return m_Wrapper.m_Mage; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -608,6 +631,9 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @KillPlayer.started += instance.OnKillPlayer;
             @KillPlayer.performed += instance.OnKillPlayer;
             @KillPlayer.canceled += instance.OnKillPlayer;
+            @SpellBook.started += instance.OnSpellBook;
+            @SpellBook.performed += instance.OnSpellBook;
+            @SpellBook.canceled += instance.OnSpellBook;
         }
 
         private void UnregisterCallbacks(IMageActions instance)
@@ -645,6 +671,9 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
             @KillPlayer.started -= instance.OnKillPlayer;
             @KillPlayer.performed -= instance.OnKillPlayer;
             @KillPlayer.canceled -= instance.OnKillPlayer;
+            @SpellBook.started -= instance.OnSpellBook;
+            @SpellBook.performed -= instance.OnSpellBook;
+            @SpellBook.canceled -= instance.OnSpellBook;
         }
 
         public void RemoveCallbacks(IMageActions instance)
@@ -799,6 +828,7 @@ public partial class @GamePlayInputActions: IInputActionCollection2, IDisposable
         void OnGuardaSu(InputAction.CallbackContext context);
         void OnGuardaGiu(InputAction.CallbackContext context);
         void OnKillPlayer(InputAction.CallbackContext context);
+        void OnSpellBook(InputAction.CallbackContext context);
     }
     public interface IKidActions
     {

@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.UI;
 
 public class MagicController : MonoBehaviour, ISubscriber
 {
@@ -13,16 +15,22 @@ public class MagicController : MonoBehaviour, ISubscriber
     [SerializeField][Range(1, 3)] private int m_spellSlot;
     [SerializeField] private GameObject m_basePrefabToShootForCombination;
     [SerializeField, ReadOnly] private FasiDiLancioMagia m_faseCorrente = FasiDiLancioMagia.AspettoComponimentoMagia;
+    [SerializeField] private StatoAperturaLibro m_statoAperturaLibro = StatoAperturaLibro.Chiuso;
     [SerializeField] private List<MagiaSO> listaMagieDisponibili;
     [Tooltip("Se spuntato fa si che se la lista degli elementi � piena e provi ad inserirne uno nuovo viene buttato fuori il primo elemento della lista per fare spazio, se non � spuntato una volta che la lista � piena non si potr� pi� aggiungere elementi")]
     [SerializeField] private bool lastInFirstOut = true;
     [Space(15)]
-    //[SerializeField]  public int livCatalizzatore = 1;
-    //[SerializeField] private List<MagiaSO> m_listaDiQuelloCheIlMagoSa;
+
+
     [SerializeField] private List<ElementoMagiaSO> m_elementiDaPrendere;
     public UnityEvent OnMagicComposed;
     public UnityEvent OnMagicCasted;
     public UnityEvent OnMagiaSbloccata;
+    [SerializeField] private GameObject m_libroAperto;
+    [SerializeField] private GameObject m_libroChiuso;
+    [SerializeField] private GameObject m_puntoEsclamativoMagiaSbloccata;
+    [SerializeField] private GameObject m_prefabScritte;
+
 
     private Dictionary<MagiaSO, float> cooldowns = new Dictionary<MagiaSO, float>();
 
@@ -67,6 +75,7 @@ public class MagicController : MonoBehaviour, ISubscriber
         m_gamePlayInput.Mage.UsaElementoFuoco.performed += AddElement;
         m_gamePlayInput.Mage.UsaElementoAria.performed += AddElement;
         m_gamePlayInput.Mage.Fire.performed += Onfire;
+        m_gamePlayInput.Mage.SpellBook.performed += AperturaLibro;
     }
 
     private void AddElement(InputAction.CallbackContext obj)
@@ -580,12 +589,13 @@ public class MagicController : MonoBehaviour, ISubscriber
             magicIsBlocked = false;
         }
     }
-    public void AggiungiMagiaAllaLista(MagiaSO magiaSO)
+    public void AggiungiMagiaAllaLista(MagiaSO magiaSO,string nomeMagia)
     {
         if (listaMagieDisponibili.Find(x => x == magiaSO) == null)
         {
             cooldowns.Clear();
             listaMagieDisponibili.Add(magiaSO);
+           
             foreach (MagiaSO magiaSOf in listaMagieDisponibili)
             {
                 cooldowns[magiaSOf] = 0f;
@@ -595,10 +605,58 @@ public class MagicController : MonoBehaviour, ISubscriber
         }
     }
 
-    public void MagiaSbloccata()
+    public void LibroOnMagiaSbloccata()
     {
-
+        m_statoAperturaLibro = StatoAperturaLibro.MagiaSbloccata;
+        m_puntoEsclamativoMagiaSbloccata.SetActive(true);
     }
+    public void AperturaLibro(InputAction.CallbackContext obj)
+    {
+        m_puntoEsclamativoMagiaSbloccata.SetActive(false);
+        if (m_statoAperturaLibro == StatoAperturaLibro.Chiuso || m_statoAperturaLibro == StatoAperturaLibro.MagiaSbloccata)
+        {
+            m_libroChiuso.SetActive(false);
+            m_libroAperto.SetActive(true);
+            m_statoAperturaLibro = StatoAperturaLibro.Aperto;
+            ScriviTutteLeMagie();
+            return;
+        }
+        else if (m_statoAperturaLibro == StatoAperturaLibro.Aperto)
+        {
+            EliminaTutteLeScritteNelLibro();
+            m_libroChiuso.SetActive(true);
+            m_libroAperto.SetActive(false);
+            m_statoAperturaLibro = StatoAperturaLibro.Chiuso;
+            return;
+        }
+    }
+
+    private void EliminaTutteLeScritteNelLibro()
+    {
+        
+        for (int i = 0; i < m_libroAperto.transform.GetChild(0).childCount; i++)
+        {
+            Destroy(m_libroAperto.transform.GetChild(0).GetChild(i).gameObject);
+        }
+    }
+
+    private void ScriviTutteLeMagie()
+    {
+        foreach (var magieSo in listaMagieDisponibili)
+        {
+            GameObject objScritte = Instantiate(m_prefabScritte, m_libroAperto.transform.GetChild(0));
+            if (objScritte.GetComponentInChildren<TMP_Text>())
+            {
+                objScritte.GetComponentInChildren<TMP_Text>().text = magieSo.nomeDellaMagia;
+            }
+            if(objScritte.GetComponentInChildren<Image>() != null)
+            {
+                objScritte.GetComponentInChildren<Image>().sprite = magieSo.spriteMagia;
+            }
+        }
+    }
+
+
 
 
     private bool IsOnCooldown(MagiaSO magiaSO)
@@ -635,4 +693,10 @@ public enum FasiDiLancioMagia
     AspettandoLancioMagia,
     LancioMagia,
 
+}
+internal enum StatoAperturaLibro
+{
+    Aperto,
+    Chiuso,
+    MagiaSbloccata
 }

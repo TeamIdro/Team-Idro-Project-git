@@ -11,6 +11,9 @@ using UnityEngine.Rendering.PostProcessing;
 [CreateAssetMenu(fileName = "Magia/TipoMagia", menuName = "Magia/TipoMagia")]
 public class MagiaSO : ScriptableObject
 {
+    public string nomeDellaMagia;
+    public Sprite spriteMagia;
+    [Space(20)]
     public GameObject prefabParticleMagia;
     public TipoComportamentoMagia magicBehaviourType;
     [Space]

@@ -12,7 +12,6 @@ public class UIPauseMenu : MonoBehaviour, ISubscriber
 
 
     private GamePlayInputActions inputActions;
-    private bool pauseIsActive = false;
     private void Awake()
     {
         inputActions = new GamePlayInputActions();

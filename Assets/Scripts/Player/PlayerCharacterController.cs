@@ -21,7 +21,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     [SerializeField] private float maxVelocityCap;
     [SerializeField] private float deceleration;
     [Range(0f, 5f)]
-    [SerializeField] private float maxCastDistance;
+    [SerializeField] private float maxRayCastDistance;
     [SerializeField] private float climbSpeed;
     [Header("Player Audios List")]
     [Space(10)]
@@ -250,7 +250,7 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     {
         bool playerCanJump = false;
         RaycastHit2D hit;
-        hit = Physics2D.BoxCast(rayCastPosition.position, boxCastDimension, 0, Vector2.down, maxCastDistance,playerMask);
+        hit = Physics2D.BoxCast(rayCastPosition.position, boxCastDimension, 0, Vector2.down, maxRayCastDistance,playerMask);
         if (hit.collider != null)
             playerCanJump = true;
         else
