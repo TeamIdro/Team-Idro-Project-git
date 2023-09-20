@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: MagiaMagma
   m_EditorClassIdentifier: 
-  nomeDellaMagia: Magia di magma
+  nomeDellaMagia: Magma Spell  =Change water to obsidian
   spriteMagia: {fileID: -769563020, guid: ff6e1483294a5044d99f702a0994b97c, type: 3}
   prefabParticleMagia: {fileID: 7754694216180532622, guid: f492f999ffb1dba449490d78b3870528, type: 3}
   magicBehaviourType: 0

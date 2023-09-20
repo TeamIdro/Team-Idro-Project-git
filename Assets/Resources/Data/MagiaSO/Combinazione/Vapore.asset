@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
   m_Name: Vapore
   m_EditorClassIdentifier: 
-  nomeDellaMagia: Magia di vapore
+  nomeDellaMagia: Steam Spell  =  Push the Columns
   spriteMagia: {fileID: 1058747787, guid: 7039db287dace1842af893b7666286a7, type: 3}
   prefabParticleMagia: {fileID: 6971113163581192933, guid: 12cb742ab5724c94da15cd823eca76c5, type: 3}
   magicBehaviourType: 0

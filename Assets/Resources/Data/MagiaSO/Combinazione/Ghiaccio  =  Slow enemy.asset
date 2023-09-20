@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30f90067bde79d24ba8f4ab075a7fa1b, type: 3}
-  m_Name: Ghiaccio Culo
+  m_Name: Ghiaccio  =  Slow enemy
   m_EditorClassIdentifier: 
-  nomeDellaMagia: Magia di ghiaccio
+  nomeDellaMagia: Ice spell = Slow AoE
   spriteMagia: {fileID: 406445449, guid: ff6e1483294a5044d99f702a0994b97c, type: 3}
   prefabParticleMagia: {fileID: 4513715434210747944, guid: 161e3be6bc256c64680fd2fa85e065c7, type: 3}
   magicBehaviourType: 0
