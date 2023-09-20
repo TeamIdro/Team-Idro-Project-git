@@ -330,7 +330,7 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 1
+  gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
 --- !u!114 &1458658717643805673
 MonoBehaviour:
@@ -372,7 +372,7 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.4
-  gizmoViewMode: 1
+  gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
 --- !u!114 &3542126693128566736
 MonoBehaviour:
@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2094090e2c79384597c0a243b242d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <hp>k__BackingField: 150
+  <hp>k__BackingField: 100
   <patrol_Speed>k__BackingField: 5
   <patrol_angularSpeed>k__BackingField: 120
   <patrol_arriveDistance>k__BackingField: 1
