@@ -341,10 +341,14 @@ public class PlayerCharacterController : MonoBehaviour, ISubscriber,IDamageable
     public void EnableController()
     {
         m_gamePlayInputActions.Mage.Enable();
+        GetComponent<MagicController>().EnableMagicControl();
     }
     public void DisableControl()
     {
         m_gamePlayInputActions.Mage.Disable();
+        GetComponent<MagicController>().DisableMagicControl();
+
+
     }
 
     public void KnockBack(Transform enemy)
