@@ -696,6 +696,20 @@ public class MagicController : MonoBehaviour, ISubscriber
         }
     }
 
+    public void DisableMagicControl()
+    {
+        magicIsBlocked = true;
+        m_gamePlayInput.Mage.Fire.performed -= Onfire;
+        //m_gamePlayInput.Mage.SpellBook.performed -= AperturaLibro;
+    }
+
+    public void EnableMagicControl()
+    {
+        magicIsBlocked = false;
+        m_gamePlayInput.Mage.Fire.performed += Onfire;
+        //m_gamePlayInput.Mage.SpellBook.performed -= AperturaLibro;
+    }
+
 }
 public enum FasiDiLancioMagia
 {
